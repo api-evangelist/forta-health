@@ -1,0 +1,80 @@
+generated: '2026-08-04'
+method: probed
+source: live probes of every Forta Health host on 2026-08-04
+result: none-found
+notes: No /.well-known/ document is served on any Forta Health host. app.fortahealth.com is a single-page
+  application whose catch-all returns HTTP 200 with an HTML shell for every path including every /.well-known/*
+  probe — those 200s are recorded as false positives, not discoveries.
+hosts:
+- host: www.fortahealth.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: api.prod.fortahealth.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 200
+    note: the OpenAPI document — harvested to openapi/
+- host: app.fortahealth.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    valid: false
+    reason: SPA catch-all returned text/html
+  - path: /.well-known/agent-card.json
+    status: 200
+    valid: false
+    reason: SPA catch-all returned text/html
+  - path: /.well-known/agent.json
+    status: 200
+    valid: false
+    reason: SPA catch-all returned text/html
+  - path: /.well-known/openid-configuration
+    status: 200
+    valid: false
+    reason: SPA catch-all returned text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    valid: false
+    reason: SPA catch-all returned text/html
+  - path: /.well-known/api-catalog
+    status: 200
+    valid: false
+    reason: SPA catch-all returned text/html
+- host: kb.fortahealth.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+documents: []

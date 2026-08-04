@@ -1,0 +1,1360 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/forta-health-platform-openapi.yml
+notes: 'Entity-relationship graph derived from the OpenAPI document served at the API host root: tag families,
+  URI path nesting, and *_id reference fields across the 578 component schemas. Forta Health publishes
+  no object reference, so id prefixes and domain semantics could not be enriched from documentation. This
+  is a clinical-operations data model (ABA therapy delivery, supervision, payer claims), not a developer-facing
+  product API.'
+counts:
+  entities: 32
+  schemas: 578
+  operations: 450
+  path_relationships: 209
+entities:
+- entity: treatment_plan
+  operations: 124
+  schemas:
+  - TreatmentPlanActivationLogResponse
+  - TreatmentPlanActivationLogUpdate
+  - TreatmentPlanAssessmentVersionEnum
+  - TreatmentPlanAssignmentCreate
+  - TreatmentPlanAssignmentResponse
+  - TreatmentPlanClientAndFamilyBackgroundVersionEnum
+  - TreatmentPlanCreate
+  - TreatmentPlanCrisisPlanCreate
+- entity: sessions
+  operations: 46
+  has_many:
+  - awaiting_acknowledgement
+  - awaiting_guardian_signature
+  - backdate
+  - bay7
+  - claim_history
+  - clinical_qa_reviews
+  - data
+  - download
+  - edit
+  - evv
+  - guardian_sign
+  - make_billable
+  - make_unbillable
+  - narrative
+  - narrative_suggestion
+  - progress-synopsis
+  - reset_status
+  - stop
+  - symptoms-interventions
+  - terminate
+  - trials
+  schemas:
+  - SessionStatusEnum
+  - SessionStop
+  - SessionSymptomsInterventionsResponse
+- entity: intake_questionnaires
+  operations: 39
+  has_many:
+  - by_provider
+  - child_info
+  - education_info
+  - family
+  - general_info
+  - medical_info
+  - medication
+  - referral
+  - send
+  - submit
+  - therapy
+  schemas:
+  - IntakeQuestionnaireChildAttitudeTowardsSchoolEnum
+  - IntakeQuestionnaireChildInfoBackgroundCreateRequest
+  - IntakeQuestionnaireChildInfoBackgroundResponse
+  - IntakeQuestionnaireChildInfoBackgroundTypeEnum
+  - IntakeQuestionnaireChildInfoResponse
+  - IntakeQuestionnaireChildInfoScheduleActivityTypeEnum
+  - IntakeQuestionnaireChildInfoScheduleCreateRequest
+  - IntakeQuestionnaireChildInfoScheduleDayOfWeekEnum
+- entity: parent_supervisions
+  operations: 25
+  has_many:
+  - backdate
+  - claim_history
+  - data
+  - download
+  - edit
+  - goal_progress
+  - make_billable
+  - make_unbillable
+  - stop
+  - target_evaluations
+  schemas:
+  - ParentSupervisionBackdate
+  - ParentSupervisionCreate
+  - ParentSupervisionDetailedResponse
+  - ParentSupervisionDownloadPdfResponse
+  - ParentSupervisionGoalProgressCreate
+  - ParentSupervisionGoalProgressPatch
+  - ParentSupervisionGoalProgressResponse
+  - ParentSupervisionListResponse
+- entity: group_parent_supervisions
+  operations: 23
+  has_many:
+  - backdate
+  - bulk_family_training_topics
+  - claim_history
+  - download
+  - edit
+  - family_attendance
+  - make_billable
+  - make_unbillable
+  - pdf_regenerate
+  - stop
+  - training_topics
+  schemas:
+  - GroupParentSupervisionBackdate
+  - GroupParentSupervisionCreate
+  - GroupParentSupervisionDetailedResponse
+  - GroupParentSupervisionListResponse
+  - GroupParentSupervisionPatch
+  - GroupParentSupervisionResponse
+  - GroupParentSupervisionStop
+  - GroupParentSupervisionWithClaimHistoryResponse
+- entity: claims
+  operations: 21
+  has_many:
+  - admin
+  - certify_claim
+  - eob_documents
+  - follow_up_notes
+  - payment_status
+  - preview
+  - procedures
+  - resubmit
+  - service_lines
+  - tebra
+  schemas:
+  - ClaimStatusEnum
+- entity: onboarding_questionnaires
+  operations: 20
+  has_many:
+  - agreement
+  - by_provider
+  - documents
+  - general_info
+  - insurance
+  - insurance-card
+  - referral
+  - status
+  - submit
+  schemas:
+  - OnboardingQuestionnaireAgreementPatchRequest
+  - OnboardingQuestionnaireAgreementResponse
+  - OnboardingQuestionnaireDetailResponse
+  - OnboardingQuestionnaireDiagnosisReportSubmissionMethodEnum
+  - OnboardingQuestionnaireDocumentResponse
+  - OnboardingQuestionnaireDocumentTypeEnum
+  - OnboardingQuestionnaireDocumentWithUrlResponse
+  - OnboardingQuestionnaireGeneralInfoPatchRequest
+- entity: client_supervisions
+  operations: 15
+  has_many:
+  - backdate
+  - claim_history
+  - data
+  - download
+  - edit
+  - make_billable
+  - make_unbillable
+  - stop
+  - target_phase
+  schemas:
+  - ClientSupervisionBackdate
+  - ClientSupervisionCreate
+  - ClientSupervisionCriteria
+  - ClientSupervisionDuration
+  - ClientSupervisionListResponse
+  - ClientSupervisionListResponseWithClaimHistory
+  - ClientSupervisionNoteTargetPhaseCreate
+  - ClientSupervisionNoteTargetPhaseResponse
+- entity: providers
+  operations: 14
+  has_many:
+  - clinical_status
+  - co_assigned
+  - email
+  - info
+  - password_reset
+  - promote
+  - provider_licenses
+  - provider_payor_credentials
+  - qa_billing_status
+  - relationship_manager
+  schemas:
+  - ProviderAssignmentClinicalRelationshipEnum
+  - ProviderAssignmentCreate
+  - ProviderAssignmentListResponse
+  - ProviderAssignmentPatch
+  - ProviderAssignmentResponse
+  - ProviderAvailabilityCreate
+  - ProviderAvailabilityPatch
+  - ProviderAvailabilityResponse
+- entity: claim_invoices
+  operations: 14
+  has_many:
+  - discount
+  - download
+  - pay
+  - payments
+  - preview
+  - reset_sent_status
+  - send
+  schemas:
+  - ClaimInvoiceCreate
+  - ClaimInvoiceListResponse
+  - ClaimInvoicePdfUrl
+  - ClaimInvoicePreviewRequest
+  - ClaimInvoiceResponse
+  - ClaimInvoiceStatusEnum
+  - ClaimInvoicesFetchResponse
+- entity: client_assessments
+  operations: 13
+  has_many:
+  - assisting_assessment_claim_history
+  - backdate
+  - claim_history
+  - download
+  - edit
+  - make_billable
+  - make_unbillable
+  - stop
+  schemas:
+  - ClientAssessmentAllocationReset
+  - ClientAssessmentBackdate
+  - ClientAssessmentCreate
+  - ClientAssessmentNoteUpdate
+  - ClientAssessmentPdfUrl
+  - ClientAssessmentResponse
+  - ClientAssessmentResponseWithClaimHistory
+  - ClientAssessmentStop
+- entity: clients
+  operations: 11
+  has_many:
+  - clinical_status
+  - families
+  - modifier_matrix
+  - reset_assessment_allocation
+  schemas:
+  - ClientSignsSymptomsObserved
+  - ClientStrengthsRequest
+  - ClientSupervisionBackdate
+  - ClientSupervisionCreate
+  - ClientSupervisionCriteria
+  - ClientSupervisionDuration
+  - ClientSupervisionListResponse
+  - ClientSupervisionListResponseWithClaimHistory
+- entity: payor
+  operations: 9
+  schemas:
+  - PayorContractCreate
+  - PayorContractPatch
+  - PayorContractResponse
+  - PayorCreate
+  - PayorDetailedResponse
+  - PayorListResponse
+  - PayorPatch
+  - PayorProviderCredentialCreate
+- entity: bt_supervisions
+  operations: 9
+  has_many:
+  - data
+  - make_billable
+  - make_unbillable
+  - stop
+  schemas:
+  - BTSupervisionCreate
+  - BTSupervisionFieldEvaluation
+  - BTSupervisionPatch
+  - BTSupervisionPatchDataRequest
+  - BTSupervisionResponse
+  - BTSupervisionStopRequest
+- entity: behavior
+  operations: 8
+  schemas:
+  - BehaviorCreate
+  - BehaviorReductionGoalCreate
+  - BehaviorResponse
+- entity: cohorts
+  operations: 6
+  has_many:
+  - service_classes
+  schemas:
+  - CohortServiceClass
+- entity: email_cron_configs
+  operations: 6
+  has_many:
+  - preview
+  schemas:
+  - EmailCronConfigCreate
+  - EmailCronConfigPatch
+  - EmailCronConfigPreviewRequest
+  - EmailCronConfigPreviewResponse
+  - EmailCronConfigResponse
+- entity: policies
+  operations: 5
+  has_many:
+  - prior_authorization_details
+- entity: timesheets
+  operations: 5
+  has_many:
+  - pay_periods
+  schemas:
+  - TimesheetCreate
+  - TimesheetPatch
+  - TimesheetResponse
+- entity: provider_assignments
+  operations: 4
+  schemas:
+  - ProviderAssignmentClinicalRelationshipEnum
+  - ProviderAssignmentCreate
+  - ProviderAssignmentListResponse
+  - ProviderAssignmentPatch
+  - ProviderAssignmentResponse
+  - ProviderAvailabilityCreate
+  - ProviderAvailabilityPatch
+  - ProviderAvailabilityResponse
+- entity: client_facility_assignments
+  operations: 4
+  schemas:
+  - ClientFacilityAssignmentCreate
+  - ClientFacilityAssignmentPatch
+  - ClientFacilityAssignmentResponse
+  - ClientFacilityAssignmentTypeEnum
+  - ClientFamilyListResponse
+- entity: payor_provider_credentials
+  operations: 4
+  schemas:
+  - PayorProviderCredentialCreate
+  - PayorProviderCredentialPatch
+  - PayorProviderCredentialResponse
+- entity: client_cohort_assignments
+  operations: 4
+  schemas:
+  - ClientCohortAssignmentCreate
+  - ClientCohortAssignmentPatch
+  - ClientCohortAssignmentResponse
+- entity: provider_availability_records
+  operations: 4
+  schemas:
+  - ProviderAssignmentClinicalRelationshipEnum
+  - ProviderAssignmentCreate
+  - ProviderAssignmentListResponse
+  - ProviderAssignmentPatch
+  - ProviderAssignmentResponse
+  - ProviderAvailabilityCreate
+  - ProviderAvailabilityPatch
+  - ProviderAvailabilityResponse
+- entity: field_templates
+  operations: 3
+  has_many:
+  - fields
+  schemas:
+  - FieldTemplateResponse
+  - FieldTemplateUpsertRequest
+- entity: service_codes
+  operations: 2
+  schemas:
+  - ServiceCodeBase
+  - ServiceCodeEnum
+  - ServiceCodeResponse
+  - ServiceCodeTypeEnum
+- entity: treatment_plan_statuses
+  operations: 2
+  schemas:
+  - TreatmentPlanActivationLogResponse
+  - TreatmentPlanActivationLogUpdate
+  - TreatmentPlanAssessmentVersionEnum
+  - TreatmentPlanAssignmentCreate
+  - TreatmentPlanAssignmentResponse
+  - TreatmentPlanClientAndFamilyBackgroundVersionEnum
+  - TreatmentPlanCreate
+  - TreatmentPlanCrisisPlanCreate
+- entity: facilities
+  operations: 2
+- entity: assessment_surveys
+  operations: 2
+  schemas:
+  - AssessmentBarrierCreate
+  - AssessmentBarrierEnum
+  - AssessmentBarrierResponse
+  - AssessmentCreate
+  - AssessmentDuration
+  - AssessmentResponse
+  - AssessmentStatusEnum
+  - AssessmentSummaryCreate
+- entity: feature_flags
+  operations: 2
+  schemas:
+  - FeatureFlagResponse
+  - FeatureFlagUpdate
+- entity: evv
+  operations: 1
+  has_many:
+  - capture_gps
+  - end
+  - start
+  - status
+  belongs_to:
+  - sessions
+  schemas:
+  - EVVCaptureGpsRequest
+  - EVVCaptureGpsResponse
+  - EVVSessionStatusResponse
+  - EVVSideStatusResponse
+  - EVVTokenCreateResponse
+- entity: stripe
+  operations: 1
+  belongs_to:
+  - webhooks
+  schemas:
+  - StripeCheckoutSessionResponse
+relationships:
+- from: admin
+  to: bulk-unbillable
+  kind: has_many
+  via: path nesting
+- from: admin
+  to: status
+  kind: has_many
+  via: path nesting
+- from: assessments
+  to: barriers
+  kind: has_many
+  via: path nesting
+- from: assessments
+  to: summarize
+  kind: has_many
+  via: path nesting
+- from: assessments
+  to: tools
+  kind: has_many
+  via: path nesting
+- from: bay7
+  to: guardian_signature
+  kind: has_many
+  via: path nesting
+- from: behaviors
+  to: goal_names
+  kind: has_many
+  via: path nesting
+- from: bt_supervisions
+  to: data
+  kind: has_many
+  via: path nesting
+- from: bt_supervisions
+  to: make_billable
+  kind: has_many
+  via: path nesting
+- from: bt_supervisions
+  to: make_unbillable
+  kind: has_many
+  via: path nesting
+- from: bt_supervisions
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: child_info
+  to: background
+  kind: has_many
+  via: path nesting
+- from: child_info
+  to: schedule
+  kind: has_many
+  via: path nesting
+- from: claim_invoices
+  to: discount
+  kind: has_many
+  via: path nesting
+- from: claim_invoices
+  to: download
+  kind: has_many
+  via: path nesting
+- from: claim_invoices
+  to: pay
+  kind: has_many
+  via: path nesting
+- from: claim_invoices
+  to: payments
+  kind: has_many
+  via: path nesting
+- from: claim_invoices
+  to: preview
+  kind: has_many
+  via: path nesting
+- from: claim_invoices
+  to: reset_sent_status
+  kind: has_many
+  via: path nesting
+- from: claim_invoices
+  to: send
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: admin
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: certify_claim
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: eob_documents
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: follow_up_notes
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: payment_status
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: preview
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: procedures
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: resubmit
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: service_lines
+  kind: has_many
+  via: path nesting
+- from: claims
+  to: tebra
+  kind: has_many
+  via: path nesting
+- from: client_and_family_background
+  to: client_interests
+  kind: has_many
+  via: path nesting
+- from: client_and_family_background
+  to: client_strengths
+  kind: has_many
+  via: path nesting
+- from: client_and_family_background
+  to: parents_and_caregivers
+  kind: has_many
+  via: path nesting
+- from: client_and_family_background
+  to: siblings
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: assisting_assessment_claim_history
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: backdate
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: claim_history
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: download
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: edit
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: make_billable
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: make_unbillable
+  kind: has_many
+  via: path nesting
+- from: client_assessments
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: backdate
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: claim_history
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: data
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: download
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: edit
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: make_billable
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: make_unbillable
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: client_supervisions
+  to: target_phase
+  kind: has_many
+  via: path nesting
+- from: clients
+  to: clinical_status
+  kind: has_many
+  via: path nesting
+- from: clients
+  to: families
+  kind: has_many
+  via: path nesting
+- from: clients
+  to: modifier_matrix
+  kind: has_many
+  via: path nesting
+- from: clients
+  to: reset_assessment_allocation
+  kind: has_many
+  via: path nesting
+- from: clinical_qa_reviews
+  to: acknowledge
+  kind: has_many
+  via: path nesting
+- from: clinical_qa_reviews
+  to: discourses
+  kind: has_many
+  via: path nesting
+- from: clinical_qa_reviews
+  to: download
+  kind: has_many
+  via: path nesting
+- from: clinical_qa_reviews
+  to: pdf_regenerate
+  kind: has_many
+  via: path nesting
+- from: clinical_qa_reviews
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: cohorts
+  to: service_classes
+  kind: has_many
+  via: path nesting
+- from: data
+  to: review_summary
+  kind: has_many
+  via: path nesting
+- from: data
+  to: trial_summary
+  kind: has_many
+  via: path nesting
+- from: data
+  to: utilization
+  kind: has_many
+  via: path nesting
+- from: discharges
+  to: reasons
+  kind: has_many
+  via: path nesting
+- from: documents
+  to: reupload_visual
+  kind: has_many
+  via: path nesting
+- from: email_cron_configs
+  to: preview
+  kind: has_many
+  via: path nesting
+- from: evv
+  to: capture_gps
+  kind: has_many
+  via: path nesting
+- from: evv
+  to: end
+  kind: has_many
+  via: path nesting
+- from: evv
+  to: start
+  kind: has_many
+  via: path nesting
+- from: evv
+  to: status
+  kind: has_many
+  via: path nesting
+- from: family
+  to: additional_info
+  kind: has_many
+  via: path nesting
+- from: family
+  to: client_sibling
+  kind: has_many
+  via: path nesting
+- from: family
+  to: member
+  kind: has_many
+  via: path nesting
+- from: family_attendance
+  to: topics
+  kind: has_many
+  via: path nesting
+- from: field_templates
+  to: fields
+  kind: has_many
+  via: path nesting
+- from: goal_names
+  to: activate
+  kind: has_many
+  via: path nesting
+- from: goal_names
+  to: all
+  kind: has_many
+  via: path nesting
+- from: goal_names
+  to: deactivate
+  kind: has_many
+  via: path nesting
+- from: goals
+  to: activate
+  kind: has_many
+  via: path nesting
+- from: goals
+  to: deactivate
+  kind: has_many
+  via: path nesting
+- from: goals
+  to: hypothesized_functions
+  kind: has_many
+  via: path nesting
+- from: goals
+  to: migrate
+  kind: has_many
+  via: path nesting
+- from: goals
+  to: targets
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: backdate
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: bulk_family_training_topics
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: claim_history
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: download
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: edit
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: family_attendance
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: make_billable
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: make_unbillable
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: pdf_regenerate
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: group_parent_supervisions
+  to: training_topics
+  kind: has_many
+  via: path nesting
+- from: insurance
+  to: preferences
+  kind: has_many
+  via: path nesting
+- from: insurance
+  to: primary
+  kind: has_many
+  via: path nesting
+- from: insurance
+  to: secondary
+  kind: has_many
+  via: path nesting
+- from: insurance-card
+  to: extract
+  kind: has_many
+  via: path nesting
+- from: insurance-card
+  to: extraction-jobs
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: by_provider
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: child_info
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: education_info
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: family
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: general_info
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: medical_info
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: medication
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: referral
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: send
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: submit
+  kind: has_many
+  via: path nesting
+- from: intake_questionnaires
+  to: therapy
+  kind: has_many
+  via: path nesting
+- from: medical_history
+  to: diagnoses
+  kind: has_many
+  via: path nesting
+- from: medical_info
+  to: diagnosis
+  kind: has_many
+  via: path nesting
+- from: medical_info
+  to: selection
+  kind: has_many
+  via: path nesting
+- from: medication
+  to: all
+  kind: has_many
+  via: path nesting
+- from: metrics
+  to: duration_aggregates
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: agreement
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: by_provider
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: documents
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: general_info
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: insurance
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: insurance-card
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: referral
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: status
+  kind: has_many
+  via: path nesting
+- from: onboarding_questionnaires
+  to: submit
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: backdate
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: claim_history
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: data
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: download
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: edit
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: goal_progress
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: make_billable
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: make_unbillable
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: parent_supervisions
+  to: target_evaluations
+  kind: has_many
+  via: path nesting
+- from: payors
+  to: contracts
+  kind: has_many
+  via: path nesting
+- from: payors
+  to: service_code_descriptions
+  kind: has_many
+  via: path nesting
+- from: policies
+  to: prior_authorization_details
+  kind: has_many
+  via: path nesting
+- from: procedures
+  to: download
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: clinical_status
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: co_assigned
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: email
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: info
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: password_reset
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: promote
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: provider_licenses
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: provider_payor_credentials
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: qa_billing_status
+  kind: has_many
+  via: path nesting
+- from: providers
+  to: relationship_manager
+  kind: has_many
+  via: path nesting
+- from: referral_history
+  to: assessment_tools
+  kind: has_many
+  via: path nesting
+- from: service_lines
+  to: payments
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: awaiting_acknowledgement
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: awaiting_guardian_signature
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: backdate
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: bay7
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: claim_history
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: clinical_qa_reviews
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: data
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: download
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: edit
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: evv
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: guardian_sign
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: make_billable
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: make_unbillable
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: narrative
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: narrative_suggestion
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: progress-synopsis
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: reset_status
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: symptoms-interventions
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: terminate
+  kind: has_many
+  via: path nesting
+- from: sessions
+  to: trials
+  kind: has_many
+  via: path nesting
+- from: target_evaluations
+  to: duration_events
+  kind: has_many
+  via: path nesting
+- from: target_evaluations
+  to: rate_events
+  kind: has_many
+  via: path nesting
+- from: targets
+  to: activate
+  kind: has_many
+  via: path nesting
+- from: targets
+  to: bulk_change_stage
+  kind: has_many
+  via: path nesting
+- from: targets
+  to: change_stage
+  kind: has_many
+  via: path nesting
+- from: targets
+  to: deactivate
+  kind: has_many
+  via: path nesting
+- from: tebra
+  to: submit
+  kind: has_many
+  via: path nesting
+- from: therapy
+  to: all
+  kind: has_many
+  via: path nesting
+- from: therapy_history
+  to: services
+  kind: has_many
+  via: path nesting
+- from: timesheets
+  to: pay_periods
+  kind: has_many
+  via: path nesting
+- from: tools
+  to: documents
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: activate
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: activation_logs
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: assessments
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: client_and_family_background
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: crisis_plans
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: deactivate
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: discharges
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: download
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: edit
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: education_background
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: goals
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: medical_history
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: medications
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: migrate
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: pdf_regenerate
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: prior_authorizations
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: reassign_provider
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: referral_history
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: stop
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: symptoms
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: therapy_history
+  kind: has_many
+  via: path nesting
+- from: treatment_plans
+  to: treatment_recommendations
+  kind: has_many
+  via: path nesting
+- from: treatment_recommendations
+  to: services
+  kind: has_many
+  via: path nesting
+- from: trials
+  to: duration_events
+  kind: has_many
+  via: path nesting
+- from: trials
+  to: rate_events
+  kind: has_many
+  via: path nesting
+- from: webhooks
+  to: stripe
+  kind: has_many
+  via: path nesting
+id_reference_fields:
+- field: client_id
+  implies_belongs_to: client
+  schema_occurrences: 47
+- field: provider_id
+  implies_belongs_to: provider
+  schema_occurrences: 19
+- field: service_code_id
+  implies_belongs_to: service_code
+  schema_occurrences: 13
+- field: policy_id
+  implies_belongs_to: policy
+  schema_occurrences: 9
+- field: invoice_id
+  implies_belongs_to: invoice
+  schema_occurrences: 8
+- field: payor_id
+  implies_belongs_to: payor
+  schema_occurrences: 8
+- field: transaction_id
+  implies_belongs_to: transaction
+  schema_occurrences: 8
+- field: member_id
+  implies_belongs_to: member
+  schema_occurrences: 8
+- field: target_id
+  implies_belongs_to: target
+  schema_occurrences: 7
+- field: onboarding_questionnaire_id
+  implies_belongs_to: onboarding_questionnaire
+  schema_occurrences: 6
+- field: claim_id
+  implies_belongs_to: claim
+  schema_occurrences: 5
+- field: treatment_plan_id
+  implies_belongs_to: treatment_plan
+  schema_occurrences: 5
+- field: clearinghouse_payor_id
+  implies_belongs_to: clearinghouse_payor
+  schema_occurrences: 5
+- field: bt_provider_id
+  implies_belongs_to: bt_provider
+  schema_occurrences: 4
+- field: goal_name_id
+  implies_belongs_to: goal_name
+  schema_occurrences: 4
+- field: clearing_house_claim_id
+  implies_belongs_to: clearing_house_claim
+  schema_occurrences: 4
+- field: active_treatment_plan_id
+  implies_belongs_to: active_treatment_plan
+  schema_occurrences: 4
+- field: changehealthcare_eligibility_payor_id
+  implies_belongs_to: changehealthcare_eligibility_payor
+  schema_occurrences: 4
+- field: session_id
+  implies_belongs_to: session
+  schema_occurrences: 3
+- field: goal_id
+  implies_belongs_to: goal
+  schema_occurrences: 3
+core_domains:
+- domain: clinical delivery
+  entities:
+  - clients
+  - sessions
+  - treatment_plan
+  - treatment_plan_statuses
+  - behavior
+  - client_assessments
+  - assessment_surveys
+- domain: workforce & supervision
+  entities:
+  - providers
+  - provider_assignments
+  - provider_availability_records
+  - bt_supervisions
+  - parent_supervisions
+  - group_parent_supervisions
+  - client_supervisions
+  - timesheets
+- domain: intake & onboarding
+  entities:
+  - intake_questionnaires
+  - onboarding_questionnaires
+  - field_templates
+- domain: revenue cycle
+  entities:
+  - payor
+  - payor_provider_credentials
+  - claims
+  - claim_invoices
+  - service_codes
+  - stripe
+- domain: compliance & operations
+  entities:
+  - evv
+  - policies
+  - facilities
+  - client_facility_assignments
+  - cohorts
+  - client_cohort_assignments
+  - feature_flags
+  - email_cron_configs

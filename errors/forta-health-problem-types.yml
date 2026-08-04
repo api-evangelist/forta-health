@@ -1,0 +1,94 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/forta-health-platform-openapi.yml
+format: fastapi-detail
+notes: Forta Health does not publish an error reference — there is no public developer documentation.
+  This catalog is derived from the OpenAPI document served at the API host root plus the error semantics
+  stated in individual operation descriptions. The API does NOT use RFC 9457 application/problem+json;
+  it uses the FastAPI convention of a JSON object with a single "detail" key. For 422 the detail is an
+  array of ValidationError objects; for handler-raised errors (400/403/404/409) the detail is a plain
+  string.
+envelope:
+  media_type: application/json
+  field: detail
+  shapes:
+  - when: 422 schema validation
+    type: array
+    items: '#/components/schemas/ValidationError'
+    item_fields:
+    - loc
+    - msg
+    - type
+  - when: 400/401/403/404/409 handler-raised
+    type: string
+    note: human-readable message, not a stable machine code
+rfc9457:
+  conforms: false
+  evidence: no application/problem+json media type anywhere in the spec; 0 occurrences
+problems:
+- status: 400
+  title: Bad Request
+  description: Request understood but rejected by business-rule validation — for example a required questionnaire
+    section is incomplete, or a state transition is not allowed from the current status.
+  modelled_in_spec: false
+  documented_in_operation_descriptions: 29
+  example_operations:
+  - openapi/forta-health-platform-openapi.yml#list_onboarding_questionnaires_api_v1_onboarding_questionnaires_get
+  - openapi/forta-health-platform-openapi.yml#patch_onboarding_questionnaire_agreement_api_v1_onboarding_questionnaires__questionnaire_id__agreement_patch
+  - openapi/forta-health-platform-openapi.yml#submit_onboarding_questionnaire_api_v1_onboarding_questionnaires__questionnaire_id__submit_post
+- status: 401
+  title: Not Authenticated
+  description: 'No HTTP bearer token was presented, or the token is expired/invalid. Returned by FastAPI
+    HTTPBearer as {"detail": "Not authenticated"}.'
+  modelled_in_spec: false
+  documented_in_operation_descriptions: 0
+- status: 403
+  title: Forbidden
+  description: The authenticated caller is not the provider/role the resource is assigned to. This API
+    enforces per-assignment authorization, not just role checks — the most frequently documented error
+    class in the spec.
+  modelled_in_spec: false
+  documented_in_operation_descriptions: 44
+  example_operations:
+  - openapi/forta-health-platform-openapi.yml#list_onboarding_questionnaires_api_v1_onboarding_questionnaires_get
+  - openapi/forta-health-platform-openapi.yml#get_onboarding_questionnaire_by_provider_api_v1_onboarding_questionnaires_by_provider__provider_id__get
+  - openapi/forta-health-platform-openapi.yml#get_onboarding_questionnaire_by_id_api_v1_onboarding_questionnaires__questionnaire_id__get
+- status: 404
+  title: Not Found
+  description: The addressed resource (questionnaire, session, client, treatment plan, claim) does not
+    exist or is not visible to the caller.
+  modelled_in_spec: false
+  documented_in_operation_descriptions: 42
+  example_operations:
+  - openapi/forta-health-platform-openapi.yml#send_assessment_api_v1_assessment_surveys__post
+  - openapi/forta-health-platform-openapi.yml#get_onboarding_questionnaire_by_provider_api_v1_onboarding_questionnaires_by_provider__provider_id__get
+  - openapi/forta-health-platform-openapi.yml#get_onboarding_questionnaire_by_id_api_v1_onboarding_questionnaires__questionnaire_id__get
+- status: 409
+  title: Conflict
+  description: The operation conflicts with current resource state — for example a duplicate assignment
+    or a re-submission that is not idempotent.
+  modelled_in_spec: false
+  documented_in_operation_descriptions: 4
+  example_operations:
+  - openapi/forta-health-platform-openapi.yml#admin_delete_claim_api_v1_claims_admin__claim_id___delete
+  - openapi/forta-health-platform-openapi.yml#admin_override_claim_status_api_v1_claims_admin__claim_id__status__patch
+  - openapi/forta-health-platform-openapi.yml#create_intake_questionnaire_medical_info_diagnosis_api_v1_intake_questionnaires__questionnaire_id__medical_info_diagnosis_post
+- status: 422
+  title: Unprocessable Entity
+  description: FastAPI/Pydantic request-schema validation failure. The only 4xx response modelled in the
+    OpenAPI document; body is HTTPValidationError with a detail[] array of ValidationError objects carrying
+    loc (JSON pointer path), msg and type.
+  modelled_in_spec: true
+  occurrences_in_spec: 434
+  documented_in_operation_descriptions: 6
+  schema: '#/components/schemas/HTTPValidationError'
+  media_type: application/json
+  example_operations:
+  - openapi/forta-health-platform-openapi.yml#update_onboarding_questionnaire_status_api_v1_onboarding_questionnaires__questionnaire_id__status_patch
+  - openapi/forta-health-platform-openapi.yml#upload_onboarding_questionnaire_document_api_v1_onboarding_questionnaires__questionnaire_id__documents__post
+  - openapi/forta-health-platform-openapi.yml#list_onboarding_questionnaire_documents_api_v1_onboarding_questionnaires__questionnaire_id__documents__get
+gaps:
+- Only 422 is modelled as a response in the OpenAPI document (434 of 450 operations); 401/403/404 are
+  enforced at runtime but absent from every responses{} block.
+- No stable machine-readable error codes — callers must match on human-readable detail strings.
+- No documented retry or rate-limit error (no 429 anywhere in the spec).

@@ -1,0 +1,33 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Forta Health Clinical Operations API
+  version: 1.0.0
+extends: openapi/forta-health-platform-openapi.yml
+actions:
+- target: $.info
+  update:
+    title: Forta Health Clinical Operations API
+    description: Private REST API behind the Forta Health clinical operations platform. Harvested by API
+      Evangelist from the OpenAPI document served publicly at https://api.prod.fortahealth.com/openapi.json.
+      The upstream document carries the FastAPI default title and version; this overlay supplies the real
+      identity without mutating the harvested original.
+    x-apievangelist-slug: forta-health
+    x-apievangelist-harvested: '2026-08-04'
+    x-apievangelist-source: https://api.prod.fortahealth.com/openapi.json
+    x-apievangelist-surface: private-internal
+    x-apievangelist-domain: healthcare/behavioral-health
+    x-apievangelist-phi: true
+- target: $
+  update:
+    servers:
+    - url: https://api.prod.fortahealth.com
+      description: Production (observed; the harvested document declares no servers[])
+- target: $.info
+  update:
+    x-apievangelist-gaps:
+    - info.title is the FastAPI default ("FastAPI") and info.version is the default 0.1.0
+    - servers[] is absent — the base URL is not discoverable from the document
+    - only 136 of 450 operations carry a description (all 450 have summaries and operationIds)
+    - only the 422 validation error is modelled; 401/403/404/409 are enforced at runtime but undocumented
+    - no examples anywhere in the document
+    - operationIds are FastAPI auto-generated (handler name + path + method), not human-designed

@@ -42,5 +42,34 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Forta Health is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.hiive.com/securities/forta-health-stock
+Forta Health operates the largest virtual Applied Behavior Analysis (ABA) network in the United States,
+delivering autism therapy to children through two models: Virtual ABA over a HIPAA-secure telehealth
+platform across 43 states, and In-Home ABA in Dallas, Houston and San Antonio, Texas. Founded in 2021,
+Forta pairs Board Certified Behavior Analysts (BCBAs) who design and supervise individualized treatment
+plans with Registered Behavior Technicians and trained parents who deliver live sessions, using
+proprietary software and machine-learning models to personalize each plan.
+
+> **Not Forta Network.** This profile covers Forta Health (fortahealth.com), a healthcare company. It is
+> unrelated to Forta Network (forta.network), a blockchain security project that shares the name.
+
+## API surface
+
+Forta Health publishes **no public developer program** — no developer portal, documentation, API
+reference, SDKs, CLI, sandbox, status page or changelog, and no self-serve API signup.
+
+It does operate a private clinical-operations REST API behind its provider application at
+`app.fortahealth.com`. That service publishes its OpenAPI 3.1.0 description anonymously at
+`https://api.prod.fortahealth.com/openapi.json` (450 operations, 306 paths, 578 schemas, HTTP bearer
+auth), which is the machine-readable surface this profile is built from. Every data operation on that
+API is correctly authenticated — anonymous requests return `403 Not authenticated`, and only the health
+check answers without a token. No patient, staff or other record was retrieved, and none appears in this
+repository.
+
+Because the API's resources are protected health information concerning children, and because no
+authorized third-party caller exists, **no Agent Skills and no MCP tool manifest were authored** for this
+provider. That exclusion is deliberate and is recorded in [`skills/_index.yml`](skills/_index.yml). Full
+detail of what was probed, found and withheld is in [`review.yml`](review.yml).
+
+- Company: https://www.fortahealth.com/
+- GitHub: https://github.com/fortahealth
+- Secondary-market listing: https://www.hiive.com/securities/forta-health-stock

@@ -1,0 +1,93 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/forta-health-platform-openapi.yml
+notes: Forta Health publishes no developer documentation, so every convention below is derived from the
+  OpenAPI document served publicly at https://api.prod.fortahealth.com/openapi.json. Nothing here is a
+  provider claim. The service is a FastAPI application and follows FastAPI/Pydantic defaults rather than
+  a designed, documented public API contract.
+authentication:
+  style: http-bearer
+  scheme: HTTPBearer
+  applied_to: 447 of 450 operations (only /api/v1/health/ is anonymous)
+  token_format: unspecified in spec (no bearerFormat declared)
+  oauth2: false
+  api_keys: false
+  artifact: authentication/forta-health-authentication.yml
+idempotency:
+  idempotency_key_header: false
+  supported: false
+  evidence: no Idempotency-Key header or parameter anywhere in the spec
+  natural_idempotence:
+    documented: true
+    scope: four onboarding-questionnaire operations state idempotent re-application semantics in prose
+    examples:
+    - PATCH agreement section — "Idempotent re-PATCH of the same values does not error"
+    - POST submit onboarding questionnaire — "idempotent if already done"
+    - DELETE all medications — "Idempotent when there are no medications to begin with"
+    - DELETE all therapies — "Idempotent when there are no therapies to begin with"
+    note: This is operation-level idempotent BEHAVIOUR, not a client-supplied idempotency-key contract.
+      No Idempotency pointer is emitted in apis.yml because there is no key mechanism a client can use
+      to make a retry safe.
+pagination:
+  supported: false
+  style: null
+  evidence: no page/per_page/cursor/offset/limit pagination parameters on any collection operation. Collection
+    GETs return unbounded arrays filtered by domain query parameters instead.
+filtering:
+  style: query-parameter
+  common_parameters:
+  - client_id
+  - provider_id
+  - start
+  - end
+  - status
+  - client_clinical_status
+  - action_required
+  - active_only
+  note: date-window filtering via start/end is the dominant collection-narrowing mechanism (18 operations
+    each)
+field_expansion:
+  supported: true
+  parameter: expand
+  style: repeated query array
+  operations:
+  - openapi/forta-health-platform-openapi.yml#get_all_treatment_plans_api_v1_treatment_plans__get
+  - openapi/forta-health-platform-openapi.yml#get_treatment_plan_api_v1_treatment_plans__treatment_plan_id___get
+  - openapi/forta-health-platform-openapi.yml#get_claim_invoice_api_v1_claim_invoices__claim_invoice_id___get
+  note: treatment_plans constrains expand to the TreatmentPlanSubResource enum; the other two accept free
+    strings
+request_tracing:
+  request_id_header: false
+  evidence: no X-Request-Id / X-Correlation-Id parameter or response header in the spec
+  other_headers:
+  - name: x-forwarded-for
+    operations: 5
+    note: client IP forwarding, accepted as an explicit parameter
+  - name: X-EVV-Token
+    operations: 1
+    note: electronic visit verification callback token
+versioning:
+  scheme: uri-path
+  current: v1
+  evidence: every path is prefixed /api/v1/
+  artifact: lifecycle/forta-health-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  field: detail
+  rfc9457: false
+  artifact: errors/forta-health-problem-types.yml
+rate_limiting:
+  documented: false
+  evidence: no 429 response, no RateLimit/X-RateLimit/Retry-After headers anywhere in the spec
+method_semantics:
+  get: 118
+  post: 111
+  patch: 90
+  delete: 74
+  put: 57
+  note: PATCH is used for partial update and PUT for state transitions/actions (promote, stop, acknowledge,
+    reset_status) rather than full replacement — an RPC-over-REST style rather than strict resource semantics.
+content_types:
+  request: application/json
+  response: application/json
+  note: a small number of session/QA operations return PDF downloads

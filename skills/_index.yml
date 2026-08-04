@@ -1,0 +1,23 @@
+generated: '2026-08-04'
+method: none
+status: deliberately-excluded
+skills: []
+exclusion:
+  decision: No Agent Skills and no MCP server manifest were authored for Forta Health.
+  reasons:
+  - The API is a private clinical-operations backend for a HIPAA-covered ABA therapy provider. Its resources
+    are identified patients (clients), therapy sessions, treatment plans, supervisions, claims and electronic
+    visit verification records — protected health information under HIPAA, concerning children with autism.
+  - 'There is no public developer program: no documentation, no signup, no API keys, no terms permitting
+    third-party access. No agent could legitimately obtain a token, so a skill or tool manifest would
+    package operations no authorized caller exists for.'
+  - API Evangelist policy (enrichment PII guardrail) is to document an exposure, never to ship the recipe.
+    Emitting an AgentSkill or MCPServer tool list here would turn a structural profile into a working
+    operating manual for a PHI system.
+  what_was_captured_instead:
+  - openapi/ — the contract as published, verbatim
+  - data-model/ — the entity graph, structural only
+  - errors/, conventions/, authentication/ — semantics, no operating recipes
+  - review.yml — the disclosure finding, with no individual named
+  note: This exclusion is recorded so the omission reads as deliberate rather than as an incomplete pass.
+    No AgentSkill or MCPServer pointer is wired in apis.yml, and none should be added on a later round.

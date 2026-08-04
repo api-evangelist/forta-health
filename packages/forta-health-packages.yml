@@ -1,0 +1,35 @@
+generated: '2026-08-04'
+method: searched
+result: none-found
+source: npm registry search, PyPI, RubyGems, crates.io, github.com/fortahealth
+notes: 'Forta Health ships no client libraries. It has no public developer program, so there is nothing
+  for a third-party SDK to wrap. The public GitHub org (github.com/fortahealth, created 2022-01-18) holds
+  five repositories: three forks of upstream ML projects (huggingface/transformers, huggingface/datasets,
+  meta-llama/llama-recipes) and two first-party research repositories, OpenMedLM-Project and MedCodeLM-Project.
+  None is an API client library.'
+packages: []
+registries_probed:
+- registry: npm
+  query: fortahealth
+  results: 0
+- registry: pypi
+  names:
+  - forta-health
+  - fortahealth
+  status: 404
+- registry: rubygems
+  name: fortahealth
+  status: 404
+- registry: crates.io
+  name: fortahealth
+  status: 403
+github_org:
+  url: https://github.com/fortahealth
+  public_repos: 5
+  first_party:
+  - OpenMedLM-Project
+  - MedCodeLM-Project
+  forks:
+  - transformers
+  - datasets
+  - llama-recipes

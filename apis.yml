@@ -1,23 +1,117 @@
 aid: forta-health
 name: Forta Health
-description: 'Forta Health is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Forta Health operates the largest virtual Applied Behavior Analysis (ABA) network in the United States,
+  delivering autism therapy to children through two models: Virtual ABA over a HIPAA-secure telehealth
+  platform across 43 states, and In-Home ABA in Dallas, Houston and San Antonio, Texas. Founded in 2021 and
+  led by CEO Edan Morag, Forta pairs Board Certified Behavior Analysts (BCBAs) who design and supervise
+  individualized treatment plans with Registered Behavior Technicians (RBTs) and trained parents who deliver
+  live sessions, using proprietary software and machine-learning models that ingest medical records and
+  session data to surface relevant case data for clinicians and personalize each treatment plan. The company
+  works with major commercial payers and state Medicaid programs to shorten the typical six-to-eighteen-month
+  ABA waitlist to roughly ninety days. Forta publishes no public developer program; its clinical operations
+  platform is a private, bearer-token-authenticated REST API.
+image: https://cdn.prod.website-files.com/62605ac6c670d21352ebb32c/675d0e02ce1be8abd64c0749_opengraph.webp
 url: https://raw.githubusercontent.com/api-evangelist/forta-health/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
-- Company
-apis: []
+- healthcare
+- autism
+- aba-therapy
+- behavioral-health
+- telehealth
+- digital-health
+- pediatric-care
+- clinical-operations
+- medicaid
+- health-insurance
+- ehr
+- machine-learning
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- name: Forta Health Clinical Operations API
+  description: >-
+    The private REST API behind the Forta Health clinical operations platform (app.fortahealth.com), a
+    FastAPI service exposing 450 operations across 306 paths covering providers and provider assignments,
+    clients and client assessments, therapy sessions with trial/duration/rate event capture, clinical QA
+    reviews, treatment plans and statuses, BCBA and parent supervisions, cohorts, facilities, payors and
+    payor-provider credentials, claims and claim invoices, service codes, timesheets, electronic visit
+    verification (EVV), intake and onboarding questionnaires, assessment surveys, policies, feature flags
+    and Stripe billing. Authentication is HTTP bearer; every operation except the health check is
+    authenticated. This is an internal product API with no public developer program, no published
+    documentation and no self-serve signup — the OpenAPI description is served publicly at the API host
+    root, which is how it was discovered.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - healthcare
+  - autism
+  - aba-therapy
+  - behavioral-health
+  - telehealth
+  - clinical-operations
+  - claims
+  - ehr
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-platform-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+  - type: Overlay
+    url: overlays/forta-health-platform-overlay.yaml
 common:
 - type: Website
+  url: https://www.fortahealth.com/
+- type: SecondaryMarket
   url: https://www.hiive.com/securities/forta-health-stock
+- type: SignUp
+  url: https://www.fortahealth.com/contact
+- type: Login
+  url: https://app.fortahealth.com/
+- type: Support
+  url: https://www.fortahealth.com/contact
+- type: HelpCenter
+  url: https://www.fortahealth.com/faq
+- type: Blog
+  url: https://www.fortahealth.com/resources
+- type: TermsOfService
+  url: https://www.fortahealth.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.fortahealth.com/privacy-policy
+- type: GitHubOrganization
+  url: https://github.com/fortahealth
+- type: Research
+  url: https://www.fortahealth.com/our-research
+- type: Careers
+  url: https://www.fortahealth.com/careers
+- type: Compliance
+  url: https://www.fortahealth.com/notice-of-privacy-practices
+- type: Conformance
+  url: conformance/forta-health-conformance.yml
+- type: Packages
+  url: packages/forta-health-packages.yml
+- type: Lifecycle
+  url: lifecycle/forta-health-lifecycle.yml
+- type: DomainSecurity
+  url: security/forta-health-domain-security.yml
+- type: LLMsTxt
+  url: llms/forta-health-llms.txt
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

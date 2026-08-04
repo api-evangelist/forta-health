@@ -1,0 +1,12 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/forta-health-platform-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: HTTPBearer
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/forta-health-platform-openapi.yml

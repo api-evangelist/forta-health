@@ -1,0 +1,132 @@
+generated: '2026-08-04'
+method: probed
+slug: forta-health
+name: Forta Health
+
+summary: >-
+  Forta Health has no public API program — no developer portal, no documentation, no SDKs, no signup.
+  What it does have is a private clinical-operations backend whose OpenAPI description is served
+  anonymously at the API host root. That document (OpenAPI 3.1.0, 450 operations, 306 paths, 578
+  schemas) is the entire machine-readable surface this profile is built from. Every data operation on
+  that API is correctly authenticated; the finding is a contract disclosure, not a data exposure.
+
+identity:
+  disambiguation: >-
+    Forta Health (fortahealth.com) is a virtual ABA autism therapy provider. It is unrelated to Forta
+    Network (forta.network), a blockchain security project that shares the name and that dominates
+    search results for "Forta API". Earlier catalog rounds and any future harvest must not merge them.
+  seed: https://www.hiive.com/securities/forta-health-stock
+
+contract_discovery:
+  outcome: openapi-found
+  note: >-
+    The docs/marketing host published nothing. The API host was not listed anywhere public — it was
+    recovered from the single-page application bundle at
+    https://app.fortahealth.com/static/js/main.b0f682e6.js, which references
+    https://api.prod.fortahealth.com 22 times. Probing that host root returned a live OpenAPI document.
+    This is the Harmonic.ai pattern: the spec was never on the docs host.
+  probes:
+    - {url: 'https://www.fortahealth.com/openapi.json', status: 404}
+    - {url: 'https://www.fortahealth.com/llms.txt', status: 404}
+    - {url: 'https://api.prod.fortahealth.com/openapi.json', status: 200, result: 'OpenAPI 3.1.0, parsed'}
+    - {url: 'https://api.prod.fortahealth.com/docs', status: 404, note: 'Swagger UI disabled'}
+    - {url: 'https://api.prod.fortahealth.com/redoc', status: 404, note: 'ReDoc disabled'}
+    - {url: 'https://api.prod.fortahealth.com/graphql', status: 404}
+    - {url: 'https://api.prod.fortahealth.com/.well-known/agent-card.json', status: 404}
+    - {url: 'https://app.fortahealth.com/.well-known/agent-card.json', status: 200, valid: false,
+       note: 'SPA catch-all returns text/html for every path — rejected as a false positive'}
+    - {url: 'https://docs.fortahealth.com/', status: 'no DNS'}
+    - {url: 'https://developer.fortahealth.com/', status: 'no DNS'}
+    - {url: 'https://status.fortahealth.com/', status: 'no DNS'}
+    - {url: 'https://trust.fortahealth.com/', status: 'no DNS'}
+
+findings:
+  - id: openapi-served-publicly
+    severity: informational
+    title: FastAPI OpenAPI description is served anonymously while the interactive docs are disabled
+    detail: >-
+      https://api.prod.fortahealth.com/openapi.json returns HTTP 200 to an anonymous caller and
+      describes all 450 operations of the clinical operations platform, including client (patient),
+      treatment plan, session, supervision, claim and EVV resources. /docs and /redoc are both
+      disabled (404), which suggests the intent was to turn documentation off — disabling the Swagger
+      UI in FastAPI does not disable the openapi.json route, which is a common oversight.
+    exposure: contract-only
+    verified_authorization: >-
+      Anonymous GETs against /api/v1/providers/, /api/v1/clients/, /api/v1/facilities/,
+      /api/v1/service_codes/ and /api/v1/feature_flags/ all returned 403 {"detail":"Not
+      authenticated"}. Only /api/v1/health/ answers anonymously (200, body null). No patient or staff
+      record was retrieved, and none is recorded anywhere in this repository.
+    recommendation: >-
+      If the docs were meant to be off, set openapi_url=None on the FastAPI app (or gate the route)
+      so the description is not served to unauthenticated callers.
+    disclosure_channel_available: false
+    disclosure_note: >-
+      Forta Health publishes no security.txt, no /security page and no vulnerability disclosure
+      program, so there is no advertised channel to report this to. General contact:
+      https://www.fortahealth.com/contact
+
+  - id: no-public-api-program
+    severity: informational
+    title: No developer program of any kind
+    detail: >-
+      No portal, documentation, reference, getting-started, SDKs, CLI, Postman collection, sandbox,
+      changelog, status page, deprecation policy, SLA, webhooks or AsyncAPI. The company is a care
+      delivery organization, not an API provider; the low API-facing score reflects an absent product
+      surface rather than a neglected one.
+
+  - id: spec-quality
+    severity: informational
+    title: Spec carries FastAPI defaults
+    detail: >-
+      info.title is "FastAPI" and info.version is "0.1.0"; servers[] is absent so the base URL is not
+      discoverable from the document; only 136 of 450 operations carry a description (all 450 have
+      summaries and auto-generated operationIds); there are no examples; and only the 422 validation
+      error is modelled, though 400/403/404/409 are enforced at runtime and described in prose.
+
+pii_guardrail:
+  applied: true
+  decisions:
+    - >-
+      No Agent Skills were authored and no MCP server manifest or tool crosswalk was derived. The
+      resources are protected health information about children with autism, and no authorized
+      third-party caller exists. Recorded deliberately in skills/_index.yml.
+    - >-
+      No live response body was captured or used as an example. Authorization was verified from HTTP
+      status codes only.
+    - >-
+      The harvested OpenAPI document was checked for embedded personal data before saving: zero email
+      addresses, zero example blocks, zero sample payloads. It is schema only.
+    - >-
+      No individual is named in this repository. Company leadership named in the public description
+      is drawn from the company's own about page.
+
+artifacts_written:
+  - openapi/_original/forta-health-openapi.json
+  - openapi/forta-health-platform-openapi.yml
+  - authentication/forta-health-authentication.yml
+  - conventions/forta-health-conventions.yml
+  - errors/forta-health-problem-types.yml
+  - data-model/forta-health-data-model.yml
+  - conformance/forta-health-conformance.yml
+  - lifecycle/forta-health-lifecycle.yml
+  - security/forta-health-domain-security.yml
+  - well-known/forta-health-well-known.yml
+  - packages/forta-health-packages.yml
+  - overlays/forta-health-platform-overlay.yaml
+  - llms/forta-health-llms.txt
+  - skills/_index.yml
+
+not_written:
+  - {artifact: 'a2a/', reason: 'no agent card on any host — search-only artifact, nothing authored'}
+  - {artifact: 'mcp/', reason: 'no MCP server; candidate derivation withheld under the PII guardrail'}
+  - {artifact: 'skills/*.md', reason: 'withheld under the PII guardrail; exclusion recorded in skills/_index.yml'}
+  - {artifact: 'scopes/', reason: 'no oauth2 security scheme — bearer tokens only'}
+  - {artifact: 'asyncapi/', reason: 'no event, streaming or webhook surface exists'}
+  - {artifact: 'sandbox/', reason: 'no sandbox or test environment published'}
+  - {artifact: 'changelog/', reason: 'no changelog published'}
+  - {artifact: 'cli/', reason: 'no CLI'}
+  - {artifact: 'components/', reason: 'no embeddable UI components published'}
+  - {artifact: 'grpc/', reason: 'no .proto published'}
+  - {artifact: 'errors/*-decline-codes.yml', reason: 'not a payments or card-authorization provider'}
+  - {artifact: 'security/*-vulnerability-disclosure.yml', reason: 'probe found no disclosure program'}
+  - {artifact: 'security/*-trust-center.yml', reason: 'probe found no trust center'}

@@ -1,0 +1,41 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/forta-health-platform-openapi.yml
+notes: Forta Health publishes no versioning policy, no deprecation policy, no changelog, no SLA and no
+  status page. Everything below is derived from the OpenAPI document or recorded as an observed absence.
+  Absence is real data, not a gap in the probe.
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: null
+  evidence: all 306 paths are prefixed /api/v1/
+  policy_published: false
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  evidence: 'no Sunset/Deprecation header and zero operations marked deprecated: true in the spec'
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  published: false
+status_page: null
+status_page_probes:
+- url: https://status.fortahealth.com/
+  result: no DNS resolution
+- url: https://www.fortahealth.com/status
+  result: '404'
+changelog:
+  published: false
+  evidence: no changelog page in sitemap.xml; no releases in the public GitHub org
+health_check:
+  operation: openapi/forta-health-platform-openapi.yml#health_check_api_v1_health__get
+  url: https://api.prod.fortahealth.com/api/v1/health/
+  anonymous: true
+  observed_status: 200
+  note: the only unauthenticated operation on the API
+x-evidence:
+  fetched: '2026-08-04'
+  openapi_url: https://api.prod.fortahealth.com/openapi.json
+  http_status: 200
