@@ -37,32 +37,16 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- name: Forta Health Clinical Operations API
-  description: >-
-    The private REST API behind the Forta Health clinical operations platform (app.fortahealth.com), a
-    FastAPI service exposing 450 operations across 306 paths covering providers and provider assignments,
-    clients and client assessments, therapy sessions with trial/duration/rate event capture, clinical QA
-    reviews, treatment plans and statuses, BCBA and parent supervisions, cohorts, facilities, payors and
-    payor-provider credentials, claims and claim invoices, service codes, timesheets, electronic visit
-    verification (EVV), intake and onboarding questionnaires, assessment surveys, policies, feature flags
-    and Stripe billing. Authentication is HTTP bearer; every operation except the health check is
-    authenticated. This is an internal product API with no public developer program, no published
-    documentation and no self-serve signup — the OpenAPI description is served publicly at the API host
-    root, which is how it was discovered.
+- aid: forta-health:forta-health-assessment-surveys-api
+  name: Forta Health Assessment Surveys API
+  description: The assessment_surveys API from Forta Health — 1 operation(s) for assessment_surveys.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
-  - healthcare
-  - autism
-  - aba-therapy
-  - behavioral-health
-  - telehealth
-  - clinical-operations
-  - claims
-  - ehr
+  - assessment_surveys
   properties:
   - type: OpenAPI
-    url: openapi/forta-health-platform-openapi.yml
+    url: openapi/forta-health-assessment-surveys-api-openapi.yml
   - type: Authentication
     url: authentication/forta-health-authentication.yml
   - type: ErrorCatalog
@@ -71,9 +55,612 @@ apis:
     url: conventions/forta-health-conventions.yml
   - type: DataModel
     url: data-model/forta-health-data-model.yml
-  - type: Overlay
-    url: overlays/forta-health-platform-overlay.yaml
+- aid: forta-health:forta-health-behavior-api
+  name: Forta Health Behavior API
+  description: The behavior API from Forta Health — 6 operation(s) for behavior.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - behavior
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-behavior-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-bt-supervisions-api
+  name: Forta Health Bt Supervisions API
+  description: The bt_supervisions API from Forta Health — 6 operation(s) for bt_supervisions.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - bt_supervisions
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-bt-supervisions-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-claim-invoices-api
+  name: Forta Health Claim Invoices API
+  description: The claim_invoices API from Forta Health — 10 operation(s) for claim_invoices.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - claim_invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-claim-invoices-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-claims-api
+  name: Forta Health Claims API
+  description: The claims API from Forta Health — 17 operation(s) for claims.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - claims
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-claims-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-client-assessments-api
+  name: Forta Health Client Assessments API
+  description: The client_assessments API from Forta Health — 10 operation(s) for client_assessments.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - client_assessments
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-client-assessments-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-client-cohort-assignments-api
+  name: Forta Health Client Cohort Assignments API
+  description: >-
+    The client_cohort_assignments API from Forta Health — 2 operation(s) for client_cohort_assignments.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - client_cohort_assignments
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-client-cohort-assignments-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-client-facility-assignments-api
+  name: Forta Health Client Facility Assignments API
+  description: >-
+    The client_facility_assignments API from Forta Health — 2 operation(s) for client_facility_assignments.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - client_facility_assignments
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-client-facility-assignments-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-client-supervisions-api
+  name: Forta Health Client Supervisions API
+  description: The client_supervisions API from Forta Health — 12 operation(s) for client_supervisions.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - client_supervisions
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-client-supervisions-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-clients-api
+  name: Forta Health Clients API
+  description: The clients API from Forta Health — 7 operation(s) for clients.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - clients
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-clients-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-cohorts-api
+  name: Forta Health Cohorts API
+  description: The cohorts API from Forta Health — 3 operation(s) for cohorts.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - cohorts
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-cohorts-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-email-cron-configs-api
+  name: Forta Health Email Cron Configs API
+  description: The email_cron_configs API from Forta Health — 3 operation(s) for email_cron_configs.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - email_cron_configs
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-email-cron-configs-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-evv-api
+  name: Forta Health Evv API
+  description: The evv API from Forta Health — 1 operation(s) for evv.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - evv
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-evv-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-facilities-api
+  name: Forta Health Facilities API
+  description: The facilities API from Forta Health — 1 operation(s) for facilities.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - facilities
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-facilities-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-feature-flags-api
+  name: Forta Health Feature Flags API
+  description: The feature_flags API from Forta Health — 2 operation(s) for feature_flags.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - feature_flags
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-feature-flags-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-field-templates-api
+  name: Forta Health Field Templates API
+  description: The field_templates API from Forta Health — 2 operation(s) for field_templates.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - field_templates
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-field-templates-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-group-parent-supervisions-api
+  name: Forta Health Group Parent Supervisions API
+  description: >-
+    The group_parent_supervisions API from Forta Health — 18 operation(s) for group_parent_supervisions.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - group_parent_supervisions
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-group-parent-supervisions-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-health-api
+  name: Forta Health Health API
+  description: The health API from Forta Health — 1 operation(s) for health.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-health-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-intake-questionnaires-api
+  name: Forta Health Intake Questionnaires API
+  description: >-
+    The intake_questionnaires API from Forta Health — 32 operation(s) for intake_questionnaires.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - intake_questionnaires
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-intake-questionnaires-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-metrics-api
+  name: Forta Health Metrics API
+  description: The metrics API from Forta Health — 1 operation(s) for metrics.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-metrics-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-onboarding-questionnaires-api
+  name: Forta Health Onboarding Questionnaires API
+  description: >-
+    The onboarding_questionnaires API from Forta Health — 17 operation(s) for onboarding_questionnaires.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - onboarding_questionnaires
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-onboarding-questionnaires-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-parent-supervisions-api
+  name: Forta Health Parent Supervisions API
+  description: The parent_supervisions API from Forta Health — 18 operation(s) for parent_supervisions.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - parent_supervisions
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-parent-supervisions-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-payor-api
+  name: Forta Health Payor API
+  description: The payor API from Forta Health — 6 operation(s) for payor.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - payor
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-payor-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-payor-provider-credentials-api
+  name: Forta Health Payor Provider Credentials API
+  description: >-
+    The payor_provider_credentials API from Forta Health — 2 operation(s) for payor_provider_credentials.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - payor_provider_credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-payor-provider-credentials-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-policies-api
+  name: Forta Health Policies API
+  description: The policies API from Forta Health — 3 operation(s) for policies.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - policies
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-policies-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-provider-assignments-api
+  name: Forta Health Provider Assignments API
+  description: >-
+    The provider_assignments API from Forta Health — 2 operation(s) for provider_assignments.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - provider_assignments
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-provider-assignments-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-provider-availability-records-api
+  name: Forta Health Provider Availability Records API
+  description: >-
+    The provider_availability_records API from Forta Health — 2 operation(s) for provider_availability_records.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - provider_availability_records
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-provider-availability-records-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-providers-api
+  name: Forta Health Providers API
+  description: The providers API from Forta Health — 12 operation(s) for providers.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - providers
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-providers-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-service-codes-api
+  name: Forta Health Service Codes API
+  description: The service_codes API from Forta Health — 1 operation(s) for service_codes.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - service_codes
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-service-codes-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-sessions-api
+  name: Forta Health Sessions API
+  description: The sessions API from Forta Health — 38 operation(s) for sessions.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-sessions-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-stripe-api
+  name: Forta Health Stripe API
+  description: The stripe API from Forta Health — 1 operation(s) for stripe.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - stripe
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-stripe-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-timesheets-api
+  name: Forta Health Timesheets API
+  description: The timesheets API from Forta Health — 3 operation(s) for timesheets.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - timesheets
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-timesheets-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-treatment-plan-api
+  name: Forta Health Treatment Plan API
+  description: The treatment_plan API from Forta Health — 63 operation(s) for treatment_plan.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - treatment_plan
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-treatment-plan-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-treatment-plan-statuses-api
+  name: Forta Health Treatment Plan Statuses API
+  description: >-
+    The treatment_plan_statuses API from Forta Health — 1 operation(s) for treatment_plan_statuses.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - treatment_plan_statuses
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-treatment-plan-statuses-api-openapi.yml
+  - type: Authentication
+    url: authentication/forta-health-authentication.yml
+  - type: ErrorCatalog
+    url: errors/forta-health-problem-types.yml
+  - type: Conventions
+    url: conventions/forta-health-conventions.yml
+  - type: DataModel
+    url: data-model/forta-health-data-model.yml
 common:
+- type: Overlay
+  url: overlays/forta-health-platform-overlay.yaml
 - type: Website
   url: https://www.fortahealth.com/
 - type: SecondaryMarket
