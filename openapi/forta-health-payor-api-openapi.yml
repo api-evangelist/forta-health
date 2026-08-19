@@ -1,0 +1,899 @@
+openapi: 3.2.0
+info:
+  title: Fast Payor API
+  version: 0.1.0
+tags:
+- name: payor
+paths:
+  /api/v1/payors/:
+    get:
+      tags:
+      - payor
+      summary: Get Payors
+      operationId: get_payors_api_v1_payors__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PayorListResponse'
+                type: array
+                title: Response Get Payors Api V1 Payors  Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - payor
+      summary: Create Payor
+      operationId: create_payor_api_v1_payors__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayorCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayorDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/payors/{payor_id}:
+    get:
+      tags:
+      - payor
+      summary: Get Payor
+      operationId: get_payor_api_v1_payors__payor_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayorDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - payor
+      summary: Update Payor
+      operationId: update_payor_api_v1_payors__payor_id__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayorPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayorDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/payors/{payor_id}/contracts/:
+    post:
+      tags:
+      - payor
+      summary: Create Payor Contract
+      operationId: create_payor_contract_api_v1_payors__payor_id__contracts__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayorContractCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayorContractResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/payors/{payor_id}/contracts/{contract_id}:
+    patch:
+      tags:
+      - payor
+      summary: Update Payor Contract
+      operationId: update_payor_contract_api_v1_payors__payor_id__contracts__contract_id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      - name: contract_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Contract Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayorContractPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayorContractResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - payor
+      summary: Delete Payor Contract
+      operationId: delete_payor_contract_api_v1_payors__payor_id__contracts__contract_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      - name: contract_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Contract Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/payors/{payor_id}/service_code_descriptions/:
+    post:
+      tags:
+      - payor
+      summary: Create Service Code Description
+      operationId: create_service_code_description_api_v1_payors__payor_id__service_code_descriptions__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayorServiceCodeDescriptionCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayorServiceCodeDescriptionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/payors/{payor_id}/service_code_descriptions/{service_code_description_id}/:
+    patch:
+      tags:
+      - payor
+      summary: Update Service Code Description
+      operationId: update_service_code_description_api_v1_payors__payor_id__service_code_descriptions__service_code_description_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      - name: service_code_description_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Service Code Description Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayorServiceCodeDescriptionPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayorServiceCodeDescriptionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ClientSupervisionCriteria:
+      properties:
+        minimum_percentage:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Minimum Percentage
+        minimum_hours:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Minimum Hours
+        operator:
+          anyOf:
+          - $ref: '#/components/schemas/OperatorEnum'
+          - type: 'null'
+          default: OR
+      type: object
+      title: ClientSupervisionCriteria
+    ClientSupervisionRequirements-Output:
+      properties:
+        is_required:
+          type: boolean
+          title: Is Required
+        criteria:
+          anyOf:
+          - $ref: '#/components/schemas/ClientSupervisionCriteria'
+          - type: 'null'
+      type: object
+      required:
+      - is_required
+      title: ClientSupervisionRequirements
+    PayorServiceCodeDescriptionResponse:
+      properties:
+        description:
+          type: string
+          minLength: 2
+          title: Description
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        id:
+          type: integer
+          title: Id
+        payor_id:
+          type: integer
+          title: Payor Id
+        service_code:
+          anyOf:
+          - $ref: '#/components/schemas/ServiceCodeEnum'
+          - type: string
+          title: Service Code
+      type: object
+      required:
+      - description
+      - service_code_id
+      - id
+      - payor_id
+      - service_code
+      title: PayorServiceCodeDescriptionResponse
+    PayorContractPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        rate_per_unit:
+          type: number
+          title: Rate Per Unit
+      type: object
+      required:
+      - date_start
+      - rate_per_unit
+      title: PayorContractPatch
+    PayorPatch:
+      properties:
+        label:
+          type: string
+          title: Label
+        state:
+          type: string
+          title: State
+        clearinghouse_payor_id:
+          type: string
+          title: Clearinghouse Payor Id
+        type:
+          $ref: '#/components/schemas/PayorTypeEnum'
+        modifier:
+          anyOf:
+          - type: string
+            maxLength: 2
+            minLength: 2
+          - type: 'null'
+          title: Modifier
+        preferred_service_code_type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+        is_using_taxonomy_code:
+          type: boolean
+          title: Is Using Taxonomy Code
+        sector:
+          $ref: '#/components/schemas/PayorSectorEnum'
+        internal_classification:
+          anyOf:
+          - type: string
+            maxLength: 50
+            minLength: 1
+          - type: 'null'
+          title: Internal Classification
+        forta_website_payor_name:
+          anyOf:
+          - type: string
+            maxLength: 50
+            minLength: 1
+          - type: 'null'
+          title: Forta Website Payor Name
+        changehealthcare_eligibility_payor_id:
+          anyOf:
+          - type: string
+            maxLength: 50
+            minLength: 1
+          - type: 'null'
+          title: Changehealthcare Eligibility Payor Id
+        max_client_age:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Client Age
+        is_pbt_allowed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Pbt Allowed
+        is_telehealth_allowed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Telehealth Allowed
+        evv_enabled:
+          type: boolean
+          title: Evv Enabled
+          default: false
+        bt_type:
+          anyOf:
+          - $ref: '#/components/schemas/BTTypeEnum'
+          - type: 'null'
+        client_supervision_requirements:
+          $ref: '#/components/schemas/ClientSupervisionRequirements-Input'
+      type: object
+      required:
+      - label
+      - state
+      - clearinghouse_payor_id
+      - type
+      - preferred_service_code_type
+      - is_using_taxonomy_code
+      - sector
+      - client_supervision_requirements
+      title: PayorPatch
+    PayorSectorEnum:
+      type: string
+      enum:
+      - Commercial
+      - Medicaid
+      - MCO
+      - Government Plan
+      title: PayorSectorEnum
+      description: Enum for payor sectors.
+    BTTypeEnum:
+      type: string
+      enum:
+      - BT
+      - RBT
+      - RLT
+      - CBT
+      title: BTTypeEnum
+    PayorListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        label:
+          type: string
+          title: Label
+        state:
+          type: string
+          title: State
+        clearinghouse_payor_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clearinghouse Payor Id
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/PayorTypeEnum'
+          - type: 'null'
+        modifier:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modifier
+        preferred_service_code_type:
+          anyOf:
+          - $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          - type: 'null'
+        evv_enabled:
+          type: boolean
+          title: Evv Enabled
+          default: false
+        taxonomy_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Taxonomy Code
+      type: object
+      required:
+      - id
+      - label
+      - state
+      title: PayorListResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
+    PayorServiceCodeDefaultDescriptionResponse:
+      properties:
+        description:
+          type: string
+          minLength: 2
+          title: Description
+        service_code_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Service Code Id
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        payor_id:
+          type: integer
+          title: Payor Id
+        service_code:
+          anyOf:
+          - $ref: '#/components/schemas/ServiceCodeEnum'
+          - type: string
+          title: Service Code
+      type: object
+      required:
+      - description
+      - payor_id
+      - service_code
+      title: PayorServiceCodeDefaultDescriptionResponse
+    PayorTypeEnum:
+      type: string
+      enum:
+      - Medicare Part A
+      - Medicare Part B
+      - Medicaid
+      - Tricare
+      - ChampVa
+      - Group Health Plan
+      - FECA Blk Lung
+      - Other
+      title: PayorTypeEnum
+      description: Enum for payor types.
+    ClientSupervisionRequirements-Input:
+      properties:
+        is_required:
+          type: boolean
+          title: Is Required
+        criteria:
+          anyOf:
+          - $ref: '#/components/schemas/ClientSupervisionCriteria'
+          - type: 'null'
+      type: object
+      required:
+      - is_required
+      title: ClientSupervisionRequirements
+    PayorCreate:
+      properties:
+        label:
+          type: string
+          title: Label
+        state:
+          type: string
+          title: State
+        clearinghouse_payor_id:
+          type: string
+          title: Clearinghouse Payor Id
+        type:
+          $ref: '#/components/schemas/PayorTypeEnum'
+        modifier:
+          anyOf:
+          - type: string
+            maxLength: 2
+            minLength: 2
+          - type: 'null'
+          title: Modifier
+        preferred_service_code_type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+        is_using_taxonomy_code:
+          type: boolean
+          title: Is Using Taxonomy Code
+        sector:
+          $ref: '#/components/schemas/PayorSectorEnum'
+        internal_classification:
+          anyOf:
+          - type: string
+            maxLength: 50
+            minLength: 1
+          - type: 'null'
+          title: Internal Classification
+        forta_website_payor_name:
+          anyOf:
+          - type: string
+            maxLength: 50
+            minLength: 1
+          - type: 'null'
+          title: Forta Website Payor Name
+        changehealthcare_eligibility_payor_id:
+          anyOf:
+          - type: string
+            maxLength: 50
+            minLength: 1
+          - type: 'null'
+          title: Changehealthcare Eligibility Payor Id
+        max_client_age:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Client Age
+        is_pbt_allowed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Pbt Allowed
+        is_telehealth_allowed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Telehealth Allowed
+        evv_enabled:
+          type: boolean
+          title: Evv Enabled
+          default: false
+        bt_type:
+          anyOf:
+          - $ref: '#/components/schemas/BTTypeEnum'
+          - type: 'null'
+        client_supervision_requirements:
+          $ref: '#/components/schemas/ClientSupervisionRequirements-Input'
+      type: object
+      required:
+      - label
+      - state
+      - clearinghouse_payor_id
+      - type
+      - preferred_service_code_type
+      - is_using_taxonomy_code
+      - sector
+      - client_supervision_requirements
+      title: PayorCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PayorServiceCodeDescriptionCreate:
+      properties:
+        description:
+          type: string
+          minLength: 2
+          title: Description
+        service_code_id:
+          type: integer
+          title: Service Code Id
+      type: object
+      required:
+      - description
+      - service_code_id
+      title: PayorServiceCodeDescriptionCreate
+    ServiceCodeEnum:
+      type: string
+      enum:
+      - '97151'
+      - '97152'
+      - '97153'
+      - '97155'
+      - '97156'
+      - '97157'
+      - '99366'
+      title: ServiceCodeEnum
+    OperatorEnum:
+      type: string
+      enum:
+      - AND
+      - OR
+      title: OperatorEnum
+    PayorContractResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        rate_per_unit:
+          type: number
+          title: Rate Per Unit
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - date_start
+      - rate_per_unit
+      - service_code_id
+      - id
+      title: PayorContractResponse
+    PayorContractCreate:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        rate_per_unit:
+          type: number
+          title: Rate Per Unit
+        service_code_id:
+          type: integer
+          title: Service Code Id
+      type: object
+      required:
+      - date_start
+      - rate_per_unit
+      - service_code_id
+      title: PayorContractCreate
+    PayorServiceCodeDescriptionPatch:
+      properties:
+        description:
+          type: string
+          minLength: 2
+          title: Description
+      type: object
+      required:
+      - description
+      title: PayorServiceCodeDescriptionPatch
+    PayorDetailedResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        state:
+          type: string
+          title: State
+        clearinghouse_payor_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clearinghouse Payor Id
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/PayorTypeEnum'
+          - type: 'null'
+        modifier:
+          anyOf:
+          - type: string
+            maxLength: 2
+            minLength: 2
+          - type: 'null'
+          title: Modifier
+        preferred_service_code_type:
+          anyOf:
+          - $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          - type: 'null'
+        is_using_taxonomy_code:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Using Taxonomy Code
+        sector:
+          anyOf:
+          - $ref: '#/components/schemas/PayorSectorEnum'
+          - type: 'null'
+        internal_classification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Internal Classification
+        forta_website_payor_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Forta Website Payor Name
+        changehealthcare_eligibility_payor_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Changehealthcare Eligibility Payor Id
+        max_client_age:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Client Age
+        is_pbt_allowed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Pbt Allowed
+        is_telehealth_allowed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Telehealth Allowed
+        evv_enabled:
+          type: boolean
+          title: Evv Enabled
+          default: false
+        bt_type:
+          anyOf:
+          - $ref: '#/components/schemas/BTTypeEnum'
+          - type: 'null'
+        client_supervision_requirements:
+          anyOf:
+          - $ref: '#/components/schemas/ClientSupervisionRequirements-Output'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        taxonomy_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Taxonomy Code
+        contracts:
+          items:
+            $ref: '#/components/schemas/PayorContractResponse'
+          type: array
+          title: Contracts
+        service_code_descriptions:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/PayorServiceCodeDescriptionResponse'
+            - $ref: '#/components/schemas/PayorServiceCodeDefaultDescriptionResponse'
+          type: array
+          title: Service Code Descriptions
+      type: object
+      required:
+      - label
+      - state
+      - id
+      - contracts
+      - service_code_descriptions
+      title: PayorDetailedResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

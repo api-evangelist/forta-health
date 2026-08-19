@@ -1,0 +1,1307 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Sessions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_qa_stats",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bay",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_participated_only",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "find_by_provider_id_only",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action_required",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_clinical_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pending_parent_signature",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Sessions"
+        },
+        {
+          "info": {
+            "name": "Create Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Session"
+        },
+        {
+          "info": {
+            "name": "Get Sessions Awaiting Guardian Signature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/awaiting_guardian_signature/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Sessions Awaiting Guardian Signature"
+        },
+        {
+          "info": {
+            "name": "Bay7 Guardian Signature",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/bay7/guardian_signature/",
+            "headers": [
+              {
+                "name": "x-forwarded-for",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bay7 Guardian Signature"
+        },
+        {
+          "info": {
+            "name": "Get Unacknowledged Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/awaiting_acknowledgement/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns sessions of which most recent QA review is not acknowledged yet\nRoles Allowed: pRBT, BCBA, Admin\nArgs:\n    provider:\nReturns:\n    list[SessionResponse]"
+        },
+        {
+          "info": {
+            "name": "Get Sessions With Claim History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/claim_history/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_qa_stats",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bay",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Roles Allowed: Clinical QA, Biller, Admin\nArgs:\n    client_id:\n    start:\n    end:\n    include_qa_stats:\n    provider:\n    session_model_converter:\n    session_repo:\n    session_service:\n    clinical_qa_review_repo:\n\nReturns:\n    list[SessionResponseWithClaimStatus]"
+        },
+        {
+          "info": {
+            "name": "Get Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Session"
+        },
+        {
+          "info": {
+            "name": "Patch Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Session"
+        },
+        {
+          "info": {
+            "name": "Delete Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Session"
+        },
+        {
+          "info": {
+            "name": "Stop Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/stop/",
+            "headers": [
+              {
+                "name": "x-forwarded-for",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop Session"
+        },
+        {
+          "info": {
+            "name": "Reset Session Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/reset_status/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reset Session Status"
+        },
+        {
+          "info": {
+            "name": "Queue To Regenerate Clinical Qa Review Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/:clinical_qa_review_id/pdf_regenerate/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clinical_qa_review_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Allows only Admin\nChecks:\n1. Check if clinical qa review exists\n2. Check if clinical qa review status is allowed to generate pdf report"
+        },
+        {
+          "info": {
+            "name": "Get Session Practiced Targets Trials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Session Practiced Targets Trials"
+        },
+        {
+          "info": {
+            "name": "Create Trial",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Trial"
+        },
+        {
+          "info": {
+            "name": "Patch Trial",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Trial"
+        },
+        {
+          "info": {
+            "name": "Delete Trial",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Trial"
+        },
+        {
+          "info": {
+            "name": "Create Trial Duration Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/duration_events/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Trial Duration Event"
+        },
+        {
+          "info": {
+            "name": "Update Trial Duration Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/duration_events/:duration_event_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "duration_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Trial Duration Event"
+        },
+        {
+          "info": {
+            "name": "Delete Trial Duration Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/duration_events/:duration_event_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "duration_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Trial Duration Event"
+        },
+        {
+          "info": {
+            "name": "Create Trial Rate Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/rate_events/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Trial Rate Event"
+        },
+        {
+          "info": {
+            "name": "Update Trial Rate Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/rate_events/:rate_event_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rate_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Trial Rate Event"
+        },
+        {
+          "info": {
+            "name": "Delete Trial Rate Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/trials/:trial_id/rate_events/:rate_event_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rate_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Trial Rate Event"
+        },
+        {
+          "info": {
+            "name": "Download Session Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/download/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download Session Pdf"
+        },
+        {
+          "info": {
+            "name": "Get Clinical Qa Review Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/:clinical_qa_review_id/download/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clinical_qa_review_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch most recent PDF document for a clinical qa review\nPDF is returned as a pre-signed URL"
+        },
+        {
+          "info": {
+            "name": "Create Clinical Qa Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Clinical Qa Review"
+        },
+        {
+          "info": {
+            "name": "Save Clinical Qa Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/:clinical_qa_review_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clinical_qa_review_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Save Clinical Qa Review"
+        },
+        {
+          "info": {
+            "name": "Delete Clinical Qa Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/:clinical_qa_review_id/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clinical_qa_review_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Clinical Qa Review"
+        },
+        {
+          "info": {
+            "name": "Submit Clinical Qa Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/:clinical_qa_review_id/stop/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clinical_qa_review_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submit Clinical Qa Review"
+        },
+        {
+          "info": {
+            "name": "Acknowledge Clinical Qa Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/:clinical_qa_review_id/acknowledge/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clinical_qa_review_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Acknowledge Clinical Qa Review"
+        },
+        {
+          "info": {
+            "name": "Create Clinical Qa Review Submission Discourse",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/clinical_qa_reviews/:clinical_qa_review_id/discourses/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clinical_qa_review_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Clinical Qa Review Submission Discourse"
+        },
+        {
+          "info": {
+            "name": "Fetch Review Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/data/review_summary/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Review Summary"
+        },
+        {
+          "info": {
+            "name": "Fetch Trial Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/data/trial_summary/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Trial Summary"
+        },
+        {
+          "info": {
+            "name": "Get Utilization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/data/utilization/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "utc_offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_ids",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Query params:\n    start: start date (local time)\n    end: end date (local time)\n    utc_offset: utc offset\n    client_ids: if client_id is not specified, return empty list"
+        },
+        {
+          "info": {
+            "name": "Construct Session Narrative Suggestion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/narrative_suggestion/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Construct Session Narrative Suggestion"
+        },
+        {
+          "info": {
+            "name": "Patch Session Symptoms Interventions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/symptoms-interventions/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Session Symptoms Interventions"
+        },
+        {
+          "info": {
+            "name": "Patch Session Progress Synopsis",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/progress-synopsis/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Session Progress Synopsis"
+        },
+        {
+          "info": {
+            "name": "Patch Session Narrative",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/narrative/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Session Narrative"
+        },
+        {
+          "info": {
+            "name": "Guardian Sign Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/guardian_sign/",
+            "headers": [
+              {
+                "name": "x-forwarded-for",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Guardian Sign Session"
+        },
+        {
+          "info": {
+            "name": "Terminate Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/terminate/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Terminate Session"
+        },
+        {
+          "info": {
+            "name": "Make Session Unbillable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/make_unbillable/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Session Unbillable"
+        },
+        {
+          "info": {
+            "name": "Make Session Billable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/make_billable/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Session Billable"
+        },
+        {
+          "info": {
+            "name": "Edit Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/edit/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Session"
+        },
+        {
+          "info": {
+            "name": "Backdate Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/backdate/",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Backdate Session"
+        },
+        {
+          "info": {
+            "name": "Start Evv Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/evv/start",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "replace_active",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start Evv Token"
+        },
+        {
+          "info": {
+            "name": "End Evv Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/evv/end",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "replace_active",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "End Evv Token"
+        },
+        {
+          "info": {
+            "name": "Get Session Evv Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/sessions/:session_id/evv/status",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Session Evv Status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

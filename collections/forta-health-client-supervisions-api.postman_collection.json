@@ -1,0 +1,2746 @@
+{
+  "item": [
+    {
+      "id": "8d28863e-9d1a-45bd-9e00-ea1f23aeb8b7",
+      "name": "client_supervisions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f202a86-66c9-473a-9e0e-d19f558acfcf",
+          "name": "Create Client Supervision Notes",
+          "request": {
+            "name": "Create Client Supervision Notes",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\",\n  \"bt_participants\": {\n    \"secondary\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"primary\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7964c896-242b-48a2-94d6-23ba24102474",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\",\n  \"bt_participants\": {\n    \"secondary\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"primary\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1133,\n  \"date_start\": \"1964-09-08T10:40:01.224Z\",\n  \"utc_offset_date_start\": 3925,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"2001-12-04\",\n    \"clinical_status\": \"ON HOLD\",\n    \"id\": 9217\n  },\n  \"duration\": 4922,\n  \"status\": \"string\",\n  \"bt_participants\": {\n    \"secondary\": [\n      {\n        \"id\": 6445,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"1dSzpuvg1sxaZ@yoNTzLlVccsU.ewsc\",\n        \"status\": \"string\",\n        \"clinical_status\": \"CLINICAL\"\n      },\n      {\n        \"id\": 994,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"IT6ibTAkf@vEKHmAGhXV.wm\",\n        \"status\": \"string\",\n        \"clinical_status\": \"OFFBOARDED\"\n      }\n    ],\n    \"primary\": {\n      \"id\": 9076,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"QR4@VJpfszmK.izwn\",\n      \"status\": \"string\",\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n    }\n  },\n  \"client_id\": 7072,\n  \"location\": \"TELEHEALTH\",\n  \"setting\": \"In-person\",\n  \"bcba\": {\n    \"id\": 4596,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"iiQEn@XjsQiamDu.nlm\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\"\n  },\n  \"target_phase\": [\n    {\n      \"id\": 8616,\n      \"title\": \"string\",\n      \"date_added\": \"1971-12-12\",\n      \"target_name\": \"string\",\n      \"goal_name\": \"string\"\n    },\n    {\n      \"id\": 899,\n      \"title\": \"string\",\n      \"date_added\": \"1969-09-21\",\n      \"target_name\": \"string\",\n      \"goal_name\": \"string\"\n    }\n  ],\n  \"bay\": \"string\",\n  \"participants_names\": \"string\",\n  \"participants\": {\n    \"parent\": false,\n    \"sibling\": false\n  },\n  \"clinical_status\": \"string\",\n  \"response_to_treatment\": \"string\",\n  \"session_narrative\": \"string\",\n  \"overall_progress_toward_mastery\": \"string\",\n  \"modified_behaviour_intervention\": \"string\",\n  \"assessed_modification\": \"string\",\n  \"probed_new_skills\": \"string\",\n  \"reviewed_and_analyzed_data\": \"string\",\n  \"reviewed_and_evaluated_session_notes\": \"string\",\n  \"reviewed_and_evaluated_treatment_plan\": \"string\",\n  \"evaluated_progress\": \"string\",\n  \"parent_demonstrated_new_or_changed_skills\": \"string\",\n  \"active_treatment_id\": 3469\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93d8cb88-6e2a-4ec4-b9d6-3842e28a7c29",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\",\n  \"bt_participants\": {\n    \"secondary\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"primary\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d6cd963-40f4-4980-8084-52fab50ec330",
+          "name": "Fetch Client Supervisions",
+          "request": {
+            "name": "Fetch Client Supervisions",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "action_required",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fe247380-7d04-4dbb-8115-7f2832342dba",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4673,\n    \"date_start\": \"1947-06-27T02:20:52.213Z\",\n    \"utc_offset_date_start\": 2811,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"female\",\n      \"dob\": \"2014-08-05\",\n      \"clinical_status\": \"OFFBOARDED\",\n      \"id\": 6586\n    },\n    \"duration\": 80,\n    \"status\": \"string\",\n    \"bt_participants\": {\n      \"secondary\": [\n        {\n          \"id\": 4187,\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"ACPxeM1n1@kECCdeQZbefULwACniOrGpwxWBmb.gbcp\",\n          \"status\": \"string\",\n          \"clinical_status\": \"ON HOLD\"\n        },\n        {\n          \"id\": 2639,\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"l57h3S6jo0ziv1@AmMJcSzTpFJQCrzgfdGhTIIjqUoLB.ucb\",\n          \"status\": \"string\",\n          \"clinical_status\": \"CLINICAL\"\n        }\n      ],\n      \"primary\": {\n        \"id\": 6824,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"i9kNSs5V@SzKmMZcshNzQTHiNhatkNUpIbGXQDrHC.tbco\",\n        \"status\": \"string\",\n        \"clinical_status\": \"CLINICAL\"\n      }\n    },\n    \"bay\": \"string\"\n  },\n  {\n    \"id\": 7077,\n    \"date_start\": \"1958-07-09T08:22:58.422Z\",\n    \"utc_offset_date_start\": 9897,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"female\",\n      \"dob\": \"1951-04-08\",\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n      \"id\": 3217\n    },\n    \"duration\": 188,\n    \"status\": \"string\",\n    \"bt_participants\": {\n      \"secondary\": [\n        {\n          \"id\": 6167,\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"TsJbYUnT@i.hbu\",\n          \"status\": \"string\",\n          \"clinical_status\": \"ON HOLD\"\n        },\n        {\n          \"id\": 7853,\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"zzL3OLI@q.cyjz\",\n          \"status\": \"string\",\n          \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n        }\n      ],\n      \"primary\": {\n        \"id\": 2304,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"vJmbJaek7VEJW0I@XwYURZNvQWyccJmIOqlRklY.vg\",\n        \"status\": \"string\",\n        \"clinical_status\": \"ON HOLD\"\n      }\n    },\n    \"bay\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f30cf7e0-71d4-45ff-9f29-f6267445ef83",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfd14efd-fad1-4e82-8270-0630e144f02e",
+          "name": "Get Client Supervision Notes With Claim Status",
+          "request": {
+            "name": "Get Client Supervision Notes With Claim Status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                "claim_history",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6af3750a-77e0-43a7-b342-8da7dd2f9a0d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    "claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 3084,\n    \"date_start\": \"1973-10-26T01:38:04.922Z\",\n    \"utc_offset_date_start\": 5802,\n    \"duration\": 6236,\n    \"expected_duration\": 8521,\n    \"status\": \"string\",\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"female\",\n      \"dob\": \"1983-02-13\",\n      \"id\": 3555,\n      \"clinical_status\": \"CLINICAL\",\n      \"middle_name\": \"string\",\n      \"email\": \"4LIqdqPhUG@WhXmhotDkezFJioXchPLvOWWDCNOYU.olan\",\n      \"street_address_line_one\": \"string\",\n      \"street_address_line_two\": \"string\",\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"st\",\n      \"phone\": \"string\",\n      \"clinical_status_reason\": \"TERMINATED\",\n      \"street_address_latitude\": -13.962579559530624,\n      \"street_address_longitude\": 102.04479965015162\n    },\n    \"claim_history\": [\n      {\n        \"id\": 2858,\n        \"status\": \"Rejected, Needs Resubmission\",\n        \"total_charge\": 7770.4296218227,\n        \"secondary_status\": \"On Hold\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 9599,\n        \"status\": \"Generated\",\n        \"total_charge\": 7548.034883525401,\n        \"secondary_status\": \"Approved\",\n        \"clearing_house_claim_id\": \"string\"\n      }\n    ],\n    \"location\": \"TELEHEALTH\",\n    \"bcba\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"other\",\n      \"dob\": \"1949-10-20\",\n      \"id\": 3814,\n      \"clinical_status\": \"ON HOLD\",\n      \"qa_billing_status\": \"Not Billable\",\n      \"middle_name\": \"string\",\n      \"email\": \"ZonkRcFjDCfT@tnIeyoXbishZtq.yb\",\n      \"street_address_line_one\": \"string\",\n      \"street_address_line_two\": \"string\",\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"st\",\n      \"phone\": \"string\",\n      \"npi\": \"string\",\n      \"certification\": \"string\",\n      \"date_certification_start\": \"1990-08-15\",\n      \"date_certification_end\": \"1985-07-25\",\n      \"state_license\": \"string\",\n      \"caqh_id\": \"string\",\n      \"payroll_id\": \"string\",\n      \"employment_type\": \"Hourly, full-time\",\n      \"job_title\": \"Virtual Therapy Assistant\",\n      \"preferred_language\": \"string\",\n      \"supported_languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"status\": \"Not Training\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"clinical_status_reason\": \"DISCHARGED\"\n    },\n    \"bay\": \"string\"\n  },\n  {\n    \"id\": 204,\n    \"date_start\": \"1958-05-05T06:57:56.328Z\",\n    \"utc_offset_date_start\": 3550,\n    \"duration\": 8583,\n    \"expected_duration\": 4263,\n    \"status\": \"string\",\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"male\",\n      \"dob\": \"2014-04-09\",\n      \"id\": 609,\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n      \"middle_name\": \"string\",\n      \"email\": \"ByNgg@HxbfNtRUP.svmo\",\n      \"street_address_line_one\": \"string\",\n      \"street_address_line_two\": \"string\",\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"st\",\n      \"phone\": \"string\",\n      \"clinical_status_reason\": \"DISCHARGED\",\n      \"street_address_latitude\": 22.14514465092776,\n      \"street_address_longitude\": 48.36445028055323\n    },\n    \"claim_history\": [\n      {\n        \"id\": 5152,\n        \"status\": \"Approved\",\n        \"total_charge\": 9550.515969347665,\n        \"secondary_status\": \"Approved - Recouped & Resubmitted\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 606,\n        \"status\": \"On Hold\",\n        \"total_charge\": 1139.7068157388312,\n        \"secondary_status\": \"Rejected & Resubmitted\",\n        \"clearing_house_claim_id\": \"s\"\n      }\n    ],\n    \"location\": \"COMMUNITY\",\n    \"bcba\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"other\",\n      \"dob\": \"1969-12-23\",\n      \"id\": 3953,\n      \"clinical_status\": \"PRE CLINICAL\",\n      \"qa_billing_status\": \"Billable\",\n      \"middle_name\": \"string\",\n      \"email\": \"jxze7X1Hx22nV0@QUfsGwdHswSedSGzTchATqxHTh.iup\",\n      \"street_address_line_one\": \"string\",\n      \"street_address_line_two\": \"string\",\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"st\",\n      \"phone\": \"string\",\n      \"npi\": \"string\",\n      \"certification\": \"string\",\n      \"date_certification_start\": \"2018-03-07\",\n      \"date_certification_end\": \"1949-10-28\",\n      \"state_license\": \"string\",\n      \"caqh_id\": \"string\",\n      \"payroll_id\": \"string\",\n      \"employment_type\": \"Salaried, full-time\",\n      \"job_title\": \"Virtual Therapy Assistant\",\n      \"preferred_language\": \"string\",\n      \"supported_languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"status\": \"Not Training\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"clinical_status_reason\": \"TERMINATED\"\n    },\n    \"bay\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2312454-78a1-4513-bc0b-3e273d67c637",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    "claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e379b38d-7cec-49d2-abae-2372b616979f",
+          "name": "Get Client Supervision Note",
+          "request": {
+            "name": "Get Client Supervision Note",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "87b5af7a-6251-4ff3-90ad-9e8bdb0548e0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4595,\n  \"date_start\": \"1980-05-24T17:32:31.183Z\",\n  \"utc_offset_date_start\": 8541,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"other\",\n    \"dob\": \"1982-05-11\",\n    \"clinical_status\": \"ON HOLD\",\n    \"id\": 5968\n  },\n  \"duration\": 9705,\n  \"status\": \"string\",\n  \"bt_participants\": {\n    \"secondary\": [\n      {\n        \"id\": 7413,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"aIIp93@jVzgXmVHHbbhIoZNUitUOL.ape\",\n        \"status\": \"string\",\n        \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n      },\n      {\n        \"id\": 4978,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"ZX1uO@SWKeFPWJTMRWmflPtbEZufHMoch.inn\",\n        \"status\": \"string\",\n        \"clinical_status\": \"OFFBOARDED\"\n      }\n    ],\n    \"primary\": {\n      \"id\": 2338,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"Ylv@QcEtAjhpBmdfSzymfpS.to\",\n      \"status\": \"string\",\n      \"clinical_status\": \"CLINICAL\"\n    }\n  },\n  \"client_id\": 3306,\n  \"location\": \"COMMUNITY\",\n  \"setting\": \"In-person\",\n  \"bcba\": {\n    \"id\": 5224,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"XiYkMv@nBixVBrojaPppwUuKQrd.df\",\n    \"status\": \"string\",\n    \"clinical_status\": \"OFFBOARDED\"\n  },\n  \"target_phase\": [\n    {\n      \"id\": 7795,\n      \"title\": \"string\",\n      \"date_added\": \"2019-11-09\",\n      \"target_name\": \"string\",\n      \"goal_name\": \"string\"\n    },\n    {\n      \"id\": 6721,\n      \"title\": \"string\",\n      \"date_added\": \"1974-04-23\",\n      \"target_name\": \"string\",\n      \"goal_name\": \"string\"\n    }\n  ],\n  \"bay\": \"string\",\n  \"participants_names\": \"string\",\n  \"participants\": {\n    \"parent\": true,\n    \"sibling\": false\n  },\n  \"clinical_status\": \"string\",\n  \"response_to_treatment\": \"string\",\n  \"session_narrative\": \"string\",\n  \"overall_progress_toward_mastery\": \"string\",\n  \"modified_behaviour_intervention\": \"string\",\n  \"assessed_modification\": \"string\",\n  \"probed_new_skills\": \"string\",\n  \"reviewed_and_analyzed_data\": \"string\",\n  \"reviewed_and_evaluated_session_notes\": \"string\",\n  \"reviewed_and_evaluated_treatment_plan\": \"string\",\n  \"evaluated_progress\": \"string\",\n  \"parent_demonstrated_new_or_changed_skills\": \"string\",\n  \"active_treatment_id\": 589,\n  \"active_goals\": [\n    {\n      \"goal_name_id\": 2921,\n      \"date_introduced\": \"1959-05-29\",\n      \"data_collection_method\": \"string\",\n      \"id\": 8313,\n      \"goal_name\": {\n        \"label\": \"string\",\n        \"id\": 6547,\n        \"behavior_id\": 356,\n        \"behavior\": {\n          \"label\": \"string\",\n          \"id\": 4614\n        },\n        \"is_active\": false,\n        \"prefix\": \"string\"\n      },\n      \"is_active\": true,\n      \"goal_type\": \"skill_acquisition\",\n      \"resource_versions\": {\n        \"baseline_measurement\": \"string\"\n      },\n      \"mastery_criteria\": {\n        \"change_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"desired_amount\": 5278,\n        \"measurement_mode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"practice_duration_count\": 262\n      },\n      \"measurement_units\": {\n        \"duration_unit\": \"MINUTE\",\n        \"duration_unit_formatted\": \"string\"\n      },\n      \"is_baseline_known_at_creation\": false,\n      \"hypothesized_functions\": [\n        {\n          \"date_selected\": \"2004-08-09\",\n          \"is_sensory\": true,\n          \"is_escape_or_avoidance\": true,\n          \"is_attention\": true,\n          \"is_tangible\": false,\n          \"id\": 8603,\n          \"date_edits_blocked\": \"1965-06-23T21:41:37.076Z\"\n        },\n        {\n          \"date_selected\": \"1951-10-23\",\n          \"is_sensory\": true,\n          \"is_escape_or_avoidance\": false,\n          \"is_attention\": true,\n          \"is_tangible\": true,\n          \"id\": 1447,\n          \"date_edits_blocked\": \"2009-05-02T02:01:52.811Z\"\n        }\n      ],\n      \"targets\": [\n        {\n          \"label\": \"string\",\n          \"id\": 4444,\n          \"stage_change_logs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"is_event_duration_required\": false,\n          \"order\": 1437.5954081718235,\n          \"instruction\": \"string\",\n          \"description\": \"string\",\n          \"stage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": true,\n          \"reason\": \"string\",\n          \"is_goal_active\": true,\n          \"is_goal_linkable\": false,\n          \"last_activation_log\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"event_duration_measurement_unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"label\": \"string\",\n          \"id\": 5330,\n          \"stage_change_logs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"is_event_duration_required\": true,\n          \"order\": 8554.216171843636,\n          \"instruction\": \"string\",\n          \"description\": \"string\",\n          \"stage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": true,\n          \"reason\": \"string\",\n          \"is_goal_active\": true,\n          \"is_goal_linkable\": false,\n          \"last_activation_log\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"event_duration_measurement_unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"status_at_creation\": \"New Goal\",\n      \"current_level_at_creation\": 9163.98126741796,\n      \"baseline_at_creation\": 6382.858682787665,\n      \"expected_mastery_date\": \"1979-08-16\",\n      \"linked_goals\": {\n        \"key_0\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"goal_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"is_active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_collection_method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"goal_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"is_active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_collection_method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"key_1\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"goal_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"is_active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_collection_method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"goal_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"is_active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_collection_method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"comparand_type\": \"string\",\n      \"is_current_level_known_at_creation\": true,\n      \"description\": \"stringstring\",\n      \"operational_definition\": \"stringstring\",\n      \"objective\": \"stringstring\",\n      \"antecedent_modifications\": \"stringstring\",\n      \"consequence_modifications\": \"stringstring\",\n      \"target_mastery\": 6,\n      \"is_maladaptive_correction\": true,\n      \"maladaptive_symptom_id\": 2008,\n      \"linked_skill_acquisition_goal_ids\": [\n        4411,\n        3580\n      ],\n      \"reason\": \"string\",\n      \"is_linkable\": false\n    },\n    {\n      \"goal_name_id\": 9011,\n      \"date_introduced\": \"1985-07-12\",\n      \"data_collection_method\": \"string\",\n      \"id\": 2172,\n      \"goal_name\": {\n        \"label\": \"string\",\n        \"id\": 8886,\n        \"behavior_id\": 2995,\n        \"behavior\": {\n          \"label\": \"string\",\n          \"id\": 3829\n        },\n        \"is_active\": true,\n        \"prefix\": \"string\"\n      },\n      \"is_active\": false,\n      \"goal_type\": \"skill_acquisition\",\n      \"resource_versions\": {\n        \"baseline_measurement\": \"string\"\n      },\n      \"mastery_criteria\": {\n        \"change_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"desired_amount\": 7052,\n        \"measurement_mode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"practice_duration_count\": 634\n      },\n      \"measurement_units\": {\n        \"duration_unit\": \"HOUR\",\n        \"duration_unit_formatted\": \"string\"\n      },\n      \"is_baseline_known_at_creation\": true,\n      \"hypothesized_functions\": [\n        {\n          \"date_selected\": \"2017-04-01\",\n          \"is_sensory\": false,\n          \"is_escape_or_avoidance\": false,\n          \"is_attention\": false,\n          \"is_tangible\": false,\n          \"id\": 2,\n          \"date_edits_blocked\": \"1982-12-20T01:40:51.728Z\"\n        },\n        {\n          \"date_selected\": \"1988-08-28\",\n          \"is_sensory\": true,\n          \"is_escape_or_avoidance\": true,\n          \"is_attention\": false,\n          \"is_tangible\": true,\n          \"id\": 634,\n          \"date_edits_blocked\": \"1984-10-17T17:07:23.229Z\"\n        }\n      ],\n      \"targets\": [\n        {\n          \"label\": \"string\",\n          \"id\": 5444,\n          \"stage_change_logs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"is_event_duration_required\": false,\n          \"order\": 6497.4081748242925,\n          \"instruction\": \"string\",\n          \"description\": \"string\",\n          \"stage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": true,\n          \"reason\": \"string\",\n          \"is_goal_active\": false,\n          \"is_goal_linkable\": false,\n          \"last_activation_log\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"event_duration_measurement_unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"label\": \"string\",\n          \"id\": 3383,\n          \"stage_change_logs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"is_event_duration_required\": true,\n          \"order\": 3714.6224847417498,\n          \"instruction\": \"string\",\n          \"description\": \"string\",\n          \"stage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": true,\n          \"reason\": \"string\",\n          \"is_goal_active\": false,\n          \"is_goal_linkable\": true,\n          \"last_activation_log\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"event_duration_measurement_unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"status_at_creation\": \"Generalization\",\n      \"current_level_at_creation\": 2964.16394743084,\n      \"baseline_at_creation\": 7913.206034711119,\n      \"expected_mastery_date\": \"1998-11-04\",\n      \"linked_goals\": {\n        \"key_0\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"goal_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"is_active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_collection_method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"goal_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"is_active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_collection_method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"comparand_type\": \"string\",\n      \"is_current_level_known_at_creation\": true,\n      \"description\": \"stringstring\",\n      \"operational_definition\": \"stringstring\",\n      \"objective\": \"stringstring\",\n      \"antecedent_modifications\": \"stringstring\",\n      \"consequence_modifications\": \"stringstring\",\n      \"target_mastery\": 3,\n      \"is_maladaptive_correction\": false,\n      \"maladaptive_symptom_id\": 177,\n      \"linked_skill_acquisition_goal_ids\": [\n        4043,\n        2674\n      ],\n      \"reason\": \"string\",\n      \"is_linkable\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16d55ad1-2185-4e6c-869e-fa7d972e1cd9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c68e5718-a583-4f2c-8d5f-ce30f7194d4b",
+          "name": "Patch Client Supervision Notes",
+          "request": {
+            "name": "Patch Client Supervision Notes",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\",\n  \"bt_participants\": {\n    \"secondary\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"primary\": \"<integer>\"\n  },\n  \"clinical_status\": \"<string>\",\n  \"response_to_treatment\": \"<string>\",\n  \"session_narrative\": \"<string>\",\n  \"overall_progress_toward_mastery\": \"<string>\",\n  \"modified_behaviour_intervention\": \"<string>\",\n  \"assessed_modification\": \"<string>\",\n  \"probed_new_skills\": \"<string>\",\n  \"reviewed_and_analyzed_data\": \"<string>\",\n  \"reviewed_and_evaluated_session_notes\": \"<string>\",\n  \"reviewed_and_evaluated_treatment_plan\": \"<string>\",\n  \"evaluated_progress\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12403258-ccca-498d-af05-4789ee51cb18",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\",\n  \"bt_participants\": {\n    \"secondary\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"primary\": \"<integer>\"\n  },\n  \"clinical_status\": \"<string>\",\n  \"response_to_treatment\": \"<string>\",\n  \"session_narrative\": \"<string>\",\n  \"overall_progress_toward_mastery\": \"<string>\",\n  \"modified_behaviour_intervention\": \"<string>\",\n  \"assessed_modification\": \"<string>\",\n  \"probed_new_skills\": \"<string>\",\n  \"reviewed_and_analyzed_data\": \"<string>\",\n  \"reviewed_and_evaluated_session_notes\": \"<string>\",\n  \"reviewed_and_evaluated_treatment_plan\": \"<string>\",\n  \"evaluated_progress\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6930,\n  \"date_start\": \"1972-11-14T09:21:14.544Z\",\n  \"utc_offset_date_start\": 2812,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"female\",\n    \"dob\": \"1985-11-28\",\n    \"clinical_status\": \"PRE CLINICAL\",\n    \"id\": 7411\n  },\n  \"duration\": 920,\n  \"status\": \"string\",\n  \"bt_participants\": {\n    \"secondary\": [\n      {\n        \"id\": 3845,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"mKM6F@NKgshrxNptjHJgpFGjoPDZcgVaIMHMbWE.dzuv\",\n        \"status\": \"string\",\n        \"clinical_status\": \"ON HOLD\"\n      },\n      {\n        \"id\": 4659,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"AFhntgPa6@nPMnnRflU.xoi\",\n        \"status\": \"string\",\n        \"clinical_status\": \"PRE CLINICAL\"\n      }\n    ],\n    \"primary\": {\n      \"id\": 4980,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"pGistVRbmVIo25@VGS.ra\",\n      \"status\": \"string\",\n      \"clinical_status\": \"PRE CLINICAL\"\n    }\n  },\n  \"client_id\": 8299,\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"bcba\": {\n    \"id\": 5906,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"IBpo@XEE.rzgh\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"target_phase\": [\n    {\n      \"id\": 5747,\n      \"title\": \"string\",\n      \"date_added\": \"1986-08-03\",\n      \"target_name\": \"string\",\n      \"goal_name\": \"string\"\n    },\n    {\n      \"id\": 8656,\n      \"title\": \"string\",\n      \"date_added\": \"1970-04-28\",\n      \"target_name\": \"string\",\n      \"goal_name\": \"string\"\n    }\n  ],\n  \"bay\": \"string\",\n  \"participants_names\": \"string\",\n  \"participants\": {\n    \"parent\": true,\n    \"sibling\": true\n  },\n  \"clinical_status\": \"string\",\n  \"response_to_treatment\": \"string\",\n  \"session_narrative\": \"string\",\n  \"overall_progress_toward_mastery\": \"string\",\n  \"modified_behaviour_intervention\": \"string\",\n  \"assessed_modification\": \"string\",\n  \"probed_new_skills\": \"string\",\n  \"reviewed_and_analyzed_data\": \"string\",\n  \"reviewed_and_evaluated_session_notes\": \"string\",\n  \"reviewed_and_evaluated_treatment_plan\": \"string\",\n  \"evaluated_progress\": \"string\",\n  \"parent_demonstrated_new_or_changed_skills\": \"string\",\n  \"active_treatment_id\": 6566\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0e3f4d8-0dbe-4e43-8199-e2dda1a24207",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\",\n  \"bt_participants\": {\n    \"secondary\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"primary\": \"<integer>\"\n  },\n  \"clinical_status\": \"<string>\",\n  \"response_to_treatment\": \"<string>\",\n  \"session_narrative\": \"<string>\",\n  \"overall_progress_toward_mastery\": \"<string>\",\n  \"modified_behaviour_intervention\": \"<string>\",\n  \"assessed_modification\": \"<string>\",\n  \"probed_new_skills\": \"<string>\",\n  \"reviewed_and_analyzed_data\": \"<string>\",\n  \"reviewed_and_evaluated_session_notes\": \"<string>\",\n  \"reviewed_and_evaluated_treatment_plan\": \"<string>\",\n  \"evaluated_progress\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1adce3f4-6e32-4278-9107-df870f5c978d",
+          "name": "Delete Client Supervision",
+          "request": {
+            "name": "Delete Client Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9df2e381-a66c-482c-9b84-027956b50134",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3eed044a-de62-4b7b-b5f4-a82172c8491c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c311b09-6e0d-42a1-b556-c1696c78c155",
+          "name": "Create Client Supervision Notes Target Phase",
+          "request": {
+            "name": "Create Client Supervision Notes Target Phase",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "target_phase",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"date_added\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "152ad70a-8e64-40b5-9715-bda914599723",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "target_phase",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"date_added\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6627,\n  \"title\": \"string\",\n  \"date_added\": \"2026-06-11\",\n  \"target_name\": \"string\",\n  \"goal_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa79611b-f56e-401e-9b8f-2432ad126387",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "target_phase",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"date_added\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8674389c-e9b0-4289-8b95-e09355fd90ca",
+          "name": "Delete Client Supervision Note Target Phase",
+          "request": {
+            "name": "Delete Client Supervision Note Target Phase",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "target_phase",
+                ":target_phase_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "target_phase_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "845a70b9-46e5-455a-be42-cbb0011fe9b5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "target_phase",
+                    ":target_phase_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "target_phase_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4246,\n    \"title\": \"string\",\n    \"date_added\": \"2011-03-07\",\n    \"target_name\": \"string\",\n    \"goal_name\": \"string\"\n  },\n  {\n    \"id\": 1107,\n    \"title\": \"string\",\n    \"date_added\": \"1965-11-17\",\n    \"target_name\": \"string\",\n    \"goal_name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a79d51e7-1921-4323-8817-e215f0da1ee0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "target_phase",
+                    ":target_phase_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "target_phase_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a50a9157-42ae-479c-9bb5-0c2d270ed813",
+          "name": "Stop Client Supervision",
+          "request": {
+            "name": "Stop Client Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "stop",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "x-forwarded-for",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\",\n  \"date_signed\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31a4d91e-b7a0-4693-9f17-f15395ab86f5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-forwarded-for",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\",\n  \"date_signed\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6f81991-6668-462d-a29d-4ade75ee3e3b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "x-forwarded-for",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\",\n  \"date_signed\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "963d92d0-c4c6-419b-a2a1-59923b9f17a3",
+          "name": "Get Utilization",
+          "request": {
+            "name": "Get Utilization",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                "data",
+                "utilization",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<date>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4fefd259-339b-4fc0-83d0-28e221e7a377",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    "data",
+                    "utilization",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_id\": 3612,\n  \"duration\": 7915,\n  \"count\": 6954\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a05906c-fabb-489e-ac4e-3be0f195fe49",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    "data",
+                    "utilization",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f21b424a-bf5b-4814-b7de-472e1ab42937",
+          "name": "Download Client Supervision Pdf",
+          "request": {
+            "name": "Download Client Supervision Pdf",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "download",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "36dbd7a6-ed12-42eb-b622-5a6fbb2418bd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"document_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad919b0b-206a-45b9-8054-87280e67631e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65c12012-ef80-4781-82db-09bb7009c197",
+          "name": "Make Client Supervision Unbillable",
+          "request": {
+            "name": "Make Client Supervision Unbillable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "make_unbillable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2bb08add-7f3c-4ac2-8a04-98c7b4bf7e00",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f63d28c2-0d21-4a00-9cfe-2afe1521997c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b372842-b9f9-457e-a37d-9ba388b2ffed",
+          "name": "Make Client Supervision Billable",
+          "request": {
+            "name": "Make Client Supervision Billable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "make_billable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c484e2d0-1fd2-481b-b95e-a43ddd09886b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e56f672b-24c7-42de-a203-dbebc6b1ef0f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c7af365-1990-47fe-a02a-0c4ecabe010a",
+          "name": "Edit Client Supervision",
+          "request": {
+            "name": "Edit Client Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "edit",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "29935d13-d5b2-4f7c-829b-971790af29a2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "edit",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8760d5e-fd29-4af8-8852-20a915572376",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "edit",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5042eaf4-48fe-43ba-8b51-d8a29b2f1a84",
+          "name": "Backdate Client Supervision",
+          "request": {
+            "name": "Backdate Client Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_supervisions",
+                ":client_supervision_id",
+                "backdate",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ed76ca4-4420-4a38-8be2-780ae89f28c9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "backdate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6bea698-45d6-4829-934c-4943df7f72d3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_supervisions",
+                    ":client_supervision_id",
+                    "backdate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6ce89951-1ee9-40e3-b323-c44e2917df30",
+    "name": "Fast Client Supervisions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

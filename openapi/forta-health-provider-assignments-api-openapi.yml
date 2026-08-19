@@ -1,0 +1,426 @@
+openapi: 3.2.0
+info:
+  title: Fast Provider Assignments API
+  version: 0.1.0
+tags:
+- name: provider_assignments
+paths:
+  /api/v1/provider_assignments/:
+    post:
+      tags:
+      - provider_assignments
+      summary: Create Provider Assignment
+      operationId: create_provider_assignment_api_v1_provider_assignments__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderAssignmentCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderAssignmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - provider_assignments
+      summary: Fetch Provider Assignments
+      operationId: fetch_provider_assignments_api_v1_provider_assignments__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: active_only
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: true
+          title: Active Only
+      - name: clinical_relationship
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Clinical Relationship
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: integer
+          - type: 'null'
+          title: Client Id
+      - name: provider_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: integer
+          - type: 'null'
+          title: Provider Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProviderAssignmentListResponse'
+                title: Response Fetch Provider Assignments Api V1 Provider Assignments  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/provider_assignments/{provider_assignment_id}/:
+    patch:
+      tags:
+      - provider_assignments
+      summary: Patch Provider Assignment
+      operationId: patch_provider_assignment_api_v1_provider_assignments__provider_assignment_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_assignment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Assignment Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderAssignmentPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderAssignmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - provider_assignments
+      summary: Delete Provider Assignment
+      operationId: delete_provider_assignment_api_v1_provider_assignments__provider_assignment_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_assignment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Assignment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ClientWithAddressListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address State
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientWithAddressListResponse
+    ProviderAssignmentCreate:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        client_id:
+          type: integer
+          title: Client Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        clinical_relationship:
+          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
+      type: object
+      required:
+      - date_start
+      - client_id
+      - provider_id
+      - clinical_relationship
+      title: ProviderAssignmentCreate
+    ProviderAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        clinical_relationship:
+          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - provider
+      - clinical_relationship
+      - client
+      title: ProviderAssignmentResponse
+    ProviderAssignmentClinicalRelationshipEnum:
+      type: string
+      enum:
+      - home_bcba
+      - bobbing_bcba
+      - substitute_bcba
+      - prbt
+      - assistant_assessor
+      - vbt
+      - practicing_guardian
+      - parent
+      - caregiver
+      - parent_and_caregiver
+      - limited_access_guardian
+      title: ProviderAssignmentClinicalRelationshipEnum
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    ProviderAssignmentPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+      type: object
+      required:
+      - date_start
+      title: ProviderAssignmentPatch
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ProviderAssignmentListResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        clinical_relationship:
+          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
+        client:
+          $ref: '#/components/schemas/ClientWithAddressListResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - provider
+      - clinical_relationship
+      - client
+      title: ProviderAssignmentListResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Client Cohort Assignments API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "client_cohort_assignments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Client Cohort Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_cohort_assignments/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cohort_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Client Cohort Assignments"
+        },
+        {
+          "info": {
+            "name": "Create Client Cohort Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/client_cohort_assignments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Client Cohort Assignment"
+        },
+        {
+          "info": {
+            "name": "Update Client Cohort Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/client_cohort_assignments/:client_cohort_assignment_id/",
+            "params": [
+              {
+                "name": "client_cohort_assignment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Client Cohort Assignment"
+        },
+        {
+          "info": {
+            "name": "Delete Client Cohort Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/client_cohort_assignments/:client_cohort_assignment_id/",
+            "params": [
+              {
+                "name": "client_cohort_assignment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Client Cohort Assignment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

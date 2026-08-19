@@ -1,0 +1,362 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Claim Invoices API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "claim_invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Invoice Preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/preview/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate Invoice Preview"
+        },
+        {
+          "info": {
+            "name": "Get Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_due",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sent",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Invoices"
+        },
+        {
+          "info": {
+            "name": "Create Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Invoice"
+        },
+        {
+          "info": {
+            "name": "Get Invoice Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/payments/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Invoice Payments"
+        },
+        {
+          "info": {
+            "name": "Create Invoice Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/payments/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Invoice Payment"
+        },
+        {
+          "info": {
+            "name": "Update Invoice Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/payments/:payment_id/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Invoice Payment"
+        },
+        {
+          "info": {
+            "name": "Delete Invoice Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/payments/:payment_id/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Invoice Payment"
+        },
+        {
+          "info": {
+            "name": "Send Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/send/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send Invoice"
+        },
+        {
+          "info": {
+            "name": "Get Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Invoice"
+        },
+        {
+          "info": {
+            "name": "Reset Invoice Sent Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/reset_sent_status/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reset Invoice Sent Status"
+        },
+        {
+          "info": {
+            "name": "Download Invoice Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/download/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download Invoice Pdf"
+        },
+        {
+          "info": {
+            "name": "Pay Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/pay/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Pay Invoice"
+        },
+        {
+          "info": {
+            "name": "Apply Discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/discount/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Apply Discount"
+        },
+        {
+          "info": {
+            "name": "Remove Discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/claim_invoices/:claim_invoice_id/discount/",
+            "params": [
+              {
+                "name": "claim_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove Discount"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

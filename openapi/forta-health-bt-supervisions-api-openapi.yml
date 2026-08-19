@@ -1,0 +1,840 @@
+openapi: 3.2.0
+info:
+  title: Fast Bt Supervisions API
+  version: 0.1.0
+tags:
+- name: bt_supervisions
+paths:
+  /api/v1/bt_supervisions/:
+    post:
+      tags:
+      - bt_supervisions
+      summary: Create
+      operationId: create_api_v1_bt_supervisions__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BTSupervisionCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BTSupervisionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - bt_supervisions
+      summary: Fetch All
+      operationId: fetch_all_api_v1_bt_supervisions__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: status_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Id
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: action_required
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Action Required
+      - name: client_clinical_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Client Clinical Status
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BTSupervisionResponse'
+                title: Response Fetch All Api V1 Bt Supervisions  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/bt_supervisions/{bt_supervision_id}/:
+    get:
+      tags:
+      - bt_supervisions
+      summary: Fetch
+      operationId: fetch_api_v1_bt_supervisions__bt_supervision_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: bt_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Bt Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BTSupervisionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - bt_supervisions
+      summary: Patch Basic Details
+      operationId: patch_basic_details_api_v1_bt_supervisions__bt_supervision_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: bt_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Bt Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BTSupervisionPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BTSupervisionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - bt_supervisions
+      summary: Delete Bt Supervision
+      operationId: delete_bt_supervision_api_v1_bt_supervisions__bt_supervision_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: bt_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Bt Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/bt_supervisions/{bt_supervision_id}/data/:
+    patch:
+      tags:
+      - bt_supervisions
+      summary: Patch Data
+      operationId: patch_data_api_v1_bt_supervisions__bt_supervision_id__data__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: bt_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Bt Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BTSupervisionPatchDataRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BTSupervisionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/bt_supervisions/{bt_supervision_id}/stop/:
+    put:
+      tags:
+      - bt_supervisions
+      summary: Stop
+      operationId: stop_api_v1_bt_supervisions__bt_supervision_id__stop__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: bt_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Bt Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BTSupervisionStopRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/bt_supervisions/{bt_supervision_id}/make_unbillable/:
+    put:
+      tags:
+      - bt_supervisions
+      summary: Make Bt Supervision Unbillable
+      operationId: make_bt_supervision_unbillable_api_v1_bt_supervisions__bt_supervision_id__make_unbillable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: bt_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Bt Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/bt_supervisions/{bt_supervision_id}/make_billable/:
+    put:
+      tags:
+      - bt_supervisions
+      summary: Make Bt Supervision Billable
+      operationId: make_bt_supervision_billable_api_v1_bt_supervisions__bt_supervision_id__make_billable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: bt_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Bt Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ClientResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        id:
+          type: integer
+          title: Id
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        street_address_latitude:
+          anyOf:
+          - type: number
+            maximum: 90.0
+            minimum: -90.0
+          - type: 'null'
+          title: Street Address Latitude
+        street_address_longitude:
+          anyOf:
+          - type: number
+            maximum: 180.0
+            minimum: -180.0
+          - type: 'null'
+          title: Street Address Longitude
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      title: ClientResponse
+    Duration:
+      type: integer
+      enum:
+      - 900
+      - 1800
+      - 2700
+      - 3600
+      - 4500
+      - 5400
+      - 6300
+      - 7200
+      title: Duration
+    ProviderResponseWithoutAddress:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderResponseWithoutAddress
+    SettingEnumV1:
+      type: string
+      enum:
+      - In-person
+      - Remote
+      title: SettingEnumV1
+    BTSupervisionCreate:
+      properties:
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        bt_provider_id:
+          type: integer
+          title: Bt Provider Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        duration:
+          $ref: '#/components/schemas/Duration'
+        location:
+          $ref: '#/components/schemas/LocationEnumV1'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV1'
+        client_id:
+          type: integer
+          title: Client Id
+      type: object
+      required:
+      - utc_offset_date_start
+      - bt_provider_id
+      - date_start
+      - duration
+      - location
+      - setting
+      - client_id
+      title: BTSupervisionCreate
+    BTSupervisionResponse:
+      properties:
+        has_materials_organized_prior_to_session:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        builds_rapport_with_learner:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        implements_programs_and_collects_data_regularly:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        provides_clear_sds_and_keeps_appropriate_pace:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        varies_reinforces_assesses_as_needed:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        provides_praise_for_independent_responses:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_appropriate_ratio_of_mastered_novel_tasks:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_prompts_appropriately:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        implements_correction_procedures_appropriately:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_more_positive_than_corrective_statements:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_non_verbal_prompts_when_possible:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        remains_calm_during_challenging_behaviors:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        follows_behavior_protocol_and_records_data_as_outlined:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        professionalism:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        collaborates_effectively_with_colleagues:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        seeks_feedback_for_growth_in_clinical_skills:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        additional_comments:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Additional Comments
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        bt_provider_id:
+          type: integer
+          title: Bt Provider Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        duration:
+          $ref: '#/components/schemas/Duration'
+        location:
+          $ref: '#/components/schemas/LocationEnumV1'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV1'
+        client_id:
+          type: integer
+          title: Client Id
+        signature:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Signature
+        utc_offset_date_signed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset Date Signed
+        date_signed:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Signed
+        id:
+          type: integer
+          title: Id
+        status:
+          type: string
+          title: Status
+        is_billable:
+          type: boolean
+          title: Is Billable
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        bt_provider:
+          $ref: '#/components/schemas/ProviderResponseWithoutAddress'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+      type: object
+      required:
+      - utc_offset_date_start
+      - bt_provider_id
+      - date_start
+      - duration
+      - location
+      - setting
+      - client_id
+      - id
+      - status
+      - is_billable
+      - client
+      - bt_provider
+      - bcba
+      title: BTSupervisionResponse
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    BTSupervisionFieldEvaluation:
+      type: string
+      enum:
+      - NEEDS_IMPROVEMENT
+      - MEETS_EXPECTATIONS
+      - EXCEEDS_EXPECTATIONS
+      - NOT_EVALUATED
+      title: BTSupervisionFieldEvaluation
+    BTSupervisionPatch:
+      properties:
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        bt_provider_id:
+          type: integer
+          title: Bt Provider Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        duration:
+          $ref: '#/components/schemas/Duration'
+        location:
+          $ref: '#/components/schemas/LocationEnumV1'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV1'
+      type: object
+      required:
+      - utc_offset_date_start
+      - bt_provider_id
+      - date_start
+      - duration
+      - location
+      - setting
+      title: BTSupervisionPatch
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LocationEnumV1:
+      type: string
+      enum:
+      - HOME
+      - COMMUNITY
+      - TELEHEALTH
+      title: LocationEnumV1
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    BTSupervisionPatchDataRequest:
+      properties:
+        has_materials_organized_prior_to_session:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        builds_rapport_with_learner:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        implements_programs_and_collects_data_regularly:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        provides_clear_sds_and_keeps_appropriate_pace:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        varies_reinforces_assesses_as_needed:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        provides_praise_for_independent_responses:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_appropriate_ratio_of_mastered_novel_tasks:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_prompts_appropriately:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        implements_correction_procedures_appropriately:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_more_positive_than_corrective_statements:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_non_verbal_prompts_when_possible:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        remains_calm_during_challenging_behaviors:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        follows_behavior_protocol_and_records_data_as_outlined:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        professionalism:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        collaborates_effectively_with_colleagues:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        seeks_feedback_for_growth_in_clinical_skills:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        additional_comments:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Additional Comments
+      type: object
+      title: BTSupervisionPatchDataRequest
+    BTSupervisionStopRequest:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+        date_signed:
+          type: string
+          format: date-time
+          title: Date Signed
+      type: object
+      required:
+      - signature
+      - utc_offset_date_signed
+      - date_signed
+      title: BTSupervisionStopRequest
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

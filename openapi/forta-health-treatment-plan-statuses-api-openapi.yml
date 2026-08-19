@@ -1,0 +1,119 @@
+openapi: 3.2.0
+info:
+  title: Fast Treatment Plan Statuses API
+  version: 0.1.0
+tags:
+- name: treatment_plan_statuses
+paths:
+  /api/v1/treatment_plan_statuses/:
+    get:
+      tags:
+      - treatment_plan_statuses
+      summary: Get Treatment Plan Status
+      description: 'Return all treatment plan statuses.
+
+        Roles allowed: pRBT, BCBA, Admin, CSM.'
+      operationId: get_treatment_plan_status_api_v1_treatment_plan_statuses__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TreatmentPlanStatusResponse'
+                type: array
+                title: Response Get Treatment Plan Status Api V1 Treatment Plan Statuses  Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - treatment_plan_statuses
+      summary: Create Treatment Plan Status
+      description: Create a new treatment plan status.
+      operationId: create_treatment_plan_status_api_v1_treatment_plan_statuses__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentPlanStatusBase'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    TreatmentPlanStatusLabelEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      - EDITING
+      - READ_ONLY
+      title: TreatmentPlanStatusLabelEnum
+      description: Enum for treatment plan status labels.
+    TreatmentPlanStatusResponse:
+      properties:
+        label:
+          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: TreatmentPlanStatusResponse
+    TreatmentPlanStatusBase:
+      properties:
+        label:
+          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
+      type: object
+      required:
+      - label
+      title: TreatmentPlanStatusBase
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,2456 @@
+openapi: 3.2.0
+info:
+  title: Fast Onboarding Questionnaires API
+  version: 0.1.0
+tags:
+- name: onboarding_questionnaires
+paths:
+  /api/v1/onboarding_questionnaires/:
+    post:
+      tags:
+      - onboarding_questionnaires
+      summary: Send Onboarding Questionnaire
+      description: 'Send onboarding questionnaire.
+
+
+        Creates a questionnaire on first send for the (provider, client) pair. On resend,
+
+        returns the existing row for that pair. ``date_sent`` (stamped server-side as a
+
+        UTC-aware datetime at send time) and ``date_sent_utc_offset`` are refreshed on resend
+
+        except when the questionnaire is COMPLETED.'
+      operationId: send_onboarding_questionnaire_api_v1_onboarding_questionnaires__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireSendRequest'
+        required: true
+      responses:
+        '201':
+          description: A new questionnaire was created (first send for this provider and client).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireResponse'
+        '200':
+          description: A questionnaire row already exists for this provider and client; the same row is
+            returned (no second questionnaire is created).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/onboarding_questionnaires:
+    get:
+      tags:
+      - onboarding_questionnaires
+      summary: List Onboarding Questionnaires
+      description: 'List onboarding questionnaires (basic columns only, newest date_sent first).
+
+
+        Each returned row also includes a lightweight ``provider`` and ``client`` summary
+
+        (id/name/email) for the linked provider and client.
+
+
+        Filter by ``provider_id``, ``client_id``, ``status``, and a ``date_sent`` window
+
+        (``date_start`` inclusive, ``date_end`` inclusive of the whole day). The window is
+
+        padded by one extra day on each side so records that land on an adjacent UTC day
+
+        (because ``date_sent`` is stored as naive UTC while the bounds are treated as UTC days)
+
+        are still returned. When no filter is provided, results are limited to the past month.
+
+
+        Callers without an overriding role may only list their own questionnaires (403 when
+
+        ``provider_id`` is someone else''s); the filter is otherwise scoped to the caller''s own
+
+        id. 400 when ``date_start`` is after ``date_end``.'
+      operationId: list_onboarding_questionnaires_api_v1_onboarding_questionnaires_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            exclusiveMinimum: 0
+          - type: 'null'
+          description: Filter by provider id (must be > 0).
+          title: Provider Id
+        description: Filter by provider id (must be > 0).
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            exclusiveMinimum: 0
+          - type: 'null'
+          description: Filter by client id (must be > 0).
+          title: Client Id
+        description: Filter by client id (must be > 0).
+      - name: date_start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: Only include questionnaires with date_sent on/after this date.
+          title: Date Start
+        description: Only include questionnaires with date_sent on/after this date.
+      - name: date_end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: Only include questionnaires with date_sent on/before this date.
+          title: Date End
+        description: Only include questionnaires with date_sent on/before this date.
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnaireStatusEnum'
+          - type: 'null'
+          description: Filter by questionnaire status.
+          title: Status
+        description: Filter by questionnaire status.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingQuestionnaireListResponse'
+                title: Response List Onboarding Questionnaires Api V1 Onboarding Questionnaires Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/by_provider/{provider_id}:
+    get:
+      tags:
+      - onboarding_questionnaires
+      summary: Get Onboarding Questionnaire By Provider
+      description: 'All questionnaires for the provider (newest date_sent first).
+
+
+        A provider usually has several clients assigned, so this returns every questionnaire
+
+        at once; pass ``client_id`` to narrow to a single client.
+
+
+        Callers with broad visibility (an overriding role, or the provider looking up their
+
+        own id) get the real outcome: an empty list when none exists and ``404`` if the
+
+        provider is missing. Any other caller only sees the questionnaires they are authorized
+
+        to read (an active provider assignment to the client); when none are readable, a
+
+        missing provider, an absent questionnaire, and a forbidden one all return the same
+
+        ``403`` so existence is not observable to someone who could not read it.'
+      operationId: get_onboarding_questionnaire_by_provider_api_v1_onboarding_questionnaires_by_provider__provider_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Provider id (must be > 0)
+          title: Provider Id
+        description: Provider id (must be > 0)
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          description: When set, narrows the result to this provider and client (at most one row). When
+            omitted, returns every questionnaire for the provider.
+          title: Client Id
+        description: When set, narrows the result to this provider and client (at most one row). When
+          omitted, returns every questionnaire for the provider.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingQuestionnaireResponse'
+                title: Response Get Onboarding Questionnaire By Provider Api V1 Onboarding Questionnaires
+                  By Provider  Provider Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}:
+    get:
+      tags:
+      - onboarding_questionnaires
+      summary: Get Onboarding Questionnaire By Id
+      description: 'Full questionnaire with nested sections, or 404 if not found.
+
+        403 unless the caller holds an overriding role, is the assigned provider, or has
+
+        an active provider assignment to the questionnaire''s client.'
+      operationId: get_onboarding_questionnaire_by_id_api_v1_onboarding_questionnaires__questionnaire_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireDetailResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/general_info:
+    patch:
+      tags:
+      - onboarding_questionnaires
+      summary: Patch Onboarding Questionnaire General Info
+      description: 'Merge partial general info for the questionnaire (omit fields to leave unchanged).
+
+        403 if caller is not the assigned provider; 404 if questionnaire missing.'
+      operationId: patch_onboarding_questionnaire_general_info_api_v1_onboarding_questionnaires__questionnaire_id__general_info_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireGeneralInfoPatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireGeneralInfoResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/insurance/primary:
+    patch:
+      tags:
+      - onboarding_questionnaires
+      summary: Patch Onboarding Questionnaire Insurance Primary
+      description: Merge partial primary insurance (insurance_type PRIMARY). 403/404 like general_info.
+      operationId: patch_onboarding_questionnaire_insurance_primary_api_v1_onboarding_questionnaires__questionnaire_id__insurance_primary_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireInsurancePatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireInsuranceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/insurance/secondary:
+    patch:
+      tags:
+      - onboarding_questionnaires
+      summary: Patch Onboarding Questionnaire Insurance Secondary
+      description: Merge partial secondary insurance (insurance_type SECONDARY). 403/404 like general_info.
+      operationId: patch_onboarding_questionnaire_insurance_secondary_api_v1_onboarding_questionnaires__questionnaire_id__insurance_secondary_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireInsurancePatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireInsuranceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - onboarding_questionnaires
+      summary: Delete Onboarding Questionnaire Insurance Secondary
+      description: Drop secondary insurance row. 204 either way; 403/404 same as PATCH insurance.
+      operationId: delete_onboarding_questionnaire_insurance_secondary_api_v1_onboarding_questionnaires__questionnaire_id__insurance_secondary_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/insurance/preferences:
+    patch:
+      tags:
+      - onboarding_questionnaires
+      summary: Patch Onboarding Questionnaire Insurance Preferences
+      description: Save no-secondary choice; clears secondary row when true. 403/404 like other insurance
+        PATCH.
+      operationId: patch_onboarding_questionnaire_insurance_preferences_api_v1_onboarding_questionnaires__questionnaire_id__insurance_preferences_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireInsurancePreferencesPatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireInsurancePreferencesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/insurance-card/extract:
+    post:
+      tags:
+      - onboarding_questionnaires
+      summary: Extract Onboarding Questionnaire Insurance Card
+      description: 'Extract insurance fields from saved front/back card images (prefill only; not persisted).
+
+        403 if caller is not the assigned provider; 404 if questionnaire missing.'
+      operationId: extract_onboarding_questionnaire_insurance_card_api_v1_onboarding_questionnaires__questionnaire_id__insurance_card_extract_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCardExtractRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtractedInsuranceCardResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/insurance-card/extraction-jobs:
+    post:
+      tags:
+      - onboarding_questionnaires
+      summary: Create Onboarding Questionnaire Insurance Card Extraction Job
+      description: Create async insurance card extraction job; poll GET extraction-jobs/{job_id} for results.
+      operationId: create_onboarding_questionnaire_insurance_card_extraction_job_api_v1_onboarding_questionnaires__questionnaire_id__insurance_card_extraction_jobs_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCardExtractionJobCreateRequest'
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCardExtractionJobCreateResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/insurance-card/extraction-jobs/{job_id}:
+    get:
+      tags:
+      - onboarding_questionnaires
+      summary: Get Onboarding Questionnaire Insurance Card Extraction Job
+      description: 'Poll extraction job status and result. 403 unless the caller holds an overriding
+
+        role, is the assigned provider, or has an active provider assignment to the
+
+        questionnaire''s client.'
+      operationId: get_onboarding_questionnaire_insurance_card_extraction_job_api_v1_onboarding_questionnaires__questionnaire_id__insurance_card_extraction_jobs__job_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Extraction job id (must be > 0)
+          title: Job Id
+        description: Extraction job id (must be > 0)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCardExtractionJobStatusResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/referral:
+    patch:
+      tags:
+      - onboarding_questionnaires
+      summary: Patch referral section
+      description: Merge referral fields; lists replace the whole list ([] clears). Empty body with no
+        saved row returns the same empty shell as GET; with a saved row, returns the current section unchanged.
+      operationId: patch_onboarding_questionnaire_referral_api_v1_onboarding_questionnaires__questionnaire_id__referral_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireReferralPatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireReferralSectionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/agreement:
+    patch:
+      tags:
+      - onboarding_questionnaires
+      summary: Patch agreement section
+      description: 'Partially updates agreement; empty body is a no-op. Idempotent re-PATCH of the same
+
+        values does not error. 403 if caller is not the assigned provider; 404 if questionnaire
+
+        id is unknown; 400 when questionnaire status is COMPLETED.'
+      operationId: patch_onboarding_questionnaire_agreement_api_v1_onboarding_questionnaires__questionnaire_id__agreement_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireAgreementPatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireAgreementResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/submit:
+    post:
+      tags:
+      - onboarding_questionnaires
+      summary: Submit Onboarding Questionnaire
+      description: 'Validate required sections then set status to COMPLETED (idempotent if already done).
+
+        403 if caller is not the assigned provider; 404 if questionnaire missing; 400 if
+
+        any required section is incomplete.'
+      operationId: submit_onboarding_questionnaire_api_v1_onboarding_questionnaires__questionnaire_id__submit_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireSubmitRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/status:
+    patch:
+      tags:
+      - onboarding_questionnaires
+      summary: Update Onboarding Questionnaire Status
+      description: 'Forward-only status chain (STARTED→IN_PROGRESS); same status is a no-op. Completing
+
+        a questionnaire is not allowed here — use POST /{id}/submit, which validates required
+
+        sections and records date_concluded; requesting COMPLETED returns 400. 400/422/403/404
+
+        on bad transition, invalid stored status, wrong provider, or id.'
+      operationId: update_onboarding_questionnaire_status_api_v1_onboarding_questionnaires__questionnaire_id__status_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingQuestionnaireStatusUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/documents/:
+    post:
+      tags:
+      - onboarding_questionnaires
+      summary: Upload Onboarding Questionnaire Document
+      description: 'Upload PDF/PNG/JPEG to S3 and save metadata (title, type, size rules in service).
+
+        Returns the full questionnaire document list (oldest first), same shape as GET
+
+        ``.../documents/``, so clients can refresh UI without a follow-up list call.
+
+        404/422/400/403 on bad questionnaire id, validation, or wrong provider.'
+      operationId: upload_onboarding_questionnaire_document_api_v1_onboarding_questionnaires__questionnaire_id__documents__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_onboarding_questionnaire_document_api_v1_onboarding_questionnaires__questionnaire_id__documents__post'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingQuestionnaireDocumentResponse'
+                title: Response Upload Onboarding Questionnaire Document Api V1 Onboarding Questionnaires  Questionnaire
+                  Id  Documents  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - onboarding_questionnaires
+      summary: List Onboarding Questionnaire Documents
+      description: 'Metadata-only list, oldest first; empty list if none. No presigned URLs here (use
+
+        GET by document id). 404/422 if questionnaire invalid. 403 unless the caller holds an
+
+        overriding role, is the assigned provider, or has an active provider assignment to the
+
+        questionnaire''s client.'
+      operationId: list_onboarding_questionnaire_documents_api_v1_onboarding_questionnaires__questionnaire_id__documents__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingQuestionnaireDocumentResponse'
+                title: Response List Onboarding Questionnaire Documents Api V1 Onboarding Questionnaires  Questionnaire
+                  Id  Documents  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/onboarding_questionnaires/{questionnaire_id}/documents/{document_id}:
+    get:
+      tags:
+      - onboarding_questionnaires
+      summary: Get Onboarding Questionnaire Document
+      description: 'One document''s metadata plus a presigned URL; 404 unless document belongs to this
+
+        questionnaire (no cross-scope leaks). 422 on non-positive ids. 403 unless the caller
+
+        holds an overriding role, is the assigned provider, or has an active provider
+
+        assignment to the questionnaire''s client.'
+      operationId: get_onboarding_questionnaire_document_api_v1_onboarding_questionnaires__questionnaire_id__documents__document_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      - name: document_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Questionnaire document id (must be > 0)
+          title: Document Id
+        description: Questionnaire document id (must be > 0)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingQuestionnaireDocumentWithUrlResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - onboarding_questionnaires
+      summary: Delete Onboarding Questionnaire Document
+      description: 'Delete DB row then best-effort S3 cleanup; extraction jobs referencing the document
+
+        are removed first. Returns 204 once the DB row is gone; S3 failures are logged only.
+
+        404/422/403 on missing scope, bad ids, or wrong provider.'
+      operationId: delete_onboarding_questionnaire_document_api_v1_onboarding_questionnaires__questionnaire_id__documents__document_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: questionnaire_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Onboarding questionnaire id (must be > 0)
+          title: Questionnaire Id
+        description: Onboarding questionnaire id (must be > 0)
+      - name: document_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          exclusiveMinimum: 0
+          description: Questionnaire document id (must be > 0)
+          title: Document Id
+        description: Questionnaire document id (must be > 0)
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    OnboardingQuestionnaireStatusUpdateRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/OnboardingQuestionnaireStatusEnum'
+      type: object
+      required:
+      - status
+      title: OnboardingQuestionnaireStatusUpdateRequest
+    OnboardingQuestionnaireSubmitRequest:
+      properties:
+        date_concluded_utc_offset:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Date Concluded Utc Offset
+      additionalProperties: false
+      type: object
+      required:
+      - date_concluded_utc_offset
+      title: OnboardingQuestionnaireSubmitRequest
+      description: 'Request body for submitting (completing) an onboarding questionnaire.
+
+
+        The conclusion timestamp is stamped server-side at submit time (aware UTC) rather
+
+        than accepted from the client. ``date_concluded_utc_offset`` is the client''s UTC
+
+        offset in seconds at that moment, retained so the server-stamped conclusion time can
+
+        later be rendered in the user''s local timezone.'
+    OnboardingQuestionnaireAgreementResponse:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        onboarding_questionnaire_id:
+          type: integer
+          title: Onboarding Questionnaire Id
+        consent_electronic_delivery_via_email:
+          type: boolean
+          title: Consent Electronic Delivery Via Email
+        consent_text_messages_regarding_aba_services:
+          type: boolean
+          title: Consent Text Messages Regarding Aba Services
+        consent_electronic_signature_platform:
+          type: boolean
+          title: Consent Electronic Signature Platform
+        consent_complete_required_assessments:
+          type: boolean
+          title: Consent Complete Required Assessments
+        consent_paper_document_delivery_notice:
+          type: boolean
+          title: Consent Paper Document Delivery Notice
+        consent_electronic_delivery_freely_given:
+          type: boolean
+          title: Consent Electronic Delivery Freely Given
+        printed_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Printed Name
+        signature:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Signature
+        signature_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Signature Date
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - onboarding_questionnaire_id
+      - consent_electronic_delivery_via_email
+      - consent_text_messages_regarding_aba_services
+      - consent_electronic_signature_platform
+      - consent_complete_required_assessments
+      - consent_paper_document_delivery_notice
+      - consent_electronic_delivery_freely_given
+      title: OnboardingQuestionnaireAgreementResponse
+      description: Agreement section response.
+    OnboardingQuestionnaireListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        client_id:
+          type: integer
+          title: Client Id
+        status:
+          $ref: '#/components/schemas/OnboardingQuestionnaireStatusEnum'
+        no_secondary_insurance:
+          type: boolean
+          title: No Secondary Insurance
+          default: false
+        date_sent:
+          type: string
+          format: date-time
+          title: Date Sent
+        date_sent_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Sent Utc Offset
+        date_concluded:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Concluded
+        date_concluded_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Concluded Utc Offset
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/QuestionnaireProviderSummary'
+          - type: 'null'
+        client:
+          anyOf:
+          - $ref: '#/components/schemas/QuestionnaireClientSummary'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - provider_id
+      - client_id
+      - status
+      - date_sent
+      title: OnboardingQuestionnaireListResponse
+      description: List row that also carries the linked provider's and client's basic identity.
+    OnboardingQuestionnaireRelationshipToClientEnum:
+      type: string
+      enum:
+      - Mother
+      - Father
+      - Legal Guardian
+      - Adoptive Parent
+      - Foster Parent
+      - Step-Mother
+      - Step-Father
+      - Grandmother
+      - Grandfather
+      - Aunt
+      - Uncle
+      - Sibling (Brother / Sister)
+      - Half-Sibling
+      - Cousin
+      - Nanny / Babysitter
+      - Caregiver
+      - Family Friend
+      - Case Worker / Social Worker
+      - Court-Appointed Guardian
+      title: OnboardingQuestionnaireRelationshipToClientEnum
+      description: Relationship-to-child options on general info.
+    OnboardingQuestionnaireDetailResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        client_id:
+          type: integer
+          title: Client Id
+        status:
+          $ref: '#/components/schemas/OnboardingQuestionnaireStatusEnum'
+        no_secondary_insurance:
+          type: boolean
+          title: No Secondary Insurance
+          default: false
+        date_sent:
+          type: string
+          format: date-time
+          title: Date Sent
+        date_sent_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Sent Utc Offset
+        date_concluded:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Concluded
+        date_concluded_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Concluded Utc Offset
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+        general_info:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnaireGeneralInfoResponse'
+          - type: 'null'
+        documents:
+          items:
+            $ref: '#/components/schemas/OnboardingQuestionnaireDocumentResponse'
+          type: array
+          title: Documents
+        insurances:
+          items:
+            $ref: '#/components/schemas/OnboardingQuestionnaireInsuranceResponse'
+          type: array
+          title: Insurances
+        referral:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnaireReferralSectionResponse'
+          - type: 'null'
+        agreement:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnaireAgreementResponse'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - provider_id
+      - client_id
+      - status
+      - date_sent
+      title: OnboardingQuestionnaireDetailResponse
+      description: 'Full questionnaire payload for GET /onboarding_questionnaires/{id} (shell + nested
+        sections).
+
+
+        ``referral`` is JSON null until a referral row exists; once saved, it matches
+
+        ``PATCH .../referral`` (``OnboardingQuestionnaireReferralSectionResponse``)—flattened
+
+        lists, ``referral_documents``, no nested ORM child rows.'
+    OnboardingQuestionnaireResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        client_id:
+          type: integer
+          title: Client Id
+        status:
+          $ref: '#/components/schemas/OnboardingQuestionnaireStatusEnum'
+        no_secondary_insurance:
+          type: boolean
+          title: No Secondary Insurance
+          default: false
+        date_sent:
+          type: string
+          format: date-time
+          title: Date Sent
+        date_sent_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Sent Utc Offset
+        date_concluded:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Concluded
+        date_concluded_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Concluded Utc Offset
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - id
+      - provider_id
+      - client_id
+      - status
+      - date_sent
+      title: OnboardingQuestionnaireResponse
+    ExtractedInsuranceCardResponse:
+      properties:
+        insurance_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Insurance Name
+        relationship_to_policyholder:
+          anyOf:
+          - $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
+          - type: 'null'
+        member_first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member First Name
+        member_last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Last Name
+        insurance_start_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Insurance Start Date
+        insurance_end_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Insurance End Date
+        member_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Id
+        group_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Number
+        member_street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address Line One
+        member_street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address Line Two
+        member_street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address Zip
+        member_street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address City
+        member_street_address_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address State
+        is_insurance_card:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Insurance Card
+        document_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Type
+        confidence_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Confidence Notes
+      type: object
+      title: ExtractedInsuranceCardResponse
+      description: Fields read from an uploaded document image. All optional—review before saving.
+    OnboardingQuestionnaireDiagnosisReportSubmissionMethodEnum:
+      type: string
+      enum:
+      - EMAIL
+      - FAX
+      - US_MAIL
+      - PORTAL_OR_APP_UPLOAD
+      - ALREADY_ON_FILE
+      title: OnboardingQuestionnaireDiagnosisReportSubmissionMethodEnum
+      description: How the diagnosis report will be provided (OB-Referral); stored as stable codes.
+    OnboardingQuestionnairePrimaryLanguageEnum:
+      type: string
+      enum:
+      - English
+      - Spanish
+      - French
+      - Portuguese
+      - Mandarin
+      - Japanese
+      title: OnboardingQuestionnairePrimaryLanguageEnum
+      description: Home language options on general info.
+    OnboardingQuestionnaireDocumentWithUrlResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        onboarding_questionnaire_id:
+          type: integer
+          title: Onboarding Questionnaire Id
+        title:
+          type: string
+          title: Title
+        document_type:
+          $ref: '#/components/schemas/OnboardingQuestionnaireDocumentTypeEnum'
+        document_sub_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Sub Type
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+        document_url:
+          type: string
+          title: Document Url
+        file_type:
+          type: string
+          title: File Type
+      type: object
+      required:
+      - id
+      - onboarding_questionnaire_id
+      - title
+      - document_type
+      - document_url
+      - file_type
+      title: OnboardingQuestionnaireDocumentWithUrlResponse
+      description: 'Single-document GET: adds presigned document_url and file_type from the storage key
+        extension.'
+    OnboardingQuestionnaireInsuranceResponse:
+      properties:
+        insurance_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Insurance Name
+        relationship_to_policyholder:
+          anyOf:
+          - $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
+          - type: 'null'
+        member_first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member First Name
+        member_last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Last Name
+        insurance_start_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Insurance Start Date
+        insurance_end_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Insurance End Date
+        member_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Id
+        group_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Number
+        member_street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address Line One
+        member_street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address Line Two
+        member_street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address Zip
+        member_street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address City
+        member_street_address_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Member Street Address State
+        policyholder_first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder First Name
+        policyholder_last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder Last Name
+        policyholder_date_of_birth:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Policyholder Date Of Birth
+        policyholder_phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder Phone
+        policyholder_gender:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          - type: 'null'
+        policyholder_address_same_as_member:
+          type: boolean
+          title: Policyholder Address Same As Member
+        policyholder_street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder Street Address Line One
+        policyholder_street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder Street Address Line Two
+        policyholder_street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder Street Address Zip
+        policyholder_street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder Street Address City
+        policyholder_street_address_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Policyholder Street Address State
+        id:
+          type: integer
+          title: Id
+        onboarding_questionnaire_id:
+          type: integer
+          title: Onboarding Questionnaire Id
+        insurance_type:
+          $ref: '#/components/schemas/OnboardingQuestionnaireInsuranceTypeEnum'
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - policyholder_address_same_as_member
+      - id
+      - onboarding_questionnaire_id
+      - insurance_type
+      title: OnboardingQuestionnaireInsuranceResponse
+    InsuranceCardExtractionJobStatusEnum:
+      type: string
+      enum:
+      - PENDING
+      - PROCESSING
+      - SUCCEEDED
+      - FAILED
+      title: InsuranceCardExtractionJobStatusEnum
+    OnboardingQuestionnaireReferralSectionResponse:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        onboarding_questionnaire_id:
+          type: integer
+          title: Onboarding Questionnaire Id
+        referral_physician_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Referral Physician Name
+        diagnosis_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Diagnosis Date
+        diagnosis_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Diagnosis City
+        diagnosis_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Diagnosis State
+        diagnosis_report_submission_method:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnaireDiagnosisReportSubmissionMethodEnum'
+          - type: 'null'
+        diagnostic_assessments_used:
+          items:
+            $ref: '#/components/schemas/OnboardingQuestionnaireReferralDiagnosticAssessmentEnum'
+          type: array
+          title: Diagnostic Assessments Used
+        diagnoses:
+          items:
+            $ref: '#/components/schemas/OnboardingQuestionnaireReferralDiagnosisEnum'
+          type: array
+          title: Diagnoses
+        referral_documents:
+          items:
+            $ref: '#/components/schemas/OnboardingQuestionnaireDocumentResponse'
+          type: array
+          title: Referral Documents
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - onboarding_questionnaire_id
+      title: OnboardingQuestionnaireReferralSectionResponse
+      description: 'PATCH /referral: scalars, assessment/diagnosis lists, referral doc metadata.
+
+
+        When no referral row exists yet, ``id`` is null and lists are empty. Document types
+
+        in ``referral_documents`` are REFERRAL_REPORT and legacy REFERRAL only.
+
+
+        **Contract (intentional):** ``diagnostic_assessments_used`` and ``diagnoses`` are
+
+        flat lists of allowed wire tokens (OpenAPI: enums), not nested ORM-style objects
+
+        (e.g. no ``{ "id", "assessment_name" }`` rows). Matches persisted child-table values
+
+        only through those string tokens; FE should treat this as an API shape change from
+
+        any older nested payload on aggregate questionnaire GET.'
+    OnboardingQuestionnaireReferralDiagnosticAssessmentEnum:
+      type: string
+      enum:
+      - ADOS-2
+      - ASRS
+      - AQ
+      - CARS-2
+      - GARS-2
+      - M-CHAT-R/F
+      - PEDS
+      - SRS-2
+      - STAT
+      - Tele-ASD-Peds
+      - Other
+      title: OnboardingQuestionnaireReferralDiagnosticAssessmentEnum
+      description: "OB-Referral diagnostic tools (multi-select). Wire values are short stable tokens.\n\
+        \nFigma / UI copy (for product reference only):\n  ADOS-2 — Autism Diagnostic Observation Schedule\n\
+        \  ASRS — Autism Spectrum Rating Scales™ (ASRS®)\n  AQ — Autism Spectrum Quotient\n  CARS-2 —\
+        \ Childhood Autism Rating Scale\n  GARS-2 — Gilliam Autism Rating Scale\n  M-CHAT-R/F — Modified\
+        \ Checklist for Autism in Toddlers\n  PEDS — Parents' Evaluation of Developmental Status\n  SRS-2\
+        \ — Social Responsiveness Scale\n  STAT — Screening Tool for Autism in Toddlers\n  Tele-ASD-Peds"
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InsuranceCardExtractionJobStatusResponse:
+      properties:
+        job_id:
+          type: integer
+          title: Job Id
+        status:
+          $ref: '#/components/schemas/InsuranceCardExtractionJobStatusEnum'
+        result:
+          anyOf:
+          - $ref: '#/components/schemas/ExtractedInsuranceCardResponse'
+          - type: 'null'
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+        failure_reason_code:
+          anyOf:
+          - $ref: '#/components/schemas/InsuranceCardExtractionFailureReasonCode'
+          - type: 'null'
+      type: object
+      required:
+      - job_id
+      - status
+      title: InsuranceCardExtractionJobStatusResponse
+    OnboardingQuestionnaireInsurancePatchRequest:
+      properties:
+        insurance_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Insurance Name
+        relationship_to_policyholder:
+          anyOf:
+          - $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
+          - type: 'null'
+        member_first_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Member First Name
+        member_last_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Member Last Name
+        insurance_start_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Insurance Start Date
+        insurance_end_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Insurance End Date
+        member_id:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Member Id
+        group_number:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Group Number
+        member_street_address_line_one:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Member Street Address Line One
+        member_street_address_line_two:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Member Street Address Line Two
+        member_street_address_zip:
+          anyOf:
+          - type: string
+            maxLength: 5
+            minLength: 5
+            pattern: ^\d{5}$
+          - type: 'null'
+          title: Member Street Address Zip
+        member_street_address_city:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Member Street Address City
+        member_street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+            minLength: 2
+          - type: 'null'
+          title: Member Street Address State
+        policyholder_first_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Policyholder First Name
+        policyholder_last_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Policyholder Last Name
+        policyholder_date_of_birth:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Policyholder Date Of Birth
+        policyholder_phone:
+          anyOf:
+          - type: string
+            maxLength: 10
+            minLength: 10
+            pattern: ^\d{10}$
+          - type: 'null'
+          title: Policyholder Phone
+        policyholder_gender:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          - type: 'null'
+        policyholder_address_same_as_member:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Policyholder Address Same As Member
+        policyholder_street_address_line_one:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Policyholder Street Address Line One
+        policyholder_street_address_line_two:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Policyholder Street Address Line Two
+        policyholder_street_address_zip:
+          anyOf:
+          - type: string
+            maxLength: 5
+            minLength: 5
+            pattern: ^\d{5}$
+          - type: 'null'
+          title: Policyholder Street Address Zip
+        policyholder_street_address_city:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Policyholder Street Address City
+        policyholder_street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+            minLength: 2
+          - type: 'null'
+          title: Policyholder Street Address State
+      additionalProperties: false
+      type: object
+      title: OnboardingQuestionnaireInsurancePatchRequest
+      description: 'Partial PATCH: omitted fields unchanged; explicit null clears nullable columns.'
+    QuestionnaireProviderSummary:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+      type: object
+      required:
+      - id
+      title: QuestionnaireProviderSummary
+      description: Lightweight provider identity shown alongside a listed questionnaire.
+    OnboardingQuestionnaireReferralDiagnosisEnum:
+      type: string
+      enum:
+      - ASD
+      - OTHER_DEVELOPMENTAL_DISORDERS
+      - MOOD_DISORDERS
+      - ADD or ADHD
+      - GDD
+      - ODD
+      - GENETIC_SYNDROME_ASD
+      - Other
+      title: OnboardingQuestionnaireReferralDiagnosisEnum
+      description: "OB-Referral diagnoses (multi-select). Wire values are short stable tokens.\n\nFigma\
+        \ / UI copy (for product reference only):\n  ASD\n  Other developmental disorders (e.g., intellectual\
+        \ disabilities, language disorders)\n    → wire ``OTHER_DEVELOPMENTAL_DISORDERS``\n  Mood disorders\
+        \ (e.g., depression, bipolar disorder, anxiety disorders)\n    → wire ``MOOD_DISORDERS``\n  ADD\
+        \ or ADHD → wire ``ADD or ADHD``\n  Global Developmental Delay → wire ``GDD``\n  Oppositional\
+        \ Defiant Disorder → wire ``ODD``\n  Genetic syndromes associated with ASD (e.g., Fragile X syndrome,\
+        \ Rett syndrome)\n    → wire ``GENETIC_SYNDROME_ASD``\n  Other"
+    OnboardingQuestionnaireReferralPatchRequest:
+      properties:
+        referral_physician_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Referral Physician Name
+        diagnosis_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Diagnosis Date
+        diagnosis_city:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Diagnosis City
+        diagnosis_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+            minLength: 2
+          - type: 'null'
+          title: Diagnosis State
+        diagnosis_report_submission_method:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnaireDiagnosisReportSubmissionMethodEnum'
+          - type: 'null'
+        diagnostic_assessments_used:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/OnboardingQuestionnaireReferralDiagnosticAssessmentEnum'
+            type: array
+          - type: 'null'
+          title: Diagnostic Assessments Used
+        diagnoses:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/OnboardingQuestionnaireReferralDiagnosisEnum'
+            type: array
+          - type: 'null'
+          title: Diagnoses
+      additionalProperties: false
+      type: object
+      title: OnboardingQuestionnaireReferralPatchRequest
+      description: 'Referral PATCH: skip fields you don''t touch; lists overwrite the whole list.'
+    OnboardingQuestionnaireGeneralInfoPatchRequest:
+      properties:
+        provider_full_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 2
+          - type: 'null'
+          title: Provider Full Name
+        provider_email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Provider Email
+        primary_language:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnairePrimaryLanguageEnum'
+          - type: 'null'
+        relationship_to_client:
+          anyOf:
+          - $ref: '#/components/schemas/OnboardingQuestionnaireRelationshipToClientEnum'
+          - type: 'null'
+        client_first_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Client First Name
+        client_last_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Client Last Name
+        client_middle_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Client Middle Name
+        client_date_of_birth:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Client Date Of Birth
+        client_sex:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          - type: 'null'
+        client_address_same_as_provider:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Client Address Same As Provider
+        client_street_address_line_one:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Client Street Address Line One
+        client_street_address_line_two:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Client Street Address Line Two
+        client_street_address_zip:
+          anyOf:
+          - type: string
+            maxLength: 5
+            minLength: 5
+            pattern: ^\d{5}$
+          - type: 'null'
+          title: Client Street Address Zip
+        client_street_address_city:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 4
+          - type: 'null'
+          title: Client Street Address City
+        client_street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+            minLength: 2
+          - type: 'null'
+          title: Client Street Address State
+      additionalProperties: false
+      type: object
+      title: OnboardingQuestionnaireGeneralInfoPatchRequest
+      description: 'Partial PATCH: omitted fields are unchanged; explicit null clears nullable columns.'
+    InsuranceCardExtractRequest:
+      properties:
+        insurance_type:
+          $ref: '#/components/schemas/OnboardingQuestionnaireInsuranceTypeEnum'
+      type: object
+      required:
+      - insurance_type
+      title: InsuranceCardExtractRequest
+      description: Which insurance card pair (front/back) to extract from uploaded documents.
+    RelationshipToPolicyHolderEnum:
+      type: string
+      enum:
+      - SELF
+      - SPOUSE
+      - CHILD
+      - OTHER
+      title: RelationshipToPolicyHolderEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    OnboardingQuestionnaireSendRequest:
+      properties:
+        provider_id:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Provider Id
+        client_id:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Client Id
+          description: Client whose general-info client fields are prepopulated; must have an active guardian
+            assignment.
+        date_sent_utc_offset:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Date Sent Utc Offset
+      additionalProperties: false
+      type: object
+      required:
+      - provider_id
+      - client_id
+      - date_sent_utc_offset
+      title: OnboardingQuestionnaireSendRequest
+      description: 'Request body for sending (creating) an onboarding questionnaire.
+
+
+        ``date_sent`` is stamped server-side at send time (aware UTC) rather than accepted
+
+        from the client, so it shares the same clock as the server-stamped ``date_concluded``
+
+        and the conclusion-not-before-sent ordering check is well-defined. ``date_sent_utc_offset``
+
+        is the client''s UTC offset in seconds at that moment, retained so the send time can
+
+        later be rendered in the user''s local timezone.'
+    OnboardingQuestionnaireInsurancePreferencesPatchRequest:
+      properties:
+        no_secondary_insurance:
+          type: boolean
+          title: No Secondary Insurance
+      additionalProperties: false
+      type: object
+      required:
+      - no_secondary_insurance
+      title: OnboardingQuestionnaireInsurancePreferencesPatchRequest
+      description: No secondary insurance checkbox only (not insurance field columns).
+    OnboardingQuestionnaireGeneralInfoResponse:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        onboarding_questionnaire_id:
+          type: integer
+          title: Onboarding Questionnaire Id
+        provider_full_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Full Name
+        provider_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Email
+        primary_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Primary Language
+        relationship_to_client:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Relationship To Client
+        client_first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client First Name
+        client_last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Last Name
+        client_middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Middle Name
+        client_date_of_birth:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Client Date Of Birth
+        client_sex:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          - type: 'null'
+        client_address_same_as_provider:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Client Address Same As Provider
+        client_street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Street Address Line One
+        client_street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Street Address Line Two
+        client_street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Street Address Zip
+        client_street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Street Address City
+        client_street_address_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Street Address State
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - onboarding_questionnaire_id
+      title: OnboardingQuestionnaireGeneralInfoResponse
+      description: GET returns this shape; when no row exists yet, scalar fields are null.
+    OnboardingQuestionnaireStatusEnum:
+      type: string
+      enum:
+      - STARTED
+      - IN_PROGRESS
+      - COMPLETED
+      title: OnboardingQuestionnaireStatusEnum
+      description: 'Lifecycle for the row we send to a provider.
+
+
+        STARTED: initial state when the questionnaire is first created/sent.
+
+        IN_PROGRESS: provider has begun the flow (first allowed forward step from STARTED).
+
+        COMPLETED: terminal state; ``date_concluded`` is set on first transition here.'
+    InsuranceCardExtractionJobCreateResponse:
+      properties:
+        job_id:
+          type: integer
+          title: Job Id
+        status:
+          $ref: '#/components/schemas/InsuranceCardExtractionJobStatusEnum'
+      type: object
+      required:
+      - job_id
+      - status
+      title: InsuranceCardExtractionJobCreateResponse
+    OnboardingQuestionnaireDocumentResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        onboarding_questionnaire_id:
+          type: integer
+          title: Onboarding Questionnaire Id
+        title:
+          type: string
+          title: Title
+        document_type:
+          $ref: '#/components/schemas/OnboardingQuestionnaireDocumentTypeEnum'
+        document_sub_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Sub Type
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - id
+      - onboarding_questionnaire_id
+      - title
+      - document_type
+      title: OnboardingQuestionnaireDocumentResponse
+    InsuranceCardExtractionJobCreateRequest:
+      properties:
+        insurance_type:
+          $ref: '#/components/schemas/OnboardingQuestionnaireInsuranceTypeEnum'
+      type: object
+      required:
+      - insurance_type
+      title: InsuranceCardExtractionJobCreateRequest
+    Body_upload_onboarding_questionnaire_document_api_v1_onboarding_questionnaires__questionnaire_id__documents__post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+          description: Document file (pdf / png / jpeg)
+        title:
+          type: string
+          title: Title
+          description: Human-readable document title
+        document_type:
+          $ref: '#/components/schemas/OnboardingQuestionnaireDocumentTypeEnum'
+          description: Category of the document
+        document_sub_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Document Sub Type
+          description: 'Optional sub-category. Required for INSURANCE_CARD; must be one of: PRIMARY_FRONT,
+            PRIMARY_BACK, SECONDARY_FRONT, SECONDARY_BACK. Other document types accept free-form values.'
+      type: object
+      required:
+      - file
+      - title
+      - document_type
+      title: Body_upload_onboarding_questionnaire_document_api_v1_onboarding_questionnaires__questionnaire_id__documents__post
+    OnboardingQuestionnaireAgreementPatchRequest:
+      properties:
+        consent_electronic_delivery_via_email:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Consent Electronic Delivery Via Email
+        consent_text_messages_regarding_aba_services:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Consent Text Messages Regarding Aba Services
+        consent_electronic_signature_platform:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Consent Electronic Signature Platform
+        consent_complete_required_assessments:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Consent Complete Required Assessments
+        consent_paper_document_delivery_notice:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Consent Paper Document Delivery Notice
+        consent_electronic_delivery_freely_given:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Consent Electronic Delivery Freely Given
+        printed_name:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Printed Name
+        signature:
+          anyOf:
+          - type: string
+            maxLength: 200000
+          - type: 'null'
+          title: Signature
+        signature_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Signature Date
+      additionalProperties: false
+      type: object
+      title: OnboardingQuestionnaireAgreementPatchRequest
+      description: Partial agreement PATCH.
+    OnboardingQuestionnaireDocumentTypeEnum:
+      type: string
+      enum:
+      - DIAGNOSIS_REPORT
+      - INSURANCE_CARD
+      - REFERRAL
+      - REFERRAL_REPORT
+      - OTHER
+      title: OnboardingQuestionnaireDocumentTypeEnum
+      description: Stored as questionnaire_document.document_type; extend only when adding real categories.
+    InsuranceCardExtractionFailureReasonCode:
+      type: string
+      enum:
+      - GPT_TIMEOUT
+      - RATE_LIMITED
+      - INVALID_RESPONSE
+      - MISSING_DOCUMENT
+      - UNKNOWN_ERROR
+      title: InsuranceCardExtractionFailureReasonCode
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    QuestionnaireClientSummary:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+      type: object
+      required:
+      - id
+      title: QuestionnaireClientSummary
+      description: Lightweight client identity shown alongside a listed questionnaire.
+    OnboardingQuestionnaireInsuranceTypeEnum:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      title: OnboardingQuestionnaireInsuranceTypeEnum
+      description: Stored on onboarding_questionnaire_insurance.insurance_type.
+    OnboardingQuestionnaireInsurancePreferencesResponse:
+      properties:
+        no_secondary_insurance:
+          type: boolean
+          title: No Secondary Insurance
+      type: object
+      required:
+      - no_secondary_insurance
+      title: OnboardingQuestionnaireInsurancePreferencesResponse
+      description: Saved no-secondary choice.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,322 @@
+openapi: 3.2.0
+info:
+  title: Fast Client Cohort Assignments API
+  version: 0.1.0
+tags:
+- name: client_cohort_assignments
+paths:
+  /api/v1/client_cohort_assignments/:
+    post:
+      tags:
+      - client_cohort_assignments
+      summary: Create Client Cohort Assignment
+      operationId: create_client_cohort_assignment_api_v1_client_cohort_assignments__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCohortAssignmentCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCohortAssignmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - client_cohort_assignments
+      summary: Fetch Client Cohort Assignments
+      operationId: fetch_client_cohort_assignments_api_v1_client_cohort_assignments__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: cohort_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Cohort Id
+      - name: active_only
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Active Only
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientCohortAssignmentResponse'
+                title: Response Fetch Client Cohort Assignments Api V1 Client Cohort Assignments  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_cohort_assignments/{client_cohort_assignment_id}/:
+    patch:
+      tags:
+      - client_cohort_assignments
+      summary: Update Client Cohort Assignment
+      operationId: update_client_cohort_assignment_api_v1_client_cohort_assignments__client_cohort_assignment_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_cohort_assignment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Cohort Assignment Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCohortAssignmentPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCohortAssignmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - client_cohort_assignments
+      summary: Delete Client Cohort Assignment
+      operationId: delete_client_cohort_assignment_api_v1_client_cohort_assignments__client_cohort_assignment_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_cohort_assignment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Cohort Assignment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ClientCohortAssignmentCreate:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        client_id:
+          type: integer
+          title: Client Id
+        cohort_id:
+          type: integer
+          title: Cohort Id
+      type: object
+      required:
+      - date_start
+      - client_id
+      - cohort_id
+      title: ClientCohortAssignmentCreate
+    ClientCohortAssignmentPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+      type: object
+      required:
+      - date_start
+      title: ClientCohortAssignmentPatch
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CohortResponse:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - name
+      - service_classes
+      - id
+      title: CohortResponse
+    CohortServiceClass:
+      type: string
+      enum:
+      - 97151 CLAIMS
+      - 97152 CLAIMS
+      - 97153 CLAIMS
+      - 97155 CLAIMS
+      - 97156 CLAIMS
+      - 97157 CLAIMS
+      - NO SERVICE
+      - NON THERAPY HOURS TIMESHEETS
+      title: CohortServiceClass
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClientCohortAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        cohort:
+          $ref: '#/components/schemas/CohortResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - client
+      - cohort
+      title: ClientCohortAssignmentResponse
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

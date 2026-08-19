@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Policies API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/policies/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Policies"
+        },
+        {
+          "info": {
+            "name": "Create Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/policies/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Policy"
+        },
+        {
+          "info": {
+            "name": "Get Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/policies/:policy_id/",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Policy"
+        },
+        {
+          "info": {
+            "name": "Patch Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/policies/:policy_id/",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Policy"
+        },
+        {
+          "info": {
+            "name": "Get Prior Authorization Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/policies/:policy_id/prior_authorization_details/:service_code_id/",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_code_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Prior Authorization Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

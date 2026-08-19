@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Client Facility Assignments API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "client_facility_assignments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Client Facility Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_facility_assignments/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Client Facility Assignments"
+        },
+        {
+          "info": {
+            "name": "Create Client Facility Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/client_facility_assignments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Client Facility Assignments"
+        },
+        {
+          "info": {
+            "name": "Update Client Facility Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/client_facility_assignments/:client_facility_assignment_id/",
+            "params": [
+              {
+                "name": "client_facility_assignment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Client Facility Assignment"
+        },
+        {
+          "info": {
+            "name": "Delete Client Facility Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/client_facility_assignments/:client_facility_assignment_id/",
+            "params": [
+              {
+                "name": "client_facility_assignment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Client Facility Assignment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

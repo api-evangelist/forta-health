@@ -1,0 +1,1225 @@
+openapi: 3.2.0
+info:
+  title: Fast Providers API
+  version: 0.1.0
+tags:
+- name: providers
+paths:
+  /api/v1/providers/{provider_id}/clinical_status/:
+    put:
+      tags:
+      - providers
+      summary: Set Clinical Status
+      operationId: set_clinical_status_api_v1_providers__provider_id__clinical_status__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderClinicalStatusUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/promote/:
+    put:
+      tags:
+      - providers
+      summary: Promote Provider To Clinical
+      operationId: promote_provider_to_clinical_api_v1_providers__provider_id__promote__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderPromote'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/:
+    post:
+      tags:
+      - providers
+      summary: Create Provider
+      operationId: create_provider_api_v1_providers__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - providers
+      summary: Get All Providers
+      operationId: get_all_providers_api_v1_providers__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: include_roles
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Include Roles
+      - name: fail_on_roles_error
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Fail On Roles Error
+      - name: clinical_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          default:
+          - CLINICAL
+          title: Clinical Status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: array
+                items:
+                  type: string
+              - type: 'null'
+              title: Role
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProviderResponse'
+                title: Response Get All Providers Api V1 Providers  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/co_assigned/:
+    get:
+      tags:
+      - providers
+      summary: Fetch Co Assigned Providers
+      operationId: fetch_co_assigned_providers_api_v1_providers_co_assigned__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: clinical_relationship
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Clinical Relationship
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProviderResponse'
+                title: Response Fetch Co Assigned Providers Api V1 Providers Co Assigned  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/:
+    get:
+      tags:
+      - providers
+      summary: Get Provider
+      operationId: get_provider_api_v1_providers__provider_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      - name: include_roles
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Include Roles
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - providers
+      summary: Patch Provider
+      operationId: patch_provider_api_v1_providers__provider_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/email/:
+    put:
+      tags:
+      - providers
+      summary: Update Provider Email
+      operationId: update_provider_email_api_v1_providers__provider_id__email__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderEmailUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/info:
+    get:
+      tags:
+      - providers
+      summary: Get Provider Info
+      operationId: get_provider_info_api_v1_providers_info_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/providers/{provider_id}/password_reset/:
+    post:
+      tags:
+      - providers
+      summary: Send Password Reset Email
+      operationId: send_password_reset_email_api_v1_providers__provider_id__password_reset__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/qa_billing_status/:
+    put:
+      tags:
+      - providers
+      summary: Set Provider Qa Billing Status
+      operationId: set_provider_qa_billing_status_api_v1_providers__provider_id__qa_billing_status__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderQABillingStatus'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/provider_licenses/{state}/:
+    get:
+      tags:
+      - providers
+      summary: Get Provider State License
+      operationId: get_provider_state_license_api_v1_providers__provider_id__provider_licenses__state___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      - name: state
+        in: path
+        required: true
+        schema:
+          type: string
+          title: State
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderLicenseResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/provider_payor_credentials/{payor_id}/:
+    get:
+      tags:
+      - providers
+      summary: Get Provider Payor Credentials
+      operationId: get_provider_payor_credentials_api_v1_providers__provider_id__provider_payor_credentials__payor_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      - name: payor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Payor Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderStateCredentialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{guardian_provider_id}/relationship_manager/:
+    get:
+      tags:
+      - providers
+      summary: Fetch Guardian Relationship Manager Assignments
+      operationId: fetch_guardian_relationship_manager_assignments_api_v1_providers__guardian_provider_id__relationship_manager__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: guardian_provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Guardian Provider Id
+      - name: exclude_inactive
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Exclude Inactive
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GuardianRelationshipManagerAssignmentResponse'
+                title: Response Fetch Guardian Relationship Manager Assignments Api V1 Providers  Guardian
+                  Provider Id  Relationship Manager  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ProviderStateLicenseDetails:
+      properties:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        status:
+          type: string
+          title: Status
+        date_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        tasks:
+          items:
+            type: string
+          type: array
+          title: Tasks
+        priority:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Priority
+      type: object
+      required:
+      - id
+      - provider_id
+      - status
+      - tasks
+      title: ProviderStateLicenseDetails
+    JobTitleEnum:
+      type: string
+      enum:
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
+    ProviderStateCredentialsDetails:
+      properties:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        payor_id:
+          type: integer
+          title: Payor Id
+        date_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        medicaid_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medicaid Id
+      type: object
+      required:
+      - id
+      - provider_id
+      - payor_id
+      title: ProviderStateCredentialsDetails
+    GuardianRelationshipManagerAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        guardian_provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        relationship_manager_provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - guardian_provider
+      - relationship_manager_provider
+      title: GuardianRelationshipManagerAssignmentResponse
+    ProviderPromote:
+      properties:
+        roles:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ProviderTypes'
+            type: array
+          - type: 'null'
+          title: Roles
+      type: object
+      title: ProviderPromote
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ProviderQABillingStatus:
+      properties:
+        qa_billing_status:
+          $ref: '#/components/schemas/QABillingStatusEnum'
+      type: object
+      required:
+      - qa_billing_status
+      title: ProviderQABillingStatus
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ProviderLicenseResponse:
+      properties:
+        state:
+          type: string
+          title: State
+        is_license_required_in_state:
+          type: boolean
+          title: Is License Required In State
+        licenses:
+          items:
+            $ref: '#/components/schemas/ProviderStateLicenseDetails'
+          type: array
+          title: Licenses
+      type: object
+      required:
+      - state
+      - is_license_required_in_state
+      - licenses
+      title: ProviderLicenseResponse
+    ProviderClinicalStatusUpdateRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ProviderClinicalStatusUpdateRequest
+    ProviderPatch:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          type: string
+          format: email
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+        relationship_manager_provider_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Relationship Manager Provider Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - email
+      title: ProviderPatch
+    ProviderCreate:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          type: string
+          format: email
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - email
+      title: ProviderCreate
+    ProviderTypes:
+      type: string
+      enum:
+      - prbt
+      - bcba
+      - admin
+      - onboarding_coordinator
+      - client_success_manager
+      - clinical_documentation_qa_specialist
+      - biller
+      - assistant_assessor
+      - vbt
+      - guardian
+      - invoice_coordinator
+      - limited_access_guardian
+      title: ProviderTypes
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
+    ProviderStateCredentialsResponse:
+      properties:
+        payor_sector:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payor Sector
+        state:
+          type: string
+          title: State
+        is_medicaid_credential_required:
+          type: boolean
+          title: Is Medicaid Credential Required
+        is_no_medicaid_state:
+          type: boolean
+          title: Is No Medicaid State
+        credentials:
+          items:
+            $ref: '#/components/schemas/ProviderStateCredentialsDetails'
+          type: array
+          title: Credentials
+        medicaid_credentials:
+          items:
+            $ref: '#/components/schemas/ProviderStateCredentialsDetails'
+          type: array
+          title: Medicaid Credentials
+      type: object
+      required:
+      - state
+      - is_medicaid_credential_required
+      - is_no_medicaid_state
+      - credentials
+      - medicaid_credentials
+      title: ProviderStateCredentialsResponse
+    QABillingStatusEnum:
+      type: string
+      enum:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
+    ProviderEmailUpdate:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: ProviderEmailUpdate
+    ProviderStatusEnum:
+      type: string
+      enum:
+      - Not Training
+      - Training
+      title: ProviderStatusEnum
+    ProviderResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+        id:
+          type: integer
+          title: Id
+        roles:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Roles
+          default: []
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        qa_billing_status:
+          $ref: '#/components/schemas/QABillingStatusEnum'
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      - qa_billing_status
+      title: ProviderResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Treatment Plan Statuses API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "treatment_plan_statuses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Treatment Plan Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plan_statuses/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return all treatment plan statuses.\nRoles allowed: pRBT, BCBA, Admin, CSM."
+        },
+        {
+          "info": {
+            "name": "Create Treatment Plan Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plan_statuses/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new treatment plan status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

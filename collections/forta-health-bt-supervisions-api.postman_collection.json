@@ -1,0 +1,1646 @@
+{
+  "item": [
+    {
+      "id": "1846760a-4d4e-4636-bb6b-488b500be7e9",
+      "name": "bt_supervisions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8f1f8935-c9c0-4342-a388-73e397f543dc",
+          "name": "Create",
+          "request": {
+            "name": "Create",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"utc_offset_date_start\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"date_start\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"client_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ca11fe13-3d26-4501-a2a9-9bdc46c28656",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utc_offset_date_start\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"date_start\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"client_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"utc_offset_date_start\": 73,\n  \"bt_provider_id\": 1244,\n  \"date_start\": \"2000-07-16T01:24:58.432Z\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"client_id\": 8079,\n  \"id\": 1684,\n  \"status\": \"string\",\n  \"is_billable\": true,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"1975-03-21\",\n    \"id\": 2394,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"middle_name\": \"string\",\n    \"email\": \"U5g7f9zPKJZg5@rmJByayNabE.vtwq\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"RESIGNED\",\n    \"street_address_latitude\": -34.59146740448341,\n    \"street_address_longitude\": -66.54617731630614\n  },\n  \"bt_provider\": {\n    \"id\": 1743,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"x-oMME3W5f@zQhDGzZNLtVecNNCGasDIpa.zpgl\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\",\n    \"phone\": \"string\"\n  },\n  \"bcba\": {\n    \"id\": 873,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"w8IK4EHAQqVaw@JwXFNBvPFkCFJnhXLmx.ayvu\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"has_materials_organized_prior_to_session\": \"NOT_EVALUATED\",\n  \"builds_rapport_with_learner\": \"NOT_EVALUATED\",\n  \"implements_programs_and_collects_data_regularly\": \"EXCEEDS_EXPECTATIONS\",\n  \"provides_clear_sds_and_keeps_appropriate_pace\": \"MEETS_EXPECTATIONS\",\n  \"varies_reinforces_assesses_as_needed\": \"EXCEEDS_EXPECTATIONS\",\n  \"provides_praise_for_independent_responses\": \"NEEDS_IMPROVEMENT\",\n  \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"EXCEEDS_EXPECTATIONS\",\n  \"uses_prompts_appropriately\": \"MEETS_EXPECTATIONS\",\n  \"implements_correction_procedures_appropriately\": \"EXCEEDS_EXPECTATIONS\",\n  \"uses_more_positive_than_corrective_statements\": \"MEETS_EXPECTATIONS\",\n  \"uses_non_verbal_prompts_when_possible\": \"NEEDS_IMPROVEMENT\",\n  \"remains_calm_during_challenging_behaviors\": \"MEETS_EXPECTATIONS\",\n  \"follows_behavior_protocol_and_records_data_as_outlined\": \"NOT_EVALUATED\",\n  \"professionalism\": \"NOT_EVALUATED\",\n  \"collaborates_effectively_with_colleagues\": \"NOT_EVALUATED\",\n  \"seeks_feedback_for_growth_in_clinical_skills\": \"MEETS_EXPECTATIONS\",\n  \"additional_comments\": \"string\",\n  \"signature\": \"string\",\n  \"utc_offset_date_signed\": 571,\n  \"date_signed\": \"1966-06-08T11:17:41.613Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4c97e95-dfe0-4ab9-ba2e-880156304572",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utc_offset_date_start\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"date_start\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"client_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edc9b30c-e976-4230-9313-088c9b8b158b",
+          "name": "Fetch All",
+          "request": {
+            "name": "Fetch All",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "action_required",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f785dfe7-fb22-4739-b5f5-7421142914a9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"utc_offset_date_start\": 5998,\n    \"bt_provider_id\": 4415,\n    \"date_start\": \"2015-05-16T10:43:59.564Z\",\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"setting\": \"<string>\",\n    \"client_id\": 9753,\n    \"id\": 1637,\n    \"status\": \"string\",\n    \"is_billable\": true,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"male\",\n      \"dob\": \"2013-01-10\",\n      \"id\": 4707,\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n      \"middle_name\": \"string\",\n      \"email\": \"QYz2X1@yODlPgjISMh.wb\",\n      \"street_address_line_one\": \"string\",\n      \"street_address_line_two\": \"string\",\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"st\",\n      \"phone\": \"string\",\n      \"clinical_status_reason\": \"DISCHARGED\",\n      \"street_address_latitude\": 11.301889340434414,\n      \"street_address_longitude\": -22.489683051192543\n    },\n    \"bt_provider\": {\n      \"id\": 5306,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"28wRuOu@thjevyGDbEcSsqykUZmiAVEolIcIvkuon.hlco\",\n      \"status\": \"string\",\n      \"clinical_status\": \"PRE CLINICAL\",\n      \"phone\": \"string\"\n    },\n    \"bcba\": {\n      \"id\": 4474,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"hQOjEE@mIRJUrlRIHoQgCCwyFs.sod\",\n      \"status\": \"string\",\n      \"clinical_status\": \"PRE CLINICAL\"\n    },\n    \"has_materials_organized_prior_to_session\": \"NOT_EVALUATED\",\n    \"builds_rapport_with_learner\": \"NEEDS_IMPROVEMENT\",\n    \"implements_programs_and_collects_data_regularly\": \"EXCEEDS_EXPECTATIONS\",\n    \"provides_clear_sds_and_keeps_appropriate_pace\": \"MEETS_EXPECTATIONS\",\n    \"varies_reinforces_assesses_as_needed\": \"NOT_EVALUATED\",\n    \"provides_praise_for_independent_responses\": \"MEETS_EXPECTATIONS\",\n    \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"NOT_EVALUATED\",\n    \"uses_prompts_appropriately\": \"MEETS_EXPECTATIONS\",\n    \"implements_correction_procedures_appropriately\": \"NEEDS_IMPROVEMENT\",\n    \"uses_more_positive_than_corrective_statements\": \"NEEDS_IMPROVEMENT\",\n    \"uses_non_verbal_prompts_when_possible\": \"MEETS_EXPECTATIONS\",\n    \"remains_calm_during_challenging_behaviors\": \"NEEDS_IMPROVEMENT\",\n    \"follows_behavior_protocol_and_records_data_as_outlined\": \"NOT_EVALUATED\",\n    \"professionalism\": \"NOT_EVALUATED\",\n    \"collaborates_effectively_with_colleagues\": \"NOT_EVALUATED\",\n    \"seeks_feedback_for_growth_in_clinical_skills\": \"NOT_EVALUATED\",\n    \"additional_comments\": \"string\",\n    \"signature\": \"string\",\n    \"utc_offset_date_signed\": 4278,\n    \"date_signed\": \"1975-02-12T00:40:41.334Z\"\n  },\n  {\n    \"utc_offset_date_start\": 2699,\n    \"bt_provider_id\": 2808,\n    \"date_start\": \"1958-09-25T23:34:58.448Z\",\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"setting\": \"<string>\",\n    \"client_id\": 5789,\n    \"id\": 2186,\n    \"status\": \"string\",\n    \"is_billable\": false,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"other\",\n      \"dob\": \"1983-11-04\",\n      \"id\": 3458,\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n      \"middle_name\": \"string\",\n      \"email\": \"Ga-vE@cptEPldoHEhupOOfqQSOCzEXeGsdw.aa\",\n      \"street_address_line_one\": \"string\",\n      \"street_address_line_two\": \"string\",\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"st\",\n      \"phone\": \"string\",\n      \"clinical_status_reason\": \"RESIGNED\",\n      \"street_address_latitude\": 74.69115037392723,\n      \"street_address_longitude\": 9.816155259165242\n    },\n    \"bt_provider\": {\n      \"id\": 8201,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"symCdy1qT@KtJgxCFDMrkGzLfrGSO.rz\",\n      \"status\": \"string\",\n      \"clinical_status\": \"CLINICAL\",\n      \"phone\": \"string\"\n    },\n    \"bcba\": {\n      \"id\": 4888,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"wLbc5@EpvmJnceAPQZGaltUGiGFTopQ.tss\",\n      \"status\": \"string\",\n      \"clinical_status\": \"PRE CLINICAL\"\n    },\n    \"has_materials_organized_prior_to_session\": \"NOT_EVALUATED\",\n    \"builds_rapport_with_learner\": \"NEEDS_IMPROVEMENT\",\n    \"implements_programs_and_collects_data_regularly\": \"NEEDS_IMPROVEMENT\",\n    \"provides_clear_sds_and_keeps_appropriate_pace\": \"NOT_EVALUATED\",\n    \"varies_reinforces_assesses_as_needed\": \"NEEDS_IMPROVEMENT\",\n    \"provides_praise_for_independent_responses\": \"EXCEEDS_EXPECTATIONS\",\n    \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"EXCEEDS_EXPECTATIONS\",\n    \"uses_prompts_appropriately\": \"NEEDS_IMPROVEMENT\",\n    \"implements_correction_procedures_appropriately\": \"MEETS_EXPECTATIONS\",\n    \"uses_more_positive_than_corrective_statements\": \"EXCEEDS_EXPECTATIONS\",\n    \"uses_non_verbal_prompts_when_possible\": \"NEEDS_IMPROVEMENT\",\n    \"remains_calm_during_challenging_behaviors\": \"MEETS_EXPECTATIONS\",\n    \"follows_behavior_protocol_and_records_data_as_outlined\": \"MEETS_EXPECTATIONS\",\n    \"professionalism\": \"NEEDS_IMPROVEMENT\",\n    \"collaborates_effectively_with_colleagues\": \"EXCEEDS_EXPECTATIONS\",\n    \"seeks_feedback_for_growth_in_clinical_skills\": \"MEETS_EXPECTATIONS\",\n    \"additional_comments\": \"string\",\n    \"signature\": \"string\",\n    \"utc_offset_date_signed\": 2911,\n    \"date_signed\": \"1968-04-04T02:56:43.837Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "953f8e4c-2c3e-4726-ad5b-6f660dc5b1d3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53577641-5563-4002-9e55-51fbc765a13e",
+          "name": "Fetch",
+          "request": {
+            "name": "Fetch",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ":bt_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "bt_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "47b398bb-8352-4d80-9af3-9a76cfb32b90",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"utc_offset_date_start\": 73,\n  \"bt_provider_id\": 1244,\n  \"date_start\": \"2000-07-16T01:24:58.432Z\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"client_id\": 8079,\n  \"id\": 1684,\n  \"status\": \"string\",\n  \"is_billable\": true,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"1975-03-21\",\n    \"id\": 2394,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"middle_name\": \"string\",\n    \"email\": \"U5g7f9zPKJZg5@rmJByayNabE.vtwq\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"RESIGNED\",\n    \"street_address_latitude\": -34.59146740448341,\n    \"street_address_longitude\": -66.54617731630614\n  },\n  \"bt_provider\": {\n    \"id\": 1743,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"x-oMME3W5f@zQhDGzZNLtVecNNCGasDIpa.zpgl\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\",\n    \"phone\": \"string\"\n  },\n  \"bcba\": {\n    \"id\": 873,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"w8IK4EHAQqVaw@JwXFNBvPFkCFJnhXLmx.ayvu\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"has_materials_organized_prior_to_session\": \"NOT_EVALUATED\",\n  \"builds_rapport_with_learner\": \"NOT_EVALUATED\",\n  \"implements_programs_and_collects_data_regularly\": \"EXCEEDS_EXPECTATIONS\",\n  \"provides_clear_sds_and_keeps_appropriate_pace\": \"MEETS_EXPECTATIONS\",\n  \"varies_reinforces_assesses_as_needed\": \"EXCEEDS_EXPECTATIONS\",\n  \"provides_praise_for_independent_responses\": \"NEEDS_IMPROVEMENT\",\n  \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"EXCEEDS_EXPECTATIONS\",\n  \"uses_prompts_appropriately\": \"MEETS_EXPECTATIONS\",\n  \"implements_correction_procedures_appropriately\": \"EXCEEDS_EXPECTATIONS\",\n  \"uses_more_positive_than_corrective_statements\": \"MEETS_EXPECTATIONS\",\n  \"uses_non_verbal_prompts_when_possible\": \"NEEDS_IMPROVEMENT\",\n  \"remains_calm_during_challenging_behaviors\": \"MEETS_EXPECTATIONS\",\n  \"follows_behavior_protocol_and_records_data_as_outlined\": \"NOT_EVALUATED\",\n  \"professionalism\": \"NOT_EVALUATED\",\n  \"collaborates_effectively_with_colleagues\": \"NOT_EVALUATED\",\n  \"seeks_feedback_for_growth_in_clinical_skills\": \"MEETS_EXPECTATIONS\",\n  \"additional_comments\": \"string\",\n  \"signature\": \"string\",\n  \"utc_offset_date_signed\": 571,\n  \"date_signed\": \"1966-06-08T11:17:41.613Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca411fbe-5531-4557-84aa-de7fee792a96",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3e7b382-151e-4a6f-b422-4562107e4f7b",
+          "name": "Patch Basic Details",
+          "request": {
+            "name": "Patch Basic Details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ":bt_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "bt_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"utc_offset_date_start\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"date_start\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f524cba-2cc3-435a-a043-c9121e343ba9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utc_offset_date_start\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"date_start\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"utc_offset_date_start\": 73,\n  \"bt_provider_id\": 1244,\n  \"date_start\": \"2000-07-16T01:24:58.432Z\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"client_id\": 8079,\n  \"id\": 1684,\n  \"status\": \"string\",\n  \"is_billable\": true,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"1975-03-21\",\n    \"id\": 2394,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"middle_name\": \"string\",\n    \"email\": \"U5g7f9zPKJZg5@rmJByayNabE.vtwq\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"RESIGNED\",\n    \"street_address_latitude\": -34.59146740448341,\n    \"street_address_longitude\": -66.54617731630614\n  },\n  \"bt_provider\": {\n    \"id\": 1743,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"x-oMME3W5f@zQhDGzZNLtVecNNCGasDIpa.zpgl\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\",\n    \"phone\": \"string\"\n  },\n  \"bcba\": {\n    \"id\": 873,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"w8IK4EHAQqVaw@JwXFNBvPFkCFJnhXLmx.ayvu\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"has_materials_organized_prior_to_session\": \"NOT_EVALUATED\",\n  \"builds_rapport_with_learner\": \"NOT_EVALUATED\",\n  \"implements_programs_and_collects_data_regularly\": \"EXCEEDS_EXPECTATIONS\",\n  \"provides_clear_sds_and_keeps_appropriate_pace\": \"MEETS_EXPECTATIONS\",\n  \"varies_reinforces_assesses_as_needed\": \"EXCEEDS_EXPECTATIONS\",\n  \"provides_praise_for_independent_responses\": \"NEEDS_IMPROVEMENT\",\n  \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"EXCEEDS_EXPECTATIONS\",\n  \"uses_prompts_appropriately\": \"MEETS_EXPECTATIONS\",\n  \"implements_correction_procedures_appropriately\": \"EXCEEDS_EXPECTATIONS\",\n  \"uses_more_positive_than_corrective_statements\": \"MEETS_EXPECTATIONS\",\n  \"uses_non_verbal_prompts_when_possible\": \"NEEDS_IMPROVEMENT\",\n  \"remains_calm_during_challenging_behaviors\": \"MEETS_EXPECTATIONS\",\n  \"follows_behavior_protocol_and_records_data_as_outlined\": \"NOT_EVALUATED\",\n  \"professionalism\": \"NOT_EVALUATED\",\n  \"collaborates_effectively_with_colleagues\": \"NOT_EVALUATED\",\n  \"seeks_feedback_for_growth_in_clinical_skills\": \"MEETS_EXPECTATIONS\",\n  \"additional_comments\": \"string\",\n  \"signature\": \"string\",\n  \"utc_offset_date_signed\": 571,\n  \"date_signed\": \"1966-06-08T11:17:41.613Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d25de82b-78a1-4f0f-9a8f-b3721e81cb19",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utc_offset_date_start\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"date_start\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4a146f3-19eb-495a-9e77-5cf5d8f70575",
+          "name": "Delete Bt Supervision",
+          "request": {
+            "name": "Delete Bt Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ":bt_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "bt_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ee0290f-b4f9-4958-93ac-c7628f08fd3c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ad723dc4-9cdb-4786-8f51-6af1a856bc81",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "892ca2d7-e858-436c-8c22-b45a3ba9ecc8",
+          "name": "Patch Data",
+          "request": {
+            "name": "Patch Data",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ":bt_supervision_id",
+                "data",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "bt_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"has_materials_organized_prior_to_session\": \"<string>\",\n  \"builds_rapport_with_learner\": \"<string>\",\n  \"implements_programs_and_collects_data_regularly\": \"<string>\",\n  \"provides_clear_sds_and_keeps_appropriate_pace\": \"<string>\",\n  \"varies_reinforces_assesses_as_needed\": \"<string>\",\n  \"provides_praise_for_independent_responses\": \"<string>\",\n  \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"<string>\",\n  \"uses_prompts_appropriately\": \"<string>\",\n  \"implements_correction_procedures_appropriately\": \"<string>\",\n  \"uses_more_positive_than_corrective_statements\": \"<string>\",\n  \"uses_non_verbal_prompts_when_possible\": \"<string>\",\n  \"remains_calm_during_challenging_behaviors\": \"<string>\",\n  \"follows_behavior_protocol_and_records_data_as_outlined\": \"<string>\",\n  \"professionalism\": \"<string>\",\n  \"collaborates_effectively_with_colleagues\": \"<string>\",\n  \"seeks_feedback_for_growth_in_clinical_skills\": \"<string>\",\n  \"additional_comments\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b708c01b-e12a-42c1-834a-0348687dc2a0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "data",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"has_materials_organized_prior_to_session\": \"<string>\",\n  \"builds_rapport_with_learner\": \"<string>\",\n  \"implements_programs_and_collects_data_regularly\": \"<string>\",\n  \"provides_clear_sds_and_keeps_appropriate_pace\": \"<string>\",\n  \"varies_reinforces_assesses_as_needed\": \"<string>\",\n  \"provides_praise_for_independent_responses\": \"<string>\",\n  \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"<string>\",\n  \"uses_prompts_appropriately\": \"<string>\",\n  \"implements_correction_procedures_appropriately\": \"<string>\",\n  \"uses_more_positive_than_corrective_statements\": \"<string>\",\n  \"uses_non_verbal_prompts_when_possible\": \"<string>\",\n  \"remains_calm_during_challenging_behaviors\": \"<string>\",\n  \"follows_behavior_protocol_and_records_data_as_outlined\": \"<string>\",\n  \"professionalism\": \"<string>\",\n  \"collaborates_effectively_with_colleagues\": \"<string>\",\n  \"seeks_feedback_for_growth_in_clinical_skills\": \"<string>\",\n  \"additional_comments\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"utc_offset_date_start\": 581,\n  \"bt_provider_id\": 9772,\n  \"date_start\": \"1992-12-16T14:37:25.362Z\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"setting\": \"<string>\",\n  \"client_id\": 8929,\n  \"id\": 3239,\n  \"status\": \"string\",\n  \"is_billable\": false,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"2018-05-08\",\n    \"id\": 5410,\n    \"clinical_status\": \"ON HOLD\",\n    \"middle_name\": \"string\",\n    \"email\": \"zZF8cm@rKyIAIs.oat\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"TERMINATED\",\n    \"street_address_latitude\": -27.431317390704265,\n    \"street_address_longitude\": 121.33049840910161\n  },\n  \"bt_provider\": {\n    \"id\": 4462,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"uSZqlgmTPNw3V2@XtrvxmBDismzolugZVcFXYCzyLLXYzi.cxiy\",\n    \"status\": \"string\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n    \"phone\": \"string\"\n  },\n  \"bcba\": {\n    \"id\": 773,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"Gaq@wVTfwo.lgq\",\n    \"status\": \"string\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n  },\n  \"has_materials_organized_prior_to_session\": \"<string>\",\n  \"builds_rapport_with_learner\": \"<string>\",\n  \"implements_programs_and_collects_data_regularly\": \"<string>\",\n  \"provides_clear_sds_and_keeps_appropriate_pace\": \"<string>\",\n  \"varies_reinforces_assesses_as_needed\": \"<string>\",\n  \"provides_praise_for_independent_responses\": \"<string>\",\n  \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"<string>\",\n  \"uses_prompts_appropriately\": \"<string>\",\n  \"implements_correction_procedures_appropriately\": \"<string>\",\n  \"uses_more_positive_than_corrective_statements\": \"<string>\",\n  \"uses_non_verbal_prompts_when_possible\": \"<string>\",\n  \"remains_calm_during_challenging_behaviors\": \"<string>\",\n  \"follows_behavior_protocol_and_records_data_as_outlined\": \"<string>\",\n  \"professionalism\": \"<string>\",\n  \"collaborates_effectively_with_colleagues\": \"<string>\",\n  \"seeks_feedback_for_growth_in_clinical_skills\": \"<string>\",\n  \"additional_comments\": \"string\",\n  \"signature\": \"string\",\n  \"utc_offset_date_signed\": 3430,\n  \"date_signed\": \"1973-06-15T21:18:45.571Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "516cf981-c80b-45c9-8ae1-6cd389026b3b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "data",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"has_materials_organized_prior_to_session\": \"<string>\",\n  \"builds_rapport_with_learner\": \"<string>\",\n  \"implements_programs_and_collects_data_regularly\": \"<string>\",\n  \"provides_clear_sds_and_keeps_appropriate_pace\": \"<string>\",\n  \"varies_reinforces_assesses_as_needed\": \"<string>\",\n  \"provides_praise_for_independent_responses\": \"<string>\",\n  \"uses_appropriate_ratio_of_mastered_novel_tasks\": \"<string>\",\n  \"uses_prompts_appropriately\": \"<string>\",\n  \"implements_correction_procedures_appropriately\": \"<string>\",\n  \"uses_more_positive_than_corrective_statements\": \"<string>\",\n  \"uses_non_verbal_prompts_when_possible\": \"<string>\",\n  \"remains_calm_during_challenging_behaviors\": \"<string>\",\n  \"follows_behavior_protocol_and_records_data_as_outlined\": \"<string>\",\n  \"professionalism\": \"<string>\",\n  \"collaborates_effectively_with_colleagues\": \"<string>\",\n  \"seeks_feedback_for_growth_in_clinical_skills\": \"<string>\",\n  \"additional_comments\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7902967f-27ab-4734-a5df-1125f2ac1384",
+          "name": "Stop",
+          "request": {
+            "name": "Stop",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ":bt_supervision_id",
+                "stop",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "bt_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\",\n  \"date_signed\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f458fb0a-84bb-4d1f-91aa-e9323ba7138a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\",\n  \"date_signed\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26cc4c09-34b0-4e03-b962-4926e750a362",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\",\n  \"date_signed\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5136ba40-4c00-429d-8868-66176c3e317f",
+          "name": "Make Bt Supervision Unbillable",
+          "request": {
+            "name": "Make Bt Supervision Unbillable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ":bt_supervision_id",
+                "make_unbillable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "bt_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d0277599-affa-4b98-9e0a-3d7422896a5d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fcdf08f3-15f0-47d1-b5ef-39ba46b558e3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "298c547d-9bd4-48d2-81c3-47b1e01ef85f",
+          "name": "Make Bt Supervision Billable",
+          "request": {
+            "name": "Make Bt Supervision Billable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bt_supervisions",
+                ":bt_supervision_id",
+                "make_billable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "bt_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "439955c6-023a-4f47-9bd5-fc7f1151a233",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c1c5b79-b1d7-49be-a86d-c59703522a1f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bt_supervisions",
+                    ":bt_supervision_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "bt_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1a1718dc-94ba-49cb-a8fe-01cb0a006bd2",
+    "name": "Fast Bt Supervisions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

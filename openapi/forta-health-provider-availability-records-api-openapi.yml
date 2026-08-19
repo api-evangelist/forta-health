@@ -1,0 +1,312 @@
+openapi: 3.2.0
+info:
+  title: Fast Provider Availability Records API
+  version: 0.1.0
+tags:
+- name: provider_availability_records
+paths:
+  /api/v1/provider_availability/:
+    post:
+      tags:
+      - provider_availability_records
+      summary: Create Provider Availability
+      operationId: create_provider_availability_api_v1_provider_availability__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderAvailabilityCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderAvailabilityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - provider_availability_records
+      summary: Get Provider Availability Records
+      operationId: get_provider_availability_records_api_v1_provider_availability__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Provider Id
+      - name: timezone
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/TimeZoneEnum'
+          - type: 'null'
+          title: Timezone
+      - name: day_of_week
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          - type: 'null'
+          title: Day Of Week
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProviderAvailabilityResponse'
+                title: Response Get Provider Availability Records Api V1 Provider Availability  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/provider_availability/{provider_availability_id}/:
+    patch:
+      tags:
+      - provider_availability_records
+      summary: Update Provider Availability
+      operationId: update_provider_availability_api_v1_provider_availability__provider_availability_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_availability_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Availability Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderAvailabilityPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderAvailabilityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - provider_availability_records
+      summary: Delete Provider Availability
+      operationId: delete_provider_availability_api_v1_provider_availability__provider_availability_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: provider_availability_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Availability Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ProviderAvailabilityResponse:
+      properties:
+        day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        time_start:
+          type: string
+          format: time
+          title: Time Start
+        time_end:
+          type: string
+          format: time
+          title: Time End
+        provider_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Provider Id
+        timezone:
+          $ref: '#/components/schemas/TimeZoneEnum'
+        id:
+          type: integer
+          title: Id
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+      type: object
+      required:
+      - day_of_week
+      - time_start
+      - time_end
+      - timezone
+      - id
+      - provider
+      title: ProviderAvailabilityResponse
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TimeZoneEnum:
+      type: string
+      enum:
+      - America/New_York
+      - America/Los_Angeles
+      - America/Chicago
+      - America/Denver
+      - America/Phoenix
+      - America/Honolulu
+      - America/Anchorage
+      title: TimeZoneEnum
+    ProviderAvailabilityCreate:
+      properties:
+        day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        time_start:
+          type: string
+          format: time
+          title: Time Start
+        time_end:
+          type: string
+          format: time
+          title: Time End
+        provider_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Provider Id
+        timezone:
+          $ref: '#/components/schemas/TimeZoneEnum'
+      type: object
+      required:
+      - day_of_week
+      - time_start
+      - time_end
+      - timezone
+      title: ProviderAvailabilityCreate
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+      title: DayOfWeek
+    ProviderAvailabilityPatch:
+      properties:
+        day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        time_start:
+          type: string
+          format: time
+          title: Time Start
+        time_end:
+          type: string
+          format: time
+          title: Time End
+      type: object
+      required:
+      - day_of_week
+      - time_start
+      - time_end
+      title: ProviderAvailabilityPatch
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

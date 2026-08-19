@@ -1,0 +1,620 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Claims API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Form 1500 Preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/preview/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate Form 1500 Preview"
+        },
+        {
+          "info": {
+            "name": "Get Claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/claims/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "biller_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "payor_claim_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "secondary_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clearing_house_claim_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "invoice_history_attributes_only",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "invoiceable_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Claims"
+        },
+        {
+          "info": {
+            "name": "Create Claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Claim"
+        },
+        {
+          "info": {
+            "name": "Resubmit Claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/resubmit/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Resubmit Claim"
+        },
+        {
+          "info": {
+            "name": "Get Claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Claim"
+        },
+        {
+          "info": {
+            "name": "Patch Claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Claim"
+        },
+        {
+          "info": {
+            "name": "Delete Claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Claim"
+        },
+        {
+          "info": {
+            "name": "Admin Delete Claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/claims/admin/:claim_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Admin-only force delete: remove a claim in ANY status, no status guardrails.\n\nUnlike ``delete_claim``, this skips ``validate_delete_request`` (which limits\ndeletion to Generated/Unbillable), so an admin can delete a claim regardless of\nstatus. It still refuses (409) when the claim has references the cascade cannot\nsafely remove -- an invoice, child claims, or EOB documents -- surfacing a clear\nmessage via ``assert_admin_deletable`` rather than a raw FK error. Because the row\nis about to be remov"
+        },
+        {
+          "info": {
+            "name": "Admin Override Claim Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/claims/admin/:claim_id/status/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Admin-only override of the claim status and the payment status.\n\nThis endpoint does not use the workflow validators. An admin can set\nthe status of a claim in almost any state. Some guards stay: the\nendpoint refuses (409) a change that can break an invoice, a payment,\nan EOB file, or a second submission (see assert_admin_status_overridable).\nEach change writes a claim_status_change_log row and a warning log line."
+        },
+        {
+          "info": {
+            "name": "Create Follow Up Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/follow_up_notes/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Follow Up Notes"
+        },
+        {
+          "info": {
+            "name": "Patch Follow Up Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/follow_up_notes/:claim_follow_up_notes_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "claim_follow_up_notes_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Follow Up Notes"
+        },
+        {
+          "info": {
+            "name": "Patch Claim Payment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/payment_status/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Claim Payment Status"
+        },
+        {
+          "info": {
+            "name": "Download Procedure Pdfs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/procedures/download/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download Procedure Pdfs"
+        },
+        {
+          "info": {
+            "name": "Create Service Line Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/service_lines/:service_line_id/payments/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_line_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Service Line Payment"
+        },
+        {
+          "info": {
+            "name": "Patch Service Line Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/service_lines/:service_line_id/payments/:payment_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_line_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Service Line Payment"
+        },
+        {
+          "info": {
+            "name": "Delete Service Line Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/service_lines/:service_line_id/payments/:payment_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_line_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Service Line Payment"
+        },
+        {
+          "info": {
+            "name": "Certify Claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/certify_claim/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Certify Claim"
+        },
+        {
+          "info": {
+            "name": "Create Eob Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/eob_documents/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Eob Document"
+        },
+        {
+          "info": {
+            "name": "Delete Eob Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/eob_documents/:eob_document_id/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "eob_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Eob Document"
+        },
+        {
+          "info": {
+            "name": "Submit Claim To Tebra",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/:claim_id/tebra/submit/",
+            "params": [
+              {
+                "name": "claim_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submit Claim To Tebra"
+        },
+        {
+          "info": {
+            "name": "Bulk Mark Notes Unbillable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/claims/admin/bulk-unbillable",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Admin-only: create Unbillable claims from a CSV of notes.\n\nGuarded by JWT + admin role. Returns a summary with a per-row failure CSV;\nnever raises on individual bad rows."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

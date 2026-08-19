@@ -1,0 +1,3938 @@
+{
+  "item": [
+    {
+      "id": "479b4052-d72b-4428-9fa8-b95442457015",
+      "name": "onboarding_questionnaires",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b5b65ca-1c78-464a-b08d-e4e67c8b0f61",
+          "name": "Send Onboarding Questionnaire",
+          "request": {
+            "name": "Send Onboarding Questionnaire",
+            "description": {
+              "content": "Send onboarding questionnaire.\n\nCreates a questionnaire on first send for the (provider, client) pair. On resend,\nreturns the existing row for that pair. ``date_sent`` (stamped server-side as a\nUTC-aware datetime at send time) and ``date_sent_utc_offset`` are refreshed on resend\nexcept when the questionnaire is COMPLETED.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider_id\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"date_sent_utc_offset\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "421abe45-e39d-4b36-b0cd-497c213cb027",
+              "name": "A questionnaire row already exists for this provider and client; the same row is returned (no second questionnaire is created).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider_id\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"date_sent_utc_offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8379,\n  \"provider_id\": 4859,\n  \"client_id\": 1382,\n  \"status\": \"COMPLETED\",\n  \"date_sent\": \"2018-09-04T14:32:06.658Z\",\n  \"no_secondary_insurance\": false,\n  \"date_sent_utc_offset\": 6101,\n  \"date_concluded\": \"1999-04-01T23:45:08.473Z\",\n  \"date_concluded_utc_offset\": 9509,\n  \"date_row_created\": \"2007-04-28T09:32:12.982Z\",\n  \"date_row_updated\": \"2000-02-11T22:29:56.381Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fbe122c-ec9b-4302-9439-cd0cd9edd043",
+              "name": "A new questionnaire was created (first send for this provider and client).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider_id\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"date_sent_utc_offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8379,\n  \"provider_id\": 4859,\n  \"client_id\": 1382,\n  \"status\": \"COMPLETED\",\n  \"date_sent\": \"2018-09-04T14:32:06.658Z\",\n  \"no_secondary_insurance\": false,\n  \"date_sent_utc_offset\": 6101,\n  \"date_concluded\": \"1999-04-01T23:45:08.473Z\",\n  \"date_concluded_utc_offset\": 9509,\n  \"date_row_created\": \"2007-04-28T09:32:12.982Z\",\n  \"date_row_updated\": \"2000-02-11T22:29:56.381Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49f7060a-7c27-40ab-8724-9845e49d0a37",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider_id\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"date_sent_utc_offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30b83391-d8b4-4ec9-a5ae-3d1587955ace",
+          "name": "List Onboarding Questionnaires",
+          "request": {
+            "name": "List Onboarding Questionnaires",
+            "description": {
+              "content": "List onboarding questionnaires (basic columns only, newest date_sent first).\n\nEach returned row also includes a lightweight ``provider`` and ``client`` summary\n(id/name/email) for the linked provider and client.\n\nFilter by ``provider_id``, ``client_id``, ``status``, and a ``date_sent`` window\n(``date_start`` inclusive, ``date_end`` inclusive of the whole day). The window is\npadded by one extra day on each side so records that land on an adjacent UTC day\n(because ``date_sent`` is stored as naive UTC while the bounds are treated as UTC days)\nare still returned. When no filter is provided, results are limited to the past month.\n\nCallers without an overriding role may only list their own questionnaires (403 when\n``provider_id`` is someone else's); the filter is otherwise scoped to the caller's own\nid. 400 when ``date_start`` is after ``date_end``.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider_id",
+                  "value": "<integer>",
+                  "description": "Filter by provider id (must be > 0)."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "Filter by client id (must be > 0)."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_start",
+                  "value": "<date>",
+                  "description": "Only include questionnaires with date_sent on/after this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_end",
+                  "value": "<date>",
+                  "description": "Only include questionnaires with date_sent on/before this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by questionnaire status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "884d38c7-ce54-4439-b9d5-d59f38501746",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4015,\n    \"provider_id\": 5230,\n    \"client_id\": 7093,\n    \"status\": \"<string>\",\n    \"date_sent\": \"1967-03-22T09:08:51.380Z\",\n    \"no_secondary_insurance\": false,\n    \"date_sent_utc_offset\": 5262,\n    \"date_concluded\": \"2005-05-26T12:27:43.257Z\",\n    \"date_concluded_utc_offset\": 4931,\n    \"date_row_created\": \"1992-09-10T06:35:47.103Z\",\n    \"date_row_updated\": \"1987-03-16T13:56:26.488Z\",\n    \"provider\": {\n      \"id\": 5384,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"foqm@yfBMDEAhpKURJrVklnMp.pjz\"\n    },\n    \"client\": {\n      \"id\": 3115,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"Ub5mcb@hkpkkDyOXxitKcJZJQyTHvHRg.bftd\"\n    }\n  },\n  {\n    \"id\": 534,\n    \"provider_id\": 6478,\n    \"client_id\": 2052,\n    \"status\": \"<string>\",\n    \"date_sent\": \"2013-07-15T09:47:54.935Z\",\n    \"no_secondary_insurance\": false,\n    \"date_sent_utc_offset\": 7477,\n    \"date_concluded\": \"1976-02-17T18:10:54.678Z\",\n    \"date_concluded_utc_offset\": 8919,\n    \"date_row_created\": \"2002-05-27T08:28:46.491Z\",\n    \"date_row_updated\": \"1952-11-22T09:58:53.969Z\",\n    \"provider\": {\n      \"id\": 8125,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"k5RMQUKSwjPTCd@sgTjAUzIeiBeShiwkmKgHlWySTICiI.uira\"\n    },\n    \"client\": {\n      \"id\": 5718,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"uQLR4u0I@JXLtZQSQPCvafHgdn.yxq\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6d4ce9c-2d18-4cb3-ba50-7431106f83ba",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b112e6b-b975-4046-803f-f2f5686239b4",
+          "name": "Get Onboarding Questionnaire By Provider",
+          "request": {
+            "name": "Get Onboarding Questionnaire By Provider",
+            "description": {
+              "content": "All questionnaires for the provider (newest date_sent first).\n\nA provider usually has several clients assigned, so this returns every questionnaire\nat once; pass ``client_id`` to narrow to a single client.\n\nCallers with broad visibility (an overriding role, or the provider looking up their\nown id) get the real outcome: an empty list when none exists and ``404`` if the\nprovider is missing. Any other caller only sees the questionnaires they are authorized\nto read (an active provider assignment to the client); when none are readable, a\nmissing provider, an absent questionnaire, and a forbidden one all return the same\n``403`` so existence is not observable to someone who could not read it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                "by_provider",
+                ":provider_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "When set, narrows the result to this provider and client (at most one row). When omitted, returns every questionnaire for the provider."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "provider_id",
+                  "description": "(Required) Provider id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4dd0ebec-67c7-43cb-af90-f4cef77bacc7",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    "by_provider",
+                    ":provider_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "provider_id",
+                      "description": "(Required) Provider id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4404,\n    \"provider_id\": 364,\n    \"client_id\": 8751,\n    \"status\": \"<string>\",\n    \"date_sent\": \"1990-02-19T13:40:18.047Z\",\n    \"no_secondary_insurance\": false,\n    \"date_sent_utc_offset\": 9283,\n    \"date_concluded\": \"1998-04-22T04:34:59.988Z\",\n    \"date_concluded_utc_offset\": 192,\n    \"date_row_created\": \"1951-01-07T23:56:26.766Z\",\n    \"date_row_updated\": \"1955-08-30T17:43:01.905Z\"\n  },\n  {\n    \"id\": 4418,\n    \"provider_id\": 5217,\n    \"client_id\": 4464,\n    \"status\": \"<string>\",\n    \"date_sent\": \"1975-07-05T07:46:48.068Z\",\n    \"no_secondary_insurance\": false,\n    \"date_sent_utc_offset\": 9054,\n    \"date_concluded\": \"1990-03-30T13:30:14.674Z\",\n    \"date_concluded_utc_offset\": 3036,\n    \"date_row_created\": \"1978-04-17T16:03:19.253Z\",\n    \"date_row_updated\": \"2023-04-04T18:41:45.169Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a82fd03-a3ac-430c-84d2-81617a716ec0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    "by_provider",
+                    ":provider_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "provider_id",
+                      "description": "(Required) Provider id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0abd38c9-90af-4b4c-844d-ee9ba769d5db",
+          "name": "Get Onboarding Questionnaire By Id",
+          "request": {
+            "name": "Get Onboarding Questionnaire By Id",
+            "description": {
+              "content": "Full questionnaire with nested sections, or 404 if not found.\n403 unless the caller holds an overriding role, is the assigned provider, or has\nan active provider assignment to the questionnaire's client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b08994eb-b175-4303-9012-87775fdf4eaf",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4072,\n  \"provider_id\": 8909,\n  \"client_id\": 6988,\n  \"status\": \"<string>\",\n  \"date_sent\": \"2010-06-30T07:16:44.122Z\",\n  \"no_secondary_insurance\": false,\n  \"date_sent_utc_offset\": 3672,\n  \"date_concluded\": \"2002-07-10T04:15:56.356Z\",\n  \"date_concluded_utc_offset\": 3640,\n  \"date_row_created\": \"1960-02-19T22:47:38.410Z\",\n  \"date_row_updated\": \"1963-05-03T22:02:42.519Z\",\n  \"general_info\": {\n    \"onboarding_questionnaire_id\": 3166,\n    \"id\": 17,\n    \"provider_full_name\": \"string\",\n    \"provider_email\": \"string\",\n    \"primary_language\": \"string\",\n    \"relationship_to_client\": \"string\",\n    \"client_first_name\": \"string\",\n    \"client_last_name\": \"string\",\n    \"client_middle_name\": \"string\",\n    \"client_date_of_birth\": \"2008-11-14\",\n    \"client_sex\": \"unknown\",\n    \"client_address_same_as_provider\": false,\n    \"client_street_address_line_one\": \"string\",\n    \"client_street_address_line_two\": \"string\",\n    \"client_street_address_zip\": \"string\",\n    \"client_street_address_city\": \"string\",\n    \"client_street_address_state\": \"string\",\n    \"date_row_created\": \"1955-02-14T09:34:50.561Z\",\n    \"date_row_updated\": \"2018-10-14T20:59:53.808Z\"\n  },\n  \"documents\": [\n    {\n      \"id\": 3177,\n      \"onboarding_questionnaire_id\": 3842,\n      \"title\": \"string\",\n      \"document_type\": \"REFERRAL\",\n      \"document_sub_type\": \"string\",\n      \"date_row_created\": \"1973-04-08T20:55:53.322Z\",\n      \"date_row_updated\": \"1990-01-08T21:50:52.451Z\"\n    },\n    {\n      \"id\": 6537,\n      \"onboarding_questionnaire_id\": 3107,\n      \"title\": \"string\",\n      \"document_type\": \"REFERRAL\",\n      \"document_sub_type\": \"string\",\n      \"date_row_created\": \"2005-07-03T22:35:05.133Z\",\n      \"date_row_updated\": \"1988-09-29T20:42:40.947Z\"\n    }\n  ],\n  \"insurances\": [\n    {\n      \"policyholder_address_same_as_member\": true,\n      \"id\": 5521,\n      \"onboarding_questionnaire_id\": 8905,\n      \"insurance_type\": \"SECONDARY\",\n      \"insurance_name\": \"string\",\n      \"relationship_to_policyholder\": \"CHILD\",\n      \"member_first_name\": \"string\",\n      \"member_last_name\": \"string\",\n      \"insurance_start_date\": \"1974-04-18\",\n      \"insurance_end_date\": \"1977-02-15\",\n      \"member_id\": \"string\",\n      \"group_number\": \"string\",\n      \"member_street_address_line_one\": \"string\",\n      \"member_street_address_line_two\": \"string\",\n      \"member_street_address_zip\": \"string\",\n      \"member_street_address_city\": \"string\",\n      \"member_street_address_state\": \"string\",\n      \"policyholder_first_name\": \"string\",\n      \"policyholder_last_name\": \"string\",\n      \"policyholder_date_of_birth\": \"2011-09-30\",\n      \"policyholder_phone\": \"string\",\n      \"policyholder_gender\": \"female\",\n      \"policyholder_street_address_line_one\": \"string\",\n      \"policyholder_street_address_line_two\": \"string\",\n      \"policyholder_street_address_zip\": \"string\",\n      \"policyholder_street_address_city\": \"string\",\n      \"policyholder_street_address_state\": \"string\",\n      \"date_row_created\": \"2000-07-15T02:17:40.751Z\",\n      \"date_row_updated\": \"2020-11-27T19:54:33.598Z\"\n    },\n    {\n      \"policyholder_address_same_as_member\": true,\n      \"id\": 2020,\n      \"onboarding_questionnaire_id\": 2485,\n      \"insurance_type\": \"SECONDARY\",\n      \"insurance_name\": \"string\",\n      \"relationship_to_policyholder\": \"CHILD\",\n      \"member_first_name\": \"string\",\n      \"member_last_name\": \"string\",\n      \"insurance_start_date\": \"1955-10-07\",\n      \"insurance_end_date\": \"2010-03-26\",\n      \"member_id\": \"string\",\n      \"group_number\": \"string\",\n      \"member_street_address_line_one\": \"string\",\n      \"member_street_address_line_two\": \"string\",\n      \"member_street_address_zip\": \"string\",\n      \"member_street_address_city\": \"string\",\n      \"member_street_address_state\": \"string\",\n      \"policyholder_first_name\": \"string\",\n      \"policyholder_last_name\": \"string\",\n      \"policyholder_date_of_birth\": \"2016-05-28\",\n      \"policyholder_phone\": \"string\",\n      \"policyholder_gender\": \"unknown\",\n      \"policyholder_street_address_line_one\": \"string\",\n      \"policyholder_street_address_line_two\": \"string\",\n      \"policyholder_street_address_zip\": \"string\",\n      \"policyholder_street_address_city\": \"string\",\n      \"policyholder_street_address_state\": \"string\",\n      \"date_row_created\": \"1950-08-06T23:06:15.306Z\",\n      \"date_row_updated\": \"2000-06-01T12:51:28.701Z\"\n    }\n  ],\n  \"referral\": {\n    \"onboarding_questionnaire_id\": 6441,\n    \"id\": 4392,\n    \"referral_physician_name\": \"string\",\n    \"diagnosis_date\": \"1971-04-06\",\n    \"diagnosis_city\": \"string\",\n    \"diagnosis_state\": \"string\",\n    \"diagnosis_report_submission_method\": \"FAX\",\n    \"diagnostic_assessments_used\": [\n      \"AQ\",\n      \"ASRS\"\n    ],\n    \"diagnoses\": [\n      \"GDD\",\n      \"OTHER_DEVELOPMENTAL_DISORDERS\"\n    ],\n    \"referral_documents\": [\n      {\n        \"id\": 3934,\n        \"onboarding_questionnaire_id\": 1372,\n        \"title\": \"string\",\n        \"document_type\": \"REFERRAL_REPORT\",\n        \"document_sub_type\": \"string\",\n        \"date_row_created\": \"1997-03-05T07:24:30.852Z\",\n        \"date_row_updated\": \"1957-02-08T22:37:11.423Z\"\n      },\n      {\n        \"id\": 3188,\n        \"onboarding_questionnaire_id\": 6564,\n        \"title\": \"string\",\n        \"document_type\": \"DIAGNOSIS_REPORT\",\n        \"document_sub_type\": \"string\",\n        \"date_row_created\": \"1972-08-01T07:13:27.252Z\",\n        \"date_row_updated\": \"1953-10-29T18:39:53.520Z\"\n      }\n    ],\n    \"date_row_created\": \"1968-05-14T11:31:31.297Z\",\n    \"date_row_updated\": \"2012-11-17T09:18:00.380Z\"\n  },\n  \"agreement\": {\n    \"onboarding_questionnaire_id\": 5737,\n    \"consent_electronic_delivery_via_email\": true,\n    \"consent_text_messages_regarding_aba_services\": true,\n    \"consent_electronic_signature_platform\": false,\n    \"consent_complete_required_assessments\": false,\n    \"consent_paper_document_delivery_notice\": false,\n    \"consent_electronic_delivery_freely_given\": true,\n    \"id\": 3045,\n    \"printed_name\": \"string\",\n    \"signature\": \"string\",\n    \"signature_date\": \"1974-06-25\",\n    \"date_row_created\": \"1950-06-10T10:35:13.529Z\",\n    \"date_row_updated\": \"2016-03-17T20:04:56.238Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67041548-a967-4866-bec4-eb6d2e73d95a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a9396a9-65f9-466c-9aa1-dd0cae7f85a1",
+          "name": "Patch Onboarding Questionnaire General Info",
+          "request": {
+            "name": "Patch Onboarding Questionnaire General Info",
+            "description": {
+              "content": "Merge partial general info for the questionnaire (omit fields to leave unchanged).\n403 if caller is not the assigned provider; 404 if questionnaire missing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "general_info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider_full_name\": \"<string>\",\n  \"provider_email\": \"<email>\",\n  \"primary_language\": \"<string>\",\n  \"relationship_to_client\": \"<string>\",\n  \"client_first_name\": \"<string>\",\n  \"client_last_name\": \"<string>\",\n  \"client_middle_name\": \"<string>\",\n  \"client_date_of_birth\": \"<date>\",\n  \"client_sex\": \"<string>\",\n  \"client_address_same_as_provider\": \"<boolean>\",\n  \"client_street_address_line_one\": \"<string>\",\n  \"client_street_address_line_two\": \"<string>\",\n  \"client_street_address_zip\": \"<string>\",\n  \"client_street_address_city\": \"<string>\",\n  \"client_street_address_state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fbe06d12-3966-4e38-ad4a-be7bbccb79fe",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "general_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider_full_name\": \"<string>\",\n  \"provider_email\": \"<email>\",\n  \"primary_language\": \"<string>\",\n  \"relationship_to_client\": \"<string>\",\n  \"client_first_name\": \"<string>\",\n  \"client_last_name\": \"<string>\",\n  \"client_middle_name\": \"<string>\",\n  \"client_date_of_birth\": \"<date>\",\n  \"client_sex\": \"<string>\",\n  \"client_address_same_as_provider\": \"<boolean>\",\n  \"client_street_address_line_one\": \"<string>\",\n  \"client_street_address_line_two\": \"<string>\",\n  \"client_street_address_zip\": \"<string>\",\n  \"client_street_address_city\": \"<string>\",\n  \"client_street_address_state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"onboarding_questionnaire_id\": 8268,\n  \"id\": 3547,\n  \"provider_full_name\": \"string\",\n  \"provider_email\": \"string\",\n  \"primary_language\": \"string\",\n  \"relationship_to_client\": \"string\",\n  \"client_first_name\": \"string\",\n  \"client_last_name\": \"string\",\n  \"client_middle_name\": \"string\",\n  \"client_date_of_birth\": \"1999-06-17\",\n  \"client_sex\": \"<string>\",\n  \"client_address_same_as_provider\": true,\n  \"client_street_address_line_one\": \"string\",\n  \"client_street_address_line_two\": \"string\",\n  \"client_street_address_zip\": \"string\",\n  \"client_street_address_city\": \"string\",\n  \"client_street_address_state\": \"string\",\n  \"date_row_created\": \"2026-02-06T05:47:05.555Z\",\n  \"date_row_updated\": \"1998-09-03T17:19:35.548Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c34d2751-07ee-436b-b7b1-572cf5440f8b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "general_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider_full_name\": \"<string>\",\n  \"provider_email\": \"<email>\",\n  \"primary_language\": \"<string>\",\n  \"relationship_to_client\": \"<string>\",\n  \"client_first_name\": \"<string>\",\n  \"client_last_name\": \"<string>\",\n  \"client_middle_name\": \"<string>\",\n  \"client_date_of_birth\": \"<date>\",\n  \"client_sex\": \"<string>\",\n  \"client_address_same_as_provider\": \"<boolean>\",\n  \"client_street_address_line_one\": \"<string>\",\n  \"client_street_address_line_two\": \"<string>\",\n  \"client_street_address_zip\": \"<string>\",\n  \"client_street_address_city\": \"<string>\",\n  \"client_street_address_state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47f19510-75fc-42bd-9564-c48ecc7fe02c",
+          "name": "Patch Onboarding Questionnaire Insurance Primary",
+          "request": {
+            "name": "Patch Onboarding Questionnaire Insurance Primary",
+            "description": {
+              "content": "Merge partial primary insurance (insurance_type PRIMARY). 403/404 like general_info.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "insurance",
+                "primary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insurance_name\": \"<string>\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"<string>\",\n  \"member_last_name\": \"<string>\",\n  \"insurance_start_date\": \"<date>\",\n  \"insurance_end_date\": \"<date>\",\n  \"member_id\": \"<string>\",\n  \"group_number\": \"<string>\",\n  \"member_street_address_line_one\": \"<string>\",\n  \"member_street_address_line_two\": \"<string>\",\n  \"member_street_address_zip\": \"<string>\",\n  \"member_street_address_city\": \"<string>\",\n  \"member_street_address_state\": \"<string>\",\n  \"policyholder_first_name\": \"<string>\",\n  \"policyholder_last_name\": \"<string>\",\n  \"policyholder_date_of_birth\": \"<date>\",\n  \"policyholder_phone\": \"<string>\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_address_same_as_member\": \"<boolean>\",\n  \"policyholder_street_address_line_one\": \"<string>\",\n  \"policyholder_street_address_line_two\": \"<string>\",\n  \"policyholder_street_address_zip\": \"<string>\",\n  \"policyholder_street_address_city\": \"<string>\",\n  \"policyholder_street_address_state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b4286a1-3d12-4ff6-a6d1-72a2e7ff06d8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "primary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_name\": \"<string>\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"<string>\",\n  \"member_last_name\": \"<string>\",\n  \"insurance_start_date\": \"<date>\",\n  \"insurance_end_date\": \"<date>\",\n  \"member_id\": \"<string>\",\n  \"group_number\": \"<string>\",\n  \"member_street_address_line_one\": \"<string>\",\n  \"member_street_address_line_two\": \"<string>\",\n  \"member_street_address_zip\": \"<string>\",\n  \"member_street_address_city\": \"<string>\",\n  \"member_street_address_state\": \"<string>\",\n  \"policyholder_first_name\": \"<string>\",\n  \"policyholder_last_name\": \"<string>\",\n  \"policyholder_date_of_birth\": \"<date>\",\n  \"policyholder_phone\": \"<string>\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_address_same_as_member\": \"<boolean>\",\n  \"policyholder_street_address_line_one\": \"<string>\",\n  \"policyholder_street_address_line_two\": \"<string>\",\n  \"policyholder_street_address_zip\": \"<string>\",\n  \"policyholder_street_address_city\": \"<string>\",\n  \"policyholder_street_address_state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"policyholder_address_same_as_member\": false,\n  \"id\": 1764,\n  \"onboarding_questionnaire_id\": 5520,\n  \"insurance_type\": \"PRIMARY\",\n  \"insurance_name\": \"string\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"string\",\n  \"member_last_name\": \"string\",\n  \"insurance_start_date\": \"2023-01-27\",\n  \"insurance_end_date\": \"1959-10-01\",\n  \"member_id\": \"string\",\n  \"group_number\": \"string\",\n  \"member_street_address_line_one\": \"string\",\n  \"member_street_address_line_two\": \"string\",\n  \"member_street_address_zip\": \"string\",\n  \"member_street_address_city\": \"string\",\n  \"member_street_address_state\": \"string\",\n  \"policyholder_first_name\": \"string\",\n  \"policyholder_last_name\": \"string\",\n  \"policyholder_date_of_birth\": \"1989-08-04\",\n  \"policyholder_phone\": \"string\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_street_address_line_one\": \"string\",\n  \"policyholder_street_address_line_two\": \"string\",\n  \"policyholder_street_address_zip\": \"string\",\n  \"policyholder_street_address_city\": \"string\",\n  \"policyholder_street_address_state\": \"string\",\n  \"date_row_created\": \"1979-05-23T06:58:48.454Z\",\n  \"date_row_updated\": \"2008-11-08T04:31:39.867Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b93f86c-0152-4cae-8436-5f2c630586a2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "primary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_name\": \"<string>\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"<string>\",\n  \"member_last_name\": \"<string>\",\n  \"insurance_start_date\": \"<date>\",\n  \"insurance_end_date\": \"<date>\",\n  \"member_id\": \"<string>\",\n  \"group_number\": \"<string>\",\n  \"member_street_address_line_one\": \"<string>\",\n  \"member_street_address_line_two\": \"<string>\",\n  \"member_street_address_zip\": \"<string>\",\n  \"member_street_address_city\": \"<string>\",\n  \"member_street_address_state\": \"<string>\",\n  \"policyholder_first_name\": \"<string>\",\n  \"policyholder_last_name\": \"<string>\",\n  \"policyholder_date_of_birth\": \"<date>\",\n  \"policyholder_phone\": \"<string>\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_address_same_as_member\": \"<boolean>\",\n  \"policyholder_street_address_line_one\": \"<string>\",\n  \"policyholder_street_address_line_two\": \"<string>\",\n  \"policyholder_street_address_zip\": \"<string>\",\n  \"policyholder_street_address_city\": \"<string>\",\n  \"policyholder_street_address_state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee309e9d-c419-497b-934f-684a7e5de393",
+          "name": "Patch Onboarding Questionnaire Insurance Secondary",
+          "request": {
+            "name": "Patch Onboarding Questionnaire Insurance Secondary",
+            "description": {
+              "content": "Merge partial secondary insurance (insurance_type SECONDARY). 403/404 like general_info.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "insurance",
+                "secondary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insurance_name\": \"<string>\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"<string>\",\n  \"member_last_name\": \"<string>\",\n  \"insurance_start_date\": \"<date>\",\n  \"insurance_end_date\": \"<date>\",\n  \"member_id\": \"<string>\",\n  \"group_number\": \"<string>\",\n  \"member_street_address_line_one\": \"<string>\",\n  \"member_street_address_line_two\": \"<string>\",\n  \"member_street_address_zip\": \"<string>\",\n  \"member_street_address_city\": \"<string>\",\n  \"member_street_address_state\": \"<string>\",\n  \"policyholder_first_name\": \"<string>\",\n  \"policyholder_last_name\": \"<string>\",\n  \"policyholder_date_of_birth\": \"<date>\",\n  \"policyholder_phone\": \"<string>\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_address_same_as_member\": \"<boolean>\",\n  \"policyholder_street_address_line_one\": \"<string>\",\n  \"policyholder_street_address_line_two\": \"<string>\",\n  \"policyholder_street_address_zip\": \"<string>\",\n  \"policyholder_street_address_city\": \"<string>\",\n  \"policyholder_street_address_state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53695275-cd4b-4e1b-abde-acb42e7a09dd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "secondary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_name\": \"<string>\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"<string>\",\n  \"member_last_name\": \"<string>\",\n  \"insurance_start_date\": \"<date>\",\n  \"insurance_end_date\": \"<date>\",\n  \"member_id\": \"<string>\",\n  \"group_number\": \"<string>\",\n  \"member_street_address_line_one\": \"<string>\",\n  \"member_street_address_line_two\": \"<string>\",\n  \"member_street_address_zip\": \"<string>\",\n  \"member_street_address_city\": \"<string>\",\n  \"member_street_address_state\": \"<string>\",\n  \"policyholder_first_name\": \"<string>\",\n  \"policyholder_last_name\": \"<string>\",\n  \"policyholder_date_of_birth\": \"<date>\",\n  \"policyholder_phone\": \"<string>\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_address_same_as_member\": \"<boolean>\",\n  \"policyholder_street_address_line_one\": \"<string>\",\n  \"policyholder_street_address_line_two\": \"<string>\",\n  \"policyholder_street_address_zip\": \"<string>\",\n  \"policyholder_street_address_city\": \"<string>\",\n  \"policyholder_street_address_state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"policyholder_address_same_as_member\": false,\n  \"id\": 1764,\n  \"onboarding_questionnaire_id\": 5520,\n  \"insurance_type\": \"PRIMARY\",\n  \"insurance_name\": \"string\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"string\",\n  \"member_last_name\": \"string\",\n  \"insurance_start_date\": \"2023-01-27\",\n  \"insurance_end_date\": \"1959-10-01\",\n  \"member_id\": \"string\",\n  \"group_number\": \"string\",\n  \"member_street_address_line_one\": \"string\",\n  \"member_street_address_line_two\": \"string\",\n  \"member_street_address_zip\": \"string\",\n  \"member_street_address_city\": \"string\",\n  \"member_street_address_state\": \"string\",\n  \"policyholder_first_name\": \"string\",\n  \"policyholder_last_name\": \"string\",\n  \"policyholder_date_of_birth\": \"1989-08-04\",\n  \"policyholder_phone\": \"string\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_street_address_line_one\": \"string\",\n  \"policyholder_street_address_line_two\": \"string\",\n  \"policyholder_street_address_zip\": \"string\",\n  \"policyholder_street_address_city\": \"string\",\n  \"policyholder_street_address_state\": \"string\",\n  \"date_row_created\": \"1979-05-23T06:58:48.454Z\",\n  \"date_row_updated\": \"2008-11-08T04:31:39.867Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73f4e2cb-6ae1-4896-8b9e-9b45b7a990e3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "secondary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_name\": \"<string>\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"<string>\",\n  \"member_last_name\": \"<string>\",\n  \"insurance_start_date\": \"<date>\",\n  \"insurance_end_date\": \"<date>\",\n  \"member_id\": \"<string>\",\n  \"group_number\": \"<string>\",\n  \"member_street_address_line_one\": \"<string>\",\n  \"member_street_address_line_two\": \"<string>\",\n  \"member_street_address_zip\": \"<string>\",\n  \"member_street_address_city\": \"<string>\",\n  \"member_street_address_state\": \"<string>\",\n  \"policyholder_first_name\": \"<string>\",\n  \"policyholder_last_name\": \"<string>\",\n  \"policyholder_date_of_birth\": \"<date>\",\n  \"policyholder_phone\": \"<string>\",\n  \"policyholder_gender\": \"<string>\",\n  \"policyholder_address_same_as_member\": \"<boolean>\",\n  \"policyholder_street_address_line_one\": \"<string>\",\n  \"policyholder_street_address_line_two\": \"<string>\",\n  \"policyholder_street_address_zip\": \"<string>\",\n  \"policyholder_street_address_city\": \"<string>\",\n  \"policyholder_street_address_state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d50f0793-60e3-47bb-a779-f4b3ed87c9d8",
+          "name": "Delete Onboarding Questionnaire Insurance Secondary",
+          "request": {
+            "name": "Delete Onboarding Questionnaire Insurance Secondary",
+            "description": {
+              "content": "Drop secondary insurance row. 204 either way; 403/404 same as PATCH insurance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "insurance",
+                "secondary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d2951934-7b98-473f-a034-aa97bc4b051a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "secondary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a9abf041-c4f4-4095-ba90-eb57ac73999e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "secondary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3728b10-7e19-46b8-95f0-a581e04a55fc",
+          "name": "Patch Onboarding Questionnaire Insurance Preferences",
+          "request": {
+            "name": "Patch Onboarding Questionnaire Insurance Preferences",
+            "description": {
+              "content": "Save no-secondary choice; clears secondary row when true. 403/404 like other insurance PATCH.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "insurance",
+                "preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"no_secondary_insurance\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e54803a6-9c91-4ecd-ad51-d4f5d0aeed9a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"no_secondary_insurance\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"no_secondary_insurance\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "070042a3-991f-45e2-965d-f721e45d7363",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"no_secondary_insurance\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c51eb6a-f634-4ac8-b8ca-b41acb3ce81f",
+          "name": "Extract Onboarding Questionnaire Insurance Card",
+          "request": {
+            "name": "Extract Onboarding Questionnaire Insurance Card",
+            "description": {
+              "content": "Extract insurance fields from saved front/back card images (prefill only; not persisted).\n403 if caller is not the assigned provider; 404 if questionnaire missing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "insurance-card",
+                "extract"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insurance_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ba34c87-b902-4b50-97c4-ff428cec7140",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance-card",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"insurance_name\": \"string\",\n  \"relationship_to_policyholder\": \"<string>\",\n  \"member_first_name\": \"string\",\n  \"member_last_name\": \"string\",\n  \"insurance_start_date\": \"1970-04-27\",\n  \"insurance_end_date\": \"1978-03-26\",\n  \"member_id\": \"string\",\n  \"group_number\": \"string\",\n  \"member_street_address_line_one\": \"string\",\n  \"member_street_address_line_two\": \"string\",\n  \"member_street_address_zip\": \"string\",\n  \"member_street_address_city\": \"string\",\n  \"member_street_address_state\": \"string\",\n  \"is_insurance_card\": false,\n  \"document_type\": \"string\",\n  \"confidence_notes\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06f9c561-7181-4458-97cb-bab7ce870937",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance-card",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c686a66-11fb-42c0-a9d0-8b6e14cfed1f",
+          "name": "Create Onboarding Questionnaire Insurance Card Extraction Job",
+          "request": {
+            "name": "Create Onboarding Questionnaire Insurance Card Extraction Job",
+            "description": {
+              "content": "Create async insurance card extraction job; poll GET extraction-jobs/{job_id} for results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "insurance-card",
+                "extraction-jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insurance_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bfc33ad0-9d06-4249-9b4f-6968bcff07d3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance-card",
+                    "extraction-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": 2309,\n  \"status\": \"PROCESSING\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07fd67a7-1879-46e5-92dd-7fd666ce8652",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance-card",
+                    "extraction-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c921817-6473-4a7f-9c3b-7a82978f5f31",
+          "name": "Get Onboarding Questionnaire Insurance Card Extraction Job",
+          "request": {
+            "name": "Get Onboarding Questionnaire Insurance Card Extraction Job",
+            "description": {
+              "content": "Poll extraction job status and result. 403 unless the caller holds an overriding\nrole, is the assigned provider, or has an active provider assignment to the\nquestionnaire's client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "insurance-card",
+                "extraction-jobs",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "job_id",
+                  "description": "(Required) Extraction job id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "81449fb3-4bd4-45f9-b956-02ff371bbd73",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance-card",
+                    "extraction-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job_id",
+                      "description": "(Required) Extraction job id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": 4834,\n  \"status\": \"PROCESSING\",\n  \"result\": {\n    \"insurance_name\": \"string\",\n    \"relationship_to_policyholder\": \"<string>\",\n    \"member_first_name\": \"string\",\n    \"member_last_name\": \"string\",\n    \"insurance_start_date\": \"1979-12-20\",\n    \"insurance_end_date\": \"1993-05-30\",\n    \"member_id\": \"string\",\n    \"group_number\": \"string\",\n    \"member_street_address_line_one\": \"string\",\n    \"member_street_address_line_two\": \"string\",\n    \"member_street_address_zip\": \"string\",\n    \"member_street_address_city\": \"string\",\n    \"member_street_address_state\": \"string\",\n    \"is_insurance_card\": false,\n    \"document_type\": \"string\",\n    \"confidence_notes\": \"string\"\n  },\n  \"error_message\": \"string\",\n  \"failure_reason_code\": \"INVALID_RESPONSE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d175d4b4-dc26-4079-92b4-c3b6042668a4",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "insurance-card",
+                    "extraction-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job_id",
+                      "description": "(Required) Extraction job id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d40b61f-1878-43b8-9483-1a8c8cfc2237",
+          "name": "Patch referral section",
+          "request": {
+            "name": "Patch referral section",
+            "description": {
+              "content": "Merge referral fields; lists replace the whole list ([] clears). Empty body with no saved row returns the same empty shell as GET; with a saved row, returns the current section unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "referral"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referral_physician_name\": \"<string>\",\n  \"diagnosis_date\": \"<date>\",\n  \"diagnosis_city\": \"<string>\",\n  \"diagnosis_state\": \"<string>\",\n  \"diagnosis_report_submission_method\": \"<string>\",\n  \"diagnostic_assessments_used\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"diagnoses\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed1e2c34-9604-4d7a-9d5b-2894c42d6457",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "referral"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referral_physician_name\": \"<string>\",\n  \"diagnosis_date\": \"<date>\",\n  \"diagnosis_city\": \"<string>\",\n  \"diagnosis_state\": \"<string>\",\n  \"diagnosis_report_submission_method\": \"<string>\",\n  \"diagnostic_assessments_used\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"diagnoses\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"onboarding_questionnaire_id\": 9244,\n  \"id\": 2666,\n  \"referral_physician_name\": \"string\",\n  \"diagnosis_date\": \"1967-01-07\",\n  \"diagnosis_city\": \"string\",\n  \"diagnosis_state\": \"string\",\n  \"diagnosis_report_submission_method\": \"<string>\",\n  \"diagnostic_assessments_used\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"diagnoses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"referral_documents\": [\n    {\n      \"id\": 5714,\n      \"onboarding_questionnaire_id\": 2036,\n      \"title\": \"string\",\n      \"document_type\": \"OTHER\",\n      \"document_sub_type\": \"string\",\n      \"date_row_created\": \"1983-03-04T17:52:03.966Z\",\n      \"date_row_updated\": \"1982-10-21T02:53:27.617Z\"\n    },\n    {\n      \"id\": 7952,\n      \"onboarding_questionnaire_id\": 9180,\n      \"title\": \"string\",\n      \"document_type\": \"OTHER\",\n      \"document_sub_type\": \"string\",\n      \"date_row_created\": \"2006-03-30T09:28:02.756Z\",\n      \"date_row_updated\": \"1948-04-14T03:59:35.771Z\"\n    }\n  ],\n  \"date_row_created\": \"1952-12-12T12:22:15.790Z\",\n  \"date_row_updated\": \"1964-12-21T01:29:12.820Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a1ab5d7-8bdd-49c1-a468-6d3063233424",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "referral"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referral_physician_name\": \"<string>\",\n  \"diagnosis_date\": \"<date>\",\n  \"diagnosis_city\": \"<string>\",\n  \"diagnosis_state\": \"<string>\",\n  \"diagnosis_report_submission_method\": \"<string>\",\n  \"diagnostic_assessments_used\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"diagnoses\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3502312-9651-4344-b5b2-1809007fc35f",
+          "name": "Patch agreement section",
+          "request": {
+            "name": "Patch agreement section",
+            "description": {
+              "content": "Partially updates agreement; empty body is a no-op. Idempotent re-PATCH of the same\nvalues does not error. 403 if caller is not the assigned provider; 404 if questionnaire\nid is unknown; 400 when questionnaire status is COMPLETED.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "agreement"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consent_electronic_delivery_via_email\": \"<boolean>\",\n  \"consent_text_messages_regarding_aba_services\": \"<boolean>\",\n  \"consent_electronic_signature_platform\": \"<boolean>\",\n  \"consent_complete_required_assessments\": \"<boolean>\",\n  \"consent_paper_document_delivery_notice\": \"<boolean>\",\n  \"consent_electronic_delivery_freely_given\": \"<boolean>\",\n  \"printed_name\": \"<string>\",\n  \"signature\": \"<string>\",\n  \"signature_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6f6ea13-820f-49ce-abdb-447d5ff93e0a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "agreement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consent_electronic_delivery_via_email\": \"<boolean>\",\n  \"consent_text_messages_regarding_aba_services\": \"<boolean>\",\n  \"consent_electronic_signature_platform\": \"<boolean>\",\n  \"consent_complete_required_assessments\": \"<boolean>\",\n  \"consent_paper_document_delivery_notice\": \"<boolean>\",\n  \"consent_electronic_delivery_freely_given\": \"<boolean>\",\n  \"printed_name\": \"<string>\",\n  \"signature\": \"<string>\",\n  \"signature_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"onboarding_questionnaire_id\": 9627,\n  \"consent_electronic_delivery_via_email\": false,\n  \"consent_text_messages_regarding_aba_services\": false,\n  \"consent_electronic_signature_platform\": false,\n  \"consent_complete_required_assessments\": true,\n  \"consent_paper_document_delivery_notice\": true,\n  \"consent_electronic_delivery_freely_given\": false,\n  \"id\": 4171,\n  \"printed_name\": \"string\",\n  \"signature\": \"string\",\n  \"signature_date\": \"1985-07-19\",\n  \"date_row_created\": \"1999-06-04T00:56:50.559Z\",\n  \"date_row_updated\": \"1953-03-02T06:45:51.314Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e07de02-fb0e-4bf9-a232-b9e3a58eb19d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "agreement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consent_electronic_delivery_via_email\": \"<boolean>\",\n  \"consent_text_messages_regarding_aba_services\": \"<boolean>\",\n  \"consent_electronic_signature_platform\": \"<boolean>\",\n  \"consent_complete_required_assessments\": \"<boolean>\",\n  \"consent_paper_document_delivery_notice\": \"<boolean>\",\n  \"consent_electronic_delivery_freely_given\": \"<boolean>\",\n  \"printed_name\": \"<string>\",\n  \"signature\": \"<string>\",\n  \"signature_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30b341c3-82de-4f06-a820-785f5630062b",
+          "name": "Submit Onboarding Questionnaire",
+          "request": {
+            "name": "Submit Onboarding Questionnaire",
+            "description": {
+              "content": "Validate required sections then set status to COMPLETED (idempotent if already done).\n403 if caller is not the assigned provider; 404 if questionnaire missing; 400 if\nany required section is incomplete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_concluded_utc_offset\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "651a773b-5e2e-4b3f-ada5-d956fe44fb49",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_concluded_utc_offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3608,\n  \"provider_id\": 6796,\n  \"client_id\": 7427,\n  \"status\": \"<string>\",\n  \"date_sent\": \"1995-08-22T18:24:57.850Z\",\n  \"no_secondary_insurance\": false,\n  \"date_sent_utc_offset\": 9011,\n  \"date_concluded\": \"1963-06-15T09:44:26.947Z\",\n  \"date_concluded_utc_offset\": 961,\n  \"date_row_created\": \"1975-08-06T21:46:40.433Z\",\n  \"date_row_updated\": \"1956-02-15T00:52:45.687Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a421d695-16c1-4aa3-a04a-309c9a79c54d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_concluded_utc_offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbe44b02-5c74-4054-9eb6-f01da1f59b1a",
+          "name": "Update Onboarding Questionnaire Status",
+          "request": {
+            "name": "Update Onboarding Questionnaire Status",
+            "description": {
+              "content": "Forward-only status chain (STARTED→IN_PROGRESS); same status is a no-op. Completing\na questionnaire is not allowed here — use POST /{id}/submit, which validates required\nsections and records date_concluded; requesting COMPLETED returns 400. 400/422/403/404\non bad transition, invalid stored status, wrong provider, or id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43591c84-a93d-4cad-91c8-6d3e4fa4add6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3608,\n  \"provider_id\": 6796,\n  \"client_id\": 7427,\n  \"status\": \"<string>\",\n  \"date_sent\": \"1995-08-22T18:24:57.850Z\",\n  \"no_secondary_insurance\": false,\n  \"date_sent_utc_offset\": 9011,\n  \"date_concluded\": \"1963-06-15T09:44:26.947Z\",\n  \"date_concluded_utc_offset\": 961,\n  \"date_row_created\": \"1975-08-06T21:46:40.433Z\",\n  \"date_row_updated\": \"1956-02-15T00:52:45.687Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b715b34a-1d5d-4318-b023-5f62d6cc24d0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89edc920-d1ed-4da9-ae12-776d440c0caa",
+          "name": "Upload Onboarding Questionnaire Document",
+          "request": {
+            "name": "Upload Onboarding Questionnaire Document",
+            "description": {
+              "content": "Upload PDF/PNG/JPEG to S3 and save metadata (title, type, size rules in service).\nReturns the full questionnaire document list (oldest first), same shape as GET\n``.../documents/``, so clients can refresh UI without a follow-up list call.\n404/422/400/403 on bad questionnaire id, validation, or wrong provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "documents",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Document file (pdf / png / jpeg)"
+                },
+                {
+                  "key": "title",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Human-readable document title"
+                },
+                {
+                  "key": "document_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Category of the document"
+                },
+                {
+                  "key": "document_sub_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Optional sub-category. Required for INSURANCE_CARD; must be one of: PRIMARY_FRONT, PRIMARY_BACK, SECONDARY_FRONT, SECONDARY_BACK. Other document types accept free-form values."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1492f5f8-37df-44f2-8b4d-e7525965cefb",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Document file (pdf / png / jpeg)",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Human-readable document title",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Category of the document",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional sub-category. Required for INSURANCE_CARD; must be one of: PRIMARY_FRONT, PRIMARY_BACK, SECONDARY_FRONT, SECONDARY_BACK. Other document types accept free-form values.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_sub_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6665,\n    \"onboarding_questionnaire_id\": 4650,\n    \"title\": \"string\",\n    \"document_type\": \"<string>\",\n    \"document_sub_type\": \"string\",\n    \"date_row_created\": \"1990-05-27T20:22:30.098Z\",\n    \"date_row_updated\": \"1953-04-16T16:53:07.378Z\"\n  },\n  {\n    \"id\": 7676,\n    \"onboarding_questionnaire_id\": 5304,\n    \"title\": \"string\",\n    \"document_type\": \"<string>\",\n    \"document_sub_type\": \"string\",\n    \"date_row_created\": \"1991-09-21T12:30:12.289Z\",\n    \"date_row_updated\": \"2005-05-06T01:00:10.221Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dc05567-05b4-44ac-9dbc-a256f6068c33",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Document file (pdf / png / jpeg)",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Human-readable document title",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Category of the document",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional sub-category. Required for INSURANCE_CARD; must be one of: PRIMARY_FRONT, PRIMARY_BACK, SECONDARY_FRONT, SECONDARY_BACK. Other document types accept free-form values.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_sub_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "559af789-fda2-4d9d-84b2-eae8e41d7cb7",
+          "name": "List Onboarding Questionnaire Documents",
+          "request": {
+            "name": "List Onboarding Questionnaire Documents",
+            "description": {
+              "content": "Metadata-only list, oldest first; empty list if none. No presigned URLs here (use\nGET by document id). 404/422 if questionnaire invalid. 403 unless the caller holds an\noverriding role, is the assigned provider, or has an active provider assignment to the\nquestionnaire's client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "documents",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2cec09d4-8c57-4a8e-b230-d7fb17d5710d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4916,\n    \"onboarding_questionnaire_id\": 8302,\n    \"title\": \"string\",\n    \"document_type\": \"<string>\",\n    \"document_sub_type\": \"string\",\n    \"date_row_created\": \"1952-05-18T12:23:40.889Z\",\n    \"date_row_updated\": \"1955-12-08T03:11:25.914Z\"\n  },\n  {\n    \"id\": 3487,\n    \"onboarding_questionnaire_id\": 7700,\n    \"title\": \"string\",\n    \"document_type\": \"<string>\",\n    \"document_sub_type\": \"string\",\n    \"date_row_created\": \"1964-07-09T11:01:17.118Z\",\n    \"date_row_updated\": \"2012-09-03T16:41:23.434Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6aaaa6b9-2cf4-49e3-99dc-66d4d7af4d80",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62e9026f-dde4-4115-a3e3-06ecb1df4716",
+          "name": "Get Onboarding Questionnaire Document",
+          "request": {
+            "name": "Get Onboarding Questionnaire Document",
+            "description": {
+              "content": "One document's metadata plus a presigned URL; 404 unless document belongs to this\nquestionnaire (no cross-scope leaks). 422 on non-positive ids. 403 unless the caller\nholds an overriding role, is the assigned provider, or has an active provider\nassignment to the questionnaire's client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "documents",
+                ":document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "document_id",
+                  "description": "(Required) Questionnaire document id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8799dbba-6504-4a3b-bc7e-bdf9b46c3126",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "document_id",
+                      "description": "(Required) Questionnaire document id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2256,\n  \"onboarding_questionnaire_id\": 4171,\n  \"title\": \"string\",\n  \"document_type\": \"<string>\",\n  \"document_url\": \"string\",\n  \"file_type\": \"string\",\n  \"document_sub_type\": \"string\",\n  \"date_row_created\": \"2020-02-12T07:21:43.379Z\",\n  \"date_row_updated\": \"1984-07-22T14:48:18.226Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea78ba4c-5e12-4cf4-a407-8b74405e8775",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "document_id",
+                      "description": "(Required) Questionnaire document id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa3bbe72-008a-4d4a-9a58-01738029693e",
+          "name": "Delete Onboarding Questionnaire Document",
+          "request": {
+            "name": "Delete Onboarding Questionnaire Document",
+            "description": {
+              "content": "Delete DB row then best-effort S3 cleanup; extraction jobs referencing the document\nare removed first. Returns 204 once the DB row is gone; S3 failures are logged only.\n404/422/403 on missing scope, bad ids, or wrong provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "onboarding_questionnaires",
+                ":questionnaire_id",
+                "documents",
+                ":document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "document_id",
+                  "description": "(Required) Questionnaire document id (must be > 0)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "105d044f-d2b5-4d85-a1ec-2cdae9baf547",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "document_id",
+                      "description": "(Required) Questionnaire document id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9dace91c-7322-4461-b199-709db5ed926a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "onboarding_questionnaires",
+                    ":questionnaire_id",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) Onboarding questionnaire id (must be > 0)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "document_id",
+                      "description": "(Required) Questionnaire document id (must be > 0)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0501767d-c5ea-4fc8-b9f5-2d31bf2176a7",
+    "name": "Fast Onboarding Questionnaires API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

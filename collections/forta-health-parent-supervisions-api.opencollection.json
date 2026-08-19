@@ -1,0 +1,730 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Parent Supervisions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "parent_supervisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Parent Supervisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/",
+            "params": [
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action_required",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_clinical_status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Parent Supervisions"
+        },
+        {
+          "info": {
+            "name": "Create Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Get Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Update Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Delete Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Get Parent Supervisions With Claim History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/claim_history/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Parent Supervisions With Claim History"
+        },
+        {
+          "info": {
+            "name": "Create Parent Supervision Goal Progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/goal_progress/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Parent Supervision Goal Progress"
+        },
+        {
+          "info": {
+            "name": "Update Goal Progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/goal_progress/:goal_progress_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_progress_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Goal Progress"
+        },
+        {
+          "info": {
+            "name": "Delete Goal Progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/goal_progress/:goal_progress_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_progress_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Goal Progress"
+        },
+        {
+          "info": {
+            "name": "Create Trial",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Trial"
+        },
+        {
+          "info": {
+            "name": "Patch Trial",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Trial"
+        },
+        {
+          "info": {
+            "name": "Delete Trial",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Trial"
+        },
+        {
+          "info": {
+            "name": "Create Duration Trial Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/duration_events/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Duration Trial Event"
+        },
+        {
+          "info": {
+            "name": "Update Duration Trial Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/duration_events/:duration_event_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "duration_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Duration Trial Event"
+        },
+        {
+          "info": {
+            "name": "Delete Duration Trial Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/duration_events/:duration_event_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "duration_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Duration Trial Event"
+        },
+        {
+          "info": {
+            "name": "Create Rate Trial Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/rate_events/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Rate Trial Event"
+        },
+        {
+          "info": {
+            "name": "Update Rate Trial Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/rate_events/:rate_event_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rate_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Rate Trial Event"
+        },
+        {
+          "info": {
+            "name": "Delete Rate Trial Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/target_evaluations/:trial_id/rate_events/:rate_event_id/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trial_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rate_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Rate Trial Event"
+        },
+        {
+          "info": {
+            "name": "Stop Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/stop/",
+            "headers": [
+              {
+                "name": "x-forwarded-for",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Get Utilization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/data/utilization/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Utilization"
+        },
+        {
+          "info": {
+            "name": "Download Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/download/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download Pdf"
+        },
+        {
+          "info": {
+            "name": "Make Parent Supervision Unbillable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/make_unbillable/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Parent Supervision Unbillable"
+        },
+        {
+          "info": {
+            "name": "Make Parent Supervision Billable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/make_billable/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Parent Supervision Billable"
+        },
+        {
+          "info": {
+            "name": "Edit Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/edit/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Backdate Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/parent_supervisions/:parent_supervision_id/backdate/",
+            "params": [
+              {
+                "name": "parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Backdate Parent Supervision"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

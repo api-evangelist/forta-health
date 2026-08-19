@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Cohorts API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cohorts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Cohorts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/cohorts/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Cohorts"
+        },
+        {
+          "info": {
+            "name": "Create Cohort",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/cohorts/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Cohort"
+        },
+        {
+          "info": {
+            "name": "Fetch Cohort",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/cohorts/:cohort_id/",
+            "params": [
+              {
+                "name": "cohort_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Cohort"
+        },
+        {
+          "info": {
+            "name": "Update Cohort",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/cohorts/:cohort_id/",
+            "params": [
+              {
+                "name": "cohort_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Cohort"
+        },
+        {
+          "info": {
+            "name": "Delete Cohort",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/cohorts/:cohort_id/",
+            "params": [
+              {
+                "name": "cohort_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Cohort"
+        },
+        {
+          "info": {
+            "name": "Fetch Cohort Service Classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/cohorts/service_classes/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Cohort Service Classes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

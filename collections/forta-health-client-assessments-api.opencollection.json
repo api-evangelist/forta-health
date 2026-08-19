@@ -1,0 +1,363 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Client Assessments API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "client_assessments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Client Assessments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_assessments/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action_required",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_clinical_status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Client Assessments"
+        },
+        {
+          "info": {
+            "name": "Create Client Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/client_assessments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Client Assessment"
+        },
+        {
+          "info": {
+            "name": "Fetch Client Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Client Assessment"
+        },
+        {
+          "info": {
+            "name": "Patch Client Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Client Assessment"
+        },
+        {
+          "info": {
+            "name": "Delete Client Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Client Assessment"
+        },
+        {
+          "info": {
+            "name": "Stop Client Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/stop/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop Client Assessment"
+        },
+        {
+          "info": {
+            "name": "Fetch Assessments With Claim History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_assessments/claim_history/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Assessments With Claim History"
+        },
+        {
+          "info": {
+            "name": "Fetch Assisting Assessments With Claim History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_assessments/assisting_assessment_claim_history/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Assisting Assessments With Claim History"
+        },
+        {
+          "info": {
+            "name": "Download Client Assessment Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/download/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download Client Assessment Pdf"
+        },
+        {
+          "info": {
+            "name": "Make Assessment Unbillable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/make_unbillable/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Assessment Unbillable"
+        },
+        {
+          "info": {
+            "name": "Make Assessment Billable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/make_billable/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Assessment Billable"
+        },
+        {
+          "info": {
+            "name": "Edit Client Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/edit/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Client Assessment"
+        },
+        {
+          "info": {
+            "name": "Backdate Client Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_assessments/:client_assessment_id/backdate/",
+            "params": [
+              {
+                "name": "client_assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Backdate Client Assessment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

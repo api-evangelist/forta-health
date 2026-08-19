@@ -1,0 +1,778 @@
+{
+  "item": [
+    {
+      "id": "f8c1e974-8ebe-4ae9-b29b-1adcc563c4c1",
+      "name": "provider_assignments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f5cabe3-0213-4f0a-8f93-a8dd41c7a25c",
+          "name": "Create Provider Assignment",
+          "request": {
+            "name": "Create Provider Assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "provider_assignments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<date>\",\n  \"client_id\": \"<integer>\",\n  \"provider_id\": \"<integer>\",\n  \"clinical_relationship\": \"<string>\",\n  \"date_end\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96906ac5-1ab1-43f1-a652-a7fd3427f915",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"client_id\": \"<integer>\",\n  \"provider_id\": \"<integer>\",\n  \"clinical_relationship\": \"<string>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2001-04-10\",\n  \"id\": 865,\n  \"provider\": {\n    \"id\": 6,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"nWNiOjmNh1e5@xgNuedNtXBZnFzTbsxsUg.mibg\",\n    \"status\": \"string\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n  },\n  \"clinical_relationship\": \"<string>\",\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"female\",\n    \"dob\": \"2021-05-10\",\n    \"clinical_status\": \"OFFBOARDED\",\n    \"id\": 8860\n  },\n  \"date_end\": \"1964-02-26\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39f27600-0267-4fc5-8dcb-aad472acb72d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"client_id\": \"<integer>\",\n  \"provider_id\": \"<integer>\",\n  \"clinical_relationship\": \"<string>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89113bba-ba27-48a4-9d13-0914e7905405",
+          "name": "Fetch Provider Assignments",
+          "request": {
+            "name": "Fetch Provider Assignments",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "provider_assignments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active_only",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "clinical_relationship",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "clinical_relationship",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_id",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "18678ce3-2300-420c-bd6d-f2a0433d6ee4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "clinical_relationship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "clinical_relationship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"date_start\": \"1975-03-15\",\n    \"id\": 463,\n    \"provider\": {\n      \"id\": 8801,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"ijWU@psvkvZzO.evqn\",\n      \"status\": \"string\",\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n    },\n    \"clinical_relationship\": \"<string>\",\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"female\",\n      \"dob\": \"1993-09-26\",\n      \"clinical_status\": \"OFFBOARDED\",\n      \"id\": 8007,\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"string\"\n    },\n    \"date_end\": \"1984-06-14\"\n  },\n  {\n    \"date_start\": \"2002-02-07\",\n    \"id\": 132,\n    \"provider\": {\n      \"id\": 9376,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"tGOv-mqInQPGb@QBVcXTX.bk\",\n      \"status\": \"string\",\n      \"clinical_status\": \"CLINICAL\"\n    },\n    \"clinical_relationship\": \"<string>\",\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"other\",\n      \"dob\": \"1982-09-30\",\n      \"clinical_status\": \"OFFBOARDED\",\n      \"id\": 1818,\n      \"street_address_zip\": \"string\",\n      \"street_address_city\": \"string\",\n      \"street_address_state\": \"string\"\n    },\n    \"date_end\": \"1947-01-09\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa5feef8-676a-4962-a50a-adf26568e6a9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "clinical_relationship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "clinical_relationship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94a32dc1-84a2-425b-9323-61754446829f",
+          "name": "Patch Provider Assignment",
+          "request": {
+            "name": "Patch Provider Assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "provider_assignments",
+                ":provider_assignment_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "provider_assignment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<date>\",\n  \"date_end\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f293be9f-0832-4536-8c58-2deb7646ca89",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ":provider_assignment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "provider_assignment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2001-04-10\",\n  \"id\": 865,\n  \"provider\": {\n    \"id\": 6,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"nWNiOjmNh1e5@xgNuedNtXBZnFzTbsxsUg.mibg\",\n    \"status\": \"string\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n  },\n  \"clinical_relationship\": \"<string>\",\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"female\",\n    \"dob\": \"2021-05-10\",\n    \"clinical_status\": \"OFFBOARDED\",\n    \"id\": 8860\n  },\n  \"date_end\": \"1964-02-26\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5a55913-1b38-4b28-af1b-5462a223324c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ":provider_assignment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "provider_assignment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afa0fcc1-d584-43b0-afb8-8f335fba4edf",
+          "name": "Delete Provider Assignment",
+          "request": {
+            "name": "Delete Provider Assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "provider_assignments",
+                ":provider_assignment_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "provider_assignment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "afd6ef3f-163c-47bc-9504-fe17251dd55e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ":provider_assignment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "provider_assignment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4e62dfb-9270-4261-ae95-9b366f01204d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider_assignments",
+                    ":provider_assignment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "provider_assignment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "79abffbe-078a-43fb-b164-0b6f543b73f2",
+    "name": "Fast Provider Assignments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

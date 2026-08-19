@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Provider Availability Records API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "provider_availability_records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Provider Availability Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/provider_availability/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timezone",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "day_of_week",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Provider Availability Records"
+        },
+        {
+          "info": {
+            "name": "Create Provider Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/provider_availability/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Provider Availability"
+        },
+        {
+          "info": {
+            "name": "Update Provider Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/provider_availability/:provider_availability_id/",
+            "params": [
+              {
+                "name": "provider_availability_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Provider Availability"
+        },
+        {
+          "info": {
+            "name": "Delete Provider Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/provider_availability/:provider_availability_id/",
+            "params": [
+              {
+                "name": "provider_availability_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Provider Availability"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

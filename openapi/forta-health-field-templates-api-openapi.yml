@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Fast Field Templates API
+  version: 0.1.0
+tags:
+- name: field_templates
+paths:
+  /api/v1/field_templates/fields/:
+    get:
+      tags:
+      - field_templates
+      summary: List Fields
+      description: List catalog fields, optionally filtered by resource and enriched with templates.
+      operationId: list_fields_api_v1_field_templates_fields__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: resource
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter to fields belonging to this resource value.
+          title: Resource
+        description: Filter to fields belonging to this resource value.
+      - name: with_template
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Append each field's saved template content.
+          default: false
+          title: With Template
+        description: Append each field's saved template content.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FieldResponse'
+                title: Response List Fields Api V1 Field Templates Fields  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/field_templates/{identifier}/:
+    get:
+      tags:
+      - field_templates
+      summary: Get Field Template
+      description: Get the template bound to a field by its unique identifier (template is null if unset).
+      operationId: get_field_template_api_v1_field_templates__identifier___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Identifier
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldTemplateResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - field_templates
+      summary: Upsert Field Template
+      description: Create or replace the template bound to a field (sanitized server-side).
+      operationId: upsert_field_template_api_v1_field_templates__identifier___put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldTemplateUpsertRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldTemplateResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    FieldResponse:
+      properties:
+        resource:
+          type: string
+          title: Resource
+        identifier:
+          type: string
+          title: Identifier
+        value:
+          type: string
+          title: Value
+        label:
+          type: string
+          title: Label
+        template:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Template
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+        resource_label:
+          type: string
+          title: Resource Label
+      type: object
+      required:
+      - resource
+      - identifier
+      - value
+      - label
+      - resource_label
+      title: FieldResponse
+      description: 'A field in the catalog, optionally enriched with its template content.
+
+
+        ``template`` and the timestamps describe the bound template and are only
+
+        populated when ``with_template=true`` is requested AND a template exists;
+
+        otherwise they are ``None``. Shape is identical whether or not the list was
+
+        filtered by resource, so the client can rely on it.'
+    FieldTemplateUpsertRequest:
+      properties:
+        content:
+          type: string
+          maxLength: 50000
+          minLength: 1
+          title: Content
+      type: object
+      required:
+      - content
+      title: FieldTemplateUpsertRequest
+    FieldTemplateResponse:
+      properties:
+        resource:
+          type: string
+          title: Resource
+        identifier:
+          type: string
+          title: Identifier
+        value:
+          type: string
+          title: Value
+        label:
+          type: string
+          title: Label
+        template:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Template
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - resource
+      - identifier
+      - value
+      - label
+      title: FieldTemplateResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

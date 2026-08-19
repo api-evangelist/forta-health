@@ -1,0 +1,1437 @@
+openapi: 3.2.0
+info:
+  title: Fast Group Parent Supervisions API
+  version: 0.1.0
+tags:
+- name: group_parent_supervisions
+paths:
+  /api/v1/group_parent_supervisions/:
+    post:
+      tags:
+      - group_parent_supervisions
+      summary: Create Group Parent Supervision
+      operationId: create_group_parent_supervision_api_v1_group_parent_supervisions__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupParentSupervisionCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupParentSupervisionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - group_parent_supervisions
+      summary: Fetch Group Parent Supervisions
+      operationId: fetch_group_parent_supervisions_api_v1_group_parent_supervisions__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          - type: 'null'
+          title: Status
+      - name: action_required
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Action Required
+      - name: client_clinical_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Client Clinical Status
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupParentSupervisionListResponse'
+                title: Response Fetch Group Parent Supervisions Api V1 Group Parent Supervisions  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/family_attendance/:
+    post:
+      tags:
+      - group_parent_supervisions
+      summary: Create Family Attendance
+      operationId: create_family_attendance_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FamilyAttendanceCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FamilyAttendanceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/family_attendance/{family_attendance_id}/topics/:
+    post:
+      tags:
+      - group_parent_supervisions
+      summary: Create Family Training Topic
+      operationId: create_family_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id__topics__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      - name: family_attendance_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Family Attendance Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FamilyTrainingTopicCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FamilyAttendanceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  ? /api/v1/group_parent_supervisions/{group_parent_supervision_id}/family_attendance/{family_attendance_id}/topics/{topic_id}/
+  : delete:
+      tags:
+      - group_parent_supervisions
+      summary: Delete Family Training Topic
+      operationId: delete_family_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id__topics__topic_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      - name: family_attendance_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Family Attendance Id
+      - name: topic_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Topic Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FamilyAttendanceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/training_topics/:
+    post:
+      tags:
+      - group_parent_supervisions
+      summary: Create Training Topic
+      operationId: create_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__training_topics__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingTopicCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingTopicResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/bulk_family_training_topics/:
+    post:
+      tags:
+      - group_parent_supervisions
+      summary: Create Bulk Family Training Topics
+      operationId: create_bulk_family_training_topics_api_v1_group_parent_supervisions__group_parent_supervision_id__bulk_family_training_topics__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FamilyTrainingTopicBulkCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupParentSupervisionDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/:
+    patch:
+      tags:
+      - group_parent_supervisions
+      summary: Patch Group Parent Supervision
+      operationId: patch_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupParentSupervisionPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupParentSupervisionDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - group_parent_supervisions
+      summary: Fetch Group Parent Supervision
+      operationId: fetch_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupParentSupervisionDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - group_parent_supervisions
+      summary: Delete Group Parent Supervision
+      operationId: delete_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/training_topics/:
+    get:
+      tags:
+      - group_parent_supervisions
+      summary: Fetch Training Topics
+      operationId: fetch_training_topics_api_v1_group_parent_supervisions_training_topics__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TrainingTopic'
+                type: array
+                title: Response Fetch Training Topics Api V1 Group Parent Supervisions Training Topics  Get
+      security:
+      - HTTPBearer: []
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/family_attendance/{family_attendance_id}/:
+    patch:
+      tags:
+      - group_parent_supervisions
+      summary: Update Family Attendance
+      operationId: update_family_attendance_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      - name: family_attendance_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Family Attendance Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FamilyAttendancePatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FamilyAttendanceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - group_parent_supervisions
+      summary: Delete Family Attendance
+      operationId: delete_family_attendance_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      - name: family_attendance_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Family Attendance Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/training_topics/{training_topic_id}/:
+    patch:
+      tags:
+      - group_parent_supervisions
+      summary: Update Training Topic
+      operationId: update_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__training_topics__training_topic_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      - name: training_topic_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Training Topic Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingTopicPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingTopicResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - group_parent_supervisions
+      summary: Delete Training Topic
+      operationId: delete_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__training_topics__training_topic_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      - name: training_topic_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Training Topic Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/claim_history/:
+    get:
+      tags:
+      - group_parent_supervisions
+      summary: Fetch Group Parent Supervisions With Claim History
+      operationId: fetch_group_parent_supervisions_with_claim_history_api_v1_group_parent_supervisions_claim_history__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: End
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupParentSupervisionWithClaimHistoryResponse'
+                title: Response Fetch Group Parent Supervisions With Claim History Api V1 Group Parent
+                  Supervisions Claim History  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/stop/:
+    put:
+      tags:
+      - group_parent_supervisions
+      summary: Stop Group Parent Supervision
+      operationId: stop_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id__stop__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupParentSupervisionStop'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/download/:
+    get:
+      tags:
+      - group_parent_supervisions
+      summary: Download Group Parent Supervision Pdfs
+      operationId: download_group_parent_supervision_pdfs_api_v1_group_parent_supervisions__group_parent_supervision_id__download__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                title: Response Download Group Parent Supervision Pdfs Api V1 Group Parent Supervisions  Group
+                  Parent Supervision Id  Download  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/pdf_regenerate/:
+    put:
+      tags:
+      - group_parent_supervisions
+      summary: Regenerate Group Parent Supervision Pdfs
+      operationId: regenerate_group_parent_supervision_pdfs_api_v1_group_parent_supervisions__group_parent_supervision_id__pdf_regenerate__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/edit/:
+    put:
+      tags:
+      - group_parent_supervisions
+      summary: Edit Group Parent Supervision
+      operationId: edit_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id__edit__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/backdate/:
+    put:
+      tags:
+      - group_parent_supervisions
+      summary: Backdate Group Parent Supervision
+      operationId: backdate_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id__backdate__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupParentSupervisionBackdate'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/make_unbillable/:
+    put:
+      tags:
+      - group_parent_supervisions
+      summary: Make Group Parent Supervision Unbillable
+      operationId: make_group_parent_supervision_unbillable_api_v1_group_parent_supervisions__group_parent_supervision_id__make_unbillable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/group_parent_supervisions/{group_parent_supervision_id}/make_billable/:
+    put:
+      tags:
+      - group_parent_supervisions
+      summary: Make Group Parent Supervision Billable
+      operationId: make_group_parent_supervision_billable_api_v1_group_parent_supervisions__group_parent_supervision_id__make_billable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: group_parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Group Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    LocationEnumV2:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: LocationEnumV2
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    GroupParentSupervisionBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: GroupParentSupervisionBackdate
+    GroupParentSupervisionResponse:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+        id:
+          type: integer
+          title: Id
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        is_billable:
+          type: boolean
+          title: Is Billable
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - setting
+      - id
+      - bcba
+      - status
+      - is_billable
+      title: GroupParentSupervisionResponse
+    StatusEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      - EDITING
+      title: StatusEnum
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    TrainingTopicResponse:
+      properties:
+        description:
+          type: string
+          minLength: 120
+          title: Description
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+        group_parent_supervision_id:
+          type: integer
+          title: Group Parent Supervision Id
+      type: object
+      required:
+      - description
+      - label
+      - id
+      - group_parent_supervision_id
+      title: TrainingTopicResponse
+    ProviderListResponseForGPSN:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          format: email
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - id
+      - name
+      - email
+      title: ProviderListResponseForGPSN
+    FamilyTrainingTopicResponse:
+      properties:
+        training_topic_id:
+          type: integer
+          title: Training Topic Id
+        id:
+          type: integer
+          title: Id
+        family_attendance_id:
+          type: integer
+          title: Family Attendance Id
+        label:
+          type: string
+          title: Label
+      type: object
+      required:
+      - training_topic_id
+      - id
+      - family_attendance_id
+      - label
+      title: FamilyTrainingTopicResponse
+    GroupParentSupervisionDetailedResponse:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+        id:
+          type: integer
+          title: Id
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        is_billable:
+          type: boolean
+          title: Is Billable
+        family_attendance:
+          items:
+            $ref: '#/components/schemas/FamilyAttendanceResponse'
+          type: array
+          title: Family Attendance
+        training_topics:
+          items:
+            $ref: '#/components/schemas/TrainingTopicResponse'
+          type: array
+          title: Training Topics
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - setting
+      - id
+      - bcba
+      - status
+      - is_billable
+      - family_attendance
+      - training_topics
+      title: GroupParentSupervisionDetailedResponse
+    FamilyTrainingTopicBulkCreate:
+      properties:
+        training_topic_ids:
+          items:
+            type: integer
+          type: array
+          title: Training Topic Ids
+        family_attendance_ids:
+          items:
+            type: integer
+          type: array
+          title: Family Attendance Ids
+      type: object
+      required:
+      - training_topic_ids
+      - family_attendance_ids
+      title: FamilyTrainingTopicBulkCreate
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    GroupParentSupervisionCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - setting
+      title: GroupParentSupervisionCreate
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+    FamilyAttendanceCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        date_end:
+          type: string
+          format: date-time
+          title: Date End
+        client_id:
+          type: integer
+          title: Client Id
+        parent_and_caregiver_one_id:
+          type: integer
+          title: Parent And Caregiver One Id
+        parent_and_caregiver_two_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Parent And Caregiver Two Id
+        location:
+          $ref: '#/components/schemas/LocationEnumV2'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - date_start
+      - date_end
+      - client_id
+      - parent_and_caregiver_one_id
+      - location
+      title: FamilyAttendanceCreate
+    GroupParentSupervisionPatch:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - setting
+      title: GroupParentSupervisionPatch
+    FamilyAttendancePatch:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        date_end:
+          type: string
+          format: date-time
+          title: Date End
+        response:
+          anyOf:
+          - type: string
+            minLength: 120
+          - type: 'null'
+          title: Response
+      type: object
+      required:
+      - date_start
+      - date_end
+      title: FamilyAttendancePatch
+    SettingEnumV2:
+      type: string
+      enum:
+      - Telehealth
+      title: SettingEnumV2
+    FamilyTrainingTopicCreate:
+      properties:
+        training_topic_id:
+          type: integer
+          title: Training Topic Id
+      type: object
+      required:
+      - training_topic_id
+      title: FamilyTrainingTopicCreate
+    GroupParentSupervisionWithClaimHistoryResponse:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+        id:
+          type: integer
+          title: Id
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        is_billable:
+          type: boolean
+          title: Is Billable
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+        family_attendance_bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Family Attendance Bay
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - setting
+      - id
+      - bcba
+      - status
+      - is_billable
+      - client
+      - claim_history
+      title: GroupParentSupervisionWithClaimHistoryResponse
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    TrainingTopicPatch:
+      properties:
+        description:
+          type: string
+          minLength: 120
+          title: Description
+      type: object
+      required:
+      - description
+      title: TrainingTopicPatch
+    TrainingTopicCreate:
+      properties:
+        description:
+          type: string
+          minLength: 120
+          title: Description
+        label:
+          type: string
+          minLength: 2
+          title: Label
+      type: object
+      required:
+      - description
+      - label
+      title: TrainingTopicCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    GroupParentSupervisionStop:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        date_signed:
+          type: string
+          format: date-time
+          title: Date Signed
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+      type: object
+      required:
+      - signature
+      - date_signed
+      - utc_offset_date_signed
+      title: GroupParentSupervisionStop
+    FamilyAttendanceResponse:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        date_end:
+          type: string
+          format: date-time
+          title: Date End
+        response:
+          anyOf:
+          - type: string
+            minLength: 120
+          - type: 'null'
+          title: Response
+        id:
+          type: integer
+          title: Id
+        group_parent_supervision_id:
+          type: integer
+          title: Group Parent Supervision Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        parent_and_caregiver_one:
+          $ref: '#/components/schemas/ProviderListResponseForGPSN'
+        parent_and_caregiver_two:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderListResponseForGPSN'
+          - type: 'null'
+        location:
+          $ref: '#/components/schemas/LocationEnumV2'
+        duration:
+          type: integer
+          title: Duration
+        topics:
+          items:
+            $ref: '#/components/schemas/FamilyTrainingTopicResponse'
+          type: array
+          title: Topics
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - date_start
+      - date_end
+      - id
+      - group_parent_supervision_id
+      - client
+      - parent_and_caregiver_one
+      - location
+      - duration
+      - topics
+      title: FamilyAttendanceResponse
+    GroupParentSupervisionListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        clients:
+          items:
+            $ref: '#/components/schemas/ClientListResponse'
+          type: array
+          title: Clients
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+      type: object
+      required:
+      - id
+      - clients
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - status
+      - bcba
+      title: GroupParentSupervisionListResponse
+    TrainingTopic:
+      properties:
+        description:
+          type: string
+          minLength: 120
+          title: Description
+        label:
+          type: string
+          minLength: 2
+          title: Label
+      type: object
+      required:
+      - description
+      - label
+      title: TrainingTopic
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

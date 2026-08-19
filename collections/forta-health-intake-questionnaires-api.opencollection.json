@@ -1,0 +1,1135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Intake Questionnaires API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "intake_questionnaires",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Intake Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/send",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an intake questionnaire for the (provider, client) pair.\n\nCallers without an overriding role may only send a questionnaire for themselves\n(403 when ``provider_id`` is someone else's) — the target provider is taken from the\nrequest body, so this prevents a holder of ``post:intake_questionnaires:send`` from\ncreating questionnaires for arbitrary (provider, client) pairs.\n\n400 when the provider is not a practicing guardian for the client, the provider's\nonboarding questionnaire is not COMPLET"
+        },
+        {
+          "info": {
+            "name": "List Intake Questionnaires",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by provider id (must be > 0)."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by client id (must be > 0)."
+              },
+              {
+                "name": "date_start",
+                "value": "",
+                "type": "query",
+                "description": "Only include questionnaires with date_sent on/after this date."
+              },
+              {
+                "name": "date_end",
+                "value": "",
+                "type": "query",
+                "description": "Only include questionnaires with date_sent on/before this date."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by questionnaire status."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List intake questionnaires (basic columns only, newest date_sent first).\n\nEach returned row also includes a lightweight ``provider`` and ``client`` summary\n(id/name/email) for the linked provider and client.\n\nFilter by ``provider_id``, ``client_id``, ``status``, and a ``date_sent`` window\n(``date_start`` inclusive, ``date_end`` inclusive of the whole day). The window is\npadded by one extra day on each side so records that land on an adjacent UTC day\n(because ``date_sent`` is stored as naive UTC "
+        },
+        {
+          "info": {
+            "name": "Get Intake Questionnaires By Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/by_provider/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path",
+                "description": "Provider id (must be > 0)"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "When set, narrows the result to this provider and client (at most one row). When omitted, returns every questionnaire for the provider."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "All intake questionnaires for a provider (basic columns only, newest first).\n\nA provider usually has several clients assigned, so this returns every questionnaire\nat once; pass ``client_id`` to narrow to a single client. Related sections (general\ninfo, medical info, etc.) are omitted.\n\nCallers with broad visibility (an overriding role, or the provider looking up their\nown id) get the real outcome: an empty list when none exists and ``404`` if the\nprovider is missing. Any other caller only sees t"
+        },
+        {
+          "info": {
+            "name": "Get Intake Questionnaire By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Full questionnaire with nested sections; 404 if not found.\n\nCallers without an overriding role may only read questionnaires sent to them (403\notherwise). Sections and collections that have no rows yet (e.g. ``medical_info``,\n``referrals``) are returned as ``null``."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch top-level flags (``has_no_medications``, ``has_no_therapies``,\n``not_attending_school``) on the questionnaire; 404 if not found.\n\nOnly the provider the questionnaire was sent to may update it (403 otherwise). Only\nfields present in the request body are updated; omitted fields are unchanged."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire General Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/general_info",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partial PATCH for general info; 403/404/400 per edit guard."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Education Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/education_info",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partial PATCH for education info; upserts row and clears not_attending_school."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Medical Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medical_info",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partial PATCH for medical info; upserts the parent row."
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Medical Info Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medical_info/diagnosis",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a medical info diagnosis row for an intake questionnaire.\n\nOnly the provider the questionnaire was sent to may create it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowed (400). Duplicate ``diagnosis_name`` values return 409."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Medical Info Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medical_info/diagnosis/:diagnosis_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "diagnosis_id",
+                "value": "",
+                "type": "path",
+                "description": "Diagnosis id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partial PATCH for one medical info diagnosis row.\n\nOnly the provider the questionnaire was sent to may update it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no diagnosis with ``diagnosis_id`` belongs to\nit. Once the questionnaire is COMPLETED no further changes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Medical Info Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medical_info/diagnosis/:diagnosis_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "diagnosis_id",
+                "value": "",
+                "type": "path",
+                "description": "Diagnosis id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete one medical info diagnosis row.\n\nOnly the provider the questionnaire was sent to may delete it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no diagnosis with ``diagnosis_id`` belongs to\nit. Once the questionnaire is COMPLETED no deletes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Medical Info Selection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medical_info/selection",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create one medical info multi-select value (early intervention, pregnancy issue, or regression).\n\nOnly the provider the questionnaire was sent to may create it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowed (400). Duplicate values and ``None`` conflicts return 409."
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Medical Info Selection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medical_info/selection/:selection_type/:selection_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "selection_type",
+                "value": "",
+                "type": "path",
+                "description": "Medical info selection type"
+              },
+              {
+                "name": "selection_id",
+                "value": "",
+                "type": "path",
+                "description": "Selection id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete one medical info multi-select value.\n\nOnly the provider the questionnaire was sent to may delete it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no row with ``selection_id`` belongs to it\nfor ``selection_type``. Once the questionnaire is COMPLETED no deletes are allowed\n(400)."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Family",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partial PATCH for family; upserts the parent row."
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Family Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/member",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Intake Questionnaire Family Member"
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Family Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/member/:member_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "Family member id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Intake Questionnaire Family Member"
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Family Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/member/:member_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "Family member id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Intake Questionnaire Family Member"
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Family Client Sibling",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/client_sibling",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Intake Questionnaire Family Client Sibling"
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Family Client Sibling",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/client_sibling/:sibling_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "sibling_id",
+                "value": "",
+                "type": "path",
+                "description": "Client sibling id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Intake Questionnaire Family Client Sibling"
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Family Client Sibling",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/client_sibling/:sibling_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "sibling_id",
+                "value": "",
+                "type": "path",
+                "description": "Client sibling id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Intake Questionnaire Family Client Sibling"
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Family Additional Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/additional_info",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Intake Questionnaire Family Additional Info"
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Family Additional Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/family/additional_info/:item_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path",
+                "description": "Additional info id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Intake Questionnaire Family Additional Info"
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Referral",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/referral",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a referral for an intake questionnaire.\n\nA new referral row is created from the fields present in the body; every field is\noptional, so an empty/all-null body still creates a row with all columns NULL.\n\nOnly the provider the questionnaire was sent to may create it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Referral",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/referral/:referral_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "referral_id",
+                "value": "",
+                "type": "path",
+                "description": "Referral id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a referral by id for an intake questionnaire.\n\nOnly fields present in the body are applied (null clears the column); omitted fields\nare left untouched.\n\nOnly the provider the questionnaire was sent to may update it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no referral with ``referral_id`` belongs to\nit. Once the questionnaire is COMPLETED no further changes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Referral",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/referral/:referral_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "referral_id",
+                "value": "",
+                "type": "path",
+                "description": "Referral id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a referral by id from an intake questionnaire.\n\nOnly the provider the questionnaire was sent to may delete it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no referral with ``referral_id`` belongs to\nit. Once the questionnaire is COMPLETED no deletes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medication",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a medication for an intake questionnaire.\n\nA new medication row is created from the fields present in the body; every field is\noptional, so an empty/all-null body still creates a row with all columns NULL.\n\nOnly the provider the questionnaire was sent to may create it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medication/:medication_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "medication_id",
+                "value": "",
+                "type": "path",
+                "description": "Medication id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a medication by id for an intake questionnaire.\n\nOnly fields present in the body are applied (null clears the column); omitted fields\nare left untouched.\n\nOnly the provider the questionnaire was sent to may update it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no medication with ``medication_id`` belongs\nto it. Once the questionnaire is COMPLETED no further changes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medication/:medication_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "medication_id",
+                "value": "",
+                "type": "path",
+                "description": "Medication id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a medication by id from an intake questionnaire.\n\nOnly the provider the questionnaire was sent to may delete it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no medication with ``medication_id`` belongs\nto it. Once the questionnaire is COMPLETED no deletes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Therapy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/therapy",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a therapy for an intake questionnaire.\n\nA new therapy row is created from the fields present in the body; every field is\noptional, so an empty/all-null body still creates a row with all nullable columns\nNULL.\n\nOnly the provider the questionnaire was sent to may create it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Update Intake Questionnaire Therapy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/therapy/:therapy_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "therapy_id",
+                "value": "",
+                "type": "path",
+                "description": "Therapy id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a therapy by id for an intake questionnaire.\n\nOnly fields present in the body are applied (null clears a nullable column); omitted\nfields are left untouched. ``do_not_share_info_with_provider`` cannot be set to\n``null`` (422).\n\nOnly the provider the questionnaire was sent to may update it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no therapy with ``therapy_id`` belongs to it.\nOnce the questionnaire is COMPLETED no further changes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Therapy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/therapy/:therapy_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "therapy_id",
+                "value": "",
+                "type": "path",
+                "description": "Therapy id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a therapy by id from an intake questionnaire.\n\nOnly the provider the questionnaire was sent to may delete it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no therapy with ``therapy_id`` belongs to it.\nOnce the questionnaire is COMPLETED no deletes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Delete All Intake Questionnaire Medications",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/medication/all",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete all medications for an intake questionnaire and set ``has_no_medications``.\n\nRemoves every medication row on the questionnaire and sets its ``has_no_medications``\nflag to ``True`` in the same transaction, returning the updated questionnaire.\nIdempotent when there are no medications to begin with.\n\nOnly the provider the questionnaire was sent to may delete them (403 otherwise); 404\nif the questionnaire does not exist. Once the questionnaire is COMPLETED no deletes\nare allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Delete All Intake Questionnaire Therapies",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/therapy/all",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete all therapies for an intake questionnaire and set ``has_no_therapies``.\n\nRemoves every therapy row on the questionnaire and sets its ``has_no_therapies`` flag\nto ``True`` in the same transaction, returning the updated questionnaire. Idempotent\nwhen there are no therapies to begin with.\n\nOnly the provider the questionnaire was sent to may delete them (403 otherwise); 404\nif the questionnaire does not exist. Once the questionnaire is COMPLETED no deletes\nare allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Upsert Intake Questionnaire Child Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/child_info",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or update the questionnaire's 1:1 child info row.\n\nThe only updatable field is ``child_behavior_issues``. The row is created on demand if\nit does not exist yet, otherwise updated; fields omitted from the body are left\nuntouched.\n\nOnly the provider the questionnaire was sent to may upsert it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Child Info Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/child_info/background",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a child info background for an intake questionnaire.\n\nA new background row is created from the fields present in the body; every field is\noptional, so an empty/all-null body still creates a row with all columns NULL. The\nquestionnaire's 1:1 child info row is created automatically if it does not exist yet.\n\nOnly the provider the questionnaire was sent to may create it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowe"
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Child Info Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/child_info/background/:background_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path",
+                "description": "Background id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a child info background by id from an intake questionnaire.\n\nOnly the provider the questionnaire was sent to may delete it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no background with ``background_id`` belongs to\nit. Once the questionnaire is COMPLETED no deletes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Create Intake Questionnaire Child Info Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/child_info/schedule",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a child info schedule for an intake questionnaire.\n\nA new schedule row is created from the fields present in the body; every field is\noptional, so an empty/all-null body still creates a row with all columns NULL. The\nquestionnaire's 1:1 child info row is created automatically if it does not exist yet.\n\nOnly the provider the questionnaire was sent to may create it (403 otherwise); 404 if\nthe questionnaire does not exist. Once the questionnaire is COMPLETED no further\nchanges are allowed (4"
+        },
+        {
+          "info": {
+            "name": "Delete Intake Questionnaire Child Info Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/child_info/schedule/:schedule_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              },
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path",
+                "description": "Schedule id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a child info schedule by id from an intake questionnaire.\n\nOnly the provider the questionnaire was sent to may delete it (403 otherwise). 404 if\nthe questionnaire does not exist, or if no schedule with ``schedule_id`` belongs to\nit. Once the questionnaire is COMPLETED no deletes are allowed (400)."
+        },
+        {
+          "info": {
+            "name": "Submit Intake Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/intake_questionnaires/:questionnaire_id/submit",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Intake questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validate a completed intake questionnaire and mark it submitted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

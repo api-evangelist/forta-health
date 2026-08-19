@@ -1,0 +1,240 @@
+{
+  "item": [
+    {
+      "id": "7628451c-ca19-4b09-8468-8715fdd7e498",
+      "name": "metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "19e1bbc4-c664-432a-99b4-320b56629aee",
+          "name": "Get Duration Aggregates",
+          "request": {
+            "name": "Get Duration Aggregates",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "metrics",
+                "duration_aggregates",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_clients_meeting_csn_criteria",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_zero_session_clients",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fb0991cf-e2b8-46e5-9104-c8c9a70882ec",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "metrics",
+                    "duration_aggregates",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "exclude_clients_meeting_csn_criteria",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_zero_session_clients",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"male\",\n      \"dob\": \"1966-08-05\",\n      \"clinical_status\": \"PRE CLINICAL\",\n      \"id\": 70\n    },\n    \"session_duration\": 2547,\n    \"client_supervision_duration\": 4188,\n    \"parent_supervision_duration\": 3594,\n    \"client_assessment_duration\": 3129,\n    \"group_parent_supervision_duration\": 5714,\n    \"csn_session_ratio\": 2928.681365338226,\n    \"additional_csn_duration_required\": 1537.4941899038652\n  },\n  {\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"unknown\",\n      \"dob\": \"2017-06-22\",\n      \"clinical_status\": \"OFFBOARDED\",\n      \"id\": 4838\n    },\n    \"session_duration\": 2319,\n    \"client_supervision_duration\": 4332,\n    \"parent_supervision_duration\": 8730,\n    \"client_assessment_duration\": 6013,\n    \"group_parent_supervision_duration\": 4923,\n    \"csn_session_ratio\": 8050.997254284686,\n    \"additional_csn_duration_required\": 2064.190796782869\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "429f9500-f055-4495-8cc7-267708e7eaf2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "metrics",
+                    "duration_aggregates",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "exclude_clients_meeting_csn_criteria",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_zero_session_clients",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ebe36cae-4b31-4fac-a164-9b4a38ca9533",
+    "name": "Fast Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

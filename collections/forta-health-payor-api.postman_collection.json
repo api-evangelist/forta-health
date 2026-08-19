@@ -1,0 +1,1639 @@
+{
+  "item": [
+    {
+      "id": "19f86d84-8a5d-4bc4-9f65-1897c4c50ed6",
+      "name": "payor",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54be2608-8e9f-4883-85b8-7ac27b340268",
+          "name": "Get Payors",
+          "request": {
+            "name": "Get Payors",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "50abcb7f-eadc-40d5-a6d7-dd36f6dde5ae",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 2559,\n    \"label\": \"string\",\n    \"state\": \"string\",\n    \"clearinghouse_payor_id\": \"string\",\n    \"type\": \"ChampVa\",\n    \"modifier\": \"string\",\n    \"preferred_service_code_type\": \"HCPCS\",\n    \"evv_enabled\": false,\n    \"taxonomy_code\": \"string\"\n  },\n  {\n    \"id\": 4628,\n    \"label\": \"string\",\n    \"state\": \"string\",\n    \"clearinghouse_payor_id\": \"string\",\n    \"type\": \"Tricare\",\n    \"modifier\": \"string\",\n    \"preferred_service_code_type\": \"HCPCS\",\n    \"evv_enabled\": false,\n    \"taxonomy_code\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "291e035c-b767-4726-8956-7661adb37ffa",
+          "name": "Create Payor",
+          "request": {
+            "name": "Create Payor",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"state\": \"<string>\",\n  \"clearinghouse_payor_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": \"<boolean>\",\n  \"sector\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": \"<boolean>\",\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"modifier\": \"<string>\",\n  \"internal_classification\": \"<string>\",\n  \"forta_website_payor_name\": \"<string>\",\n  \"changehealthcare_eligibility_payor_id\": \"<string>\",\n  \"max_client_age\": \"<integer>\",\n  \"is_pbt_allowed\": \"<boolean>\",\n  \"is_telehealth_allowed\": \"<boolean>\",\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a945ed0-9d36-426c-a1c3-d7c62b83cdf8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"state\": \"<string>\",\n  \"clearinghouse_payor_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": \"<boolean>\",\n  \"sector\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": \"<boolean>\",\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"modifier\": \"<string>\",\n  \"internal_classification\": \"<string>\",\n  \"forta_website_payor_name\": \"<string>\",\n  \"changehealthcare_eligibility_payor_id\": \"<string>\",\n  \"max_client_age\": \"<integer>\",\n  \"is_pbt_allowed\": \"<boolean>\",\n  \"is_telehealth_allowed\": \"<boolean>\",\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"state\": \"string\",\n  \"id\": 3668,\n  \"contracts\": [\n    {\n      \"date_start\": \"1999-06-25\",\n      \"rate_per_unit\": 1657.1878967380371,\n      \"service_code_id\": 9071,\n      \"id\": 6342,\n      \"date_end\": \"2017-09-27\"\n    },\n    {\n      \"date_start\": \"2006-03-04\",\n      \"rate_per_unit\": 6169.788944806763,\n      \"service_code_id\": 9533,\n      \"id\": 1277,\n      \"date_end\": \"1974-08-20\"\n    }\n  ],\n  \"service_code_descriptions\": [\n    {\n      \"description\": \"string\",\n      \"service_code_id\": 8489,\n      \"id\": 9971,\n      \"payor_id\": 1599,\n      \"service_code\": \"97155\"\n    },\n    {\n      \"description\": \"string\",\n      \"service_code_id\": 8917,\n      \"id\": 4471,\n      \"payor_id\": 5310,\n      \"service_code\": \"97157\"\n    }\n  ],\n  \"clearinghouse_payor_id\": \"string\",\n  \"type\": \"<string>\",\n  \"modifier\": \"st\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": true,\n  \"sector\": \"<string>\",\n  \"internal_classification\": \"string\",\n  \"forta_website_payor_name\": \"string\",\n  \"changehealthcare_eligibility_payor_id\": \"string\",\n  \"max_client_age\": 8609,\n  \"is_pbt_allowed\": true,\n  \"is_telehealth_allowed\": true,\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": false,\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"taxonomy_code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f77f501d-f18c-4116-a5a7-fe7e5bb9bfda",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"state\": \"<string>\",\n  \"clearinghouse_payor_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": \"<boolean>\",\n  \"sector\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": \"<boolean>\",\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"modifier\": \"<string>\",\n  \"internal_classification\": \"<string>\",\n  \"forta_website_payor_name\": \"<string>\",\n  \"changehealthcare_eligibility_payor_id\": \"<string>\",\n  \"max_client_age\": \"<integer>\",\n  \"is_pbt_allowed\": \"<boolean>\",\n  \"is_telehealth_allowed\": \"<boolean>\",\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6997b633-0000-4102-955d-0ded1f953f09",
+          "name": "Get Payor",
+          "request": {
+            "name": "Get Payor",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ":payor_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payor_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8a2d5dad-ee82-4c29-8c78-6104be8221fa",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"state\": \"string\",\n  \"id\": 9524,\n  \"contracts\": [\n    {\n      \"date_start\": \"2019-09-27\",\n      \"rate_per_unit\": 4208.786744326963,\n      \"service_code_id\": 2702,\n      \"id\": 1935,\n      \"date_end\": \"1989-04-08\"\n    },\n    {\n      \"date_start\": \"1957-06-12\",\n      \"rate_per_unit\": 909.0287309753442,\n      \"service_code_id\": 2875,\n      \"id\": 7005,\n      \"date_end\": \"2007-12-16\"\n    }\n  ],\n  \"service_code_descriptions\": [\n    {\n      \"description\": \"string\",\n      \"service_code_id\": 7844,\n      \"id\": 9589,\n      \"payor_id\": 918,\n      \"service_code\": \"97155\"\n    },\n    {\n      \"description\": \"string\",\n      \"service_code_id\": 7537,\n      \"id\": 613,\n      \"payor_id\": 720,\n      \"service_code\": \"97155\"\n    }\n  ],\n  \"clearinghouse_payor_id\": \"string\",\n  \"type\": \"<string>\",\n  \"modifier\": \"st\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": false,\n  \"sector\": \"<string>\",\n  \"internal_classification\": \"string\",\n  \"forta_website_payor_name\": \"string\",\n  \"changehealthcare_eligibility_payor_id\": \"string\",\n  \"max_client_age\": 7755,\n  \"is_pbt_allowed\": true,\n  \"is_telehealth_allowed\": true,\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": true,\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"taxonomy_code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "350fb216-6cf8-4c19-8fdc-69a2115b6466",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e1d267d-e62d-42fe-a054-dae59e64b2f7",
+          "name": "Update Payor",
+          "request": {
+            "name": "Update Payor",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ":payor_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payor_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"state\": \"<string>\",\n  \"clearinghouse_payor_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": \"<boolean>\",\n  \"sector\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": \"<boolean>\",\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"modifier\": \"<string>\",\n  \"internal_classification\": \"<string>\",\n  \"forta_website_payor_name\": \"<string>\",\n  \"changehealthcare_eligibility_payor_id\": \"<string>\",\n  \"max_client_age\": \"<integer>\",\n  \"is_pbt_allowed\": \"<boolean>\",\n  \"is_telehealth_allowed\": \"<boolean>\",\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0e87f54-fa4c-4dd4-8872-0f1ac027038d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"state\": \"<string>\",\n  \"clearinghouse_payor_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": \"<boolean>\",\n  \"sector\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": \"<boolean>\",\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"modifier\": \"<string>\",\n  \"internal_classification\": \"<string>\",\n  \"forta_website_payor_name\": \"<string>\",\n  \"changehealthcare_eligibility_payor_id\": \"<string>\",\n  \"max_client_age\": \"<integer>\",\n  \"is_pbt_allowed\": \"<boolean>\",\n  \"is_telehealth_allowed\": \"<boolean>\",\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"state\": \"string\",\n  \"id\": 9524,\n  \"contracts\": [\n    {\n      \"date_start\": \"2019-09-27\",\n      \"rate_per_unit\": 4208.786744326963,\n      \"service_code_id\": 2702,\n      \"id\": 1935,\n      \"date_end\": \"1989-04-08\"\n    },\n    {\n      \"date_start\": \"1957-06-12\",\n      \"rate_per_unit\": 909.0287309753442,\n      \"service_code_id\": 2875,\n      \"id\": 7005,\n      \"date_end\": \"2007-12-16\"\n    }\n  ],\n  \"service_code_descriptions\": [\n    {\n      \"description\": \"string\",\n      \"service_code_id\": 7844,\n      \"id\": 9589,\n      \"payor_id\": 918,\n      \"service_code\": \"97155\"\n    },\n    {\n      \"description\": \"string\",\n      \"service_code_id\": 7537,\n      \"id\": 613,\n      \"payor_id\": 720,\n      \"service_code\": \"97155\"\n    }\n  ],\n  \"clearinghouse_payor_id\": \"string\",\n  \"type\": \"<string>\",\n  \"modifier\": \"st\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": false,\n  \"sector\": \"<string>\",\n  \"internal_classification\": \"string\",\n  \"forta_website_payor_name\": \"string\",\n  \"changehealthcare_eligibility_payor_id\": \"string\",\n  \"max_client_age\": 7755,\n  \"is_pbt_allowed\": true,\n  \"is_telehealth_allowed\": true,\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": true,\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"taxonomy_code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "752d23f7-f886-43ae-8c9f-1242bc4d8290",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"state\": \"<string>\",\n  \"clearinghouse_payor_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"preferred_service_code_type\": \"<string>\",\n  \"is_using_taxonomy_code\": \"<boolean>\",\n  \"sector\": \"<string>\",\n  \"client_supervision_requirements\": {\n    \"is_required\": \"<boolean>\",\n    \"criteria\": {\n      \"minimum_percentage\": \"<number>\",\n      \"minimum_hours\": \"<integer>\",\n      \"operator\": \"<string>\"\n    }\n  },\n  \"modifier\": \"<string>\",\n  \"internal_classification\": \"<string>\",\n  \"forta_website_payor_name\": \"<string>\",\n  \"changehealthcare_eligibility_payor_id\": \"<string>\",\n  \"max_client_age\": \"<integer>\",\n  \"is_pbt_allowed\": \"<boolean>\",\n  \"is_telehealth_allowed\": \"<boolean>\",\n  \"evv_enabled\": false,\n  \"bt_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9b1f648-5398-4cca-b976-c5262484e08f",
+          "name": "Create Payor Contract",
+          "request": {
+            "name": "Create Payor Contract",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ":payor_id",
+                "contracts",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payor_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<date>\",\n  \"rate_per_unit\": \"<number>\",\n  \"service_code_id\": \"<integer>\",\n  \"date_end\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "04d8b3b5-80f4-438d-8953-fcb05fe23dce",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "contracts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"rate_per_unit\": \"<number>\",\n  \"service_code_id\": \"<integer>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"1955-12-11\",\n  \"rate_per_unit\": 354.32111571091826,\n  \"service_code_id\": 9265,\n  \"id\": 5291,\n  \"date_end\": \"1978-09-05\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15ce8140-d3ea-4dce-a48f-4a627b23d318",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "contracts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"rate_per_unit\": \"<number>\",\n  \"service_code_id\": \"<integer>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6d97cfc-3584-4654-8740-ccacb7cdaa80",
+          "name": "Update Payor Contract",
+          "request": {
+            "name": "Update Payor Contract",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ":payor_id",
+                "contracts",
+                ":contract_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payor_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contract_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<date>\",\n  \"rate_per_unit\": \"<number>\",\n  \"date_end\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "839abada-f654-4c22-8d8a-6c5e98da530b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "contracts",
+                    ":contract_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contract_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"rate_per_unit\": \"<number>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"1955-12-11\",\n  \"rate_per_unit\": 354.32111571091826,\n  \"service_code_id\": 9265,\n  \"id\": 5291,\n  \"date_end\": \"1978-09-05\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6e1e1b3-5c54-47f0-9e31-cc090ef48ebd",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "contracts",
+                    ":contract_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contract_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<date>\",\n  \"rate_per_unit\": \"<number>\",\n  \"date_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "675c1094-bb8d-4c68-b4c8-f07fea05b841",
+          "name": "Delete Payor Contract",
+          "request": {
+            "name": "Delete Payor Contract",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ":payor_id",
+                "contracts",
+                ":contract_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payor_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contract_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9dee3617-407b-45a5-be5b-272dfce6333d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "contracts",
+                    ":contract_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contract_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a39b3cf-3e3b-4066-bf37-c4f3552f9967",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "contracts",
+                    ":contract_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contract_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14b8a5e9-667b-4567-a520-d0e4efcae20c",
+          "name": "Create Service Code Description",
+          "request": {
+            "name": "Create Service Code Description",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ":payor_id",
+                "service_code_descriptions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payor_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"service_code_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2828267b-a81d-4c1e-814c-fa9de4ad60a3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "service_code_descriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"service_code_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"st\",\n  \"service_code_id\": 4209,\n  \"id\": 2681,\n  \"payor_id\": 9166,\n  \"service_code\": \"97156\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf438337-f32d-4ccc-adc7-1fbf6be3eade",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "service_code_descriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"service_code_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "001ee29d-79a5-45c7-a6ab-dabc1d6e7e99",
+          "name": "Update Service Code Description",
+          "request": {
+            "name": "Update Service Code Description",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "payors",
+                ":payor_id",
+                "service_code_descriptions",
+                ":service_code_description_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payor_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "service_code_description_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3d0c0301-feb1-4e0f-a91c-b9c6dc22e3f8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "service_code_descriptions",
+                    ":service_code_description_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "service_code_description_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"st\",\n  \"service_code_id\": 4209,\n  \"id\": 2681,\n  \"payor_id\": 9166,\n  \"service_code\": \"97156\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da1ed316-2e59-4056-bb70-2ae933e1d07a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "payors",
+                    ":payor_id",
+                    "service_code_descriptions",
+                    ":service_code_description_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payor_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "service_code_description_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f5706761-7123-4b20-b94a-7d344416469a",
+    "name": "Fast Payor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

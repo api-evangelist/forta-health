@@ -1,0 +1,2355 @@
+{
+  "item": [
+    {
+      "id": "e632b123-c09f-4fa5-8d80-ef54a249c48a",
+      "name": "client_assessments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a27925a3-a6b6-421e-8ff2-6bfba4b7bc71",
+          "name": "Create Client Assessment",
+          "request": {
+            "name": "Create Client Assessment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"bay\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80269fec-d8bb-4987-a4b2-a5ca2013037b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"bay\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2011-01-11T06:29:17.393Z\",\n  \"utc_offset_date_start\": 7630,\n  \"client_id\": 4156,\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"id\": 7696,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"1983-09-01\",\n    \"clinical_status\": \"PRE CLINICAL\",\n    \"id\": 2204\n  },\n  \"provider\": {\n    \"id\": 6145,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"IPfIKaBNn@omlI.sfnr\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\"\n  },\n  \"status\": \"STARTED\",\n  \"is_billable\": true,\n  \"service_code\": \"string\",\n  \"bay\": \"string\",\n  \"activity_conducted\": {\n    \"is_assessment_administered\": false,\n    \"is_findings_of_assessment_discussed\": false,\n    \"is_recommendations_based_on_assessment_discussed\": true,\n    \"is_past_data_analyzed_non_face_to_face\": true,\n    \"is_assessment_scored_or_interpreted\": false,\n    \"is_report_or_treatment_plan_prepared\": true\n  },\n  \"notes\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"signature\": \"string\",\n  \"utc_offset_date_signed\": 9057,\n  \"date_signed\": \"1959-08-26T05:09:04.176Z\",\n  \"date_deleted\": \"1954-12-21T15:35:39.470Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdd3bef8-8e49-4d4b-a7c8-d3a5b16df591",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"bay\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdeaff30-d82f-40b7-887e-b18294604b87",
+          "name": "Fetch Client Assessments",
+          "request": {
+            "name": "Fetch Client Assessments",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "action_required",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "02abe04a-a5db-4bba-ae82-e53d3261e170",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "service_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"date_start\": \"2015-01-27T22:25:09.770Z\",\n    \"utc_offset_date_start\": 7420,\n    \"client_id\": 7169,\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"delivery_method\": \"<string>\",\n    \"id\": 6902,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"unknown\",\n      \"dob\": \"2002-10-14\",\n      \"clinical_status\": \"OFFBOARDED\",\n      \"id\": 3620\n    },\n    \"provider\": {\n      \"id\": 342,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"hpf4ub2w@BMisEdZiZwLXYJJmnwFYvlDCM.tm\",\n      \"status\": \"string\",\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": false,\n    \"service_code\": \"string\",\n    \"bay\": \"string\",\n    \"activity_conducted\": {\n      \"is_assessment_administered\": true,\n      \"is_findings_of_assessment_discussed\": true,\n      \"is_recommendations_based_on_assessment_discussed\": false,\n      \"is_past_data_analyzed_non_face_to_face\": true,\n      \"is_assessment_scored_or_interpreted\": true,\n      \"is_report_or_treatment_plan_prepared\": false\n    },\n    \"notes\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n    \"signature\": \"string\",\n    \"utc_offset_date_signed\": 7824,\n    \"date_signed\": \"2023-01-23T03:33:05.007Z\",\n    \"date_deleted\": \"1957-09-12T13:44:30.626Z\"\n  },\n  {\n    \"date_start\": \"2005-09-16T00:24:06.337Z\",\n    \"utc_offset_date_start\": 5299,\n    \"client_id\": 543,\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"delivery_method\": \"<string>\",\n    \"id\": 1640,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"unknown\",\n      \"dob\": \"1992-10-24\",\n      \"clinical_status\": \"ON HOLD\",\n      \"id\": 6038\n    },\n    \"provider\": {\n      \"id\": 6370,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"F2r88q4r8X-VKT2@J.lqta\",\n      \"status\": \"string\",\n      \"clinical_status\": \"ON HOLD\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": true,\n    \"service_code\": \"string\",\n    \"bay\": \"string\",\n    \"activity_conducted\": {\n      \"is_assessment_administered\": false,\n      \"is_findings_of_assessment_discussed\": false,\n      \"is_recommendations_based_on_assessment_discussed\": false,\n      \"is_past_data_analyzed_non_face_to_face\": true,\n      \"is_assessment_scored_or_interpreted\": false,\n      \"is_report_or_treatment_plan_prepared\": true\n    },\n    \"notes\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n    \"signature\": \"string\",\n    \"utc_offset_date_signed\": 794,\n    \"date_signed\": \"1995-07-15T02:30:11.310Z\",\n    \"date_deleted\": \"1997-08-22T17:35:43.492Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cec7a4a2-34ca-488c-99c4-548ffa248737",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "service_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ebef71a-f31b-486a-a00f-0a41b493a902",
+          "name": "Patch Client Assessment",
+          "request": {
+            "name": "Patch Client Assessment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"bay\": \"<string>\",\n  \"activity_conducted\": {\n    \"is_assessment_administered\": \"<boolean>\",\n    \"is_findings_of_assessment_discussed\": \"<boolean>\",\n    \"is_recommendations_based_on_assessment_discussed\": \"<boolean>\",\n    \"is_past_data_analyzed_non_face_to_face\": \"<boolean>\",\n    \"is_assessment_scored_or_interpreted\": \"<boolean>\",\n    \"is_report_or_treatment_plan_prepared\": \"<boolean>\"\n  },\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "048cbb07-afe9-4b9a-9547-418f45dd84fd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"bay\": \"<string>\",\n  \"activity_conducted\": {\n    \"is_assessment_administered\": \"<boolean>\",\n    \"is_findings_of_assessment_discussed\": \"<boolean>\",\n    \"is_recommendations_based_on_assessment_discussed\": \"<boolean>\",\n    \"is_past_data_analyzed_non_face_to_face\": \"<boolean>\",\n    \"is_assessment_scored_or_interpreted\": \"<boolean>\",\n    \"is_report_or_treatment_plan_prepared\": \"<boolean>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2001-11-02T06:09:58.569Z\",\n  \"utc_offset_date_start\": 7248,\n  \"client_id\": 9807,\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"id\": 1030,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"2015-02-10\",\n    \"clinical_status\": \"PRE CLINICAL\",\n    \"id\": 313\n  },\n  \"provider\": {\n    \"id\": 9142,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"1nMTUPC5vJR@mRGWPHlGoNnvhelfHwrEd.rzbb\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\"\n  },\n  \"status\": \"<string>\",\n  \"is_billable\": true,\n  \"service_code\": \"string\",\n  \"bay\": \"string\",\n  \"activity_conducted\": {\n    \"is_assessment_administered\": \"<boolean>\",\n    \"is_findings_of_assessment_discussed\": \"<boolean>\",\n    \"is_recommendations_based_on_assessment_discussed\": \"<boolean>\",\n    \"is_past_data_analyzed_non_face_to_face\": \"<boolean>\",\n    \"is_assessment_scored_or_interpreted\": \"<boolean>\",\n    \"is_report_or_treatment_plan_prepared\": \"<boolean>\"\n  },\n  \"notes\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"signature\": \"string\",\n  \"utc_offset_date_signed\": 3555,\n  \"date_signed\": \"1962-03-02T11:10:54.912Z\",\n  \"date_deleted\": \"1973-02-22T23:41:15.076Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "265fb546-6757-4892-9e7c-24276577f895",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"client_id\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"bay\": \"<string>\",\n  \"activity_conducted\": {\n    \"is_assessment_administered\": \"<boolean>\",\n    \"is_findings_of_assessment_discussed\": \"<boolean>\",\n    \"is_recommendations_based_on_assessment_discussed\": \"<boolean>\",\n    \"is_past_data_analyzed_non_face_to_face\": \"<boolean>\",\n    \"is_assessment_scored_or_interpreted\": \"<boolean>\",\n    \"is_report_or_treatment_plan_prepared\": \"<boolean>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c6bc25a-49c8-46bf-b66f-269f4cbdee5e",
+          "name": "Fetch Client Assessment",
+          "request": {
+            "name": "Fetch Client Assessment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eb5033fe-dd62-47c3-9217-d64e42ee887d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2001-11-02T06:09:58.569Z\",\n  \"utc_offset_date_start\": 7248,\n  \"client_id\": 9807,\n  \"duration\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"delivery_method\": \"<string>\",\n  \"id\": 1030,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"2015-02-10\",\n    \"clinical_status\": \"PRE CLINICAL\",\n    \"id\": 313\n  },\n  \"provider\": {\n    \"id\": 9142,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"1nMTUPC5vJR@mRGWPHlGoNnvhelfHwrEd.rzbb\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\"\n  },\n  \"status\": \"<string>\",\n  \"is_billable\": true,\n  \"service_code\": \"string\",\n  \"bay\": \"string\",\n  \"activity_conducted\": {\n    \"is_assessment_administered\": \"<boolean>\",\n    \"is_findings_of_assessment_discussed\": \"<boolean>\",\n    \"is_recommendations_based_on_assessment_discussed\": \"<boolean>\",\n    \"is_past_data_analyzed_non_face_to_face\": \"<boolean>\",\n    \"is_assessment_scored_or_interpreted\": \"<boolean>\",\n    \"is_report_or_treatment_plan_prepared\": \"<boolean>\"\n  },\n  \"notes\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"signature\": \"string\",\n  \"utc_offset_date_signed\": 3555,\n  \"date_signed\": \"1962-03-02T11:10:54.912Z\",\n  \"date_deleted\": \"1973-02-22T23:41:15.076Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86158884-7515-4947-8c59-6c9bd6daf519",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "453464a8-e081-4fa3-9ba4-c2db34b9fb8c",
+          "name": "Delete Client Assessment",
+          "request": {
+            "name": "Delete Client Assessment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "299f2b41-787a-48d2-a5d1-cd7f46fde2cc",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b10d3b55-a192-4dc1-bdd9-bca7ebad1402",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47f6d43a-2c6d-46c1-9687-dc2c9c88cae0",
+          "name": "Stop Client Assessment",
+          "request": {
+            "name": "Stop Client Assessment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                "stop",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "450edb3b-22c2-4085-a30b-8540f513f7ad",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59a48b05-82d0-4603-bfc7-112fcfd96adc",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"utc_offset_date_signed\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9f9384f-098c-41cd-9f49-6b49e75cdd38",
+          "name": "Fetch Assessments With Claim History",
+          "request": {
+            "name": "Fetch Assessments With Claim History",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                "claim_history",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3c44ce39-1f7e-4cc2-9b02-cef47b23a326",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    "claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"date_start\": \"1990-05-29T20:20:35.408Z\",\n    \"utc_offset_date_start\": 5375,\n    \"client_id\": 4675,\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"delivery_method\": \"<string>\",\n    \"id\": 526,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"other\",\n      \"dob\": \"2002-04-22\",\n      \"clinical_status\": \"PRE CLINICAL\",\n      \"id\": 2299\n    },\n    \"provider\": {\n      \"id\": 7914,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"eIeny@eydjkZxJRGyiu.wmgb\",\n      \"status\": \"string\",\n      \"clinical_status\": \"ON HOLD\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": true,\n    \"claim_history\": [\n      {\n        \"id\": 6344,\n        \"status\": \"Approved\",\n        \"total_charge\": 9831.685367495302,\n        \"secondary_status\": \"Approved - Recouped & Resubmitted\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 8619,\n        \"status\": \"Rejected, Needs Resubmission\",\n        \"total_charge\": 4933.727928879685,\n        \"secondary_status\": \"Rejected & Resubmitted\",\n        \"clearing_house_claim_id\": \"string\"\n      }\n    ],\n    \"bay\": \"string\"\n  },\n  {\n    \"date_start\": \"1969-04-19T12:01:07.487Z\",\n    \"utc_offset_date_start\": 9800,\n    \"client_id\": 3144,\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"delivery_method\": \"<string>\",\n    \"id\": 7477,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"female\",\n      \"dob\": \"1983-12-19\",\n      \"clinical_status\": \"CLINICAL\",\n      \"id\": 7618\n    },\n    \"provider\": {\n      \"id\": 507,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"x2LmBp@zaqmlgSTxpSxbAYPgMSMmobZXfphf.ux\",\n      \"status\": \"string\",\n      \"clinical_status\": \"OFFBOARDED\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": false,\n    \"claim_history\": [\n      {\n        \"id\": 9640,\n        \"status\": \"Approved - Recouped & Resubmitted\",\n        \"total_charge\": 3370.985092579537,\n        \"secondary_status\": \"Generated\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 6695,\n        \"status\": \"Rejected, Needs Resubmission\",\n        \"total_charge\": 4762.66779773492,\n        \"secondary_status\": \"Submitted\",\n        \"clearing_house_claim_id\": \"string\"\n      }\n    ],\n    \"bay\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53c04469-4295-45e3-ae83-cbccd082163e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    "claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "746c58a0-34d7-4098-ba33-332e5e7b27c2",
+          "name": "Fetch Assisting Assessments With Claim History",
+          "request": {
+            "name": "Fetch Assisting Assessments With Claim History",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                "assisting_assessment_claim_history",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "22cac36e-4fd5-497b-8dcc-df4f50aa2d0b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    "assisting_assessment_claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"date_start\": \"2016-04-05T04:33:16.756Z\",\n    \"utc_offset_date_start\": 4279,\n    \"client_id\": 7003,\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"delivery_method\": \"<string>\",\n    \"id\": 7899,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"unknown\",\n      \"dob\": \"1961-06-24\",\n      \"clinical_status\": \"CLINICAL\",\n      \"id\": 6732\n    },\n    \"provider\": {\n      \"id\": 6296,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"LOMMK6@SgZtEQssX.vrat\",\n      \"status\": \"string\",\n      \"clinical_status\": \"ON HOLD\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": true,\n    \"claim_history\": [\n      {\n        \"id\": 5091,\n        \"status\": \"Submitted\",\n        \"total_charge\": 6356.398048957025,\n        \"secondary_status\": \"Rejected, Not Resubmitted\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 7137,\n        \"status\": \"Unbillable\",\n        \"total_charge\": 9538.496628935316,\n        \"secondary_status\": \"Unbillable\",\n        \"clearing_house_claim_id\": \"string\"\n      }\n    ],\n    \"bay\": \"string\"\n  },\n  {\n    \"date_start\": \"2016-06-24T20:10:00.442Z\",\n    \"utc_offset_date_start\": 8527,\n    \"client_id\": 1036,\n    \"duration\": \"<integer>\",\n    \"location\": \"<string>\",\n    \"delivery_method\": \"<string>\",\n    \"id\": 1267,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"unknown\",\n      \"dob\": \"1957-05-10\",\n      \"clinical_status\": \"ON HOLD\",\n      \"id\": 4553\n    },\n    \"provider\": {\n      \"id\": 6304,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"A3zAjtNHxR@jXUpnuQrQnCmUyUTVqKQKussaxWPLFITz.aepy\",\n      \"status\": \"string\",\n      \"clinical_status\": \"CLINICAL\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": true,\n    \"claim_history\": [\n      {\n        \"id\": 9221,\n        \"status\": \"Approved - Recouped\",\n        \"total_charge\": 9459.312205833661,\n        \"secondary_status\": \"Rejected, Needs Resubmission\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 7550,\n        \"status\": \"Rejected, Needs Resubmission\",\n        \"total_charge\": 8638.92988751965,\n        \"secondary_status\": \"Unbillable\",\n        \"clearing_house_claim_id\": \"string\"\n      }\n    ],\n    \"bay\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c35d4d7-ee03-4a1b-9a3a-d112d7ab873c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    "assisting_assessment_claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48e0d67c-a896-46e2-be9a-b9de1c927858",
+          "name": "Download Client Assessment Pdf",
+          "request": {
+            "name": "Download Client Assessment Pdf",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                "download",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "015925f5-4795-4f7c-afd2-7c467f00aab0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"document_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "933b30bb-e670-48fc-bf5f-1dae33f57674",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f677b45-ab0d-4224-9105-7b67595f8e66",
+          "name": "Make Assessment Unbillable",
+          "request": {
+            "name": "Make Assessment Unbillable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                "make_unbillable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a49f6793-91a7-4e17-ac73-b9b72e988c33",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b266d00-787c-4ee2-a18e-025eda603414",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bca4ea47-2578-400c-840b-b1c08941d334",
+          "name": "Make Assessment Billable",
+          "request": {
+            "name": "Make Assessment Billable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                "make_billable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8cb5653a-d9d0-46e3-870e-ffd34aa6956d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b6f74b5-ba86-4174-8f20-fcfa0342f6c2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4929aded-5fdd-4be3-9186-32160d2a45b8",
+          "name": "Edit Client Assessment",
+          "request": {
+            "name": "Edit Client Assessment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                "edit",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3063a371-b4a6-40b7-9b87-1f7bc8852e3a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "edit",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10c25ee0-be02-47e0-b08d-cb77b6226e8f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "edit",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5537acc2-1b0d-459e-bea5-59f9b6cb4ff6",
+          "name": "Backdate Client Assessment",
+          "request": {
+            "name": "Backdate Client Assessment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "client_assessments",
+                ":client_assessment_id",
+                "backdate",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "client_assessment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c78fc09f-9f61-4669-a22c-22e5b85e5ff6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "backdate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a98180b6-63ec-4ac5-a0b3-05707dcbd52c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "client_assessments",
+                    ":client_assessment_id",
+                    "backdate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "client_assessment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3d94f070-be30-403c-bfed-3f5fb3abc218",
+    "name": "Fast Client Assessments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

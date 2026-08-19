@@ -1,0 +1,292 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Clients API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Clinical Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/clinical_status/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Clinical Status"
+        },
+        {
+          "info": {
+            "name": "Get All Clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/clients/",
+            "params": [
+              {
+                "name": "clinical_status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Clients"
+        },
+        {
+          "info": {
+            "name": "Create Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/clients/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Client"
+        },
+        {
+          "info": {
+            "name": "Get Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Client"
+        },
+        {
+          "info": {
+            "name": "Patch Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Client"
+        },
+        {
+          "info": {
+            "name": "Fetch Client Families",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/clients/families/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_active",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Client Families"
+        },
+        {
+          "info": {
+            "name": "Reset Client Assessment Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/reset_assessment_allocation/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reset Client Assessment Allocation"
+        },
+        {
+          "info": {
+            "name": "Get Client Modifier Matrix Rows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/modifier_matrix/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Client Modifier Matrix Rows"
+        },
+        {
+          "info": {
+            "name": "Create Client Modifier Matrix Row",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/modifier_matrix/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Client Modifier Matrix Row"
+        },
+        {
+          "info": {
+            "name": "Replace Client Modifier Matrix Row",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/modifier_matrix/:modifier_matrix_id/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "modifier_matrix_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replace Client Modifier Matrix Row"
+        },
+        {
+          "info": {
+            "name": "Delete Client Modifier Matrix Row",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/clients/:client_id/modifier_matrix/:modifier_matrix_id/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "modifier_matrix_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Client Modifier Matrix Row"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

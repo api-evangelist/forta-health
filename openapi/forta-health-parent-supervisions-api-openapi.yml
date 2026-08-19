@@ -1,0 +1,1882 @@
+openapi: 3.2.0
+info:
+  title: Fast Parent Supervisions API
+  version: 0.1.0
+tags:
+- name: parent_supervisions
+paths:
+  /api/v1/parent_supervisions/:
+    post:
+      tags:
+      - parent_supervisions
+      summary: Create Parent Supervision
+      operationId: create_parent_supervision_api_v1_parent_supervisions__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentSupervisionCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - parent_supervisions
+      summary: Fetch Parent Supervisions
+      operationId: fetch_parent_supervisions_api_v1_parent_supervisions__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: status_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Id
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: action_required
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Action Required
+      - name: client_clinical_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Client Clinical Status
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParentSupervisionListResponse'
+                title: Response Fetch Parent Supervisions Api V1 Parent Supervisions  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/:
+    patch:
+      tags:
+      - parent_supervisions
+      summary: Update Parent Supervision
+      operationId: update_parent_supervision_api_v1_parent_supervisions__parent_supervision_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentSupervisionPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - parent_supervisions
+      summary: Get Parent Supervision
+      operationId: get_parent_supervision_api_v1_parent_supervisions__parent_supervision_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionDetailedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - parent_supervisions
+      summary: Delete Parent Supervision
+      operationId: delete_parent_supervision_api_v1_parent_supervisions__parent_supervision_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/claim_history/:
+    get:
+      tags:
+      - parent_supervisions
+      summary: Get Parent Supervisions With Claim History
+      operationId: get_parent_supervisions_with_claim_history_api_v1_parent_supervisions_claim_history__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: End
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParentSupervisionResponseWithClaimHistory'
+                title: Response Get Parent Supervisions With Claim History Api V1 Parent Supervisions
+                  Claim History  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/goal_progress/:
+    post:
+      tags:
+      - parent_supervisions
+      summary: Create Parent Supervision Goal Progress
+      operationId: create_parent_supervision_goal_progress_api_v1_parent_supervisions__parent_supervision_id__goal_progress__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentSupervisionGoalProgressCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionGoalProgressResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/goal_progress/{goal_progress_id}/:
+    patch:
+      tags:
+      - parent_supervisions
+      summary: Update Goal Progress
+      operationId: update_goal_progress_api_v1_parent_supervisions__parent_supervision_id__goal_progress__goal_progress_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: goal_progress_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Goal Progress Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentSupervisionGoalProgressPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionGoalProgressResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - parent_supervisions
+      summary: Delete Goal Progress
+      operationId: delete_goal_progress_api_v1_parent_supervisions__parent_supervision_id__goal_progress__goal_progress_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: goal_progress_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Goal Progress Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/target_evaluations/:
+    post:
+      tags:
+      - parent_supervisions
+      summary: Create Trial
+      operationId: create_trial_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrialCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/target_evaluations/{trial_id}/:
+    patch:
+      tags:
+      - parent_supervisions
+      summary: Patch Trial
+      operationId: patch_trial_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/app__api__schemas__parent_supervision__TrialPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - parent_supervisions
+      summary: Delete Trial
+      operationId: delete_trial_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/target_evaluations/{trial_id}/duration_events/:
+    post:
+      tags:
+      - parent_supervisions
+      summary: Create Duration Trial Event
+      operationId: create_duration_trial_event_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id__duration_events__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DurationEventCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/target_evaluations/{trial_id}/duration_events/{duration_event_id}/:
+    patch:
+      tags:
+      - parent_supervisions
+      summary: Update Duration Trial Event
+      operationId: update_duration_trial_event_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id__duration_events__duration_event_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      - name: duration_event_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Duration Event Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DurationEventPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - parent_supervisions
+      summary: Delete Duration Trial Event
+      operationId: delete_duration_trial_event_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id__duration_events__duration_event_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      - name: duration_event_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Duration Event Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/target_evaluations/{trial_id}/rate_events/:
+    post:
+      tags:
+      - parent_supervisions
+      summary: Create Rate Trial Event
+      operationId: create_rate_trial_event_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id__rate_events__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/app__api__schemas__parent_supervision__RateEventCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/target_evaluations/{trial_id}/rate_events/{rate_event_id}/:
+    patch:
+      tags:
+      - parent_supervisions
+      summary: Update Rate Trial Event
+      operationId: update_rate_trial_event_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id__rate_events__rate_event_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      - name: rate_event_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Rate Event Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/app__api__schemas__parent_supervision__RateEventPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - parent_supervisions
+      summary: Delete Rate Trial Event
+      operationId: delete_rate_trial_event_api_v1_parent_supervisions__parent_supervision_id__target_evaluations__trial_id__rate_events__rate_event_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: trial_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Trial Id
+      - name: rate_event_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Rate Event Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionTrialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/stop/:
+    put:
+      tags:
+      - parent_supervisions
+      summary: Stop Parent Supervision
+      operationId: stop_parent_supervision_api_v1_parent_supervisions__parent_supervision_id__stop__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      - name: x-forwarded-for
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Forwarded-For
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentSupervisionStop'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/data/utilization/:
+    get:
+      tags:
+      - parent_supervisions
+      summary: Get Utilization
+      operationId: get_utilization_api_v1_parent_supervisions_data_utilization__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: End
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionUtilizationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/download/:
+    get:
+      tags:
+      - parent_supervisions
+      summary: Download Pdf
+      operationId: download_pdf_api_v1_parent_supervisions__parent_supervision_id__download__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSupervisionDownloadPdfResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/make_unbillable/:
+    put:
+      tags:
+      - parent_supervisions
+      summary: Make Parent Supervision Unbillable
+      operationId: make_parent_supervision_unbillable_api_v1_parent_supervisions__parent_supervision_id__make_unbillable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/make_billable/:
+    put:
+      tags:
+      - parent_supervisions
+      summary: Make Parent Supervision Billable
+      operationId: make_parent_supervision_billable_api_v1_parent_supervisions__parent_supervision_id__make_billable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/edit/:
+    put:
+      tags:
+      - parent_supervisions
+      summary: Edit Parent Supervision
+      operationId: edit_parent_supervision_api_v1_parent_supervisions__parent_supervision_id__edit__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/parent_supervisions/{parent_supervision_id}/backdate/:
+    put:
+      tags:
+      - parent_supervisions
+      summary: Backdate Parent Supervision
+      operationId: backdate_parent_supervision_api_v1_parent_supervisions__parent_supervision_id__backdate__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: parent_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Parent Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentSupervisionBackdate'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    LocationEnumV2:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: LocationEnumV2
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    RateTrialResponse:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+        id:
+          type: integer
+          title: Id
+        target_label:
+          type: string
+          title: Target Label
+        rate_events:
+          items:
+            $ref: '#/components/schemas/app__api__schemas__parent_supervision__RateEventResponse'
+          type: array
+          title: Rate Events
+        num_rate_events:
+          type: integer
+          title: Num Rate Events
+      type: object
+      required:
+      - target_id
+      - id
+      - target_label
+      - rate_events
+      - num_rate_events
+      title: RateTrialResponse
+    ParentSupervisionPatch:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        expected_duration:
+          type: integer
+          maximum: 14400.0
+          minimum: 900.0
+          title: Expected Duration
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        parent_one_parent_and_caregiver_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Parent One Parent And Caregiver Id
+        parent_two_parent_and_caregiver_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Parent Two Parent And Caregiver Id
+        parent_progress:
+          anyOf:
+          - $ref: '#/components/schemas/ParentProgressEnum'
+          - type: 'null'
+        goals_and_targets_adhered:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Goals And Targets Adhered
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - expected_duration
+      - location
+      - setting
+      title: ParentSupervisionPatch
+    ParentSupervisionResponseWithClaimHistory:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        expected_duration:
+          type: integer
+          maximum: 14400.0
+          minimum: 900.0
+          title: Expected Duration
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        status:
+          type: string
+          title: Status
+        version:
+          $ref: '#/components/schemas/VersionEnum'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        is_billable:
+          type: boolean
+          title: Is Billable
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - expected_duration
+      - client
+      - status
+      - version
+      - bcba
+      - location
+      - is_billable
+      - claim_history
+      title: ParentSupervisionResponseWithClaimHistory
+    ParentSupervisionDownloadPdfResponse:
+      properties:
+        document_url:
+          type: string
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: ParentSupervisionDownloadPdfResponse
+    ParentSupervisionBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: ParentSupervisionBackdate
+    ParentSupervisionGoalProgressResponse:
+      properties:
+        goal_evaluation:
+          $ref: '#/components/schemas/GoalProgressEnum'
+        goal_id:
+          type: integer
+          title: Goal Id
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - goal_evaluation
+      - goal_id
+      - id
+      title: ParentSupervisionGoalProgressResponse
+    app__api__schemas__parent_supervision__RateEventResponse:
+      properties:
+        date_of_event:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Of Event
+        id:
+          type: integer
+          title: Id
+        time_of_event:
+          type: string
+          title: Time Of Event
+      type: object
+      required:
+      - id
+      - time_of_event
+      title: RateEventResponse
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    DurationTrialResponse:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+        id:
+          type: integer
+          title: Id
+        target_label:
+          type: string
+          title: Target Label
+        duration_events:
+          items:
+            $ref: '#/components/schemas/app__api__schemas__parent_supervision__DurationEventResponse'
+          type: array
+          title: Duration Events
+        num_duration_events:
+          type: integer
+          title: Num Duration Events
+      type: object
+      required:
+      - target_id
+      - id
+      - target_label
+      - duration_events
+      - num_duration_events
+      title: DurationTrialResponse
+    app__api__schemas__parent_supervision__RateEventCreate:
+      properties:
+        date_of_event:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Of Event
+      type: object
+      title: RateEventCreate
+    ParentSupervisionGoalProgressCreate:
+      properties:
+        goal_evaluation:
+          $ref: '#/components/schemas/GoalProgressEnum'
+        goal_id:
+          type: integer
+          title: Goal Id
+      type: object
+      required:
+      - goal_evaluation
+      - goal_id
+      title: ParentSupervisionGoalProgressCreate
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    app__api__schemas__parent_supervision__DurationEventResponse:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+        id:
+          type: integer
+          title: Id
+        formatted_duration:
+          type: string
+          title: Formatted Duration
+      type: object
+      required:
+      - duration
+      - id
+      - formatted_duration
+      title: DurationEventResponse
+    GoalGroupedTrialsResponse:
+      properties:
+        goal_label:
+          type: string
+          title: Goal Label
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+        is_data_collection_method_percentage:
+          type: boolean
+          title: Is Data Collection Method Percentage
+        is_data_collection_method_rate:
+          type: boolean
+          title: Is Data Collection Method Rate
+        is_data_collection_method_duration:
+          type: boolean
+          title: Is Data Collection Method Duration
+        is_data_collection_method_instances:
+          type: boolean
+          title: Is Data Collection Method Instances
+        target_evaluations:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/app__api__schemas__parent_supervision__TrialResponse'
+            type: array
+          - items:
+              $ref: '#/components/schemas/RateTrialResponse'
+            type: array
+          - items:
+              $ref: '#/components/schemas/DurationTrialResponse'
+            type: array
+          title: Target Evaluations
+      type: object
+      required:
+      - goal_label
+      - data_collection_method
+      - is_data_collection_method_percentage
+      - is_data_collection_method_rate
+      - is_data_collection_method_duration
+      - is_data_collection_method_instances
+      - target_evaluations
+      title: GoalGroupedTrialsResponse
+    TrialCreate:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+      type: object
+      required:
+      - target_id
+      title: TrialCreate
+    LocationEnumV1:
+      type: string
+      enum:
+      - HOME
+      - COMMUNITY
+      - TELEHEALTH
+      title: LocationEnumV1
+    ParentSupervisionStop:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+        date_signed:
+          type: string
+          format: date-time
+          title: Date Signed
+      type: object
+      required:
+      - signature
+      - utc_offset_date_signed
+      - date_signed
+      title: ParentSupervisionStop
+    VersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: VersionEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ParentSupervisionCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        expected_duration:
+          type: integer
+          maximum: 14400.0
+          minimum: 900.0
+          title: Expected Duration
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          $ref: '#/components/schemas/LocationEnumV2'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - expected_duration
+      - client_id
+      - location
+      - setting
+      title: ParentSupervisionCreate
+    GoalProgressEnum:
+      type: string
+      enum:
+      - NEEDS_IMPROVEMENT
+      - MEETS_EXPECTATIONS
+      - EXCEEDS_EXPECTATIONS
+      title: GoalProgressEnum
+    ClientResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        id:
+          type: integer
+          title: Id
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        street_address_latitude:
+          anyOf:
+          - type: number
+            maximum: 90.0
+            minimum: -90.0
+          - type: 'null'
+          title: Street Address Latitude
+        street_address_longitude:
+          anyOf:
+          - type: number
+            maximum: 180.0
+            minimum: -180.0
+          - type: 'null'
+          title: Street Address Longitude
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      title: ClientResponse
+    SettingEnumV1:
+      type: string
+      enum:
+      - In-person
+      - Remote
+      title: SettingEnumV1
+    ParentAndCaregiverRoleEnum:
+      type: string
+      enum:
+      - parent
+      - caregiver
+      - parent and caregiver
+      title: ParentAndCaregiverRoleEnum
+    ParentSupervisionTrialsResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        target_progress:
+          items:
+            $ref: '#/components/schemas/GoalGroupedTrialsResponse'
+          type: array
+          title: Target Progress
+      type: object
+      required:
+      - id
+      - target_progress
+      title: ParentSupervisionTrialsResponse
+    SettingEnumV2:
+      type: string
+      enum:
+      - Telehealth
+      title: SettingEnumV2
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    app__api__schemas__parent_supervision__TrialResponse:
+      properties:
+        successful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Successful Attempts
+        unsuccessful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Unsuccessful Attempts
+        occurrence:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Occurrence
+        target_id:
+          type: integer
+          title: Target Id
+        id:
+          type: integer
+          title: Id
+        target_label:
+          type: string
+          title: Target Label
+        total_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Total Attempts
+      type: object
+      required:
+      - target_id
+      - id
+      - target_label
+      title: TrialResponse
+    ParentSupervisionListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        expected_duration:
+          type: integer
+          maximum: 14400.0
+          minimum: 900.0
+          title: Expected Duration
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        status:
+          type: string
+          title: Status
+        version:
+          $ref: '#/components/schemas/VersionEnum'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        is_billable:
+          type: boolean
+          title: Is Billable
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - expected_duration
+      - client
+      - status
+      - version
+      - bcba
+      - location
+      - is_billable
+      title: ParentSupervisionListResponse
+    ParentProgressEnum:
+      type: string
+      enum:
+      - POSITIVE
+      - NEUTRAL
+      - NEGATIVE
+      title: ParentProgressEnum
+    ParentSupervisionGoalProgressPatch:
+      properties:
+        goal_evaluation:
+          $ref: '#/components/schemas/GoalProgressEnum'
+      type: object
+      required:
+      - goal_evaluation
+      title: ParentSupervisionGoalProgressPatch
+    DurationEventCreate:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - duration
+      title: DurationEventCreate
+    ParentSupervisionUtilizationResponse:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          type: integer
+          title: Duration
+        count:
+          type: integer
+          title: Count
+      type: object
+      required:
+      - client_id
+      - duration
+      - count
+      title: ParentSupervisionUtilizationResponse
+    app__api__schemas__parent_supervision__TrialPatch:
+      properties:
+        successful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Successful Attempts
+        unsuccessful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Unsuccessful Attempts
+        occurrence:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Occurrence
+      type: object
+      title: TrialPatch
+    ParentSupervisionDetailedResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        expected_duration:
+          type: integer
+          maximum: 14400.0
+          minimum: 900.0
+          title: Expected Duration
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        status:
+          type: string
+          title: Status
+        version:
+          $ref: '#/components/schemas/VersionEnum'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        is_billable:
+          type: boolean
+          title: Is Billable
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        parent_progress:
+          anyOf:
+          - $ref: '#/components/schemas/ParentProgressEnum'
+          - type: 'null'
+        goals_and_targets_adhered:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Goals And Targets Adhered
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        date_signed:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Signed
+        utc_offset_date_signed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset Date Signed
+        signature:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Signature
+        parent_one_parent_and_caregiver:
+          anyOf:
+          - $ref: '#/components/schemas/ParentAndCaregiverListResponse'
+          - type: 'null'
+        parent_two_parent_and_caregiver:
+          anyOf:
+          - $ref: '#/components/schemas/ParentAndCaregiverListResponse'
+          - type: 'null'
+        goal_progress:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ParentSupervisionGoalProgressResponse'
+            type: array
+          - type: 'null'
+          title: Goal Progress
+        target_progress:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/GoalGroupedTrialsResponse'
+            type: array
+          - type: 'null'
+          title: Target Progress
+        active_treatment_plan_id:
+          type: integer
+          title: Active Treatment Plan Id
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - expected_duration
+      - client
+      - status
+      - version
+      - bcba
+      - location
+      - is_billable
+      - setting
+      - date_signed
+      - utc_offset_date_signed
+      - signature
+      - parent_one_parent_and_caregiver
+      - parent_two_parent_and_caregiver
+      - goal_progress
+      - target_progress
+      - active_treatment_plan_id
+      title: ParentSupervisionDetailedResponse
+    app__api__schemas__parent_supervision__RateEventPatch:
+      properties:
+        date_of_event:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Of Event
+      type: object
+      title: RateEventPatch
+    ParentAndCaregiverListResponse:
+      properties:
+        role:
+          $ref: '#/components/schemas/ParentAndCaregiverRoleEnum'
+        name:
+          type: string
+          maxLength: 1000
+          minLength: 2
+          title: Name
+        id:
+          type: integer
+          title: Id
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{9}$
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - role
+      - name
+      - id
+      title: ParentAndCaregiverListResponse
+    DurationEventPatch:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - duration
+      title: DurationEventPatch
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

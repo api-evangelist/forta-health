@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "6fc0563e-1835-4760-9c70-e1157fee40c2",
+      "name": "facilities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92d40281-92be-464c-825f-913bfb5c01f7",
+          "name": "Get Facilities",
+          "request": {
+            "name": "Get Facilities",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "facilities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7abc9c3-6b7f-4b8b-8b07-8c7878c7ae98",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "facilities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"label\": \"string\",\n    \"tin\": \"string\",\n    \"npi\": \"string\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"id\": 6241,\n    \"street_address_line_two\": \"string\",\n    \"group_medicaid_id\": \"string\"\n  },\n  {\n    \"label\": \"string\",\n    \"tin\": \"string\",\n    \"npi\": \"string\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"id\": 6901,\n    \"street_address_line_two\": \"string\",\n    \"group_medicaid_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04a94ddb-ca07-41b1-9d6f-de987a89bfc5",
+          "name": "Create Facility",
+          "request": {
+            "name": "Create Facility",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "facilities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"tin\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"street_address_line_one\": \"<string>\",\n  \"street_address_zip\": \"<string>\",\n  \"street_address_city\": \"<string>\",\n  \"street_address_state\": \"<string>\",\n  \"street_address_line_two\": \"<string>\",\n  \"group_medicaid_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ec80d01-b66b-4613-a43c-77da61157ed2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "facilities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"tin\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"street_address_line_one\": \"<string>\",\n  \"street_address_zip\": \"<string>\",\n  \"street_address_city\": \"<string>\",\n  \"street_address_state\": \"<string>\",\n  \"street_address_line_two\": \"<string>\",\n  \"group_medicaid_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"string\",\n  \"tin\": \"string\",\n  \"npi\": \"string\",\n  \"street_address_line_one\": \"string\",\n  \"street_address_zip\": \"string\",\n  \"street_address_city\": \"string\",\n  \"street_address_state\": \"st\",\n  \"id\": 1043,\n  \"street_address_line_two\": \"string\",\n  \"group_medicaid_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25fe574c-1ceb-4cb3-a844-16ff9eda0cdf",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "facilities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"tin\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"street_address_line_one\": \"<string>\",\n  \"street_address_zip\": \"<string>\",\n  \"street_address_city\": \"<string>\",\n  \"street_address_state\": \"<string>\",\n  \"street_address_line_two\": \"<string>\",\n  \"group_medicaid_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f3c11c67-8800-454e-a9e3-9efc5674c853",
+    "name": "Fast Facilities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

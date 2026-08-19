@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Field Templates API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "field_templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/field_templates/fields/",
+            "params": [
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "Filter to fields belonging to this resource value."
+              },
+              {
+                "name": "with_template",
+                "value": "",
+                "type": "query",
+                "description": "Append each field's saved template content."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List catalog fields, optionally filtered by resource and enriched with templates."
+        },
+        {
+          "info": {
+            "name": "Get Field Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/field_templates/:identifier/",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the template bound to a field by its unique identifier (template is null if unset)."
+        },
+        {
+          "info": {
+            "name": "Upsert Field Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/field_templates/:identifier/",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or replace the template bound to a field (sanitized server-side)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

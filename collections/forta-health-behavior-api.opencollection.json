@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Behavior API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "behavior",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Behaviors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/behaviors/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Behaviors"
+        },
+        {
+          "info": {
+            "name": "Create Behavior",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/behaviors/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new behavior"
+        },
+        {
+          "info": {
+            "name": "Fetch Goal Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/behaviors/:behavior_id/goal_names/",
+            "params": [
+              {
+                "name": "behavior_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_inactive",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reads goal names associated with a behavior"
+        },
+        {
+          "info": {
+            "name": "Create Goal Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/behaviors/:behavior_id/goal_names/",
+            "params": [
+              {
+                "name": "behavior_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a goal name with a corresponding behavior"
+        },
+        {
+          "info": {
+            "name": "Fetch All Goal Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/behaviors/goal_names/all/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch All Goal Names"
+        },
+        {
+          "info": {
+            "name": "Fetch Goal Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/behaviors/:behavior_id/goal_names/:goal_name_id/",
+            "params": [
+              {
+                "name": "behavior_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_name_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Goal Name"
+        },
+        {
+          "info": {
+            "name": "Activate Goal Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/behaviors/:behavior_id/goal_names/:goal_name_id/activate/",
+            "params": [
+              {
+                "name": "behavior_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_name_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Activate Goal Name"
+        },
+        {
+          "info": {
+            "name": "Deactivate Goal Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/behaviors/:behavior_id/goal_names/:goal_name_id/deactivate/",
+            "params": [
+              {
+                "name": "behavior_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_name_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deactivate Goal Name"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,24 @@
+openapi: 3.2.0
+info:
+  title: Fast Stripe API
+  version: 0.1.0
+tags:
+- name: stripe
+paths:
+  /webhooks/stripe/:
+    post:
+      tags:
+      - stripe
+      summary: Handle Stripe Webhook
+      operationId: handle_stripe_webhook_webhooks_stripe__post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

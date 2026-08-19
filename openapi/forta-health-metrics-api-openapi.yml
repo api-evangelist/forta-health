@@ -1,0 +1,191 @@
+openapi: 3.2.0
+info:
+  title: Fast Metrics API
+  version: 0.1.0
+tags:
+- name: metrics
+paths:
+  /api/v1/metrics/duration_aggregates/:
+    get:
+      tags:
+      - metrics
+      summary: Get Duration Aggregates
+      operationId: get_duration_aggregates_api_v1_metrics_duration_aggregates__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: End
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: exclude_clients_meeting_csn_criteria
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Exclude Clients Meeting Csn Criteria
+      - name: exclude_zero_session_clients
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: true
+          title: Exclude Zero Session Clients
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DurationAggregatesResponse'
+                title: Response Get Duration Aggregates Api V1 Metrics Duration Aggregates  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    DurationAggregatesResponse:
+      properties:
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        session_duration:
+          type: integer
+          title: Session Duration
+        client_supervision_duration:
+          type: integer
+          title: Client Supervision Duration
+        parent_supervision_duration:
+          type: integer
+          title: Parent Supervision Duration
+        csn_session_ratio:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Csn Session Ratio
+        additional_csn_duration_required:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Additional Csn Duration Required
+        client_assessment_duration:
+          type: integer
+          title: Client Assessment Duration
+        group_parent_supervision_duration:
+          type: integer
+          title: Group Parent Supervision Duration
+      type: object
+      required:
+      - client
+      - session_duration
+      - client_supervision_duration
+      - parent_supervision_duration
+      - client_assessment_duration
+      - group_parent_supervision_duration
+      title: DurationAggregatesResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

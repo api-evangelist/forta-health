@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Assessment Surveys API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "assessment_surveys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Treaat Prediction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/assessment_surveys/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "model_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metadata_path",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets the latest treaat prediction for a client based off of the latest assessment survey\n\nReturns\nArgs:\n    assessment_survey_service:\n    client_model_converter:\n    provider_assignment_repo:\n    client_id:\n    provider:\n\nReturns:"
+        },
+        {
+          "info": {
+            "name": "Send Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/assessment_surveys/",
+            "params": [
+              {
+                "name": "model_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metadata_path",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Sends an autism analytica survey to a client's BT\nOnly allows 1 survey to be sent per client ever for now\nby enforcing uniqueness on client_id in the database\nRoles allowed: pRBT, BCBA, Admin\nArgs:\n    request:\n    client_model_converter:\n    assessment_survey_service:\n    provider_assignment_repo:\n    provider:\nReturns:\n    Client (ClientSchema): client schema defined in pydantic\nRaises:\n    404: Client id not found"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

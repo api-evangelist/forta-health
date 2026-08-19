@@ -1,0 +1,2306 @@
+openapi: 3.2.0
+info:
+  title: Fast Client Supervisions API
+  version: 0.1.0
+tags:
+- name: client_supervisions
+paths:
+  /api/v1/client_supervisions/:
+    post:
+      tags:
+      - client_supervisions
+      summary: Create Client Supervision Notes
+      operationId: create_client_supervision_notes_api_v1_client_supervisions__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientSupervisionCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSupervisionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - client_supervisions
+      summary: Fetch Client Supervisions
+      operationId: fetch_client_supervisions_api_v1_client_supervisions__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+      - name: status_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Id
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: action_required
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Action Required
+      - name: client_clinical_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Client Clinical Status
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSupervisionListResponse'
+                title: Response Fetch Client Supervisions Api V1 Client Supervisions  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/claim_history/:
+    get:
+      tags:
+      - client_supervisions
+      summary: Get Client Supervision Notes With Claim Status
+      operationId: get_client_supervision_notes_with_claim_status_api_v1_client_supervisions_claim_history__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: End
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSupervisionListResponseWithClaimHistory'
+                title: Response Get Client Supervision Notes With Claim Status Api V1 Client Supervisions
+                  Claim History  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/:
+    get:
+      tags:
+      - client_supervisions
+      summary: Get Client Supervision Note
+      operationId: get_client_supervision_note_api_v1_client_supervisions__client_supervision_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSupervisionWithActiveGoalsResponseResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - client_supervisions
+      summary: Patch Client Supervision Notes
+      operationId: patch_client_supervision_notes_api_v1_client_supervisions__client_supervision_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientSupervisionUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSupervisionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - client_supervisions
+      summary: Delete Client Supervision
+      operationId: delete_client_supervision_api_v1_client_supervisions__client_supervision_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/target_phase/:
+    post:
+      tags:
+      - client_supervisions
+      summary: Create Client Supervision Notes Target Phase
+      operationId: create_client_supervision_notes_target_phase_api_v1_client_supervisions__client_supervision_id__target_phase__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientSupervisionNoteTargetPhaseCreate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSupervisionNoteTargetPhaseResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/target_phase/{target_phase_id}/:
+    delete:
+      tags:
+      - client_supervisions
+      summary: Delete Client Supervision Note Target Phase
+      operationId: delete_client_supervision_note_target_phase_api_v1_client_supervisions__client_supervision_id__target_phase__target_phase_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      - name: target_phase_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Target Phase Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSupervisionNoteTargetPhaseResponse'
+                title: Response Delete Client Supervision Note Target Phase Api V1 Client Supervisions  Client
+                  Supervision Id  Target Phase  Target Phase Id   Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/stop/:
+    put:
+      tags:
+      - client_supervisions
+      summary: Stop Client Supervision
+      operationId: stop_client_supervision_api_v1_client_supervisions__client_supervision_id__stop__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      - name: x-forwarded-for
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Forwarded-For
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientSupervisionStop'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/data/utilization/:
+    get:
+      tags:
+      - client_supervisions
+      summary: Get Utilization
+      operationId: get_utilization_api_v1_client_supervisions_data_utilization__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          title: End
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSupervisionUtilizationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/download/:
+    get:
+      tags:
+      - client_supervisions
+      summary: Download Client Supervision Pdf
+      operationId: download_client_supervision_pdf_api_v1_client_supervisions__client_supervision_id__download__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSupervisionPdfResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/make_unbillable/:
+    put:
+      tags:
+      - client_supervisions
+      summary: Make Client Supervision Unbillable
+      operationId: make_client_supervision_unbillable_api_v1_client_supervisions__client_supervision_id__make_unbillable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/make_billable/:
+    put:
+      tags:
+      - client_supervisions
+      summary: Make Client Supervision Billable
+      operationId: make_client_supervision_billable_api_v1_client_supervisions__client_supervision_id__make_billable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/edit/:
+    put:
+      tags:
+      - client_supervisions
+      summary: Edit Client Supervision
+      operationId: edit_client_supervision_api_v1_client_supervisions__client_supervision_id__edit__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_supervisions/{client_supervision_id}/backdate/:
+    put:
+      tags:
+      - client_supervisions
+      summary: Backdate Client Supervision
+      operationId: backdate_client_supervision_api_v1_client_supervisions__client_supervision_id__backdate__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_supervision_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Supervision Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientSupervisionBackdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ClientSupervisionWithActiveGoalsResponseResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Duration
+        status:
+          type: string
+          title: Status
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsResponse'
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        participants_names:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Participants Names
+        participants:
+          anyOf:
+          - $ref: '#/components/schemas/ClientParticipants'
+          - type: 'null'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        clinical_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Status
+        response_to_treatment:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Response To Treatment
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+        overall_progress_toward_mastery:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Overall Progress Toward Mastery
+        modified_behaviour_intervention:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified Behaviour Intervention
+        assessed_modification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Assessed Modification
+        probed_new_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Probed New Skills
+        reviewed_and_analyzed_data:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Analyzed Data
+        reviewed_and_evaluated_session_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Session Notes
+        reviewed_and_evaluated_treatment_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Treatment Plan
+        evaluated_progress:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Evaluated Progress
+        parent_demonstrated_new_or_changed_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Demonstrated New Or Changed Skills
+        target_phase:
+          items:
+            $ref: '#/components/schemas/ClientSupervisionNoteTargetPhaseResponse'
+          type: array
+          title: Target Phase
+        active_treatment_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active Treatment Id
+        active_goals:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/GoalResponse'
+            type: array
+          - type: 'null'
+          title: Active Goals
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - client
+      - duration
+      - status
+      - bt_participants
+      - client_id
+      - location
+      - setting
+      - bcba
+      - target_phase
+      title: ClientSupervisionWithActiveGoalsResponseResponse
+    LocationEnumV2:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: LocationEnumV2
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    TargetStageEnum:
+      type: string
+      enum:
+      - Baseline
+      - Mastered
+      - On Hold
+      - Discontinued
+      - Acquisition
+      - Generalization
+      - Maintenance
+      - In Progress
+      title: TargetStageEnum
+    JobTitleEnum:
+      type: string
+      enum:
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
+    ClientSupervisionListResponseWithClaimHistory:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Duration
+        expected_duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Expected Duration
+        status:
+          type: string
+          title: Status
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        bcba:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderResponse'
+          - type: 'null'
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - expected_duration
+      - status
+      - client
+      - claim_history
+      - location
+      title: ClientSupervisionListResponseWithClaimHistory
+    ClientSupervisionNoteTargetPhaseResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        title:
+          type: string
+          title: Title
+        date_added:
+          type: string
+          format: date
+          title: Date Added
+        target_name:
+          type: string
+          title: Target Name
+        goal_name:
+          type: string
+          title: Goal Name
+      type: object
+      required:
+      - id
+      - title
+      - date_added
+      - target_name
+      - goal_name
+      title: ClientSupervisionNoteTargetPhaseResponse
+    BehaviorResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: BehaviorResponse
+    HypothesizedFunctionResponse:
+      properties:
+        date_selected:
+          type: string
+          format: date
+          title: Date Selected
+        is_sensory:
+          type: boolean
+          title: Is Sensory
+        is_escape_or_avoidance:
+          type: boolean
+          title: Is Escape Or Avoidance
+        is_attention:
+          type: boolean
+          title: Is Attention
+        is_tangible:
+          type: boolean
+          title: Is Tangible
+        id:
+          type: integer
+          title: Id
+        date_edits_blocked:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Edits Blocked
+      type: object
+      required:
+      - date_selected
+      - is_sensory
+      - is_escape_or_avoidance
+      - is_attention
+      - is_tangible
+      - id
+      title: HypothesizedFunctionResponse
+    InstancesMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+        practice_duration_unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Practice Duration Unit
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: InstancesMethodMasteryCriteriaResponse
+    GoalResourceVersions:
+      properties:
+        baseline_measurement:
+          type: string
+          title: Baseline Measurement
+      type: object
+      required:
+      - baseline_measurement
+      title: GoalResourceVersions
+    BTParticipantsRequest:
+      properties:
+        primary:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Primary
+        secondary:
+          items:
+            type: integer
+          type: array
+          title: Secondary
+      type: object
+      required:
+      - secondary
+      title: BTParticipantsRequest
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    DurationMethodMeasurementUnits:
+      properties:
+        duration_unit:
+          $ref: '#/components/schemas/EventMeasurementUnitEnum'
+        duration_unit_formatted:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Duration Unit Formatted
+      type: object
+      required:
+      - duration_unit
+      title: DurationMethodMeasurementUnits
+    GoalNameResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        prefix:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prefix
+        id:
+          type: integer
+          title: Id
+        behavior_id:
+          type: integer
+          title: Behavior Id
+        behavior:
+          $ref: '#/components/schemas/BehaviorResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - label
+      - id
+      - behavior_id
+      - behavior
+      - is_active
+      title: GoalNameResponse
+    MasteryCriteriaChangeTypeEnum:
+      type: string
+      enum:
+      - decrease
+      - increase
+      title: MasteryCriteriaChangeTypeEnum
+    RateMethodMeasurementUnits:
+      properties:
+        interval_size:
+          type: integer
+          title: Interval Size
+        interval_unit:
+          $ref: '#/components/schemas/RateMethodMeasurementUnitsIntervalUnitEnum'
+      type: object
+      required:
+      - interval_size
+      - interval_unit
+      title: RateMethodMeasurementUnits
+    DurationMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        measurement_mode:
+          anyOf:
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaMeasurementModeEnum'
+          - type: 'null'
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - measurement_mode
+      - practice_duration_count
+      title: DurationMethodMasteryCriteriaResponse
+    MeasurementFrequency:
+      type: string
+      enum:
+      - Daily
+      - Twice a week
+      - Once a week
+      - Bi monthly
+      - Monthly
+      title: MeasurementFrequency
+    ClientSupervisionNoteTargetPhaseCreate:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+        title:
+          type: string
+          title: Title
+        date_added:
+          type: string
+          format: date
+          title: Date Added
+      type: object
+      required:
+      - target_id
+      - title
+      - date_added
+      title: ClientSupervisionNoteTargetPhaseCreate
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    TargetStageChangeLogResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        new_stage:
+          $ref: '#/components/schemas/TargetStageEnum'
+        old_stage:
+          anyOf:
+          - $ref: '#/components/schemas/TargetStageEnum'
+          - type: 'null'
+        date_stage_changed:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Stage Changed
+        reason_for_change:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason For Change
+        order:
+          type: number
+          title: Order
+        date_edits_blocked:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Edits Blocked
+      type: object
+      required:
+      - id
+      - new_stage
+      - order
+      title: TargetStageChangeLogResponse
+    DurationMethodMasteryCriteriaMeasurementModeEnum:
+      type: string
+      enum:
+      - average
+      - total
+      title: DurationMethodMasteryCriteriaMeasurementModeEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LocationEnumV1:
+      type: string
+      enum:
+      - HOME
+      - COMMUNITY
+      - TELEHEALTH
+      title: LocationEnumV1
+    ActivationLogResponse:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        reason:
+          type: string
+          title: Reason
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - date
+      - reason
+      - is_active
+      title: ActivationLogResponse
+    ClientParticipants:
+      properties:
+        parent:
+          type: boolean
+          title: Parent
+        sibling:
+          type: boolean
+          title: Sibling
+      type: object
+      required:
+      - parent
+      - sibling
+      title: ClientParticipants
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+    RateMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: RateMethodMasteryCriteriaResponse
+    GoalResponse:
+      properties:
+        goal_name_id:
+          type: integer
+          title: Goal Name Id
+        status_at_creation:
+          anyOf:
+          - $ref: '#/components/schemas/PresentStatusEnum'
+          - type: 'null'
+        date_introduced:
+          type: string
+          format: date
+          title: Date Introduced
+        current_level_at_creation:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current Level At Creation
+        baseline_at_creation:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Baseline At Creation
+        expected_mastery_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Expected Mastery Date
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+        id:
+          type: integer
+          title: Id
+        goal_name:
+          $ref: '#/components/schemas/GoalNameResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+        goal_type:
+          $ref: '#/components/schemas/GoalTypeEnum'
+        linked_goals:
+          anyOf:
+          - additionalProperties:
+              items:
+                $ref: '#/components/schemas/GoalSimpleResponse'
+              type: array
+            propertyNames:
+              $ref: '#/components/schemas/GoalTypeEnum'
+            type: object
+          - type: 'null'
+          title: Linked Goals
+        comparand_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Comparand Type
+        resource_versions:
+          $ref: '#/components/schemas/GoalResourceVersions'
+        mastery_criteria:
+          anyOf:
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/SkillAcquisitionGoalMasteryCriteriaV2Response'
+          title: Mastery Criteria
+        measurement_units:
+          anyOf:
+          - $ref: '#/components/schemas/DurationMethodMeasurementUnits'
+          - $ref: '#/components/schemas/RateMethodMeasurementUnits'
+          - $ref: '#/components/schemas/PercentageMethodMeasurementUnits'
+          - type: 'null'
+          title: Measurement Units
+        is_baseline_known_at_creation:
+          type: boolean
+          title: Is Baseline Known At Creation
+        is_current_level_known_at_creation:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Current Level Known At Creation
+        description:
+          anyOf:
+          - type: string
+            maxLength: 10000
+            minLength: 10
+          - type: 'null'
+          title: Description
+        operational_definition:
+          anyOf:
+          - type: string
+            maxLength: 10000
+            minLength: 10
+          - type: 'null'
+          title: Operational Definition
+        objective:
+          anyOf:
+          - type: string
+            maxLength: 10000
+            minLength: 10
+          - type: 'null'
+          title: Objective
+        antecedent_modifications:
+          anyOf:
+          - type: string
+            maxLength: 10000
+            minLength: 10
+          - type: 'null'
+          title: Antecedent Modifications
+        consequence_modifications:
+          anyOf:
+          - type: string
+            maxLength: 10000
+            minLength: 10
+          - type: 'null'
+          title: Consequence Modifications
+        hypothesized_functions:
+          items:
+            $ref: '#/components/schemas/HypothesizedFunctionResponse'
+          type: array
+          title: Hypothesized Functions
+        target_mastery:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 13.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Target Mastery
+        is_maladaptive_correction:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Maladaptive Correction
+        maladaptive_symptom_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Maladaptive Symptom Id
+        linked_skill_acquisition_goal_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Linked Skill Acquisition Goal Ids
+        targets:
+          items:
+            $ref: '#/components/schemas/DetailedTargetResponse'
+          type: array
+          title: Targets
+        reason:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Reason
+        is_linkable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Linkable
+      type: object
+      required:
+      - goal_name_id
+      - date_introduced
+      - data_collection_method
+      - id
+      - goal_name
+      - is_active
+      - goal_type
+      - resource_versions
+      - mastery_criteria
+      - measurement_units
+      - is_baseline_known_at_creation
+      - hypothesized_functions
+      - targets
+      title: GoalResponse
+    ClientResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        id:
+          type: integer
+          title: Id
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        street_address_latitude:
+          anyOf:
+          - type: number
+            maximum: 90.0
+            minimum: -90.0
+          - type: 'null'
+          title: Street Address Latitude
+        street_address_longitude:
+          anyOf:
+          - type: number
+            maximum: 180.0
+            minimum: -180.0
+          - type: 'null'
+          title: Street Address Longitude
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      title: ClientResponse
+    GoalSimpleResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        goal_name:
+          $ref: '#/components/schemas/GoalNameResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+      type: object
+      required:
+      - id
+      - goal_name
+      - is_active
+      - data_collection_method
+      title: GoalSimpleResponse
+    PercentageMethodMeasurementUnits:
+      properties:
+        total_attempts:
+          type: integer
+          title: Total Attempts
+      type: object
+      required:
+      - total_attempts
+      title: PercentageMethodMeasurementUnits
+    PresentStatusEnum:
+      type: string
+      enum:
+      - New Goal
+      - In Progress
+      - Maintenance
+      - Generalization
+      - Mastered
+      - On Hold
+      - Terminated / Discontinued
+      title: PresentStatusEnum
+    SettingEnumV1:
+      type: string
+      enum:
+      - In-person
+      - Remote
+      title: SettingEnumV1
+    ClientSupervisionUpdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        duration:
+          $ref: '#/components/schemas/ClientSupervisionDuration'
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsRequest'
+        clinical_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Status
+        response_to_treatment:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Response To Treatment
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+        overall_progress_toward_mastery:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Overall Progress Toward Mastery
+        modified_behaviour_intervention:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified Behaviour Intervention
+        assessed_modification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Assessed Modification
+        probed_new_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Probed New Skills
+        reviewed_and_analyzed_data:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Analyzed Data
+        reviewed_and_evaluated_session_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Session Notes
+        reviewed_and_evaluated_treatment_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Treatment Plan
+        evaluated_progress:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Evaluated Progress
+      type: object
+      required:
+      - date_start
+      - utc_offset
+      - client_id
+      - location
+      - duration
+      - setting
+      - bt_participants
+      title: ClientSupervisionUpdate
+    RateMethodMeasurementUnitsIntervalUnitEnum:
+      type: string
+      enum:
+      - minutes
+      - hours
+      - seconds
+      title: RateMethodMeasurementUnitsIntervalUnitEnum
+    SettingEnumV2:
+      type: string
+      enum:
+      - Telehealth
+      title: SettingEnumV2
+    BTParticipantsResponse:
+      properties:
+        primary:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderListResponse'
+          - type: 'null'
+        secondary:
+          items:
+            $ref: '#/components/schemas/ProviderListResponse'
+          type: array
+          title: Secondary
+      type: object
+      required:
+      - secondary
+      title: BTParticipantsResponse
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    GoalTypeEnum:
+      type: string
+      enum:
+      - behavior_reduction
+      - skill_acquisition
+      - caregiver
+      title: GoalTypeEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ClientSupervisionListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Duration
+        status:
+          type: string
+          title: Status
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsResponse'
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - client
+      - duration
+      - status
+      - bt_participants
+      title: ClientSupervisionListResponse
+    ClientSupervisionStop:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+        date_signed:
+          type: string
+          format: date-time
+          title: Date Signed
+      type: object
+      required:
+      - signature
+      - utc_offset_date_signed
+      - date_signed
+      title: ClientSupervisionStop
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
+    ClientSupervisionResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Duration
+        status:
+          type: string
+          title: Status
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsResponse'
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        participants_names:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Participants Names
+        participants:
+          anyOf:
+          - $ref: '#/components/schemas/ClientParticipants'
+          - type: 'null'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        clinical_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Status
+        response_to_treatment:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Response To Treatment
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+        overall_progress_toward_mastery:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Overall Progress Toward Mastery
+        modified_behaviour_intervention:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified Behaviour Intervention
+        assessed_modification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Assessed Modification
+        probed_new_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Probed New Skills
+        reviewed_and_analyzed_data:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Analyzed Data
+        reviewed_and_evaluated_session_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Session Notes
+        reviewed_and_evaluated_treatment_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Treatment Plan
+        evaluated_progress:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Evaluated Progress
+        parent_demonstrated_new_or_changed_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Demonstrated New Or Changed Skills
+        target_phase:
+          items:
+            $ref: '#/components/schemas/ClientSupervisionNoteTargetPhaseResponse'
+          type: array
+          title: Target Phase
+        active_treatment_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active Treatment Id
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - client
+      - duration
+      - status
+      - bt_participants
+      - client_id
+      - location
+      - setting
+      - bcba
+      - target_phase
+      title: ClientSupervisionResponse
+    ClientSupervisionPdfResponse:
+      properties:
+        document_url:
+          type: string
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: ClientSupervisionPdfResponse
+    ClientSupervisionDuration:
+      type: integer
+      enum:
+      - 900
+      - 1800
+      - 2700
+      - 3600
+      - 4500
+      - 5400
+      - 6300
+      - 7200
+      - 8100
+      - 9000
+      - 9900
+      - 10800
+      - 11700
+      - 12600
+      - 13500
+      - 14400
+      title: ClientSupervisionDuration
+    QABillingStatusEnum:
+      type: string
+      enum:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
+    EventMeasurementUnitEnum:
+      type: string
+      enum:
+      - SECOND
+      - MINUTE
+      - HOUR
+      title: EventMeasurementUnitEnum
+    ClientSupervisionBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: ClientSupervisionBackdate
+    ProviderStatusEnum:
+      type: string
+      enum:
+      - Not Training
+      - Training
+      title: ProviderStatusEnum
+    ProviderResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+        id:
+          type: integer
+          title: Id
+        roles:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Roles
+          default: []
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        qa_billing_status:
+          $ref: '#/components/schemas/QABillingStatusEnum'
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      - qa_billing_status
+      title: ProviderResponse
+    PercentageMethodMasteryCriteriaResponse:
+      properties:
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+        total_attempts:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Attempts
+      type: object
+      required:
+      - desired_amount
+      - practice_duration_count
+      title: PercentageMethodMasteryCriteriaResponse
+    ClientSupervisionCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          $ref: '#/components/schemas/LocationEnumV2'
+        duration:
+          $ref: '#/components/schemas/ClientSupervisionDuration'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsRequest'
+      type: object
+      required:
+      - date_start
+      - utc_offset
+      - client_id
+      - location
+      - duration
+      - setting
+      - bt_participants
+      title: ClientSupervisionCreate
+    SkillAcquisitionGoalMasteryCriteriaV2Response:
+      properties:
+        acquisition:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Acquisition
+        generalization:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Generalization
+        maintenance:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Maintenance
+        maintenance_frequency:
+          anyOf:
+          - $ref: '#/components/schemas/MeasurementFrequency'
+          - type: 'null'
+      type: object
+      required:
+      - acquisition
+      - generalization
+      - maintenance
+      title: SkillAcquisitionGoalMasteryCriteriaV2Response
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    DetailedTargetResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        order:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Order
+        instruction:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Instruction
+        description:
+          anyOf:
+          - type: string
+            maxLength: 2000
+            minLength: 2
+          - type: 'null'
+          title: Description
+        stage:
+          anyOf:
+          - $ref: '#/components/schemas/TargetStageEnum'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+        reason:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Reason
+        stage_change_logs:
+          items:
+            $ref: '#/components/schemas/TargetStageChangeLogResponse'
+          type: array
+          title: Stage Change Logs
+        is_goal_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Goal Active
+        is_goal_linkable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Goal Linkable
+        last_activation_log:
+          anyOf:
+          - $ref: '#/components/schemas/ActivationLogResponse'
+          - type: 'null'
+        is_event_duration_required:
+          type: boolean
+          title: Is Event Duration Required
+        event_duration_measurement_unit:
+          anyOf:
+          - $ref: '#/components/schemas/EventMeasurementUnitEnum'
+          - type: 'null'
+      type: object
+      required:
+      - label
+      - id
+      - stage_change_logs
+      - is_event_duration_required
+      title: DetailedTargetResponse
+    ClientSupervisionUtilizationResponse:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          type: integer
+          title: Duration
+        count:
+          type: integer
+          title: Count
+      type: object
+      required:
+      - client_id
+      - duration
+      - count
+      title: ClientSupervisionUtilizationResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

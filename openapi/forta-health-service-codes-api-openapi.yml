@@ -1,0 +1,170 @@
+openapi: 3.2.0
+info:
+  title: Fast Service Codes API
+  version: 0.1.0
+tags:
+- name: service_codes
+paths:
+  /api/v1/service_codes/:
+    post:
+      tags:
+      - service_codes
+      summary: Create Service Code
+      operationId: create_service_code_api_v1_service_codes__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceCodeBase'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceCodeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - service_codes
+      summary: Get Service Codes
+      operationId: get_service_codes_api_v1_service_codes__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: is_timesheet_usable
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Timesheet Usable
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceCodeResponse'
+                title: Response Get Service Codes Api V1 Service Codes  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ServiceCodeResponse:
+      properties:
+        code:
+          type: string
+          title: Code
+        label:
+          type: string
+          title: Label
+        is_billable:
+          type: boolean
+          title: Is Billable
+        is_timesheet_usable:
+          type: boolean
+          title: Is Timesheet Usable
+        type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          default: CPT
+        hcpcs_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hcpcs Code
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - code
+      - label
+      - is_billable
+      - is_timesheet_usable
+      - id
+      title: ServiceCodeResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ServiceCodeBase:
+      properties:
+        code:
+          type: string
+          title: Code
+        label:
+          type: string
+          title: Label
+        is_billable:
+          type: boolean
+          title: Is Billable
+        is_timesheet_usable:
+          type: boolean
+          title: Is Timesheet Usable
+        type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          default: CPT
+        hcpcs_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hcpcs Code
+      type: object
+      required:
+      - code
+      - label
+      - is_billable
+      - is_timesheet_usable
+      title: ServiceCodeBase
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

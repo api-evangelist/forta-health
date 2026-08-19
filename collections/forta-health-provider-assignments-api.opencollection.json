@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Provider Assignments API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "provider_assignments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Provider Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/provider_assignments/",
+            "params": [
+              {
+                "name": "active_only",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clinical_relationship",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Provider Assignments"
+        },
+        {
+          "info": {
+            "name": "Create Provider Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/provider_assignments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Provider Assignment"
+        },
+        {
+          "info": {
+            "name": "Patch Provider Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/provider_assignments/:provider_assignment_id/",
+            "params": [
+              {
+                "name": "provider_assignment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Provider Assignment"
+        },
+        {
+          "info": {
+            "name": "Delete Provider Assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/provider_assignments/:provider_assignment_id/",
+            "params": [
+              {
+                "name": "provider_assignment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Provider Assignment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

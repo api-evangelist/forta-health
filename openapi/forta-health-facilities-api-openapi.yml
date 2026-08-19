@@ -1,0 +1,181 @@
+openapi: 3.2.0
+info:
+  title: Fast Facilities API
+  version: 0.1.0
+tags:
+- name: facilities
+paths:
+  /api/v1/facilities/:
+    get:
+      tags:
+      - facilities
+      summary: Get Facilities
+      operationId: get_facilities_api_v1_facilities__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FacilityResponse'
+                type: array
+                title: Response Get Facilities Api V1 Facilities  Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - facilities
+      summary: Create Facility
+      operationId: create_facility_api_v1_facilities__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacilityCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    FacilityCreate:
+      properties:
+        label:
+          type: string
+          title: Label
+        tin:
+          type: string
+          title: Tin
+        npi:
+          type: string
+          title: Npi
+        street_address_line_one:
+          type: string
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          type: string
+          title: Street Address Zip
+        street_address_city:
+          type: string
+          title: Street Address City
+        street_address_state:
+          type: string
+          maxLength: 2
+          minLength: 2
+          title: Street Address State
+        group_medicaid_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Medicaid Id
+      type: object
+      required:
+      - label
+      - tin
+      - npi
+      - street_address_line_one
+      - street_address_zip
+      - street_address_city
+      - street_address_state
+      title: FacilityCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    FacilityResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        tin:
+          type: string
+          title: Tin
+        npi:
+          type: string
+          title: Npi
+        street_address_line_one:
+          type: string
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          type: string
+          title: Street Address Zip
+        street_address_city:
+          type: string
+          title: Street Address City
+        street_address_state:
+          type: string
+          maxLength: 2
+          minLength: 2
+          title: Street Address State
+        group_medicaid_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Medicaid Id
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - tin
+      - npi
+      - street_address_line_one
+      - street_address_zip
+      - street_address_city
+      - street_address_state
+      - id
+      title: FacilityResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

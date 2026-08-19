@@ -1,0 +1,566 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Onboarding Questionnaires API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "onboarding_questionnaires",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Onboarding Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send onboarding questionnaire.\n\nCreates a questionnaire on first send for the (provider, client) pair. On resend,\nreturns the existing row for that pair. ``date_sent`` (stamped server-side as a\nUTC-aware datetime at send time) and ``date_sent_utc_offset`` are refreshed on resend\nexcept when the questionnaire is COMPLETED."
+        },
+        {
+          "info": {
+            "name": "List Onboarding Questionnaires",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by provider id (must be > 0)."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by client id (must be > 0)."
+              },
+              {
+                "name": "date_start",
+                "value": "",
+                "type": "query",
+                "description": "Only include questionnaires with date_sent on/after this date."
+              },
+              {
+                "name": "date_end",
+                "value": "",
+                "type": "query",
+                "description": "Only include questionnaires with date_sent on/before this date."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by questionnaire status."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List onboarding questionnaires (basic columns only, newest date_sent first).\n\nEach returned row also includes a lightweight ``provider`` and ``client`` summary\n(id/name/email) for the linked provider and client.\n\nFilter by ``provider_id``, ``client_id``, ``status``, and a ``date_sent`` window\n(``date_start`` inclusive, ``date_end`` inclusive of the whole day). The window is\npadded by one extra day on each side so records that land on an adjacent UTC day\n(because ``date_sent`` is stored as naive "
+        },
+        {
+          "info": {
+            "name": "Get Onboarding Questionnaire By Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/by_provider/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path",
+                "description": "Provider id (must be > 0)"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "When set, narrows the result to this provider and client (at most one row). When omitted, returns every questionnaire for the provider."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "All questionnaires for the provider (newest date_sent first).\n\nA provider usually has several clients assigned, so this returns every questionnaire\nat once; pass ``client_id`` to narrow to a single client.\n\nCallers with broad visibility (an overriding role, or the provider looking up their\nown id) get the real outcome: an empty list when none exists and ``404`` if the\nprovider is missing. Any other caller only sees the questionnaires they are authorized\nto read (an active provider assignment to "
+        },
+        {
+          "info": {
+            "name": "Get Onboarding Questionnaire By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Full questionnaire with nested sections, or 404 if not found.\n403 unless the caller holds an overriding role, is the assigned provider, or has\nan active provider assignment to the questionnaire's client."
+        },
+        {
+          "info": {
+            "name": "Patch Onboarding Questionnaire General Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/general_info",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Merge partial general info for the questionnaire (omit fields to leave unchanged).\n403 if caller is not the assigned provider; 404 if questionnaire missing."
+        },
+        {
+          "info": {
+            "name": "Patch Onboarding Questionnaire Insurance Primary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/insurance/primary",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Merge partial primary insurance (insurance_type PRIMARY). 403/404 like general_info."
+        },
+        {
+          "info": {
+            "name": "Patch Onboarding Questionnaire Insurance Secondary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/insurance/secondary",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Merge partial secondary insurance (insurance_type SECONDARY). 403/404 like general_info."
+        },
+        {
+          "info": {
+            "name": "Delete Onboarding Questionnaire Insurance Secondary",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/insurance/secondary",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Drop secondary insurance row. 204 either way; 403/404 same as PATCH insurance."
+        },
+        {
+          "info": {
+            "name": "Patch Onboarding Questionnaire Insurance Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/insurance/preferences",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Save no-secondary choice; clears secondary row when true. 403/404 like other insurance PATCH."
+        },
+        {
+          "info": {
+            "name": "Extract Onboarding Questionnaire Insurance Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/insurance-card/extract",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Extract insurance fields from saved front/back card images (prefill only; not persisted).\n403 if caller is not the assigned provider; 404 if questionnaire missing."
+        },
+        {
+          "info": {
+            "name": "Create Onboarding Questionnaire Insurance Card Extraction Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/insurance-card/extraction-jobs",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create async insurance card extraction job; poll GET extraction-jobs/{job_id} for results."
+        },
+        {
+          "info": {
+            "name": "Get Onboarding Questionnaire Insurance Card Extraction Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/insurance-card/extraction-jobs/:job_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Extraction job id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Poll extraction job status and result. 403 unless the caller holds an overriding\nrole, is the assigned provider, or has an active provider assignment to the\nquestionnaire's client."
+        },
+        {
+          "info": {
+            "name": "Patch referral section",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/referral",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Merge referral fields; lists replace the whole list ([] clears). Empty body with no saved row returns the same empty shell as GET; with a saved row, returns the current section unchanged."
+        },
+        {
+          "info": {
+            "name": "Patch agreement section",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/agreement",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially updates agreement; empty body is a no-op. Idempotent re-PATCH of the same\nvalues does not error. 403 if caller is not the assigned provider; 404 if questionnaire\nid is unknown; 400 when questionnaire status is COMPLETED."
+        },
+        {
+          "info": {
+            "name": "Submit Onboarding Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/submit",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validate required sections then set status to COMPLETED (idempotent if already done).\n403 if caller is not the assigned provider; 404 if questionnaire missing; 400 if\nany required section is incomplete."
+        },
+        {
+          "info": {
+            "name": "Update Onboarding Questionnaire Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/status",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Forward-only status chain (STARTED→IN_PROGRESS); same status is a no-op. Completing\na questionnaire is not allowed here — use POST /{id}/submit, which validates required\nsections and records date_concluded; requesting COMPLETED returns 400. 400/422/403/404\non bad transition, invalid stored status, wrong provider, or id."
+        },
+        {
+          "info": {
+            "name": "List Onboarding Questionnaire Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/documents/",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Metadata-only list, oldest first; empty list if none. No presigned URLs here (use\nGET by document id). 404/422 if questionnaire invalid. 403 unless the caller holds an\noverriding role, is the assigned provider, or has an active provider assignment to the\nquestionnaire's client."
+        },
+        {
+          "info": {
+            "name": "Upload Onboarding Questionnaire Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/documents/",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload PDF/PNG/JPEG to S3 and save metadata (title, type, size rules in service).\nReturns the full questionnaire document list (oldest first), same shape as GET\n``.../documents/``, so clients can refresh UI without a follow-up list call.\n404/422/400/403 on bad questionnaire id, validation, or wrong provider."
+        },
+        {
+          "info": {
+            "name": "Get Onboarding Questionnaire Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/documents/:document_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Questionnaire document id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "One document's metadata plus a presigned URL; 404 unless document belongs to this\nquestionnaire (no cross-scope leaks). 422 on non-positive ids. 403 unless the caller\nholds an overriding role, is the assigned provider, or has an active provider\nassignment to the questionnaire's client."
+        },
+        {
+          "info": {
+            "name": "Delete Onboarding Questionnaire Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/onboarding_questionnaires/:questionnaire_id/documents/:document_id",
+            "params": [
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path",
+                "description": "Onboarding questionnaire id (must be > 0)"
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "Questionnaire document id (must be > 0)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete DB row then best-effort S3 cleanup; extraction jobs referencing the document\nare removed first. Returns 204 once the DB row is gone; S3 failures are logged only.\n404/422/403 on missing scope, bad ids, or wrong provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

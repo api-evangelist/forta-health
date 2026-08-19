@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Payor API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "payor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Payors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/payors/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Payors"
+        },
+        {
+          "info": {
+            "name": "Create Payor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/payors/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Payor"
+        },
+        {
+          "info": {
+            "name": "Get Payor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/payors/:payor_id",
+            "params": [
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Payor"
+        },
+        {
+          "info": {
+            "name": "Update Payor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/payors/:payor_id",
+            "params": [
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Payor"
+        },
+        {
+          "info": {
+            "name": "Create Payor Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/payors/:payor_id/contracts/",
+            "params": [
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Payor Contract"
+        },
+        {
+          "info": {
+            "name": "Update Payor Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/payors/:payor_id/contracts/:contract_id",
+            "params": [
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Payor Contract"
+        },
+        {
+          "info": {
+            "name": "Delete Payor Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/payors/:payor_id/contracts/:contract_id",
+            "params": [
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Payor Contract"
+        },
+        {
+          "info": {
+            "name": "Create Service Code Description",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/payors/:payor_id/service_code_descriptions/",
+            "params": [
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Service Code Description"
+        },
+        {
+          "info": {
+            "name": "Update Service Code Description",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/payors/:payor_id/service_code_descriptions/:service_code_description_id/",
+            "params": [
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_code_description_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Service Code Description"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

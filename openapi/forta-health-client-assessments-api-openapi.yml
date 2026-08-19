@@ -1,0 +1,930 @@
+openapi: 3.2.0
+info:
+  title: Fast Client Assessments API
+  version: 0.1.0
+tags:
+- name: client_assessments
+paths:
+  /api/v1/client_assessments/:
+    post:
+      tags:
+      - client_assessments
+      summary: Create Client Assessment
+      operationId: create_client_assessment_api_v1_client_assessments__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientAssessmentCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientAssessmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - client_assessments
+      summary: Fetch Client Assessments
+      operationId: fetch_client_assessments_api_v1_client_assessments__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: service_code
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Code
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/AssessmentStatusEnum'
+          - type: 'null'
+          title: Status
+      - name: action_required
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Action Required
+      - name: client_clinical_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Client Clinical Status
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientAssessmentResponse'
+                title: Response Fetch Client Assessments Api V1 Client Assessments  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/{client_assessment_id}/:
+    patch:
+      tags:
+      - client_assessments
+      summary: Patch Client Assessment
+      operationId: patch_client_assessment_api_v1_client_assessments__client_assessment_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientAssessmentNoteUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientAssessmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - client_assessments
+      summary: Fetch Client Assessment
+      operationId: fetch_client_assessment_api_v1_client_assessments__client_assessment_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientAssessmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - client_assessments
+      summary: Delete Client Assessment
+      operationId: delete_client_assessment_api_v1_client_assessments__client_assessment_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/{client_assessment_id}/stop/:
+    put:
+      tags:
+      - client_assessments
+      summary: Stop Client Assessment
+      operationId: stop_client_assessment_api_v1_client_assessments__client_assessment_id__stop__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientAssessmentStop'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/claim_history/:
+    get:
+      tags:
+      - client_assessments
+      summary: Fetch Assessments With Claim History
+      operationId: fetch_assessments_with_claim_history_api_v1_client_assessments_claim_history__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: End
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientAssessmentResponseWithClaimHistory'
+                title: Response Fetch Assessments With Claim History Api V1 Client Assessments Claim History  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/assisting_assessment_claim_history/:
+    get:
+      tags:
+      - client_assessments
+      summary: Fetch Assisting Assessments With Claim History
+      operationId: fetch_assisting_assessments_with_claim_history_api_v1_client_assessments_assisting_assessment_claim_history__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      - name: start
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: Start
+      - name: end
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: End
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientAssessmentResponseWithClaimHistory'
+                title: Response Fetch Assisting Assessments With Claim History Api V1 Client Assessments
+                  Assisting Assessment Claim History  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/{client_assessment_id}/download/:
+    get:
+      tags:
+      - client_assessments
+      summary: Download Client Assessment Pdf
+      operationId: download_client_assessment_pdf_api_v1_client_assessments__client_assessment_id__download__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientAssessmentPdfUrl'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/{client_assessment_id}/make_unbillable/:
+    put:
+      tags:
+      - client_assessments
+      summary: Make Assessment Unbillable
+      operationId: make_assessment_unbillable_api_v1_client_assessments__client_assessment_id__make_unbillable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/{client_assessment_id}/make_billable/:
+    put:
+      tags:
+      - client_assessments
+      summary: Make Assessment Billable
+      operationId: make_assessment_billable_api_v1_client_assessments__client_assessment_id__make_billable__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/{client_assessment_id}/edit/:
+    put:
+      tags:
+      - client_assessments
+      summary: Edit Client Assessment
+      operationId: edit_client_assessment_api_v1_client_assessments__client_assessment_id__edit__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_assessments/{client_assessment_id}/backdate/:
+    put:
+      tags:
+      - client_assessments
+      summary: Backdate Client Assessment
+      operationId: backdate_client_assessment_api_v1_client_assessments__client_assessment_id__backdate__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_assessment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Assessment Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientAssessmentBackdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    ClientAssessmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          $ref: '#/components/schemas/AssessmentDuration'
+        location:
+          $ref: '#/components/schemas/ClientLocationEnum'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        activity_conducted:
+          anyOf:
+          - $ref: '#/components/schemas/ActivityConducted'
+          - type: 'null'
+        notes:
+          anyOf:
+          - type: string
+            minLength: 120
+          - type: 'null'
+          title: Notes
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/AssessmentStatusEnum'
+        is_billable:
+          type: boolean
+          title: Is Billable
+        signature:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Signature
+        utc_offset_date_signed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset Date Signed
+        date_signed:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Signed
+        date_deleted:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Deleted
+        service_code:
+          type: string
+          title: Service Code
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - client_id
+      - duration
+      - location
+      - delivery_method
+      - id
+      - client
+      - provider
+      - status
+      - is_billable
+      - service_code
+      title: ClientAssessmentResponse
+    ClientAssessmentStop:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+      type: object
+      required:
+      - signature
+      - utc_offset_date_signed
+      title: ClientAssessmentStop
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClientAssessmentResponseWithClaimHistory:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          $ref: '#/components/schemas/AssessmentDuration'
+        location:
+          $ref: '#/components/schemas/ClientLocationEnum'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/AssessmentStatusEnum'
+        is_billable:
+          type: boolean
+          title: Is Billable
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - client_id
+      - duration
+      - location
+      - delivery_method
+      - id
+      - client
+      - provider
+      - status
+      - is_billable
+      - claim_history
+      title: ClientAssessmentResponseWithClaimHistory
+    AssessmentStatusEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      title: AssessmentStatusEnum
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    ClientAssessmentPdfUrl:
+      properties:
+        document_url:
+          type: string
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: ClientAssessmentPdfUrl
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+    ClientLocationEnum:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: ClientLocationEnum
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    ClientAssessmentNoteUpdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          $ref: '#/components/schemas/AssessmentDuration'
+        location:
+          $ref: '#/components/schemas/ClientLocationEnum'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        activity_conducted:
+          anyOf:
+          - $ref: '#/components/schemas/ActivityConducted'
+          - type: 'null'
+        notes:
+          anyOf:
+          - type: string
+            minLength: 120
+          - type: 'null'
+          title: Notes
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - client_id
+      - duration
+      - location
+      - delivery_method
+      title: ClientAssessmentNoteUpdate
+    AssessmentDuration:
+      type: integer
+      enum:
+      - 900
+      - 1800
+      - 2700
+      - 3600
+      - 4500
+      - 5400
+      - 6300
+      - 7200
+      title: AssessmentDuration
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ActivityConducted:
+      properties:
+        is_assessment_administered:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Assessment Administered
+        is_findings_of_assessment_discussed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Findings Of Assessment Discussed
+        is_recommendations_based_on_assessment_discussed:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Recommendations Based On Assessment Discussed
+        is_past_data_analyzed_non_face_to_face:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Past Data Analyzed Non Face To Face
+        is_assessment_scored_or_interpreted:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Assessment Scored Or Interpreted
+        is_report_or_treatment_plan_prepared:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Report Or Treatment Plan Prepared
+      type: object
+      title: ActivityConducted
+    app__api__schemas__client_assessment__DeliveryMethodEnum:
+      type: string
+      enum:
+      - Telehealth
+      title: DeliveryMethodEnum
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClientAssessmentBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: ClientAssessmentBackdate
+    ClientAssessmentCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          $ref: '#/components/schemas/AssessmentDuration'
+        location:
+          $ref: '#/components/schemas/ClientLocationEnum'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - client_id
+      - duration
+      - location
+      - delivery_method
+      title: ClientAssessmentCreate
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

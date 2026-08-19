@@ -1,0 +1,307 @@
+openapi: 3.2.0
+info:
+  title: Fast Assessment Surveys API
+  version: 0.1.0
+tags:
+- name: assessment_surveys
+paths:
+  /api/v1/assessment_surveys/:
+    post:
+      tags:
+      - assessment_surveys
+      summary: Send Assessment
+      description: "Sends an autism analytica survey to a client's BT\nOnly allows 1 survey to be sent\
+        \ per client ever for now\nby enforcing uniqueness on client_id in the database\nRoles allowed:\
+        \ pRBT, BCBA, Admin\nArgs:\n    request:\n    client_model_converter:\n    assessment_survey_service:\n\
+        \    provider_assignment_repo:\n    provider:\nReturns:\n    Client (ClientSchema): client schema\
+        \ defined in pydantic\nRaises:\n    404: Client id not found"
+      operationId: send_assessment_api_v1_assessment_surveys__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: model_path
+        in: query
+        required: false
+        schema:
+          type: string
+          default: /src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json
+          title: Model Path
+      - name: metadata_path
+        in: query
+        required: false
+        schema:
+          type: string
+          default: /src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml
+          title: Metadata Path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentSurveyCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentSurveyResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - assessment_surveys
+      summary: Get Treaat Prediction
+      description: "Gets the latest treaat prediction for a client based off of the latest assessment\
+        \ survey\n\nReturns\nArgs:\n    assessment_survey_service:\n    client_model_converter:\n    provider_assignment_repo:\n\
+        \    client_id:\n    provider:\n\nReturns:"
+      operationId: get_treaat_prediction_api_v1_assessment_surveys__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Client Id
+      - name: model_path
+        in: query
+        required: false
+        schema:
+          type: string
+          default: /src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json
+          title: Model Path
+      - name: metadata_path
+        in: query
+        required: false
+        schema:
+          type: string
+          default: /src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml
+          title: Metadata Path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentSurveyResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ClientResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        id:
+          type: integer
+          title: Id
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        street_address_latitude:
+          anyOf:
+          - type: number
+            maximum: 90.0
+            minimum: -90.0
+          - type: 'null'
+          title: Street Address Latitude
+        street_address_longitude:
+          anyOf:
+          - type: number
+            maximum: 180.0
+            minimum: -180.0
+          - type: 'null'
+          title: Street Address Longitude
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      title: ClientResponse
+    AssessmentSurveyResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        recipient_email:
+          type: string
+          title: Recipient Email
+        date_survey_sent:
+          type: string
+          format: date-time
+          title: Date Survey Sent
+        assessment_data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Assessment Data
+        treaat_prediction:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Treaat Prediction
+        date_predicted:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Predicted
+      type: object
+      required:
+      - id
+      - client
+      - recipient_email
+      - date_survey_sent
+      title: AssessmentSurveyResponse
+    AssessmentSurveyCreate:
+      properties:
+        bt_provider_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bt Provider Id
+        client_id:
+          type: integer
+          title: Client Id
+        overriding_email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Overriding Email
+      type: object
+      required:
+      - client_id
+      title: AssessmentSurveyCreate
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

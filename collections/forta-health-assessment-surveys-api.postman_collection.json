@@ -1,0 +1,409 @@
+{
+  "item": [
+    {
+      "id": "8f1e9c0c-c977-4ede-b642-457058374064",
+      "name": "assessment_surveys",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e516163-e5ba-4632-84a2-4d1da212a4e8",
+          "name": "Send Assessment",
+          "request": {
+            "name": "Send Assessment",
+            "description": {
+              "content": "Sends an autism analytica survey to a client's BT\nOnly allows 1 survey to be sent per client ever for now\nby enforcing uniqueness on client_id in the database\nRoles allowed: pRBT, BCBA, Admin\nArgs:\n    request:\n    client_model_converter:\n    assessment_survey_service:\n    provider_assignment_repo:\n    provider:\nReturns:\n    Client (ClientSchema): client schema defined in pydantic\nRaises:\n    404: Client id not found",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "assessment_surveys",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "model_path",
+                  "value": "/src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_path",
+                  "value": "/src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"overriding_email\": \"<email>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c2ee7707-40c6-4f41-9ab2-24ab77294a0e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assessment_surveys",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json"
+                    },
+                    {
+                      "key": "metadata_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"overriding_email\": \"<email>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5556,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1952-04-26\",\n    \"id\": 9427,\n    \"clinical_status\": \"CLINICAL\",\n    \"middle_name\": \"string\",\n    \"email\": \"tHBksi0SYZuOK@hnDTMjzUxvIhqXmdhEHPYvwRXUE.acdt\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"TERMINATED\",\n    \"street_address_latitude\": -63.671430621655574,\n    \"street_address_longitude\": 34.60575647629392\n  },\n  \"recipient_email\": \"string\",\n  \"date_survey_sent\": \"2017-12-21T22:13:31.318Z\",\n  \"assessment_data\": {\n    \"key_0\": 7817,\n    \"key_1\": 3585\n  },\n  \"treaat_prediction\": {\n    \"key_0\": 6982.198299862635\n  },\n  \"date_predicted\": \"1970-06-22T22:16:58.611Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25d6ece0-d0fe-4351-b220-07668b5ca929",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assessment_surveys",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json"
+                    },
+                    {
+                      "key": "metadata_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<integer>\",\n  \"bt_provider_id\": \"<integer>\",\n  \"overriding_email\": \"<email>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f1bb017-9c5e-4c2a-9d09-b976e7fc070b",
+          "name": "Get Treaat Prediction",
+          "request": {
+            "name": "Get Treaat Prediction",
+            "description": {
+              "content": "Gets the latest treaat prediction for a client based off of the latest assessment survey\n\nReturns\nArgs:\n    assessment_survey_service:\n    client_model_converter:\n    provider_assignment_repo:\n    client_id:\n    provider:\n\nReturns:",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "assessment_surveys",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "model_path",
+                  "value": "/src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata_path",
+                  "value": "/src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "677c14e5-d2f2-4b0f-9217-123f20dd6fbb",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assessment_surveys",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "model_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json"
+                    },
+                    {
+                      "key": "metadata_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5556,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1952-04-26\",\n    \"id\": 9427,\n    \"clinical_status\": \"CLINICAL\",\n    \"middle_name\": \"string\",\n    \"email\": \"tHBksi0SYZuOK@hnDTMjzUxvIhqXmdhEHPYvwRXUE.acdt\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"TERMINATED\",\n    \"street_address_latitude\": -63.671430621655574,\n    \"street_address_longitude\": 34.60575647629392\n  },\n  \"recipient_email\": \"string\",\n  \"date_survey_sent\": \"2017-12-21T22:13:31.318Z\",\n  \"assessment_data\": {\n    \"key_0\": 7817,\n    \"key_1\": 3585\n  },\n  \"treaat_prediction\": {\n    \"key_0\": 6982.198299862635\n  },\n  \"date_predicted\": \"1970-06-22T22:16:58.611Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfed647e-b870-42ec-a2a2-96bd281825fb",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assessment_surveys",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "model_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/treaat_10feats_12112023_id_6zy15xf9.json"
+                    },
+                    {
+                      "key": "metadata_path",
+                      "value": "/src/app/services/assessment_survey/treaat_inference/model/metadata_10feats_12112023_id_6zy15xf9.yml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9185ec09-3cdc-4696-a1f6-7811e17ef982",
+    "name": "Fast Assessment Surveys API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Facilities API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "facilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Facilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/facilities/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Facilities"
+        },
+        {
+          "info": {
+            "name": "Create Facility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/facilities/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Facility"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

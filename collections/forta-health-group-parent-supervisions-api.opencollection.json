@@ -1,0 +1,620 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Group Parent Supervisions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "group_parent_supervisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Group Parent Supervisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action_required",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_clinical_status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Group Parent Supervisions"
+        },
+        {
+          "info": {
+            "name": "Create Group Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Group Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Create Family Attendance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/family_attendance/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Family Attendance"
+        },
+        {
+          "info": {
+            "name": "Create Family Training Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/family_attendance/:family_attendance_id/topics/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "family_attendance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Family Training Topic"
+        },
+        {
+          "info": {
+            "name": "Delete Family Training Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/family_attendance/:family_attendance_id/topics/:topic_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "family_attendance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Family Training Topic"
+        },
+        {
+          "info": {
+            "name": "Create Training Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/training_topics/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Training Topic"
+        },
+        {
+          "info": {
+            "name": "Create Bulk Family Training Topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/bulk_family_training_topics/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Bulk Family Training Topics"
+        },
+        {
+          "info": {
+            "name": "Fetch Group Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Group Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Patch Group Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Group Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Delete Group Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Group Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Fetch Training Topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/training_topics/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Training Topics"
+        },
+        {
+          "info": {
+            "name": "Update Family Attendance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/family_attendance/:family_attendance_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "family_attendance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Family Attendance"
+        },
+        {
+          "info": {
+            "name": "Delete Family Attendance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/family_attendance/:family_attendance_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "family_attendance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Family Attendance"
+        },
+        {
+          "info": {
+            "name": "Update Training Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/training_topics/:training_topic_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "training_topic_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Training Topic"
+        },
+        {
+          "info": {
+            "name": "Delete Training Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/training_topics/:training_topic_id/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "training_topic_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Training Topic"
+        },
+        {
+          "info": {
+            "name": "Fetch Group Parent Supervisions With Claim History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/claim_history/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Group Parent Supervisions With Claim History"
+        },
+        {
+          "info": {
+            "name": "Stop Group Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/stop/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop Group Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Download Group Parent Supervision Pdfs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/download/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download Group Parent Supervision Pdfs"
+        },
+        {
+          "info": {
+            "name": "Regenerate Group Parent Supervision Pdfs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/pdf_regenerate/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Regenerate Group Parent Supervision Pdfs"
+        },
+        {
+          "info": {
+            "name": "Edit Group Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/edit/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Group Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Backdate Group Parent Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/backdate/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Backdate Group Parent Supervision"
+        },
+        {
+          "info": {
+            "name": "Make Group Parent Supervision Unbillable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/make_unbillable/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Group Parent Supervision Unbillable"
+        },
+        {
+          "info": {
+            "name": "Make Group Parent Supervision Billable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_parent_supervisions/:group_parent_supervision_id/make_billable/",
+            "params": [
+              {
+                "name": "group_parent_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Group Parent Supervision Billable"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

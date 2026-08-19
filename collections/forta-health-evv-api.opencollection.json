@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Evv API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "evv",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Capture Evv Gps",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/evv/capture_gps",
+            "headers": [
+              {
+                "name": "X-EVV-Token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Capture Evv Gps"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Feature Flags API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "feature_flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Feature Flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/feature_flags/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Feature Flags"
+        },
+        {
+          "info": {
+            "name": "Set Feature Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/feature_flags/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Feature Flag"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

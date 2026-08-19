@@ -1,0 +1,2555 @@
+{
+  "item": [
+    {
+      "id": "1cab5d0e-150d-49f3-9377-daf869b8310a",
+      "name": "claim_invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0cf04e86-d417-45b1-b74b-095a15f88325",
+          "name": "Generate Invoice Preview",
+          "request": {
+            "name": "Generate Invoice Preview",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                "preview",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<integer>\",\n  \"payee_provider_id\": \"<integer>\",\n  \"claim_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"date_due\": \"<date>\",\n  \"discount\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1df4b7df-e79a-472e-b849-39784c835a0e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    "preview",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<integer>\",\n  \"payee_provider_id\": \"<integer>\",\n  \"claim_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"date_due\": \"<date>\",\n  \"discount\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5479,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"female\",\n    \"dob\": \"2013-05-26\",\n    \"id\": 6030,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"middle_name\": \"string\",\n    \"email\": \"9MjRTyiiuM@FHVHju.va\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"RESIGNED\",\n    \"street_address_latitude\": 24.47966710574258,\n    \"street_address_longitude\": 16.972928231549616\n  },\n  \"payee\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1994-01-15\",\n    \"id\": 9746,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"qa_billing_status\": \"Billable\",\n    \"middle_name\": \"string\",\n    \"email\": \"sOYDOWCWGaKdBz@cTYgtBeENlPyQMPFYQAlNtXlvhqf.aks\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"npi\": \"string\",\n    \"certification\": \"string\",\n    \"date_certification_start\": \"1970-04-11\",\n    \"date_certification_end\": \"2008-08-04\",\n    \"state_license\": \"string\",\n    \"caqh_id\": \"string\",\n    \"payroll_id\": \"string\",\n    \"employment_type\": \"Hourly, full-time\",\n    \"job_title\": \"Registered Behavior Technician\",\n    \"preferred_language\": \"string\",\n    \"supported_languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"status\": \"Training\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"clinical_status_reason\": \"DISCHARGED\"\n  },\n  \"biller\": {\n    \"id\": 3227,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"58fGbE@XUSJkZpspVhfwRQBtIFefCHgfFtj.im\",\n    \"status\": \"string\",\n    \"clinical_status\": \"CLINICAL\"\n  },\n  \"status\": \"Partial payment\",\n  \"amount_billed\": 6944.839057590161,\n  \"amount_due\": 7127.365003371462,\n  \"date_due\": \"1975-11-17\",\n  \"net_billed_amount\": 5202.690861528945,\n  \"billing_facility\": \"string\",\n  \"claims\": [\n    {\n      \"units\": 8002,\n      \"is_amount_paid_to_subscriber\": false,\n      \"claim_id\": 4083,\n      \"invoice_id\": 7975,\n      \"earliest_date_of_service\": \"1994-12-19\",\n      \"latest_date_of_service\": \"2021-05-31\",\n      \"description\": \"string\",\n      \"billed\": 516.6715220555362,\n      \"allowable\": 2604.270734302002,\n      \"amount_insurance_paid\": 232.30873370892135,\n      \"adjustments\": 3645.737472972782,\n      \"deductible\": 1880.103273613486,\n      \"co_insurance\": 5094.116302964962,\n      \"co_pay\": 7506.800808136796,\n      \"primary_insurance_balance\": 908.8164374887808,\n      \"secondary_insurance_balance\": 6787.926816593599,\n      \"balance\": 1270.9668170826328,\n      \"amount_paid_to_subscriber\": 7013.308554446545,\n      \"patient_responsibility\": 8854.358618336519\n    },\n    {\n      \"units\": 3230,\n      \"is_amount_paid_to_subscriber\": true,\n      \"claim_id\": 3269,\n      \"invoice_id\": 1752,\n      \"earliest_date_of_service\": \"2023-08-15\",\n      \"latest_date_of_service\": \"2013-11-28\",\n      \"description\": \"string\",\n      \"billed\": 5840.070472885492,\n      \"allowable\": 8743.488701390213,\n      \"amount_insurance_paid\": 9996.86316830477,\n      \"adjustments\": 5158.664266792576,\n      \"deductible\": 7228.771458692916,\n      \"co_insurance\": 7421.338067210045,\n      \"co_pay\": 9522.197087386441,\n      \"primary_insurance_balance\": 5445.453337581643,\n      \"secondary_insurance_balance\": 8800.927983957165,\n      \"balance\": 4319.254950452322,\n      \"amount_paid_to_subscriber\": 7403.86581516618,\n      \"patient_responsibility\": 8237.904444825625\n    }\n  ],\n  \"total_billed\": 8183.602941518549,\n  \"total_allowable\": 3844.983060198328,\n  \"total_amount_insurance_paid\": 3473.4086404066998,\n  \"total_adjustments\": 2753.47926543113,\n  \"total_deductible\": 4821.430121386421,\n  \"total_co_insurance\": 5996.118238678672,\n  \"total_co_pay\": 9469.343757319764,\n  \"total_balance\": 6950.385851613663,\n  \"total_patient_responsibility\": 8772.945132219113,\n  \"date_generated\": \"2022-02-23T05:29:49.168Z\",\n  \"utc_offset_date_generated\": 6487,\n  \"total_amount_received\": 7754.535634141044,\n  \"is_any_claim_paid_to_subscriber\": false,\n  \"date_sent\": \"1964-11-19\",\n  \"discount\": 3193.189476878954,\n  \"payments\": [\n    {\n      \"id\": 3062,\n      \"status\": \"Processing\",\n      \"amount\": 7510.363366233028,\n      \"mode\": \"Check\",\n      \"date_received\": \"1961-09-15\",\n      \"date_cleared\": \"1962-11-24\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    },\n    {\n      \"id\": 3287,\n      \"status\": \"Pending\",\n      \"amount\": 3506.610296455038,\n      \"mode\": \"Check\",\n      \"date_received\": \"1982-03-08\",\n      \"date_cleared\": \"1982-05-04\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    }\n  ],\n  \"checkout_session_map\": {\n    \"key_0\": {\n      \"payment_status\": \"Pending\",\n      \"payment_id\": 8084\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62d0d68a-9bd0-410f-8e62-be780d6f5e85",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    "preview",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<integer>\",\n  \"payee_provider_id\": \"<integer>\",\n  \"claim_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"date_due\": \"<date>\",\n  \"discount\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17e20e9d-777e-477f-8a7e-b088935e45b9",
+          "name": "Create Invoice",
+          "request": {
+            "name": "Create Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<integer>\",\n  \"payee_provider_id\": \"<integer>\",\n  \"claim_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"date_due\": \"<date>\",\n  \"date_generated\": \"<dateTime>\",\n  \"utc_offset_date_generated\": \"<integer>\",\n  \"discount\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dce8551e-1291-4f43-8bd7-28e5b99b894d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<integer>\",\n  \"payee_provider_id\": \"<integer>\",\n  \"claim_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"date_due\": \"<date>\",\n  \"date_generated\": \"<dateTime>\",\n  \"utc_offset_date_generated\": \"<integer>\",\n  \"discount\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9909,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"female\",\n    \"dob\": \"1981-03-02\",\n    \"id\": 8603,\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n    \"middle_name\": \"string\",\n    \"email\": \"kQmpR5LiZhjL0t@LfRxGMeXFrAsbq.rako\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"TERMINATED\",\n    \"street_address_latitude\": -47.35613892217777,\n    \"street_address_longitude\": -73.37969014445801\n  },\n  \"payee\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"unknown\",\n    \"dob\": \"1987-03-04\",\n    \"id\": 5754,\n    \"clinical_status\": \"CLINICAL\",\n    \"qa_billing_status\": \"Not Billable\",\n    \"middle_name\": \"string\",\n    \"email\": \"lyCjqiaaa@kfpM.drus\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"npi\": \"string\",\n    \"certification\": \"string\",\n    \"date_certification_start\": \"1982-02-13\",\n    \"date_certification_end\": \"1971-04-15\",\n    \"state_license\": \"string\",\n    \"caqh_id\": \"string\",\n    \"payroll_id\": \"string\",\n    \"employment_type\": \"Salaried, full-time\",\n    \"job_title\": \"Virtual Therapy Assistant\",\n    \"preferred_language\": \"string\",\n    \"supported_languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"status\": \"Training\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"clinical_status_reason\": \"DISCHARGED\"\n  },\n  \"biller\": {\n    \"id\": 4113,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"YIY8sYR@cytPutZRQrGBBTHVXSd.xunv\",\n    \"status\": \"string\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\"\n  },\n  \"status\": \"In progress\",\n  \"amount_billed\": 9874.850824891028,\n  \"amount_due\": 4283.0638233098825,\n  \"date_due\": \"2008-04-01\",\n  \"net_billed_amount\": 2899.984439789385,\n  \"billing_facility\": \"string\",\n  \"claims\": [\n    {\n      \"units\": 4007,\n      \"is_amount_paid_to_subscriber\": true,\n      \"claim_id\": 43,\n      \"invoice_id\": 8294,\n      \"earliest_date_of_service\": \"1973-01-21\",\n      \"latest_date_of_service\": \"1951-12-18\",\n      \"description\": \"string\",\n      \"billed\": 5453.589319989303,\n      \"allowable\": 6284.348704705861,\n      \"amount_insurance_paid\": 1455.931591741042,\n      \"adjustments\": 506.80850174429025,\n      \"deductible\": 1529.2079603409425,\n      \"co_insurance\": 3814.382935229991,\n      \"co_pay\": 7222.446040579131,\n      \"primary_insurance_balance\": 4220.983248437198,\n      \"secondary_insurance_balance\": 1278.0842575210472,\n      \"balance\": 2944.3665185785094,\n      \"amount_paid_to_subscriber\": 3444.0190516951598,\n      \"patient_responsibility\": 5279.422078518345\n    },\n    {\n      \"units\": 8027,\n      \"is_amount_paid_to_subscriber\": false,\n      \"claim_id\": 8302,\n      \"invoice_id\": 6900,\n      \"earliest_date_of_service\": \"1975-02-18\",\n      \"latest_date_of_service\": \"2004-04-24\",\n      \"description\": \"string\",\n      \"billed\": 2321.293524223882,\n      \"allowable\": 5958.069531351385,\n      \"amount_insurance_paid\": 6684.995290789013,\n      \"adjustments\": 9393.255065732934,\n      \"deductible\": 994.7976593474117,\n      \"co_insurance\": 7881.834534817671,\n      \"co_pay\": 3605.566573976943,\n      \"primary_insurance_balance\": 9334.04752536191,\n      \"secondary_insurance_balance\": 1993.5685476115084,\n      \"balance\": 7546.984559948984,\n      \"amount_paid_to_subscriber\": 5593.039962860217,\n      \"patient_responsibility\": 8777.479212552415\n    }\n  ],\n  \"total_billed\": 2973.634739562718,\n  \"total_allowable\": 3021.324602030383,\n  \"total_amount_insurance_paid\": 6486.016485841722,\n  \"total_adjustments\": 1465.0902789378217,\n  \"total_deductible\": 7904.222436947367,\n  \"total_co_insurance\": 2979.8099949637867,\n  \"total_co_pay\": 992.9355770633518,\n  \"total_balance\": 7390.571139163238,\n  \"total_patient_responsibility\": 9915.17313669836,\n  \"date_generated\": \"1977-02-09T00:42:11.909Z\",\n  \"utc_offset_date_generated\": 1010,\n  \"total_amount_received\": 2388.6408282435036,\n  \"is_any_claim_paid_to_subscriber\": false,\n  \"date_sent\": \"1969-01-01\",\n  \"discount\": 161.82077385514916,\n  \"payments\": [\n    {\n      \"id\": 4363,\n      \"status\": \"Success\",\n      \"amount\": 3859.9953439214128,\n      \"mode\": \"Grant\",\n      \"date_received\": \"1990-05-15\",\n      \"date_cleared\": \"2011-11-05\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    },\n    {\n      \"id\": 1954,\n      \"status\": \"Pending\",\n      \"amount\": 9087.612364263745,\n      \"mode\": \"ACH\",\n      \"date_received\": \"1968-05-16\",\n      \"date_cleared\": \"1949-10-23\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    }\n  ],\n  \"checkout_session_map\": {\n    \"key_0\": {\n      \"payment_status\": \"Success\",\n      \"payment_id\": 2448\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ba8c7e9-85a4-4223-b807-19c4d18c1f4f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<integer>\",\n  \"payee_provider_id\": \"<integer>\",\n  \"claim_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"date_due\": \"<date>\",\n  \"date_generated\": \"<dateTime>\",\n  \"utc_offset_date_generated\": \"<integer>\",\n  \"discount\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c196f7af-0d1a-4120-bfd6-291be5a5b762",
+          "name": "Get Invoices",
+          "request": {
+            "name": "Get Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_due",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sent",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5590f600-9eaf-458a-a23c-cb27c46706ae",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_due",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sent",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_amount_due\": 850.9451576429005,\n  \"invoices\": [\n    {\n      \"id\": 215,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"female\",\n        \"dob\": \"2025-04-12\",\n        \"clinical_status\": \"CLINICAL\",\n        \"id\": 5528\n      },\n      \"payee\": {\n        \"id\": 4404,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"Ox0ND@lhfSrrnliCu.bwkl\",\n        \"status\": \"string\",\n        \"clinical_status\": \"OFFBOARDED\"\n      },\n      \"biller\": {\n        \"id\": 3403,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"aiun@rhGwDBkJ.rd\",\n        \"status\": \"string\",\n        \"clinical_status\": \"OFFBOARDED\"\n      },\n      \"status\": \"Not paid\",\n      \"amount_billed\": 2671.4459011225244,\n      \"amount_due\": 5462.849166846848,\n      \"date_due\": \"2003-10-13\",\n      \"net_billed_amount\": 4417.606349461503,\n      \"date_sent\": \"1971-09-28\",\n      \"discount\": 2674.57614455182\n    },\n    {\n      \"id\": 5956,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"female\",\n        \"dob\": \"2020-04-08\",\n        \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n        \"id\": 4422\n      },\n      \"payee\": {\n        \"id\": 7898,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"qZjXPGsE@UFBffUUsINkixCMV.veh\",\n        \"status\": \"string\",\n        \"clinical_status\": \"PRE CLINICAL\"\n      },\n      \"biller\": {\n        \"id\": 2645,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"nrsusdL6j412s-r@RwnnMhgQX.hn\",\n        \"status\": \"string\",\n        \"clinical_status\": \"ON HOLD\"\n      },\n      \"status\": \"Partial payment\",\n      \"amount_billed\": 3646.816976275404,\n      \"amount_due\": 9396.40672902358,\n      \"date_due\": \"1951-03-29\",\n      \"net_billed_amount\": 7217.285055557373,\n      \"date_sent\": \"2014-01-22\",\n      \"discount\": 3198.362777543419\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4081dc73-a7a3-43be-bf6a-cbf0fc3775e9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_due",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sent",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c982c15-9ea0-4308-a42f-70eb6be2fe2a",
+          "name": "Create Invoice Payment",
+          "request": {
+            "name": "Create Invoice Payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "payments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"date_received\": \"<date>\",\n  \"date_cleared\": \"<date>\",\n  \"transaction_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4ad8a69-1270-427b-91d6-34f3792a1964",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"date_received\": \"<date>\",\n  \"date_cleared\": \"<date>\",\n  \"transaction_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9947,\n  \"status\": \"Processing\",\n  \"invoice_id\": 4867,\n  \"invoice_amount_due\": 4092.753825274066,\n  \"amount\": 6742.139065097399,\n  \"mode\": \"<string>\",\n  \"date_received\": \"2023-07-21\",\n  \"date_cleared\": \"1949-08-24\",\n  \"transaction_id\": \"string\",\n  \"status_reason\": \"Payment link expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b915d479-2bb8-42a9-b1f9-549d740213c9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"date_received\": \"<date>\",\n  \"date_cleared\": \"<date>\",\n  \"transaction_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0aeaa325-5109-4232-a13d-5b35b9f3745a",
+          "name": "Get Invoice Payments",
+          "request": {
+            "name": "Get Invoice Payments",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "payments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "549a3246-9361-4e76-a170-ff43aadf3692",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoice_id\": 9737,\n  \"invoice_amount_due\": 432.6599967973466,\n  \"payments\": [\n    {\n      \"id\": 1027,\n      \"status\": \"Pending\",\n      \"amount\": 7914.77654726608,\n      \"mode\": \"<string>\",\n      \"date_received\": \"1984-11-11\",\n      \"date_cleared\": \"1949-02-25\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    },\n    {\n      \"id\": 7351,\n      \"status\": \"Pending\",\n      \"amount\": 3427.7063443933375,\n      \"mode\": \"<string>\",\n      \"date_received\": \"1994-09-01\",\n      \"date_cleared\": \"1986-01-31\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b5a73d4-3500-4b3b-98f3-370d00ae8030",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "246172c0-34f6-40f7-a195-b8dd3fbb2d73",
+          "name": "Update Invoice Payment",
+          "request": {
+            "name": "Update Invoice Payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "payments",
+                ":payment_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"date_received\": \"<date>\",\n  \"date_cleared\": \"<date>\",\n  \"transaction_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd229340-ccc5-43ec-bdb1-c964e88fc11c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ":payment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"date_received\": \"<date>\",\n  \"date_cleared\": \"<date>\",\n  \"transaction_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9947,\n  \"status\": \"Processing\",\n  \"invoice_id\": 4867,\n  \"invoice_amount_due\": 4092.753825274066,\n  \"amount\": 6742.139065097399,\n  \"mode\": \"<string>\",\n  \"date_received\": \"2023-07-21\",\n  \"date_cleared\": \"1949-08-24\",\n  \"transaction_id\": \"string\",\n  \"status_reason\": \"Payment link expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26da41e4-9d89-4002-af15-465a601b3726",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ":payment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"date_received\": \"<date>\",\n  \"date_cleared\": \"<date>\",\n  \"transaction_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4f4b768-2f0a-4894-b75e-cbdc5a931877",
+          "name": "Delete Invoice Payment",
+          "request": {
+            "name": "Delete Invoice Payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "payments",
+                ":payment_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "payment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "70621b0c-da17-407d-90b4-edbb8af1cd2b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ":payment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoice_id\": 4009,\n  \"invoice_amount_due\": 5378.803734214066\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5abfa21b-fdfd-42aa-940c-51bce02792b8",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "payments",
+                    ":payment_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "payment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "788e4dfa-82d7-4648-93a7-67aae1c7f408",
+          "name": "Send Invoice",
+          "request": {
+            "name": "Send Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "send",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2a3f3388-d6ea-4036-b879-8f7c317fe6a7",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "send",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7016,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"other\",\n    \"dob\": \"1963-11-21\",\n    \"id\": 1144,\n    \"clinical_status\": \"CLINICAL\",\n    \"middle_name\": \"string\",\n    \"email\": \"pfgil@ZB.ux\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"TERMINATED\",\n    \"street_address_latitude\": 33.70830987068514,\n    \"street_address_longitude\": -163.8387641284176\n  },\n  \"payee\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1947-12-08\",\n    \"id\": 669,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"qa_billing_status\": \"Billable\",\n    \"middle_name\": \"string\",\n    \"email\": \"x2D@pyBxHvlYERhwSyEpXOXH.zvpb\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"npi\": \"string\",\n    \"certification\": \"string\",\n    \"date_certification_start\": \"1995-12-03\",\n    \"date_certification_end\": \"2008-04-29\",\n    \"state_license\": \"string\",\n    \"caqh_id\": \"string\",\n    \"payroll_id\": \"string\",\n    \"employment_type\": \"Salaried, full-time\",\n    \"job_title\": \"Certified Behavioral Technician\",\n    \"preferred_language\": \"string\",\n    \"supported_languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"status\": \"Training\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"clinical_status_reason\": \"TERMINATED\"\n  },\n  \"biller\": {\n    \"id\": 2772,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"YaphB4r@OkSGenU.eq\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"status\": \"Partial payment\",\n  \"amount_billed\": 7308.081517889429,\n  \"amount_due\": 210.55577374759827,\n  \"date_due\": \"2013-11-03\",\n  \"net_billed_amount\": 2958.9469662514466,\n  \"billing_facility\": \"string\",\n  \"claims\": [\n    {\n      \"units\": 5199,\n      \"is_amount_paid_to_subscriber\": true,\n      \"claim_id\": 5569,\n      \"invoice_id\": 9559,\n      \"earliest_date_of_service\": \"1993-09-22\",\n      \"latest_date_of_service\": \"2022-09-02\",\n      \"description\": \"string\",\n      \"billed\": 6897.197207960547,\n      \"allowable\": 4479.372057971578,\n      \"amount_insurance_paid\": 9892.646913668623,\n      \"adjustments\": 7040.972740896843,\n      \"deductible\": 5885.796588075361,\n      \"co_insurance\": 8992.273814541555,\n      \"co_pay\": 7694.695081665101,\n      \"primary_insurance_balance\": 7570.282224393399,\n      \"secondary_insurance_balance\": 400.26842516182495,\n      \"balance\": 8203.6004407494,\n      \"amount_paid_to_subscriber\": 6032.108107283671,\n      \"patient_responsibility\": 2079.3232130597207\n    },\n    {\n      \"units\": 5898,\n      \"is_amount_paid_to_subscriber\": false,\n      \"claim_id\": 9654,\n      \"invoice_id\": 322,\n      \"earliest_date_of_service\": \"1966-03-25\",\n      \"latest_date_of_service\": \"1960-03-23\",\n      \"description\": \"string\",\n      \"billed\": 8448.563612968266,\n      \"allowable\": 8136.489895862076,\n      \"amount_insurance_paid\": 5161.370520435518,\n      \"adjustments\": 6212.0109398330005,\n      \"deductible\": 8236.509172742111,\n      \"co_insurance\": 8450.490900474992,\n      \"co_pay\": 3088.3288704214597,\n      \"primary_insurance_balance\": 9820.207122776574,\n      \"secondary_insurance_balance\": 3061.9357919608283,\n      \"balance\": 4499.819840007024,\n      \"amount_paid_to_subscriber\": 2386.331042555846,\n      \"patient_responsibility\": 978.8220833282558\n    }\n  ],\n  \"total_billed\": 5551.236788160963,\n  \"total_allowable\": 1646.3888123438774,\n  \"total_amount_insurance_paid\": 7462.682581920821,\n  \"total_adjustments\": 8252.806201174059,\n  \"total_deductible\": 6588.519464590186,\n  \"total_co_insurance\": 4984.2103391223545,\n  \"total_co_pay\": 5579.168981994219,\n  \"total_balance\": 7537.965210523689,\n  \"total_patient_responsibility\": 7319.191488533755,\n  \"date_generated\": \"1959-09-11T11:32:04.388Z\",\n  \"utc_offset_date_generated\": 9867,\n  \"total_amount_received\": 665.7862895108268,\n  \"is_any_claim_paid_to_subscriber\": false,\n  \"date_sent\": \"1952-08-29\",\n  \"discount\": 7594.142110177494,\n  \"payments\": [\n    {\n      \"id\": 8722,\n      \"status\": \"Processing\",\n      \"amount\": 4694.3609359208485,\n      \"mode\": \"<string>\",\n      \"date_received\": \"1964-07-11\",\n      \"date_cleared\": \"1975-01-01\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    },\n    {\n      \"id\": 6521,\n      \"status\": \"Processing\",\n      \"amount\": 9319.742753118526,\n      \"mode\": \"<string>\",\n      \"date_received\": \"2024-07-04\",\n      \"date_cleared\": \"1948-08-26\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    }\n  ],\n  \"checkout_session_map\": {\n    \"key_0\": {\n      \"payment_status\": \"Pending\",\n      \"payment_id\": 2545\n    },\n    \"key_1\": {\n      \"payment_status\": \"Pending\",\n      \"payment_id\": 4078\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e3b7cc7-c15a-498b-afac-9cc0dda51dd5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "send",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "829b887c-7e4a-4813-8f64-47823b80a963",
+          "name": "Get Invoice",
+          "request": {
+            "name": "Get Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "feb2c7f0-10f9-434b-8082-154d1cf8c993",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7016,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"other\",\n    \"dob\": \"1963-11-21\",\n    \"id\": 1144,\n    \"clinical_status\": \"CLINICAL\",\n    \"middle_name\": \"string\",\n    \"email\": \"pfgil@ZB.ux\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"TERMINATED\",\n    \"street_address_latitude\": 33.70830987068514,\n    \"street_address_longitude\": -163.8387641284176\n  },\n  \"payee\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1947-12-08\",\n    \"id\": 669,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"qa_billing_status\": \"Billable\",\n    \"middle_name\": \"string\",\n    \"email\": \"x2D@pyBxHvlYERhwSyEpXOXH.zvpb\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"npi\": \"string\",\n    \"certification\": \"string\",\n    \"date_certification_start\": \"1995-12-03\",\n    \"date_certification_end\": \"2008-04-29\",\n    \"state_license\": \"string\",\n    \"caqh_id\": \"string\",\n    \"payroll_id\": \"string\",\n    \"employment_type\": \"Salaried, full-time\",\n    \"job_title\": \"Certified Behavioral Technician\",\n    \"preferred_language\": \"string\",\n    \"supported_languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"status\": \"Training\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"clinical_status_reason\": \"TERMINATED\"\n  },\n  \"biller\": {\n    \"id\": 2772,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"YaphB4r@OkSGenU.eq\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"status\": \"Partial payment\",\n  \"amount_billed\": 7308.081517889429,\n  \"amount_due\": 210.55577374759827,\n  \"date_due\": \"2013-11-03\",\n  \"net_billed_amount\": 2958.9469662514466,\n  \"billing_facility\": \"string\",\n  \"claims\": [\n    {\n      \"units\": 5199,\n      \"is_amount_paid_to_subscriber\": true,\n      \"claim_id\": 5569,\n      \"invoice_id\": 9559,\n      \"earliest_date_of_service\": \"1993-09-22\",\n      \"latest_date_of_service\": \"2022-09-02\",\n      \"description\": \"string\",\n      \"billed\": 6897.197207960547,\n      \"allowable\": 4479.372057971578,\n      \"amount_insurance_paid\": 9892.646913668623,\n      \"adjustments\": 7040.972740896843,\n      \"deductible\": 5885.796588075361,\n      \"co_insurance\": 8992.273814541555,\n      \"co_pay\": 7694.695081665101,\n      \"primary_insurance_balance\": 7570.282224393399,\n      \"secondary_insurance_balance\": 400.26842516182495,\n      \"balance\": 8203.6004407494,\n      \"amount_paid_to_subscriber\": 6032.108107283671,\n      \"patient_responsibility\": 2079.3232130597207\n    },\n    {\n      \"units\": 5898,\n      \"is_amount_paid_to_subscriber\": false,\n      \"claim_id\": 9654,\n      \"invoice_id\": 322,\n      \"earliest_date_of_service\": \"1966-03-25\",\n      \"latest_date_of_service\": \"1960-03-23\",\n      \"description\": \"string\",\n      \"billed\": 8448.563612968266,\n      \"allowable\": 8136.489895862076,\n      \"amount_insurance_paid\": 5161.370520435518,\n      \"adjustments\": 6212.0109398330005,\n      \"deductible\": 8236.509172742111,\n      \"co_insurance\": 8450.490900474992,\n      \"co_pay\": 3088.3288704214597,\n      \"primary_insurance_balance\": 9820.207122776574,\n      \"secondary_insurance_balance\": 3061.9357919608283,\n      \"balance\": 4499.819840007024,\n      \"amount_paid_to_subscriber\": 2386.331042555846,\n      \"patient_responsibility\": 978.8220833282558\n    }\n  ],\n  \"total_billed\": 5551.236788160963,\n  \"total_allowable\": 1646.3888123438774,\n  \"total_amount_insurance_paid\": 7462.682581920821,\n  \"total_adjustments\": 8252.806201174059,\n  \"total_deductible\": 6588.519464590186,\n  \"total_co_insurance\": 4984.2103391223545,\n  \"total_co_pay\": 5579.168981994219,\n  \"total_balance\": 7537.965210523689,\n  \"total_patient_responsibility\": 7319.191488533755,\n  \"date_generated\": \"1959-09-11T11:32:04.388Z\",\n  \"utc_offset_date_generated\": 9867,\n  \"total_amount_received\": 665.7862895108268,\n  \"is_any_claim_paid_to_subscriber\": false,\n  \"date_sent\": \"1952-08-29\",\n  \"discount\": 7594.142110177494,\n  \"payments\": [\n    {\n      \"id\": 8722,\n      \"status\": \"Processing\",\n      \"amount\": 4694.3609359208485,\n      \"mode\": \"<string>\",\n      \"date_received\": \"1964-07-11\",\n      \"date_cleared\": \"1975-01-01\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    },\n    {\n      \"id\": 6521,\n      \"status\": \"Processing\",\n      \"amount\": 9319.742753118526,\n      \"mode\": \"<string>\",\n      \"date_received\": \"2024-07-04\",\n      \"date_cleared\": \"1948-08-26\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    }\n  ],\n  \"checkout_session_map\": {\n    \"key_0\": {\n      \"payment_status\": \"Pending\",\n      \"payment_id\": 2545\n    },\n    \"key_1\": {\n      \"payment_status\": \"Pending\",\n      \"payment_id\": 4078\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd26aeec-901e-4507-9483-c27c1592f3e2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68e4fe1b-00ae-4753-82fe-aebd6ca3cc49",
+          "name": "Reset Invoice Sent Status",
+          "request": {
+            "name": "Reset Invoice Sent Status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "reset_sent_status",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "75ad76cf-2711-41f0-8ab5-d738bcc20bcd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "reset_sent_status",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7016,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"other\",\n    \"dob\": \"1963-11-21\",\n    \"id\": 1144,\n    \"clinical_status\": \"CLINICAL\",\n    \"middle_name\": \"string\",\n    \"email\": \"pfgil@ZB.ux\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"clinical_status_reason\": \"TERMINATED\",\n    \"street_address_latitude\": 33.70830987068514,\n    \"street_address_longitude\": -163.8387641284176\n  },\n  \"payee\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1947-12-08\",\n    \"id\": 669,\n    \"clinical_status\": \"OFFBOARDED\",\n    \"qa_billing_status\": \"Billable\",\n    \"middle_name\": \"string\",\n    \"email\": \"x2D@pyBxHvlYERhwSyEpXOXH.zvpb\",\n    \"street_address_line_one\": \"string\",\n    \"street_address_line_two\": \"string\",\n    \"street_address_zip\": \"string\",\n    \"street_address_city\": \"string\",\n    \"street_address_state\": \"st\",\n    \"phone\": \"string\",\n    \"npi\": \"string\",\n    \"certification\": \"string\",\n    \"date_certification_start\": \"1995-12-03\",\n    \"date_certification_end\": \"2008-04-29\",\n    \"state_license\": \"string\",\n    \"caqh_id\": \"string\",\n    \"payroll_id\": \"string\",\n    \"employment_type\": \"Salaried, full-time\",\n    \"job_title\": \"Certified Behavioral Technician\",\n    \"preferred_language\": \"string\",\n    \"supported_languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"status\": \"Training\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"clinical_status_reason\": \"TERMINATED\"\n  },\n  \"biller\": {\n    \"id\": 2772,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"YaphB4r@OkSGenU.eq\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"status\": \"Partial payment\",\n  \"amount_billed\": 7308.081517889429,\n  \"amount_due\": 210.55577374759827,\n  \"date_due\": \"2013-11-03\",\n  \"net_billed_amount\": 2958.9469662514466,\n  \"billing_facility\": \"string\",\n  \"claims\": [\n    {\n      \"units\": 5199,\n      \"is_amount_paid_to_subscriber\": true,\n      \"claim_id\": 5569,\n      \"invoice_id\": 9559,\n      \"earliest_date_of_service\": \"1993-09-22\",\n      \"latest_date_of_service\": \"2022-09-02\",\n      \"description\": \"string\",\n      \"billed\": 6897.197207960547,\n      \"allowable\": 4479.372057971578,\n      \"amount_insurance_paid\": 9892.646913668623,\n      \"adjustments\": 7040.972740896843,\n      \"deductible\": 5885.796588075361,\n      \"co_insurance\": 8992.273814541555,\n      \"co_pay\": 7694.695081665101,\n      \"primary_insurance_balance\": 7570.282224393399,\n      \"secondary_insurance_balance\": 400.26842516182495,\n      \"balance\": 8203.6004407494,\n      \"amount_paid_to_subscriber\": 6032.108107283671,\n      \"patient_responsibility\": 2079.3232130597207\n    },\n    {\n      \"units\": 5898,\n      \"is_amount_paid_to_subscriber\": false,\n      \"claim_id\": 9654,\n      \"invoice_id\": 322,\n      \"earliest_date_of_service\": \"1966-03-25\",\n      \"latest_date_of_service\": \"1960-03-23\",\n      \"description\": \"string\",\n      \"billed\": 8448.563612968266,\n      \"allowable\": 8136.489895862076,\n      \"amount_insurance_paid\": 5161.370520435518,\n      \"adjustments\": 6212.0109398330005,\n      \"deductible\": 8236.509172742111,\n      \"co_insurance\": 8450.490900474992,\n      \"co_pay\": 3088.3288704214597,\n      \"primary_insurance_balance\": 9820.207122776574,\n      \"secondary_insurance_balance\": 3061.9357919608283,\n      \"balance\": 4499.819840007024,\n      \"amount_paid_to_subscriber\": 2386.331042555846,\n      \"patient_responsibility\": 978.8220833282558\n    }\n  ],\n  \"total_billed\": 5551.236788160963,\n  \"total_allowable\": 1646.3888123438774,\n  \"total_amount_insurance_paid\": 7462.682581920821,\n  \"total_adjustments\": 8252.806201174059,\n  \"total_deductible\": 6588.519464590186,\n  \"total_co_insurance\": 4984.2103391223545,\n  \"total_co_pay\": 5579.168981994219,\n  \"total_balance\": 7537.965210523689,\n  \"total_patient_responsibility\": 7319.191488533755,\n  \"date_generated\": \"1959-09-11T11:32:04.388Z\",\n  \"utc_offset_date_generated\": 9867,\n  \"total_amount_received\": 665.7862895108268,\n  \"is_any_claim_paid_to_subscriber\": false,\n  \"date_sent\": \"1952-08-29\",\n  \"discount\": 7594.142110177494,\n  \"payments\": [\n    {\n      \"id\": 8722,\n      \"status\": \"Processing\",\n      \"amount\": 4694.3609359208485,\n      \"mode\": \"<string>\",\n      \"date_received\": \"1964-07-11\",\n      \"date_cleared\": \"1975-01-01\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    },\n    {\n      \"id\": 6521,\n      \"status\": \"Processing\",\n      \"amount\": 9319.742753118526,\n      \"mode\": \"<string>\",\n      \"date_received\": \"2024-07-04\",\n      \"date_cleared\": \"1948-08-26\",\n      \"transaction_id\": \"string\",\n      \"status_reason\": \"Payment link expired\"\n    }\n  ],\n  \"checkout_session_map\": {\n    \"key_0\": {\n      \"payment_status\": \"Pending\",\n      \"payment_id\": 2545\n    },\n    \"key_1\": {\n      \"payment_status\": \"Pending\",\n      \"payment_id\": 4078\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3435bd5-514d-4e0c-b971-98c416b5f5c1",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "reset_sent_status",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e3cc5bd-7e7f-4cd4-920e-583b5af35eee",
+          "name": "Download Invoice Pdf",
+          "request": {
+            "name": "Download Invoice Pdf",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "download",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a8ce95b0-c436-4d49-a4e5-6a001e7a2392",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"document_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "777a4d2e-932b-46bd-8323-1d34fccd8b4a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29ccbae6-d853-4172-a454-b0961802cd33",
+          "name": "Pay Invoice",
+          "request": {
+            "name": "Pay Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "pay",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5568a01d-ef43-4015-a44f-2a9f227aa4a1",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "pay",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkout_session_id\": \"string\",\n  \"url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4d61b1c-a276-4900-9ab9-188d29f50046",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "pay",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ff7aa88-d021-4ca3-a2f9-3e04e14cf10d",
+          "name": "Apply Discount",
+          "request": {
+            "name": "Apply Discount",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "discount",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"discount\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61f55fc3-823c-48d5-b0b3-1872d62293ff",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "discount",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"discount\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"discount\": 8118.0326114610025,\n  \"invoice_id\": 3966,\n  \"invoice_amount_due\": 5348.554922988164\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b38c778b-cd9e-4f58-a8f4-abe9286561fb",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "discount",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"discount\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b7ab56b-7361-4338-b222-08d505da5943",
+          "name": "Remove Discount",
+          "request": {
+            "name": "Remove Discount",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "claim_invoices",
+                ":claim_invoice_id",
+                "discount",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "claim_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "358a1ebe-7ca1-4c5f-bf06-45c4b308fd46",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "discount",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"discount\": 8118.0326114610025,\n  \"invoice_id\": 3966,\n  \"invoice_amount_due\": 5348.554922988164\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bf5bb9e-a4a2-4de1-a17c-67948efbbafc",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "claim_invoices",
+                    ":claim_invoice_id",
+                    "discount",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "claim_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "59dcd207-55fc-4593-80c6-9ca92a4ad503",
+    "name": "Fast Claim Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

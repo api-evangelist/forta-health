@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Email Cron Configs API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "email_cron_configs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Email Cron Configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/email_cron_configs/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Email Cron Configs"
+        },
+        {
+          "info": {
+            "name": "Create Email Cron Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/email_cron_configs/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Email Cron Config"
+        },
+        {
+          "info": {
+            "name": "Get Email Cron Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/email_cron_configs/:config_id/",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Email Cron Config"
+        },
+        {
+          "info": {
+            "name": "Update Email Cron Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/email_cron_configs/:config_id/",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Email Cron Config"
+        },
+        {
+          "info": {
+            "name": "Delete Email Cron Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/email_cron_configs/:config_id/",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Email Cron Config"
+        },
+        {
+          "info": {
+            "name": "Preview Email Cron Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/email_cron_configs/:config_id/preview/",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Preview Email Cron Config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

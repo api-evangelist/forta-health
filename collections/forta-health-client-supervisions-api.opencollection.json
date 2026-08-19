@@ -1,0 +1,417 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Client Supervisions API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "client_supervisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Client Supervisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action_required",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_clinical_status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Client Supervisions"
+        },
+        {
+          "info": {
+            "name": "Create Client Supervision Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Client Supervision Notes"
+        },
+        {
+          "info": {
+            "name": "Get Client Supervision Notes With Claim Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/claim_history/",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Client Supervision Notes With Claim Status"
+        },
+        {
+          "info": {
+            "name": "Get Client Supervision Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Client Supervision Note"
+        },
+        {
+          "info": {
+            "name": "Patch Client Supervision Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Client Supervision Notes"
+        },
+        {
+          "info": {
+            "name": "Delete Client Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Client Supervision"
+        },
+        {
+          "info": {
+            "name": "Create Client Supervision Notes Target Phase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/target_phase/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Client Supervision Notes Target Phase"
+        },
+        {
+          "info": {
+            "name": "Delete Client Supervision Note Target Phase",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/target_phase/:target_phase_id/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_phase_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Client Supervision Note Target Phase"
+        },
+        {
+          "info": {
+            "name": "Stop Client Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/stop/",
+            "headers": [
+              {
+                "name": "x-forwarded-for",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop Client Supervision"
+        },
+        {
+          "info": {
+            "name": "Get Utilization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/data/utilization/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Utilization"
+        },
+        {
+          "info": {
+            "name": "Download Client Supervision Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/download/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download Client Supervision Pdf"
+        },
+        {
+          "info": {
+            "name": "Make Client Supervision Unbillable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/make_unbillable/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Client Supervision Unbillable"
+        },
+        {
+          "info": {
+            "name": "Make Client Supervision Billable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/make_billable/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make Client Supervision Billable"
+        },
+        {
+          "info": {
+            "name": "Edit Client Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/edit/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Client Supervision"
+        },
+        {
+          "info": {
+            "name": "Backdate Client Supervision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/client_supervisions/:client_supervision_id/backdate/",
+            "params": [
+              {
+                "name": "client_supervision_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Backdate Client Supervision"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

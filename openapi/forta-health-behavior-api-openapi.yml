@@ -1,0 +1,351 @@
+openapi: 3.2.0
+info:
+  title: Fast Behavior API
+  version: 0.1.0
+tags:
+- name: behavior
+paths:
+  /api/v1/behaviors/:
+    get:
+      tags:
+      - behavior
+      summary: Get All Behaviors
+      operationId: get_all_behaviors_api_v1_behaviors__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BehaviorResponse'
+                type: array
+                title: Response Get All Behaviors Api V1 Behaviors  Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - behavior
+      summary: Create Behavior
+      description: Creates a new behavior
+      operationId: create_behavior_api_v1_behaviors__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BehaviorCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BehaviorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/behaviors/{behavior_id}/goal_names/:
+    post:
+      tags:
+      - behavior
+      summary: Create Goal Name
+      description: Creates a goal name with a corresponding behavior
+      operationId: create_goal_name_api_v1_behaviors__behavior_id__goal_names__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: behavior_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Behavior Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoalNameCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalNameResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - behavior
+      summary: Fetch Goal Names
+      description: Reads goal names associated with a behavior
+      operationId: fetch_goal_names_api_v1_behaviors__behavior_id__goal_names__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: behavior_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Behavior Id
+      - name: include_inactive
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include Inactive
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoalNameResponse'
+                title: Response Fetch Goal Names Api V1 Behaviors  Behavior Id  Goal Names  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/behaviors/goal_names/all/:
+    get:
+      tags:
+      - behavior
+      summary: Fetch All Goal Names
+      operationId: fetch_all_goal_names_api_v1_behaviors_goal_names_all__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GoalNameResponse'
+                type: array
+                title: Response Fetch All Goal Names Api V1 Behaviors Goal Names All  Get
+      security:
+      - HTTPBearer: []
+  /api/v1/behaviors/{behavior_id}/goal_names/{goal_name_id}/:
+    get:
+      tags:
+      - behavior
+      summary: Fetch Goal Name
+      operationId: fetch_goal_name_api_v1_behaviors__behavior_id__goal_names__goal_name_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: behavior_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Behavior Id
+      - name: goal_name_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Goal Name Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalNameResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/behaviors/{behavior_id}/goal_names/{goal_name_id}/activate/:
+    patch:
+      tags:
+      - behavior
+      summary: Activate Goal Name
+      operationId: activate_goal_name_api_v1_behaviors__behavior_id__goal_names__goal_name_id__activate__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: behavior_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Behavior Id
+      - name: goal_name_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Goal Name Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalNameResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/behaviors/{behavior_id}/goal_names/{goal_name_id}/deactivate/:
+    patch:
+      tags:
+      - behavior
+      summary: Deactivate Goal Name
+      operationId: deactivate_goal_name_api_v1_behaviors__behavior_id__goal_names__goal_name_id__deactivate__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: behavior_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Behavior Id
+      - name: goal_name_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Goal Name Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalNameResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    GoalNameCreate:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        prefix:
+          type: string
+          minLength: 2
+          title: Prefix
+      type: object
+      required:
+      - label
+      - prefix
+      title: GoalNameCreate
+    BehaviorCreate:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+      type: object
+      required:
+      - label
+      title: BehaviorCreate
+    BehaviorResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: BehaviorResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GoalNameResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        prefix:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prefix
+        id:
+          type: integer
+          title: Id
+        behavior_id:
+          type: integer
+          title: Behavior Id
+        behavior:
+          $ref: '#/components/schemas/BehaviorResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - label
+      - id
+      - behavior_id
+      - behavior
+      - is_active
+      title: GoalNameResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,4240 @@
+{
+  "item": [
+    {
+      "id": "5c66d750-0595-4f9a-b5ae-d84ab49f8282",
+      "name": "group_parent_supervisions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cdedb3bf-2729-48e3-bd37-e24fcdbc5456",
+          "name": "Create Group Parent Supervision",
+          "request": {
+            "name": "Create Group Parent Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39481f39-bebc-4cd7-acc5-6a36ef386ac5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2013-07-31T21:59:48.579Z\",\n  \"utc_offset_date_start\": 5950,\n  \"duration\": 2380,\n  \"setting\": \"<string>\",\n  \"id\": 8278,\n  \"bcba\": {\n    \"id\": 3636,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"EPhhnfC86qP@bySt.fed\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"status\": \"STARTED\",\n  \"is_billable\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e32ae366-e4ed-4862-8d64-124787334f39",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5faf4a90-3f01-49cc-8bb9-7c34e0c82051",
+          "name": "Fetch Group Parent Supervisions",
+          "request": {
+            "name": "Fetch Group Parent Supervisions",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "action_required",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_clinical_status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7acced16-5bc0-47e4-859c-1e51839e5077",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 3704,\n    \"clients\": [\n      {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"unknown\",\n        \"dob\": \"1986-01-06\",\n        \"clinical_status\": \"PRE CLINICAL\",\n        \"id\": 5827\n      },\n      {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"unknown\",\n        \"dob\": \"1999-05-06\",\n        \"clinical_status\": \"PRE CLINICAL\",\n        \"id\": 9073\n      }\n    ],\n    \"date_start\": \"1965-01-17T20:29:01.083Z\",\n    \"utc_offset_date_start\": 6914,\n    \"duration\": 3549,\n    \"status\": \"<string>\",\n    \"bcba\": {\n      \"id\": 6723,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"wLiqklPLj@UoysTtXkFPFsHAfwhNksNaFEQowc.xb\",\n      \"status\": \"string\",\n      \"clinical_status\": \"PRE CLINICAL\"\n    }\n  },\n  {\n    \"id\": 8652,\n    \"clients\": [\n      {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"female\",\n        \"dob\": \"1957-05-26\",\n        \"clinical_status\": \"CLINICAL\",\n        \"id\": 6877\n      },\n      {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"female\",\n        \"dob\": \"1970-10-27\",\n        \"clinical_status\": \"OFFBOARDED\",\n        \"id\": 7355\n      }\n    ],\n    \"date_start\": \"1980-01-24T01:06:26.288Z\",\n    \"utc_offset_date_start\": 9645,\n    \"duration\": 6010,\n    \"status\": \"<string>\",\n    \"bcba\": {\n      \"id\": 3014,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"qexn7DY@akqmJpSyfCIosHeNMxHaAMUTHs.ey\",\n      \"status\": \"string\",\n      \"clinical_status\": \"OFFBOARDED\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea08c215-08e1-4227-9db3-0f0b8144c73e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_clinical_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ed68622-b038-4c36-aac1-91dcabe40940",
+          "name": "Create Family Attendance",
+          "request": {
+            "name": "Create Family Attendance",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "family_attendance",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"date_end\": \"<dateTime>\",\n  \"client_id\": \"<integer>\",\n  \"parent_and_caregiver_one_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"parent_and_caregiver_two_id\": \"<integer>\",\n  \"bay\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e8b75df-24ac-431a-abf2-e539b4986ff8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"date_end\": \"<dateTime>\",\n  \"client_id\": \"<integer>\",\n  \"parent_and_caregiver_one_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"parent_and_caregiver_two_id\": \"<integer>\",\n  \"bay\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"1991-04-08T21:07:03.443Z\",\n  \"date_end\": \"1965-09-04T06:03:14.929Z\",\n  \"id\": 2870,\n  \"group_parent_supervision_id\": 310,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"female\",\n    \"dob\": \"1951-02-25\",\n    \"clinical_status\": \"OFFBOARDED\",\n    \"id\": 3042\n  },\n  \"parent_and_caregiver_one\": {\n    \"id\": 8611,\n    \"name\": \"string\",\n    \"email\": \"0GVzx5GVD@hfDFBRynlBQ.xf\",\n    \"phone\": \"string\"\n  },\n  \"location\": \"<string>\",\n  \"duration\": 5971,\n  \"topics\": [\n    {\n      \"training_topic_id\": 1745,\n      \"id\": 3972,\n      \"family_attendance_id\": 4606,\n      \"label\": \"string\"\n    },\n    {\n      \"training_topic_id\": 8264,\n      \"id\": 1738,\n      \"family_attendance_id\": 3474,\n      \"label\": \"string\"\n    }\n  ],\n  \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"parent_and_caregiver_two\": {\n    \"id\": 3187,\n    \"name\": \"string\",\n    \"email\": \"djuZOY2E@yUNyORoDUrdgvKwevgYc.ej\",\n    \"phone\": \"string\"\n  },\n  \"bay\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1603c819-fa71-409e-ab39-4a0fc7b54948",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"date_end\": \"<dateTime>\",\n  \"client_id\": \"<integer>\",\n  \"parent_and_caregiver_one_id\": \"<integer>\",\n  \"location\": \"<string>\",\n  \"parent_and_caregiver_two_id\": \"<integer>\",\n  \"bay\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df12228a-8f23-408a-8fc9-859f2be73c17",
+          "name": "Create Family Training Topic",
+          "request": {
+            "name": "Create Family Training Topic",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "family_attendance",
+                ":family_attendance_id",
+                "topics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "family_attendance_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"training_topic_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "533ef4f8-fcf9-49ad-8e51-1acfd576f2f3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    "topics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"training_topic_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2008-11-15T04:28:14.360Z\",\n  \"date_end\": \"1975-10-04T01:24:48.004Z\",\n  \"id\": 2274,\n  \"group_parent_supervision_id\": 4892,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1973-08-15\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n    \"id\": 8606\n  },\n  \"parent_and_caregiver_one\": {\n    \"id\": 1766,\n    \"name\": \"string\",\n    \"email\": \"Hp6hFrAWv1@MrMXBa.yaxr\",\n    \"phone\": \"string\"\n  },\n  \"location\": \"<string>\",\n  \"duration\": 2764,\n  \"topics\": [\n    {\n      \"training_topic_id\": 555,\n      \"id\": 7812,\n      \"family_attendance_id\": 1223,\n      \"label\": \"string\"\n    },\n    {\n      \"training_topic_id\": 6209,\n      \"id\": 259,\n      \"family_attendance_id\": 6779,\n      \"label\": \"string\"\n    }\n  ],\n  \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"parent_and_caregiver_two\": {\n    \"id\": 9350,\n    \"name\": \"string\",\n    \"email\": \"rrX5Q-z1D@sdquvCjZGXb.dxl\",\n    \"phone\": \"string\"\n  },\n  \"bay\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a4aa0fd-6aa0-46dd-a551-baf313163c19",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    "topics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"training_topic_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22a4eea3-755e-4fc3-8666-f373443bf89e",
+          "name": "Delete Family Training Topic",
+          "request": {
+            "name": "Delete Family Training Topic",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "family_attendance",
+                ":family_attendance_id",
+                "topics",
+                ":topic_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "family_attendance_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "topic_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f12ce2d5-cacc-47c7-b621-652b94a09065",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    "topics",
+                    ":topic_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "topic_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2008-11-15T04:28:14.360Z\",\n  \"date_end\": \"1975-10-04T01:24:48.004Z\",\n  \"id\": 2274,\n  \"group_parent_supervision_id\": 4892,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1973-08-15\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n    \"id\": 8606\n  },\n  \"parent_and_caregiver_one\": {\n    \"id\": 1766,\n    \"name\": \"string\",\n    \"email\": \"Hp6hFrAWv1@MrMXBa.yaxr\",\n    \"phone\": \"string\"\n  },\n  \"location\": \"<string>\",\n  \"duration\": 2764,\n  \"topics\": [\n    {\n      \"training_topic_id\": 555,\n      \"id\": 7812,\n      \"family_attendance_id\": 1223,\n      \"label\": \"string\"\n    },\n    {\n      \"training_topic_id\": 6209,\n      \"id\": 259,\n      \"family_attendance_id\": 6779,\n      \"label\": \"string\"\n    }\n  ],\n  \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"parent_and_caregiver_two\": {\n    \"id\": 9350,\n    \"name\": \"string\",\n    \"email\": \"rrX5Q-z1D@sdquvCjZGXb.dxl\",\n    \"phone\": \"string\"\n  },\n  \"bay\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c40d7c9c-b24e-452f-96ba-6243e3f84476",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    "topics",
+                    ":topic_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "topic_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cac88bf-0a1b-465a-86c2-5c5612456e8c",
+          "name": "Create Training Topic",
+          "request": {
+            "name": "Create Training Topic",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "training_topics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"label\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25aa4255-23ba-478d-a2a0-20002056d9f0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "training_topics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"label\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"label\": \"string\",\n  \"id\": 4283,\n  \"group_parent_supervision_id\": 8934\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6c20dce-cefa-45e6-86dd-9a69bdc59182",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "training_topics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"label\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "340d3eb2-ce05-4869-b60d-8832c7ad49ec",
+          "name": "Create Bulk Family Training Topics",
+          "request": {
+            "name": "Create Bulk Family Training Topics",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "bulk_family_training_topics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"training_topic_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"family_attendance_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f08a6af6-c02f-4c38-81a8-93054842a582",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "bulk_family_training_topics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"training_topic_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"family_attendance_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"1964-10-03T08:16:53.458Z\",\n  \"utc_offset_date_start\": 5503,\n  \"duration\": 8023,\n  \"setting\": \"<string>\",\n  \"id\": 764,\n  \"bcba\": {\n    \"id\": 6758,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"bu2VECzFtR6@XnDeRJ.dajw\",\n    \"status\": \"string\",\n    \"clinical_status\": \"ON HOLD\"\n  },\n  \"status\": \"<string>\",\n  \"is_billable\": true,\n  \"family_attendance\": [\n    {\n      \"date_start\": \"1972-08-30T03:11:02.719Z\",\n      \"date_end\": \"1980-06-03T18:44:40.413Z\",\n      \"id\": 8907,\n      \"group_parent_supervision_id\": 5624,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"female\",\n        \"dob\": \"1989-10-12\",\n        \"clinical_status\": \"PRE CLINICAL\",\n        \"id\": 506\n      },\n      \"parent_and_caregiver_one\": {\n        \"id\": 9725,\n        \"name\": \"string\",\n        \"email\": \"GJZpVxOnbb@pf.jwqn\",\n        \"phone\": \"string\"\n      },\n      \"location\": \"<string>\",\n      \"duration\": 9025,\n      \"topics\": [\n        {\n          \"training_topic_id\": 4718,\n          \"id\": 5883,\n          \"family_attendance_id\": 670,\n          \"label\": \"string\"\n        },\n        {\n          \"training_topic_id\": 3217,\n          \"id\": 7633,\n          \"family_attendance_id\": 3636,\n          \"label\": \"string\"\n        }\n      ],\n      \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"parent_and_caregiver_two\": {\n        \"id\": 9874,\n        \"name\": \"string\",\n        \"email\": \"4RKVty@bfIcoxvTglyqPESSnnXnabRZ.oek\",\n        \"phone\": \"string\"\n      },\n      \"bay\": \"string\"\n    },\n    {\n      \"date_start\": \"2010-11-24T04:38:08.550Z\",\n      \"date_end\": \"1988-07-02T19:58:32.634Z\",\n      \"id\": 6040,\n      \"group_parent_supervision_id\": 2842,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"male\",\n        \"dob\": \"1993-10-15\",\n        \"clinical_status\": \"ON HOLD\",\n        \"id\": 5590\n      },\n      \"parent_and_caregiver_one\": {\n        \"id\": 2659,\n        \"name\": \"string\",\n        \"email\": \"ASOMwdT@CQTpvbg.ku\",\n        \"phone\": \"string\"\n      },\n      \"location\": \"<string>\",\n      \"duration\": 8324,\n      \"topics\": [\n        {\n          \"training_topic_id\": 6931,\n          \"id\": 5030,\n          \"family_attendance_id\": 1270,\n          \"label\": \"string\"\n        },\n        {\n          \"training_topic_id\": 912,\n          \"id\": 1207,\n          \"family_attendance_id\": 2450,\n          \"label\": \"string\"\n        }\n      ],\n      \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"parent_and_caregiver_two\": {\n        \"id\": 1183,\n        \"name\": \"string\",\n        \"email\": \"b97bgURQQeWSLAT@e.jpxw\",\n        \"phone\": \"string\"\n      },\n      \"bay\": \"string\"\n    }\n  ],\n  \"training_topics\": [\n    {\n      \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"label\": \"string\",\n      \"id\": 8388,\n      \"group_parent_supervision_id\": 8015\n    },\n    {\n      \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"label\": \"string\",\n      \"id\": 4082,\n      \"group_parent_supervision_id\": 1374\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72ecbb0c-6348-48eb-9504-eb9f2d2fca96",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "bulk_family_training_topics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"training_topic_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"family_attendance_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e7fddee-6b84-4906-aec3-a74fa812fd7e",
+          "name": "Patch Group Parent Supervision",
+          "request": {
+            "name": "Patch Group Parent Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0abb3290-141a-448f-b9b3-d5ce908cc1a7",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2002-04-05T12:05:00.102Z\",\n  \"utc_offset_date_start\": 1253,\n  \"duration\": 6425,\n  \"setting\": \"<string>\",\n  \"id\": 3687,\n  \"bcba\": {\n    \"id\": 6619,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"CCZ@lme.urv\",\n    \"status\": \"string\",\n    \"clinical_status\": \"PRE CLINICAL\"\n  },\n  \"status\": \"<string>\",\n  \"is_billable\": true,\n  \"family_attendance\": [\n    {\n      \"date_start\": \"1983-01-26T00:46:32.353Z\",\n      \"date_end\": \"1981-04-06T05:06:33.542Z\",\n      \"id\": 1403,\n      \"group_parent_supervision_id\": 288,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"other\",\n        \"dob\": \"1947-03-12\",\n        \"clinical_status\": \"PRE CLINICAL\",\n        \"id\": 6143\n      },\n      \"parent_and_caregiver_one\": {\n        \"id\": 8599,\n        \"name\": \"string\",\n        \"email\": \"1uX3Uj7mM@QauiuxGpEWqgTrJkZVoUAEtxwPmXrMuE.xq\",\n        \"phone\": \"string\"\n      },\n      \"location\": \"<string>\",\n      \"duration\": 2033,\n      \"topics\": [\n        {\n          \"training_topic_id\": 7923,\n          \"id\": 1887,\n          \"family_attendance_id\": 1701,\n          \"label\": \"string\"\n        },\n        {\n          \"training_topic_id\": 7786,\n          \"id\": 7330,\n          \"family_attendance_id\": 7176,\n          \"label\": \"string\"\n        }\n      ],\n      \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"parent_and_caregiver_two\": {\n        \"id\": 433,\n        \"name\": \"string\",\n        \"email\": \"4WmHWhAEyKJKCmI@fcn.ug\",\n        \"phone\": \"string\"\n      },\n      \"bay\": \"string\"\n    },\n    {\n      \"date_start\": \"1983-12-31T07:49:33.846Z\",\n      \"date_end\": \"1993-09-05T03:59:15.032Z\",\n      \"id\": 7520,\n      \"group_parent_supervision_id\": 8175,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"male\",\n        \"dob\": \"1972-12-07\",\n        \"clinical_status\": \"ON HOLD\",\n        \"id\": 3334\n      },\n      \"parent_and_caregiver_one\": {\n        \"id\": 8229,\n        \"name\": \"string\",\n        \"email\": \"oo5HtjcBD@fXdeNXqE.ekel\",\n        \"phone\": \"string\"\n      },\n      \"location\": \"<string>\",\n      \"duration\": 7095,\n      \"topics\": [\n        {\n          \"training_topic_id\": 1619,\n          \"id\": 7542,\n          \"family_attendance_id\": 755,\n          \"label\": \"string\"\n        },\n        {\n          \"training_topic_id\": 4693,\n          \"id\": 5138,\n          \"family_attendance_id\": 9323,\n          \"label\": \"string\"\n        }\n      ],\n      \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"parent_and_caregiver_two\": {\n        \"id\": 8481,\n        \"name\": \"string\",\n        \"email\": \"cIaJ6Nb1@swYFY.pe\",\n        \"phone\": \"string\"\n      },\n      \"bay\": \"string\"\n    }\n  ],\n  \"training_topics\": [\n    {\n      \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"label\": \"string\",\n      \"id\": 6857,\n      \"group_parent_supervision_id\": 6698\n    },\n    {\n      \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"label\": \"string\",\n      \"id\": 3639,\n      \"group_parent_supervision_id\": 2031\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7f6fb2c-06d5-4603-9254-1f571b5ffb6d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91ae8f99-ec20-40ba-bad1-a98c41d262a0",
+          "name": "Fetch Group Parent Supervision",
+          "request": {
+            "name": "Fetch Group Parent Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d73ebe0b-b605-42c2-84d8-a6cbd6ccb2ab",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2002-04-05T12:05:00.102Z\",\n  \"utc_offset_date_start\": 1253,\n  \"duration\": 6425,\n  \"setting\": \"<string>\",\n  \"id\": 3687,\n  \"bcba\": {\n    \"id\": 6619,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"CCZ@lme.urv\",\n    \"status\": \"string\",\n    \"clinical_status\": \"PRE CLINICAL\"\n  },\n  \"status\": \"<string>\",\n  \"is_billable\": true,\n  \"family_attendance\": [\n    {\n      \"date_start\": \"1983-01-26T00:46:32.353Z\",\n      \"date_end\": \"1981-04-06T05:06:33.542Z\",\n      \"id\": 1403,\n      \"group_parent_supervision_id\": 288,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"other\",\n        \"dob\": \"1947-03-12\",\n        \"clinical_status\": \"PRE CLINICAL\",\n        \"id\": 6143\n      },\n      \"parent_and_caregiver_one\": {\n        \"id\": 8599,\n        \"name\": \"string\",\n        \"email\": \"1uX3Uj7mM@QauiuxGpEWqgTrJkZVoUAEtxwPmXrMuE.xq\",\n        \"phone\": \"string\"\n      },\n      \"location\": \"<string>\",\n      \"duration\": 2033,\n      \"topics\": [\n        {\n          \"training_topic_id\": 7923,\n          \"id\": 1887,\n          \"family_attendance_id\": 1701,\n          \"label\": \"string\"\n        },\n        {\n          \"training_topic_id\": 7786,\n          \"id\": 7330,\n          \"family_attendance_id\": 7176,\n          \"label\": \"string\"\n        }\n      ],\n      \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"parent_and_caregiver_two\": {\n        \"id\": 433,\n        \"name\": \"string\",\n        \"email\": \"4WmHWhAEyKJKCmI@fcn.ug\",\n        \"phone\": \"string\"\n      },\n      \"bay\": \"string\"\n    },\n    {\n      \"date_start\": \"1983-12-31T07:49:33.846Z\",\n      \"date_end\": \"1993-09-05T03:59:15.032Z\",\n      \"id\": 7520,\n      \"group_parent_supervision_id\": 8175,\n      \"client\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"sex\": \"male\",\n        \"dob\": \"1972-12-07\",\n        \"clinical_status\": \"ON HOLD\",\n        \"id\": 3334\n      },\n      \"parent_and_caregiver_one\": {\n        \"id\": 8229,\n        \"name\": \"string\",\n        \"email\": \"oo5HtjcBD@fXdeNXqE.ekel\",\n        \"phone\": \"string\"\n      },\n      \"location\": \"<string>\",\n      \"duration\": 7095,\n      \"topics\": [\n        {\n          \"training_topic_id\": 1619,\n          \"id\": 7542,\n          \"family_attendance_id\": 755,\n          \"label\": \"string\"\n        },\n        {\n          \"training_topic_id\": 4693,\n          \"id\": 5138,\n          \"family_attendance_id\": 9323,\n          \"label\": \"string\"\n        }\n      ],\n      \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"parent_and_caregiver_two\": {\n        \"id\": 8481,\n        \"name\": \"string\",\n        \"email\": \"cIaJ6Nb1@swYFY.pe\",\n        \"phone\": \"string\"\n      },\n      \"bay\": \"string\"\n    }\n  ],\n  \"training_topics\": [\n    {\n      \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"label\": \"string\",\n      \"id\": 6857,\n      \"group_parent_supervision_id\": 6698\n    },\n    {\n      \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n      \"label\": \"string\",\n      \"id\": 3639,\n      \"group_parent_supervision_id\": 2031\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2209b008-780e-4b1c-bd5f-ff520e9c75c0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f957eda-1a1b-4a69-904b-d0a65fe87f42",
+          "name": "Delete Group Parent Supervision",
+          "request": {
+            "name": "Delete Group Parent Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f9135f70-7082-477a-ab59-918e6e5a523e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ee642ed-e3d2-49f0-b845-b6abbd1b03fe",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e71eb45b-491c-471a-8ef1-10535ad080b0",
+          "name": "Fetch Training Topics",
+          "request": {
+            "name": "Fetch Training Topics",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                "training_topics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6500e623-1099-44ba-b9ee-8c8215e779e9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    "training_topics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n    \"label\": \"string\"\n  },\n  {\n    \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n    \"label\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3188cc3a-c258-4892-8397-a0b0ddb6956f",
+          "name": "Update Family Attendance",
+          "request": {
+            "name": "Update Family Attendance",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "family_attendance",
+                ":family_attendance_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "family_attendance_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"date_end\": \"<dateTime>\",\n  \"response\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3b7c93c-fd0a-4b21-aaf0-11535492cbc2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"date_end\": \"<dateTime>\",\n  \"response\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_start\": \"2008-11-15T04:28:14.360Z\",\n  \"date_end\": \"1975-10-04T01:24:48.004Z\",\n  \"id\": 2274,\n  \"group_parent_supervision_id\": 4892,\n  \"client\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"sex\": \"male\",\n    \"dob\": \"1973-08-15\",\n    \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n    \"id\": 8606\n  },\n  \"parent_and_caregiver_one\": {\n    \"id\": 1766,\n    \"name\": \"string\",\n    \"email\": \"Hp6hFrAWv1@MrMXBa.yaxr\",\n    \"phone\": \"string\"\n  },\n  \"location\": \"<string>\",\n  \"duration\": 2764,\n  \"topics\": [\n    {\n      \"training_topic_id\": 555,\n      \"id\": 7812,\n      \"family_attendance_id\": 1223,\n      \"label\": \"string\"\n    },\n    {\n      \"training_topic_id\": 6209,\n      \"id\": 259,\n      \"family_attendance_id\": 6779,\n      \"label\": \"string\"\n    }\n  ],\n  \"response\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"parent_and_caregiver_two\": {\n    \"id\": 9350,\n    \"name\": \"string\",\n    \"email\": \"rrX5Q-z1D@sdquvCjZGXb.dxl\",\n    \"phone\": \"string\"\n  },\n  \"bay\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8f94c88-d363-4f1e-9737-3aa960f97cc9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"date_end\": \"<dateTime>\",\n  \"response\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71d98652-54a3-4af7-9b1a-63489c9337b8",
+          "name": "Delete Family Attendance",
+          "request": {
+            "name": "Delete Family Attendance",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "family_attendance",
+                ":family_attendance_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "family_attendance_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "349ab0dd-728d-41ca-816b-7558bb43c249",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e14691e4-d7ca-40d8-9c48-35235fa04fd6",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "family_attendance",
+                    ":family_attendance_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "family_attendance_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f126f71-cb2c-4a93-a61a-abcbbc436c2c",
+          "name": "Update Training Topic",
+          "request": {
+            "name": "Update Training Topic",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "training_topics",
+                ":training_topic_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "training_topic_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "123c3ea0-950c-4248-85aa-783cbb062044",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "training_topics",
+                    ":training_topic_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "training_topic_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring\",\n  \"label\": \"string\",\n  \"id\": 4283,\n  \"group_parent_supervision_id\": 8934\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41ef9dd5-d0bd-47d1-a15a-86d743d69f93",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "training_topics",
+                    ":training_topic_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "training_topic_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89ac03c4-30c4-4ce0-9c69-51ae21a6ea3f",
+          "name": "Delete Training Topic",
+          "request": {
+            "name": "Delete Training Topic",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "training_topics",
+                ":training_topic_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "training_topic_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "91208a69-cf9f-4ead-a16f-2fbce1277db5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "training_topics",
+                    ":training_topic_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "training_topic_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7269d2d6-b833-4ae8-a182-8b226523e0b4",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "training_topics",
+                    ":training_topic_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "training_topic_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18e702a9-c6b1-4f0b-8d9a-1ed3ed4f97cb",
+          "name": "Fetch Group Parent Supervisions With Claim History",
+          "request": {
+            "name": "Fetch Group Parent Supervisions With Claim History",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                "claim_history",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "96ff7d79-5fe4-4737-bc98-191e8b206031",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    "claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"date_start\": \"1954-09-09T10:46:03.283Z\",\n    \"utc_offset_date_start\": 1788,\n    \"duration\": 4333,\n    \"setting\": \"<string>\",\n    \"id\": 4935,\n    \"bcba\": {\n      \"id\": 7038,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"FXTlPbVk05Gh@QMSQLUzPBBwNqwHsvCzPmaizLiSB.fng\",\n      \"status\": \"string\",\n      \"clinical_status\": \"CLINICAL\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": false,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"unknown\",\n      \"dob\": \"1952-05-14\",\n      \"clinical_status\": \"LIMITED ACCESS GUARDIAN\",\n      \"id\": 7069\n    },\n    \"claim_history\": [\n      {\n        \"id\": 6883,\n        \"status\": \"Rejected & Resubmitted\",\n        \"total_charge\": 9136.925882139962,\n        \"secondary_status\": \"Unbillable\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 267,\n        \"status\": \"Rejected, Not Resubmitted\",\n        \"total_charge\": 7535.642153740825,\n        \"secondary_status\": \"In Appeals\",\n        \"clearing_house_claim_id\": \"string\"\n      }\n    ],\n    \"family_attendance_bay\": \"string\"\n  },\n  {\n    \"date_start\": \"2017-01-24T06:36:26.005Z\",\n    \"utc_offset_date_start\": 9143,\n    \"duration\": 3298,\n    \"setting\": \"<string>\",\n    \"id\": 5532,\n    \"bcba\": {\n      \"id\": 919,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"8szAZxzZFmfj@VizEZ.rql\",\n      \"status\": \"string\",\n      \"clinical_status\": \"CLINICAL\"\n    },\n    \"status\": \"<string>\",\n    \"is_billable\": true,\n    \"client\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"sex\": \"female\",\n      \"dob\": \"1996-07-11\",\n      \"clinical_status\": \"CLINICAL\",\n      \"id\": 3460\n    },\n    \"claim_history\": [\n      {\n        \"id\": 8857,\n        \"status\": \"Rejected, Needs Appeal\",\n        \"total_charge\": 8712.729955547926,\n        \"secondary_status\": \"Approved\",\n        \"clearing_house_claim_id\": \"string\"\n      },\n      {\n        \"id\": 3387,\n        \"status\": \"Approved - Recouped & Resubmitted\",\n        \"total_charge\": 7667.366015170087,\n        \"secondary_status\": \"In Appeals\",\n        \"clearing_house_claim_id\": \"string\"\n      }\n    ],\n    \"family_attendance_bay\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6170f1b3-c30c-4fa2-8b92-8ed5a1923279",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    "claim_history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b90b5ebe-33a7-4ee3-a654-0ea488af76ea",
+          "name": "Stop Group Parent Supervision",
+          "request": {
+            "name": "Stop Group Parent Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "stop",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature\": \"<string>\",\n  \"date_signed\": \"<dateTime>\",\n  \"utc_offset_date_signed\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bca43c8-3f60-4e16-9c01-6179f41ea90c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"date_signed\": \"<dateTime>\",\n  \"utc_offset_date_signed\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63676940-e442-499a-91ba-336492cf2769",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "stop",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"<string>\",\n  \"date_signed\": \"<dateTime>\",\n  \"utc_offset_date_signed\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "931e1990-535f-4ec9-a3ef-08d5141c79dc",
+          "name": "Download Group Parent Supervision Pdfs",
+          "request": {
+            "name": "Download Group Parent Supervision Pdfs",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "download",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7b6e371a-a104-4499-bdd6-6e3f660a5e1e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b3a2a97-7076-46d0-8a0e-094460a14453",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "download",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4d51894-f7a0-426b-b6da-83cb2d9cf5c5",
+          "name": "Regenerate Group Parent Supervision Pdfs",
+          "request": {
+            "name": "Regenerate Group Parent Supervision Pdfs",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "pdf_regenerate",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c3a3a56a-04dc-43c8-a6a8-24e3167fb897",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "pdf_regenerate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "615839a4-2995-435b-8b73-d914a90ad38d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "pdf_regenerate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6aced01d-8e6b-4ac8-958d-3645d96b95bb",
+          "name": "Edit Group Parent Supervision",
+          "request": {
+            "name": "Edit Group Parent Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "edit",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8d55c819-f4b2-4320-a4b8-c9d25686ff95",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "edit",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78f95258-cd80-4b66-87eb-044d7004ddd3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "edit",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41f6fa09-5732-4b0e-a141-f557f7dc8c2b",
+          "name": "Backdate Group Parent Supervision",
+          "request": {
+            "name": "Backdate Group Parent Supervision",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "backdate",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "763cb240-3159-4cd0-b785-62cd11868cb0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "backdate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "029b7339-43fd-415f-b7c5-d0116d296181",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "backdate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_start\": \"<dateTime>\",\n  \"utc_offset_date_start\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92f6d6a5-28db-43fe-9fe4-fbd3416b5db0",
+          "name": "Make Group Parent Supervision Unbillable",
+          "request": {
+            "name": "Make Group Parent Supervision Unbillable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "make_unbillable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a7699fe-cf83-441c-9be7-e09247e3b450",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45544efb-5e0e-4e01-b6c0-7ebe241b5d2f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "make_unbillable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cfaf377-6745-4cb0-bbb6-e9657329a122",
+          "name": "Make Group Parent Supervision Billable",
+          "request": {
+            "name": "Make Group Parent Supervision Billable",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_parent_supervisions",
+                ":group_parent_supervision_id",
+                "make_billable",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "group_parent_supervision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ff9f8a1c-e8a3-4546-bc4f-cf7e2d160e06",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0762eee5-dcec-4053-8a13-317a960569d6",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_parent_supervisions",
+                    ":group_parent_supervision_id",
+                    "make_billable",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "group_parent_supervision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2e125203-da59-484d-8df0-0657f69c76ac",
+    "name": "Fast Group Parent Supervisions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

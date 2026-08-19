@@ -1,0 +1,375 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Providers API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Clinical Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/clinical_status/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Clinical Status"
+        },
+        {
+          "info": {
+            "name": "Promote Provider To Clinical",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/promote/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Promote Provider To Clinical"
+        },
+        {
+          "info": {
+            "name": "Get All Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/",
+            "params": [
+              {
+                "name": "include_roles",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fail_on_roles_error",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clinical_status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Providers"
+        },
+        {
+          "info": {
+            "name": "Create Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/providers/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Provider"
+        },
+        {
+          "info": {
+            "name": "Fetch Co Assigned Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/co_assigned/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clinical_relationship",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Co Assigned Providers"
+        },
+        {
+          "info": {
+            "name": "Get Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_roles",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Provider"
+        },
+        {
+          "info": {
+            "name": "Patch Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Provider"
+        },
+        {
+          "info": {
+            "name": "Update Provider Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/email/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Provider Email"
+        },
+        {
+          "info": {
+            "name": "Get Provider Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/info",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Provider Info"
+        },
+        {
+          "info": {
+            "name": "Send Password Reset Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/password_reset/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send Password Reset Email"
+        },
+        {
+          "info": {
+            "name": "Set Provider Qa Billing Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/qa_billing_status/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Provider Qa Billing Status"
+        },
+        {
+          "info": {
+            "name": "Get Provider State License",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/provider_licenses/:state/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Provider State License"
+        },
+        {
+          "info": {
+            "name": "Get Provider Payor Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/:provider_id/provider_payor_credentials/:payor_id/",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "payor_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Provider Payor Credentials"
+        },
+        {
+          "info": {
+            "name": "Fetch Guardian Relationship Manager Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/:guardian_provider_id/relationship_manager/",
+            "params": [
+              {
+                "name": "guardian_provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "exclude_inactive",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Guardian Relationship Manager Assignments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

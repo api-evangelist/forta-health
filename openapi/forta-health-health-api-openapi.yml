@@ -1,0 +1,25 @@
+openapi: 3.2.0
+info:
+  title: Fast Health API
+  version: 0.1.0
+tags:
+- name: health
+paths:
+  /api/v1/health/:
+    get:
+      tags:
+      - health
+      summary: Health Check
+      description: "Basic health check to determine if the API is up\nReturns:\n    200"
+      operationId: health_check_api_v1_health__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

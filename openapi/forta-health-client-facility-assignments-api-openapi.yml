@@ -1,0 +1,315 @@
+openapi: 3.2.0
+info:
+  title: Fast Client Facility Assignments API
+  version: 0.1.0
+tags:
+- name: client_facility_assignments
+paths:
+  /api/v1/client_facility_assignments/:
+    post:
+      tags:
+      - client_facility_assignments
+      summary: Create Client Facility Assignments
+      operationId: create_client_facility_assignments_api_v1_client_facility_assignments__post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacilityAssignmentCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacilityAssignmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - client_facility_assignments
+      summary: Fetch Client Facility Assignments
+      operationId: fetch_client_facility_assignments_api_v1_client_facility_assignments__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+      - name: active_only
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Active Only
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacilityAssignmentResponse'
+                title: Response Fetch Client Facility Assignments Api V1 Client Facility Assignments  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/client_facility_assignments/{client_facility_assignment_id}/:
+    patch:
+      tags:
+      - client_facility_assignments
+      summary: Update Client Facility Assignment
+      operationId: update_client_facility_assignment_api_v1_client_facility_assignments__client_facility_assignment_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_facility_assignment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Facility Assignment Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacilityAssignmentPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacilityAssignmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - client_facility_assignments
+      summary: Delete Client Facility Assignment
+      operationId: delete_client_facility_assignment_api_v1_client_facility_assignments__client_facility_assignment_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: client_facility_assignment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Client Facility Assignment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    FacilityListResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        tin:
+          type: string
+          title: Tin
+        npi:
+          type: string
+          title: Npi
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - tin
+      - npi
+      - id
+      title: FacilityListResponse
+    ClientFacilityAssignmentPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+      type: object
+      required:
+      - date_start
+      title: ClientFacilityAssignmentPatch
+    ClientFacilityAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        facility:
+          $ref: '#/components/schemas/FacilityListResponse'
+        assignment_type:
+          $ref: '#/components/schemas/ClientFacilityAssignmentTypeEnum'
+      type: object
+      required:
+      - date_start
+      - id
+      - client
+      - facility
+      - assignment_type
+      title: ClientFacilityAssignmentResponse
+    ClientFacilityAssignmentTypeEnum:
+      type: string
+      enum:
+      - billing
+      - service
+      title: ClientFacilityAssignmentTypeEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClientFacilityAssignmentCreate:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        client_id:
+          type: integer
+          title: Client Id
+        facility_id:
+          type: integer
+          title: Facility Id
+        assignment_type:
+          $ref: '#/components/schemas/ClientFacilityAssignmentTypeEnum'
+      type: object
+      required:
+      - date_start
+      - client_id
+      - facility_id
+      - assignment_type
+      title: ClientFacilityAssignmentCreate
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

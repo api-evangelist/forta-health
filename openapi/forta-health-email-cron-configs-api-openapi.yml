@@ -1,0 +1,401 @@
+openapi: 3.2.0
+info:
+  title: Fast Email Cron Configs API
+  version: 0.1.0
+tags:
+- name: email_cron_configs
+paths:
+  /api/v1/email_cron_configs/:
+    get:
+      tags:
+      - email_cron_configs
+      summary: List Email Cron Configs
+      operationId: list_email_cron_configs_api_v1_email_cron_configs__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EmailCronConfigResponse'
+                type: array
+                title: Response List Email Cron Configs Api V1 Email Cron Configs  Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - email_cron_configs
+      summary: Create Email Cron Config
+      operationId: create_email_cron_config_api_v1_email_cron_configs__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailCronConfigCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailCronConfigResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/email_cron_configs/{config_id}/:
+    get:
+      tags:
+      - email_cron_configs
+      summary: Get Email Cron Config
+      operationId: get_email_cron_config_api_v1_email_cron_configs__config_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: config_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Config Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailCronConfigResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - email_cron_configs
+      summary: Update Email Cron Config
+      operationId: update_email_cron_config_api_v1_email_cron_configs__config_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: config_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Config Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailCronConfigPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailCronConfigResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - email_cron_configs
+      summary: Delete Email Cron Config
+      operationId: delete_email_cron_config_api_v1_email_cron_configs__config_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: config_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Config Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/email_cron_configs/{config_id}/preview/:
+    post:
+      tags:
+      - email_cron_configs
+      summary: Preview Email Cron Config
+      operationId: preview_email_cron_config_api_v1_email_cron_configs__config_id__preview__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: config_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Config Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailCronConfigPreviewRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailCronConfigPreviewResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    EmailCronConfigPatch:
+      properties:
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+        recipients:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Recipients
+        error_notification_recipient:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Error Notification Recipient
+        days_of_week:
+          anyOf:
+          - items:
+              type: string
+              enum:
+              - MON
+              - TUE
+              - WED
+              - THU
+              - FRI
+              - SAT
+              - SUN
+            type: array
+          - type: 'null'
+          title: Days Of Week
+      type: object
+      title: EmailCronConfigPatch
+    EmailCronConfigResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        job_key:
+          type: string
+          title: Job Key
+        enabled:
+          type: boolean
+          title: Enabled
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+        recipients:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Recipients
+        error_notification_recipient:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Notification Recipient
+        days_of_week:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Days Of Week
+        updated_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated By
+        is_runnable:
+          type: boolean
+          title: Is Runnable
+          readOnly: true
+      type: object
+      required:
+      - id
+      - job_key
+      - enabled
+      - is_runnable
+      title: EmailCronConfigResponse
+    EmailCronConfigPreviewResponse:
+      properties:
+        subject_rendered:
+          type: string
+          title: Subject Rendered
+        html_rendered:
+          type: string
+          title: Html Rendered
+        recipients_resolved:
+          items:
+            type: string
+          type: array
+          title: Recipients Resolved
+        has_data:
+          type: boolean
+          title: Has Data
+      type: object
+      required:
+      - subject_rendered
+      - html_rendered
+      - recipients_resolved
+      - has_data
+      title: EmailCronConfigPreviewResponse
+    EmailCronConfigCreate:
+      properties:
+        job_key:
+          type: string
+          title: Job Key
+        enabled:
+          type: boolean
+          title: Enabled
+          default: true
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+        recipients:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Recipients
+        error_notification_recipient:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Error Notification Recipient
+        days_of_week:
+          anyOf:
+          - items:
+              type: string
+              enum:
+              - MON
+              - TUE
+              - WED
+              - THU
+              - FRI
+              - SAT
+              - SUN
+            type: array
+          - type: 'null'
+          title: Days Of Week
+      type: object
+      required:
+      - job_key
+      title: EmailCronConfigCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EmailCronConfigPreviewRequest:
+      properties:
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+      type: object
+      title: EmailCronConfigPreviewRequest
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

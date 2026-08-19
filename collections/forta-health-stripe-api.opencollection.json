@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Stripe API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "stripe",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Handle Stripe Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webhooks/stripe/"
+          },
+          "docs": "Handle Stripe Webhook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

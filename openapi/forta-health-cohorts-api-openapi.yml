@@ -1,0 +1,359 @@
+openapi: 3.2.0
+info:
+  title: Fast Cohorts API
+  version: 0.1.0
+tags:
+- name: cohorts
+paths:
+  /api/v1/cohorts/:
+    get:
+      tags:
+      - cohorts
+      summary: Fetch Cohorts
+      operationId: fetch_cohorts_api_v1_cohorts__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CohortResponse'
+                type: array
+                title: Response Fetch Cohorts Api V1 Cohorts  Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - cohorts
+      summary: Create Cohort
+      operationId: create_cohort_api_v1_cohorts__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CohortCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CohortResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/cohorts/{cohort_id}/:
+    patch:
+      tags:
+      - cohorts
+      summary: Update Cohort
+      operationId: update_cohort_api_v1_cohorts__cohort_id___patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: cohort_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Cohort Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CohortPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CohortResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - cohorts
+      summary: Delete Cohort
+      operationId: delete_cohort_api_v1_cohorts__cohort_id___delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: cohort_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Cohort Id
+      - name: force
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Force
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - cohorts
+      summary: Fetch Cohort
+      operationId: fetch_cohort_api_v1_cohorts__cohort_id___get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: cohort_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Cohort Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CohortWithClientAssignmentsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/cohorts/service_classes/:
+    get:
+      tags:
+      - cohorts
+      summary: Fetch Cohort Service Classes
+      operationId: fetch_cohort_service_classes_api_v1_cohorts_service_classes__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CohortServiceClass'
+                type: array
+                title: Response Fetch Cohort Service Classes Api V1 Cohorts Service Classes  Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClientAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - client
+      title: ClientAssignmentResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CohortPatch:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+      type: object
+      required:
+      - name
+      - service_classes
+      title: CohortPatch
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CohortServiceClass:
+      type: string
+      enum:
+      - 97151 CLAIMS
+      - 97152 CLAIMS
+      - 97153 CLAIMS
+      - 97155 CLAIMS
+      - 97156 CLAIMS
+      - 97157 CLAIMS
+      - NO SERVICE
+      - NON THERAPY HOURS TIMESHEETS
+      title: CohortServiceClass
+    CohortWithClientAssignmentsResponse:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+        id:
+          type: integer
+          title: Id
+        client_assignments:
+          items:
+            $ref: '#/components/schemas/ClientAssignmentResponse'
+          type: array
+          title: Client Assignments
+      type: object
+      required:
+      - name
+      - service_classes
+      - id
+      - client_assignments
+      title: CohortWithClientAssignmentsResponse
+    CohortResponse:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - name
+      - service_classes
+      - id
+      title: CohortResponse
+    CohortCreate:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+      type: object
+      required:
+      - name
+      - service_classes
+      title: CohortCreate
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

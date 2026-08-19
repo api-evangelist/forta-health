@@ -1,0 +1,3567 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast Treatment Plan API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "treatment_plan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read Treatment Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action_required",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_clinical_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "with_activation_logs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get list of treatment plans by client ID with optional activation logs.\n\nArgs:\n    client_id: Optional client ID to filter treatment plans\n    action_required: Filter for treatment plans requiring action\n    client_clinical_status: Filter by client clinical status\n    status: Filter by treatment plan status\n    expand: Optional sub-resources to include in response\n    with_activation_logs: Include full activation log history for each treatment plan\n\nReturns:\n    List of treatment plans with opti"
+        },
+        {
+          "info": {
+            "name": "Create Treatment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Treatment Plan"
+        },
+        {
+          "info": {
+            "name": "Get Prior Authorizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/prior_authorizations/",
+            "params": [
+              {
+                "name": "pa_expires_within_days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Prior Authorizations"
+        },
+        {
+          "info": {
+            "name": "Read Treatment Plan By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read Treatment Plan By Id"
+        },
+        {
+          "info": {
+            "name": "Patch Treatment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Treatment Plan"
+        },
+        {
+          "info": {
+            "name": "Delete Treatment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Treatment Plan"
+        },
+        {
+          "info": {
+            "name": "Stop Treatment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/stop/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop Treatment Plan"
+        },
+        {
+          "info": {
+            "name": "Queue To Regenerate Treatment Plan Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/pdf_regenerate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Queue To Regenerate Treatment Plan Pdf"
+        },
+        {
+          "info": {
+            "name": "Read All Goals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_pending",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read All Goals"
+        },
+        {
+          "info": {
+            "name": "Create Goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Goal"
+        },
+        {
+          "info": {
+            "name": "Read All Medications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medications/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read All Medications"
+        },
+        {
+          "info": {
+            "name": "Create Medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medications/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Medication"
+        },
+        {
+          "info": {
+            "name": "Patch Goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Goal"
+        },
+        {
+          "info": {
+            "name": "Delete Goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Goal"
+        },
+        {
+          "info": {
+            "name": "Read Medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medications/:medication_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "medication_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read Medication"
+        },
+        {
+          "info": {
+            "name": "Patch Medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medications/:medication_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "medication_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Medication"
+        },
+        {
+          "info": {
+            "name": "Delete Medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medications/:medication_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "medication_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Medication"
+        },
+        {
+          "info": {
+            "name": "Create Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Target"
+        },
+        {
+          "info": {
+            "name": "Patch Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/:target_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Target"
+        },
+        {
+          "info": {
+            "name": "Delete Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/:target_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Target"
+        },
+        {
+          "info": {
+            "name": "Change Target Stage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/:target_id/change_stage/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Change Target Stage"
+        },
+        {
+          "info": {
+            "name": "Update Last Target Stage Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/:target_id/change_stage/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Last Target Stage Change"
+        },
+        {
+          "info": {
+            "name": "Delete Last Target Stage Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/:target_id/change_stage/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Last Target Stage Change"
+        },
+        {
+          "info": {
+            "name": "Change Target Stage In Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/bulk_change_stage/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Change Target Stage In Bulk"
+        },
+        {
+          "info": {
+            "name": "Read Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read Assessment"
+        },
+        {
+          "info": {
+            "name": "Create Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Assessment"
+        },
+        {
+          "info": {
+            "name": "Patch Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Assessment"
+        },
+        {
+          "info": {
+            "name": "Delete Assessment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Assessment"
+        },
+        {
+          "info": {
+            "name": "Get All Tools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Tools"
+        },
+        {
+          "info": {
+            "name": "Create Assessment Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Assessment Tool"
+        },
+        {
+          "info": {
+            "name": "Patch Assessment Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/:tool_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Assessment Tool"
+        },
+        {
+          "info": {
+            "name": "Delete Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/:tool_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Tool"
+        },
+        {
+          "info": {
+            "name": "Get Assessment Tool Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/:tool_id/documents/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Assessment Tool Documents"
+        },
+        {
+          "info": {
+            "name": "Create Assessment Tool Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/:tool_id/documents/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Assessment Tool Document"
+        },
+        {
+          "info": {
+            "name": "Patch Assessment Tool Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/:tool_id/documents/:document_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Assessment Tool Document"
+        },
+        {
+          "info": {
+            "name": "Delete Assessment Tool Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/:tool_id/documents/:document_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Assessment Tool Document"
+        },
+        {
+          "info": {
+            "name": "Reupload Assessment Tool Document Visual",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/tools/:tool_id/documents/:document_id/reupload_visual/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reupload Assessment Tool Document Visual"
+        },
+        {
+          "info": {
+            "name": "Get Crisis Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/crisis_plans/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Crisis Plans"
+        },
+        {
+          "info": {
+            "name": "Create Crisis Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/crisis_plans/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Crisis Plan"
+        },
+        {
+          "info": {
+            "name": "Patch Crisis Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/crisis_plans/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Crisis Plan"
+        },
+        {
+          "info": {
+            "name": "Delete Crisis Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/crisis_plans/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Crisis Plan"
+        },
+        {
+          "info": {
+            "name": "Get Discharge And Transition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read discharge from treatment plan"
+        },
+        {
+          "info": {
+            "name": "Create Discharge And Transition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Discharge And Transition"
+        },
+        {
+          "info": {
+            "name": "Patch Discharge And Transition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/:discharge_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "discharge_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing discharge and transition plan"
+        },
+        {
+          "info": {
+            "name": "Delete Discharge And Transition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/:discharge_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "discharge_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete discharge and transition"
+        },
+        {
+          "info": {
+            "name": "Get Discharge And Transition Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/:discharge_id/reasons/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "discharge_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get reasons for discharge"
+        },
+        {
+          "info": {
+            "name": "Create Discharge And Transition Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/:discharge_id/reasons/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "discharge_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create discharge and transition plan reasons"
+        },
+        {
+          "info": {
+            "name": "Patch Discharge And Transition Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/:discharge_id/reasons/:reason_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "discharge_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reason_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing reasons for discharge and transition plan"
+        },
+        {
+          "info": {
+            "name": "Delete Discharge And Transition Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/discharges/:discharge_id/reasons/:reason_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "discharge_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reason_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete discharge and transition plan reason"
+        },
+        {
+          "info": {
+            "name": "Get Education Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/education_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "read education background by treatment plan id"
+        },
+        {
+          "info": {
+            "name": "Create Education Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/education_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create education background"
+        },
+        {
+          "info": {
+            "name": "Patch Education Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/education_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch education background"
+        },
+        {
+          "info": {
+            "name": "Delete Education Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/education_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete education background"
+        },
+        {
+          "info": {
+            "name": "Get Client And Family Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read client and family background from treatment plan"
+        },
+        {
+          "info": {
+            "name": "Create Client And Family Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create client and family background"
+        },
+        {
+          "info": {
+            "name": "Patch Client And Family Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing client and family background"
+        },
+        {
+          "info": {
+            "name": "Delete Client And Family Background",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete client and family background"
+        },
+        {
+          "info": {
+            "name": "Update Client Strengths",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/client_strengths/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Client Strengths"
+        },
+        {
+          "info": {
+            "name": "Update Client Interests",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/client_interests/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Client Interests"
+        },
+        {
+          "info": {
+            "name": "Get Client And Family Background Parents And Caregivers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/parents_and_caregivers/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all parents and caregivers from client and family background"
+        },
+        {
+          "info": {
+            "name": "Create Client And Family Background Parents And Caregivers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/parents_and_caregivers/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create parent/caregiver"
+        },
+        {
+          "info": {
+            "name": "Patch Client And Family Background Parents And Caregivers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/parents_and_caregivers/:parent_and_caregiver_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_and_caregiver_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing parents and caregiver for client and family background"
+        },
+        {
+          "info": {
+            "name": "Delete Client And Family Background Parents And Caregivers",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/parents_and_caregivers/:parent_and_caregiver_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_and_caregiver_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete parent and caregiver"
+        },
+        {
+          "info": {
+            "name": "Get Client And Family Background Siblings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/siblings/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all siblings from client and family background"
+        },
+        {
+          "info": {
+            "name": "Create Client And Family Background Sibling",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/siblings/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create sibling for client and family background"
+        },
+        {
+          "info": {
+            "name": "Patch Client And Family Background Sibling",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/siblings/:sibling_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sibling_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing sibling for client and family background"
+        },
+        {
+          "info": {
+            "name": "Delete Client And Family Background Sibling",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/client_and_family_background/:background_id/siblings/:sibling_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "background_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sibling_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete sibling"
+        },
+        {
+          "info": {
+            "name": "Get All Assessment Barriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/barriers/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read all barriers"
+        },
+        {
+          "info": {
+            "name": "Create Assessment Barrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/barriers/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create barrier for assessment"
+        },
+        {
+          "info": {
+            "name": "Patch Assessment Barriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/barriers/:barrier_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "barrier_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch barrier"
+        },
+        {
+          "info": {
+            "name": "Delete Assessment Barriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/barriers/:barrier_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "barrier_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete barrier"
+        },
+        {
+          "info": {
+            "name": "Create Assessment Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/summarize/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create summary for assessment"
+        },
+        {
+          "info": {
+            "name": "Patch Assessment Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/assessments/:assessment_id/summarize/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create summary for assessment"
+        },
+        {
+          "info": {
+            "name": "Read All Symptoms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/symptoms/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all symptoms listed in a treatment plan"
+        },
+        {
+          "info": {
+            "name": "Create Symptoms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/symptoms/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create maladaptive symptoms for treatment plan"
+        },
+        {
+          "info": {
+            "name": "Patch Symptom",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/symptoms/:symptom_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "symptom_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch maladaptive symptoms for treatment plan"
+        },
+        {
+          "info": {
+            "name": "Delete Symptom",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/symptoms/:symptom_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "symptom_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete maladaptive symptoms for treatment plan"
+        },
+        {
+          "info": {
+            "name": "Get Medical History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read medical history from treatment plan"
+        },
+        {
+          "info": {
+            "name": "Create Medical History",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create medical history"
+        },
+        {
+          "info": {
+            "name": "Patch Medical History",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing medical history"
+        },
+        {
+          "info": {
+            "name": "Delete Medical History",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete medical history"
+        },
+        {
+          "info": {
+            "name": "Get Medical History Diagnoses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/:medical_history_id/diagnoses/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "medical_history_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all diagnoses from medical history"
+        },
+        {
+          "info": {
+            "name": "Create Medical History Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/:medical_history_id/diagnoses/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "medical_history_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create diagnosis for medical history"
+        },
+        {
+          "info": {
+            "name": "Patch Medical History Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/:medical_history_id/diagnoses/:diagnosis_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "medical_history_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "diagnosis_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing diagnosis for medical history"
+        },
+        {
+          "info": {
+            "name": "Delete Medical History Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/medical_history/:medical_history_id/diagnoses/:diagnosis_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "medical_history_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "diagnosis_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete sibling"
+        },
+        {
+          "info": {
+            "name": "Get Referral History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read referral history from treatment plan"
+        },
+        {
+          "info": {
+            "name": "Create Referral History",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create referral history"
+        },
+        {
+          "info": {
+            "name": "Patch Referral History",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing referral history"
+        },
+        {
+          "info": {
+            "name": "Delete Referral History",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete referral history"
+        },
+        {
+          "info": {
+            "name": "Get Referral History Assessment Tools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/:referral_history_id/assessment_tools/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "referral_history_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all assessment tools for referral history"
+        },
+        {
+          "info": {
+            "name": "Create Referral History Assessment Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/:referral_history_id/assessment_tools/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "referral_history_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create tool for referral history"
+        },
+        {
+          "info": {
+            "name": "Patch Referral History Assessment Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/:referral_history_id/assessment_tools/:tool_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "referral_history_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing tool for referral history"
+        },
+        {
+          "info": {
+            "name": "Delete Referral History Assessment Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/referral_history/:referral_history_id/assessment_tools/:tool_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "referral_history_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete assessment tool from referral history"
+        },
+        {
+          "info": {
+            "name": "Get Treatment Recommendation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read treatment recommendation from treatment plan"
+        },
+        {
+          "info": {
+            "name": "Create Treatment Recommendation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Treatment Recommendation"
+        },
+        {
+          "info": {
+            "name": "Patch Treatment Recommendation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing treatment recommendation"
+        },
+        {
+          "info": {
+            "name": "Delete Treatment Recommendation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete treatment recommendation"
+        },
+        {
+          "info": {
+            "name": "Get Treatment Recommendation Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/:treatment_recommendation_id/services/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "treatment_recommendation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all services for treatment recommendation"
+        },
+        {
+          "info": {
+            "name": "Create Treatment Recommendation Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/:treatment_recommendation_id/services/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "treatment_recommendation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create service for treatment recommendation"
+        },
+        {
+          "info": {
+            "name": "Patch Treatment Recommendation Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/:treatment_recommendation_id/services/:service_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "treatment_recommendation_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing service for treatment recommendation"
+        },
+        {
+          "info": {
+            "name": "Delete Treatment Recommendation Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/treatment_recommendations/:treatment_recommendation_id/services/:service_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "treatment_recommendation_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete service"
+        },
+        {
+          "info": {
+            "name": "Get Therapy History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read therapy history from treatment plan"
+        },
+        {
+          "info": {
+            "name": "Create Therapy History",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create therapy history"
+        },
+        {
+          "info": {
+            "name": "Patch Therapy History",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing therapy history"
+        },
+        {
+          "info": {
+            "name": "Delete Therapy History",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete therapy history"
+        },
+        {
+          "info": {
+            "name": "Get Therapy History Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/:therapy_history_id/services/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "therapy_history_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all services for therapy history"
+        },
+        {
+          "info": {
+            "name": "Create Therapy History Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/:therapy_history_id/services/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "therapy_history_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Therapy History Service"
+        },
+        {
+          "info": {
+            "name": "Patch Therapy History Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/:therapy_history_id/services/:service_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "therapy_history_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Therapy History Service"
+        },
+        {
+          "info": {
+            "name": "Delete Therapy History Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/therapy_history/:therapy_history_id/services/:service_id/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "therapy_history_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete service from therapy history"
+        },
+        {
+          "info": {
+            "name": "Activate Treatment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/activate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set this treatment plan to active"
+        },
+        {
+          "info": {
+            "name": "Deactivate Treatment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/deactivate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deactivate this treatment plan"
+        },
+        {
+          "info": {
+            "name": "Set Treatment Plan Status To Edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/edit/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set Treatment Plan Status To Edit"
+        },
+        {
+          "info": {
+            "name": "Get Treatment Plan Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/download/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch most recent PDF document for treatment plan\nPDF is returned as a pre-signed URL"
+        },
+        {
+          "info": {
+            "name": "Activate Goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/activate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Activate Goal"
+        },
+        {
+          "info": {
+            "name": "Deactivate Goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/deactivate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deactivate Goal"
+        },
+        {
+          "info": {
+            "name": "Activate Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/:target_id/activate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Activate Target"
+        },
+        {
+          "info": {
+            "name": "Deactivate Target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/targets/:target_id/deactivate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deactivate Target"
+        },
+        {
+          "info": {
+            "name": "Reassign Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/reassign_provider/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reassign Provider"
+        },
+        {
+          "info": {
+            "name": "Migrate Treatment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/migrate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Migrate Treatment Plan"
+        },
+        {
+          "info": {
+            "name": "Create Hypothesized Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/hypothesized_functions/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Hypothesized Function"
+        },
+        {
+          "info": {
+            "name": "Update Latest Hypothesized Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/hypothesized_functions/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Latest Hypothesized Function"
+        },
+        {
+          "info": {
+            "name": "Delete Latest Hypothesized Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/hypothesized_functions/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Latest Hypothesized Function"
+        },
+        {
+          "info": {
+            "name": "Update Treatment Plan Activation Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/activation_logs/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Treatment Plan Activation Log"
+        },
+        {
+          "info": {
+            "name": "Migrate Goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/treatment_plans/:treatment_plan_id/goals/:goal_id/migrate/",
+            "params": [
+              {
+                "name": "treatment_plan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Migrate Goal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
