@@ -15,7 +15,7 @@ image: https://cdn.prod.website-files.com/62605ac6c670d21352ebb32c/675d0e02ce1be
 url: https://raw.githubusercontent.com/api-evangelist/forta-health/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
