@@ -19,6 +19,19 @@ specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
+- Healthcare
+- Autism
+- ABA Therapy
+- Behavioral Health
+- Telehealth
+- Digital Health
+- pediatric-care
+- Clinical Operations
+- Medicaid
+- Health Insurance
+- EHR
+- Machine-Learning
+tags_raw:
 - healthcare
 - autism
 - aba-therapy
@@ -42,7 +55,8 @@ apis:
   description: The assessment_surveys API from Forta Health — 1 operation(s) for assessment_surveys.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - assessment_surveys
   properties:
   - type: OpenAPI
@@ -78,7 +92,8 @@ apis:
   description: The bt_supervisions API from Forta Health — 6 operation(s) for bt_supervisions.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - bt_supervisions
   properties:
   - type: OpenAPI
@@ -96,7 +111,8 @@ apis:
   description: The claim_invoices API from Forta Health — 10 operation(s) for claim_invoices.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - claim_invoices
   properties:
   - type: OpenAPI
@@ -115,6 +131,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Claims
+  tags_raw:
   - claims
   properties:
   - type: OpenAPI
@@ -132,7 +150,8 @@ apis:
   description: The client_assessments API from Forta Health — 10 operation(s) for client_assessments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - client_assessments
   properties:
   - type: OpenAPI
@@ -151,7 +170,8 @@ apis:
     The client_cohort_assignments API from Forta Health — 2 operation(s) for client_cohort_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - client_cohort_assignments
   properties:
   - type: OpenAPI
@@ -170,7 +190,8 @@ apis:
     The client_facility_assignments API from Forta Health — 2 operation(s) for client_facility_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - client_facility_assignments
   properties:
   - type: OpenAPI
@@ -188,7 +209,8 @@ apis:
   description: The client_supervisions API from Forta Health — 12 operation(s) for client_supervisions.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - client_supervisions
   properties:
   - type: OpenAPI
@@ -207,6 +229,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Clients
+  tags_raw:
   - clients
   properties:
   - type: OpenAPI
@@ -225,6 +249,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Cohorts
+  tags_raw:
   - cohorts
   properties:
   - type: OpenAPI
@@ -242,7 +268,8 @@ apis:
   description: The email_cron_configs API from Forta Health — 3 operation(s) for email_cron_configs.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - email_cron_configs
   properties:
   - type: OpenAPI
@@ -261,6 +288,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - EVV
+  tags_raw:
   - evv
   properties:
   - type: OpenAPI
@@ -279,6 +308,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Facilities
+  tags_raw:
   - facilities
   properties:
   - type: OpenAPI
@@ -297,6 +328,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Feature Flags
+  tags_raw:
   - feature_flags
   properties:
   - type: OpenAPI
@@ -315,6 +348,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Field Templates
+  tags_raw:
   - field_templates
   properties:
   - type: OpenAPI
@@ -333,7 +368,8 @@ apis:
     The group_parent_supervisions API from Forta Health — 18 operation(s) for group_parent_supervisions.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - group_parent_supervisions
   properties:
   - type: OpenAPI
@@ -352,6 +388,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -370,7 +408,8 @@ apis:
     The intake_questionnaires API from Forta Health — 32 operation(s) for intake_questionnaires.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - intake_questionnaires
   properties:
   - type: OpenAPI
@@ -389,6 +428,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Metrics
+  tags_raw:
   - metrics
   properties:
   - type: OpenAPI
@@ -407,7 +448,8 @@ apis:
     The onboarding_questionnaires API from Forta Health — 17 operation(s) for onboarding_questionnaires.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - onboarding_questionnaires
   properties:
   - type: OpenAPI
@@ -425,7 +467,8 @@ apis:
   description: The parent_supervisions API from Forta Health — 18 operation(s) for parent_supervisions.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - parent_supervisions
   properties:
   - type: OpenAPI
@@ -462,7 +505,8 @@ apis:
     The payor_provider_credentials API from Forta Health — 2 operation(s) for payor_provider_credentials.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - payor_provider_credentials
   properties:
   - type: OpenAPI
@@ -481,6 +525,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Policies
+  tags_raw:
   - policies
   properties:
   - type: OpenAPI
@@ -499,7 +545,8 @@ apis:
     The provider_assignments API from Forta Health — 2 operation(s) for provider_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - provider_assignments
   properties:
   - type: OpenAPI
@@ -518,7 +565,8 @@ apis:
     The provider_availability_records API from Forta Health — 2 operation(s) for provider_availability_records.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - provider_availability_records
   properties:
   - type: OpenAPI
@@ -537,6 +585,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Providers
+  tags_raw:
   - providers
   properties:
   - type: OpenAPI
@@ -555,6 +605,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Service Codes
+  tags_raw:
   - service_codes
   properties:
   - type: OpenAPI
@@ -573,6 +625,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Sessions
+  tags_raw:
   - sessions
   properties:
   - type: OpenAPI
@@ -591,6 +645,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Stripe
+  tags_raw:
   - stripe
   properties:
   - type: OpenAPI
@@ -609,6 +665,8 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
+  - Timesheets
+  tags_raw:
   - timesheets
   properties:
   - type: OpenAPI
@@ -626,7 +684,8 @@ apis:
   description: The treatment_plan API from Forta Health — 63 operation(s) for treatment_plan.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - treatment_plan
   properties:
   - type: OpenAPI
@@ -645,7 +704,8 @@ apis:
     The treatment_plan_statuses API from Forta Health — 1 operation(s) for treatment_plan_statuses.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
+  tags: []
+  tags_raw:
   - treatment_plan_statuses
   properties:
   - type: OpenAPI
