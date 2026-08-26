@@ -719,6 +719,8 @@ apis:
   - type: DataModel
     url: data-model/forta-health-data-model.yml
 common:
+- type: AgentSkill
+  url: skills/_index.yml
 - type: Overlay
   url: overlays/forta-health-platform-overlay.yaml
 - type: Website
