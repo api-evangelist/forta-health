@@ -11,6 +11,18 @@ description: >-
   works with major commercial payers and state Medicaid programs to shorten the typical six-to-eighteen-month
   ABA waitlist to roughly ninety days. Forta publishes no public developer program; its clinical operations
   platform is a private, bearer-token-authenticated REST API.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/62605ac6c670d21352ebb32c/675d0e02ce1be8abd64c0749_opengraph.webp
 url: https://raw.githubusercontent.com/api-evangelist/forta-health/refs/heads/main/apis.yml
 x-type: company
