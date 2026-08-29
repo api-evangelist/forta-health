@@ -19,92 +19,93 @@ edges:
   capability_id_l1: BC-2870
   capability_name: Claim Production & Submission
   confidence: 0.85
-  evidence: POST /api/v1/claims/preview/  Generate Form 1500 Preview; POST /api/v1/claims/{claim_id}/resubmit/  Resubmit
-    Claim; schemas Form1500ServiceLine, PayorVitals, RejectionReason, ClaimStatusEnum
-  reason: CMS-1500 claim creation, submission, resubmission and status/payment tracking against payors
-    — claim production and submission in the provider revenue cycle.
+  evidence: POST /api/v1/claims/preview/ Generate Form 1500 Preview; POST /api/v1/claims/{claim_id}/resubmit/
+    Resubmit Claim; schemas RejectionReason, Form1500ServiceLine, ClaimPaymentStatusPatch
+  reason: CMS-1500 claim creation, submission, resubmission and status tracking to payers is unambiguously
+    claim production and submission within healthcare revenue cycle.
 - tag: feature_flags
   spec_file: forta-health-feature-flags-api-openapi.yml
   capability_id: BC-4210.50
   capability_id_l1: BC-4210
   capability_name: Feature Flag Management
   confidence: 0.85
-  evidence: PUT /api/v1/feature_flags/{key} 'Set Feature Flag'; 'FeatureFlagResponse', 'FeatureFlagUpdate'
-  reason: Read and set runtime feature flags by key — this is literally feature flag lifecycle/runtime
-    control for the software platform, regardless of the vendor being a healthcare provider.
+  evidence: GET /api/v1/feature_flags/ 'Get Feature Flags'; PUT /api/v1/feature_flags/{key} 'Set Feature
+    Flag'; schema FeatureFlagUpdate
+  reason: Plainly runtime feature-flag read and toggle for the platform — software release/feature-flag
+    control, unrelated to any healthcare clinical capability.
 - tag: payor
   spec_file: forta-health-payor-api-openapi.yml
   capability_id: BC-2870.70
   capability_id_l1: BC-2870
   capability_name: Payer Contract Management
   confidence: 0.8
-  evidence: Create Payor Contract; Update Payor Contract; Create Service Code Description; PayorContractResponse,
-    PayorTypeEnum
-  reason: CRUD over insurance payors, their contracts and contracted service-code descriptions is payer
-    contract management inside provider revenue cycle.
-- tag: payor_provider_credentials
-  spec_file: forta-health-payor-provider-credentials-api-openapi.yml
-  capability_id: BC-2890.50
-  capability_id_l1: BC-2890
-  capability_name: Provider Enrolment Management
-  confidence: 0.78
-  evidence: Create Payor Provider Credential; PayorProviderCredentialResponse; PayorResponse, ProviderListResponse
-  reason: Records linking a provider to a payor's credentialing status is provider enrolment with payers,
-    a sub-capability of medical staff & credentialing management.
+  evidence: '"Create Payor Contract", "Update Payor Contract", "Create Service Code Description"; schemas
+    PayorContractCreate, PayorTypeEnum'
+  reason: Maintains payer master records and their contracts plus payer-specific service code descriptions
+    — payer contract management within provider revenue cycle.
 - tag: onboarding_questionnaires
   spec_file: forta-health-onboarding-questionnaires-api-openapi.yml
   capability_id: BC-2800.20
   capability_id_l1: BC-2800
   capability_name: Patient Registration Management
+  confidence: 0.78
+  evidence: '"Patch Onboarding Questionnaire General Info", "Patch Onboarding Questionnaire Insurance
+    Primary", "Extract Onboarding Questionnaire Insurance Card"; schema OnboardingQuestionnaireReferralSectionResponse'
+  reason: Pre-encounter intake questionnaire capturing demographic/general info, guardian relationship,
+    consent agreements, documents and insurance details for a new client — patient registration/intake
+    within Patient Access Management. Insurance card capture supports registration rather than eligibility
+    checking per se, so .20 is the best fit.
+- tag: treatment_plan
+  spec_file: forta-health-treatment-plan-api-openapi.yml
+  capability_id: BC-2810.60
+  capability_id_l1: BC-2810
+  capability_name: Behavioural Health Care Delivery
   confidence: 0.75
-  evidence: Send Onboarding Questionnaire; Patch Onboarding Questionnaire General Info; Patch Onboarding
-    Questionnaire Insurance Primary; OnboardingQuestionnaireRelationshipToClientEnum, OnboardingQuestionnaireAgreementResponse
-  reason: Pre-encounter intake questionnaire capturing demographic/general info, relationship to client,
-    agreements/consents, documents and insurance card details — patient registration and intake within
-    Patient Access Management. Insurance capture is part of the same intake packet rather than a separate
-    eligibility check surface.
-- tag: policies
-  spec_file: forta-health-policies-api-openapi.yml
-  capability_id: BC-2800.30
-  capability_id_l1: BC-2800
-  capability_name: Eligibility & Benefits Verification
-  confidence: 0.72
-  evidence: Get Prior Authorization Details; PolicyHolder, RelationshipToPolicyHolderEnum, PolicyPriorAuthorizationDetails,
-    PayorResponsibilityEnum
-  reason: '''Policies'' here are patient insurance policies with policy holders, payer responsibility
-    and prior-authorisation details per service code — insurance coverage/benefit and authorisation verification,
-    not corporate policy management.'
+  evidence: POST /api/v1/treatment_plans/{treatment_plan_id}/goals/ Create Goal; schemas BehaviorReductionGoalCreate,
+    TreatmentPlanCrisisPlanResponse, DischargeReasonCreate
+  reason: ABA autism therapy treatment plans with behaviour-reduction goals, medications, crisis plans
+    and discharge reasons — this is behavioural health care delivery (care planning/documentation). Sub-capability
+    behavioural health fits the vendor's ABA therapy context; some ambiguity vs clinical documentation.
 - tag: claim_invoices
   spec_file: forta-health-claim-invoices-api-openapi.yml
   capability_id: BC-2870.60
   capability_id_l1: BC-2870
   capability_name: Patient Financial Services
-  confidence: 0.7
-  evidence: POST /api/v1/claim_invoices/  Create Invoice; PUT .../send/  Send Invoice; POST .../pay/  Pay
-    Invoice; schemas StripeCheckoutSessionResponse, InvoicePaymentMode, InvoiceDiscountResponse
-  reason: Invoice generation, delivery, discounting and payment collection against invoiced claims for
-    clients — patient/responsible-party billing and collections within healthcare revenue cycle.
+  confidence: 0.72
+  evidence: POST /api/v1/claim_invoices/ Create Invoice; PUT .../send/ Send Invoice; POST .../pay/ Pay
+    Invoice; schemas InvoicePaymentMode, StripeCheckoutSessionResponse
+  reason: Invoice generation, delivery, discounting and payment collection against claims is provider
+    revenue cycle; patient/responsible-party billing and payment is the closest sub-capability, though
+    cash posting is a plausible alternative.
 - tag: client_supervisions
   spec_file: forta-health-client-supervisions-api-openapi.yml
   capability_id: BC-2830.10
   capability_id_l1: BC-2830
   capability_name: Clinical Note Documentation
+  confidence: 0.72
+  evidence: POST /api/v1/client_supervisions/ 'Create Client Supervision Notes'; 'Get Client Supervision
+    Notes With Claim Status'; schemas SkillAcquisitionGoalMasteryCriteriaV2Response, BehaviorResponse
+  reason: Operations author, amend, download and stop clinical supervision session notes for ABA clients,
+    including goals, behaviours and target phases — i.e. authoring the clinical note record of a therapy
+    session. Claim linkage is secondary metadata, not the primary surface, so revenue-cycle mapping is
+    rejected; clinical note documentation fits best.
+- tag: payor_provider_credentials
+  spec_file: forta-health-payor-provider-credentials-api-openapi.yml
+  capability_id: BC-2890.50
+  capability_id_l1: BC-2890
+  capability_name: Provider Enrolment Management
   confidence: 0.7
-  evidence: POST /api/v1/client_supervisions/ 'Create Client Supervision Notes'; schemas 'SkillAcquisitionGoalMasteryCriteriaV2Response',
-    'TargetStageChangeLogResponse'
-  reason: Operations create, patch, retrieve and export (PDF) clinical supervision notes for ABA clients,
-    including goals, behaviors and mastery criteria — i.e. authoring the clinical note record of therapy
-    sessions. Claim-status and billable flags are secondary attributes of the note, so clinical note documentation
-    is the best fit rather than revenue cycle.
-- tag: treatment_plan
-  spec_file: forta-health-treatment-plan-api-openapi.yml
-  capability_id: BC-2830.10
-  capability_id_l1: BC-2830
-  capability_name: Clinical Note Documentation
+  evidence: '"Create Payor Provider Credential", schemas PayorProviderCredentialCreate, PayorResponse,
+    ProviderListResponse'
+  reason: Records linking a provider to a payor's credentialing status correspond to provider enrolment
+    with payers rather than internal privileging.
+- tag: policies
+  spec_file: forta-health-policies-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
   confidence: 0.7
-  evidence: POST /api/v1/treatment_plans/ Create Treatment Plan; POST /api/v1/treatment_plans/{treatment_plan_id}/goals/
-    Create Goal; schemas BehaviorReductionGoalCreate, MedicalHistoryDiagnosisCreate, TreatmentPlanCrisisPlanResponse
-  reason: Operations author and maintain clinical ABA treatment plans with goals, medications, medical
-    history and crisis plans — clinician documentation of the plan of care in the record. Closest fit
-    is Clinical Documentation Management / clinical note documentation; an alternative reading is Behavioural
-    Health Care Delivery (BC-2810.60), hence moderate confidence on the sub-capability.
+  evidence: '"Get Prior Authorization Details"; schemas PolicyHolder, RelationshipToPolicyHolderEnum,
+    PolicyPriorAuthorizationDetails'
+  reason: '''Policies'' here are patient insurance policies with policy holder and prior-authorisation
+    detail per service code — coverage/benefit and authorisation verification, not corporate policy management.'
