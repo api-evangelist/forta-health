@@ -31,18 +31,18 @@ specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
-- Healthcare
-- Autism
-- ABA Therapy
-- Behavioral Health
-- Telehealth
-- Digital Health
+- healthcare
+- autism
+- aba-therapy
+- behavioral-health
+- telehealth
+- digital-health
 - pediatric-care
-- Clinical Operations
-- Medicaid
-- Health Insurance
-- EHR
-- Machine-Learning
+- clinical-operations
+- medicaid
+- health-insurance
+- ehr
+- machine-learning
 tags_raw:
 - healthcare
 - autism
@@ -143,7 +143,7 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
-  - Claims
+  - claims
   tags_raw:
   - claims
   properties:
@@ -300,7 +300,7 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
-  - EVV
+  - evv
   tags_raw:
   - evv
   properties:
@@ -339,8 +339,7 @@ apis:
   description: The feature_flags API from Forta Health — 2 operation(s) for feature_flags.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
-  - Feature Flags
+  tags: []
   tags_raw:
   - feature_flags
   properties:
@@ -359,8 +358,7 @@ apis:
   description: The field_templates API from Forta Health — 2 operation(s) for field_templates.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
-  - Field Templates
+  tags: []
   tags_raw:
   - field_templates
   properties:
@@ -616,8 +614,7 @@ apis:
   description: The service_codes API from Forta Health — 1 operation(s) for service_codes.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
-  tags:
-  - Service Codes
+  tags: []
   tags_raw:
   - service_codes
   properties:
@@ -657,7 +654,7 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
-  - Stripe
+  - stripe
   tags_raw:
   - stripe
   properties:
@@ -677,7 +674,7 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
-  - Timesheets
+  - timesheets
   tags_raw:
   - timesheets
   properties:
