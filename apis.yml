@@ -1,16 +1,15 @@
 aid: forta-health
 name: Forta Health
-description: >-
-  Forta Health operates the largest virtual Applied Behavior Analysis (ABA) network in the United States,
-  delivering autism therapy to children through two models: Virtual ABA over a HIPAA-secure telehealth
-  platform across 43 states, and In-Home ABA in Dallas, Houston and San Antonio, Texas. Founded in 2021 and
-  led by CEO Edan Morag, Forta pairs Board Certified Behavior Analysts (BCBAs) who design and supervise
-  individualized treatment plans with Registered Behavior Technicians (RBTs) and trained parents who deliver
-  live sessions, using proprietary software and machine-learning models that ingest medical records and
-  session data to surface relevant case data for clinicians and personalize each treatment plan. The company
-  works with major commercial payers and state Medicaid programs to shorten the typical six-to-eighteen-month
-  ABA waitlist to roughly ninety days. Forta publishes no public developer program; its clinical operations
-  platform is a private, bearer-token-authenticated REST API.
+description: 'Forta Health operates the largest virtual Applied Behavior Analysis (ABA) network in the
+  United States, delivering autism therapy to children through two models: Virtual ABA over a HIPAA-secure
+  telehealth platform across 43 states, and In-Home ABA in Dallas, Houston and San Antonio, Texas. Founded
+  in 2021 and led by CEO Edan Morag, Forta pairs Board Certified Behavior Analysts (BCBAs) who design
+  and supervise individualized treatment plans with Registered Behavior Technicians (RBTs) and trained
+  parents who deliver live sessions, using proprietary software and machine-learning models that ingest
+  medical records and session data to surface relevant case data for clinicians and personalize each treatment
+  plan. The company works with major commercial payers and state Medicaid programs to shorten the typical
+  six-to-eighteen-month ABA waitlist to roughly ninety days. Forta publishes no public developer program;
+  its clinical operations platform is a private, bearer-token-authenticated REST API.'
 deliveryModel:
   model: saas
   open_source: false
@@ -42,7 +41,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-04'
-modified: '2026-08-04'
+modified: '2026-09-16'
 tags:
 - Healthcare
 - Autism
@@ -191,8 +190,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-client-cohort-assignments-api
   name: Forta Health Client Cohort Assignments API
-  description: >-
-    The client_cohort_assignments API from Forta Health — 2 operation(s) for client_cohort_assignments.
+  description: The client_cohort_assignments API from Forta Health — 2 operation(s) for client_cohort_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -211,8 +209,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-client-facility-assignments-api
   name: Forta Health Client Facility Assignments API
-  description: >-
-    The client_facility_assignments API from Forta Health — 2 operation(s) for client_facility_assignments.
+  description: The client_facility_assignments API from Forta Health — 2 operation(s) for client_facility_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -389,8 +386,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-group-parent-supervisions-api
   name: Forta Health Group Parent Supervisions API
-  description: >-
-    The group_parent_supervisions API from Forta Health — 18 operation(s) for group_parent_supervisions.
+  description: The group_parent_supervisions API from Forta Health — 18 operation(s) for group_parent_supervisions.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -408,7 +404,7 @@ apis:
   - type: DataModel
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-health-api
-  name: Forta Health Health API
+  name: Forta Health API
   description: The health API from Forta Health — 1 operation(s) for health.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
@@ -429,8 +425,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-intake-questionnaires-api
   name: Forta Health Intake Questionnaires API
-  description: >-
-    The intake_questionnaires API from Forta Health — 32 operation(s) for intake_questionnaires.
+  description: The intake_questionnaires API from Forta Health — 32 operation(s) for intake_questionnaires.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -469,8 +464,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-onboarding-questionnaires-api
   name: Forta Health Onboarding Questionnaires API
-  description: >-
-    The onboarding_questionnaires API from Forta Health — 17 operation(s) for onboarding_questionnaires.
+  description: The onboarding_questionnaires API from Forta Health — 17 operation(s) for onboarding_questionnaires.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -526,8 +520,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-payor-provider-credentials-api
   name: Forta Health Payor Provider Credentials API
-  description: >-
-    The payor_provider_credentials API from Forta Health — 2 operation(s) for payor_provider_credentials.
+  description: The payor_provider_credentials API from Forta Health — 2 operation(s) for payor_provider_credentials.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -566,8 +559,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-provider-assignments-api
   name: Forta Health Provider Assignments API
-  description: >-
-    The provider_assignments API from Forta Health — 2 operation(s) for provider_assignments.
+  description: The provider_assignments API from Forta Health — 2 operation(s) for provider_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -586,8 +578,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-provider-availability-records-api
   name: Forta Health Provider Availability Records API
-  description: >-
-    The provider_availability_records API from Forta Health — 2 operation(s) for provider_availability_records.
+  description: The provider_availability_records API from Forta Health — 2 operation(s) for provider_availability_records.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -725,8 +716,7 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-treatment-plan-statuses-api
   name: Forta Health Treatment Plan Statuses API
-  description: >-
-    The treatment_plan_statuses API from Forta Health — 1 operation(s) for treatment_plan_statuses.
+  description: The treatment_plan_statuses API from Forta Health — 1 operation(s) for treatment_plan_statuses.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
