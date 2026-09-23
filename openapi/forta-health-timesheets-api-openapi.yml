@@ -3,12 +3,12 @@ info:
   title: Fast Timesheets API
   version: 0.1.0
 tags:
-- name: timesheets
+- name: Timesheets
 paths:
   /api/v1/timesheets/pay_periods/:
     get:
       tags:
-      - timesheets
+      - Timesheets
       summary: Get Pay Period
       operationId: get_pay_period_api_v1_timesheets_pay_periods__get
       security:
@@ -48,7 +48,7 @@ paths:
   /api/v1/timesheets/:
     post:
       tags:
-      - timesheets
+      - Timesheets
       summary: Create Timesheet
       operationId: create_timesheet_api_v1_timesheets__post
       security:
@@ -74,7 +74,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - timesheets
+      - Timesheets
       summary: Get Timesheets
       operationId: get_timesheets_api_v1_timesheets__get
       security:
@@ -135,7 +135,7 @@ paths:
   /api/v1/timesheets/{timesheet_id}/:
     patch:
       tags:
-      - timesheets
+      - Timesheets
       summary: Patch Timesheet
       operationId: patch_timesheet_api_v1_timesheets__timesheet_id___patch
       security:
@@ -168,7 +168,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - timesheets
+      - Timesheets
       summary: Delete Timesheet
       operationId: delete_timesheet_api_v1_timesheets__timesheet_id___delete
       security:
@@ -222,6 +222,104 @@ components:
       - is_timesheet_usable
       - id
       title: AssociatedServiceCodeResponse
+    PayPeriodResponse:
+      properties:
+        present:
+          items: {}
+          type: array
+          title: Present
+        past_payperiod_data_input_end_date:
+          type: string
+          format: date
+          title: Past Payperiod Data Input End Date
+        past:
+          items:
+            items: {}
+            type: array
+          type: array
+          title: Past
+          default: []
+        future:
+          items:
+            items: {}
+            type: array
+          type: array
+          title: Future
+          default: []
+      type: object
+      required:
+      - present
+      - past_payperiod_data_input_end_date
+      title: PayPeriodResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TimesheetCreate:
+      properties:
+        client_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        date_end:
+          type: string
+          format: date-time
+          title: Date End
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Label
+        utc_offset:
+          type: integer
+          title: Utc Offset
+      type: object
+      required:
+      - date_start
+      - date_end
+      - service_code_id
+      - utc_offset
+      title: TimesheetCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
     TimesheetPatch:
       properties:
         client_id:
@@ -258,71 +356,6 @@ components:
           title: Utc Offset
       type: object
       title: TimesheetPatch
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
-    PayPeriodResponse:
-      properties:
-        present:
-          items: {}
-          type: array
-          title: Present
-        past_payperiod_data_input_end_date:
-          type: string
-          format: date
-          title: Past Payperiod Data Input End Date
-        past:
-          items:
-            items: {}
-            type: array
-          type: array
-          title: Past
-          default: []
-        future:
-          items:
-            items: {}
-            type: array
-          type: array
-          title: Future
-          default: []
-      type: object
-      required:
-      - present
-      - past_payperiod_data_input_end_date
-      title: PayPeriodResponse
     TimesheetResponse:
       properties:
         client_id:
@@ -383,39 +416,6 @@ components:
       - provider_id
       - service_code
       title: TimesheetResponse
-    TimesheetCreate:
-      properties:
-        client_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Client Id
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        date_end:
-          type: string
-          format: date-time
-          title: Date End
-        service_code_id:
-          type: integer
-          title: Service Code Id
-        label:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Label
-        utc_offset:
-          type: integer
-          title: Utc Offset
-      type: object
-      required:
-      - date_start
-      - date_end
-      - service_code_id
-      - utc_offset
-      title: TimesheetCreate
   securitySchemes:
     HTTPBearer:
       type: http

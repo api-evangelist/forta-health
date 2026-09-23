@@ -172,6 +172,50 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    EmailCronConfigPreviewRequest:
+      properties:
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+      type: object
+      title: EmailCronConfigPreviewRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     EmailCronConfigPatch:
       properties:
         enabled:
@@ -351,50 +395,6 @@ components:
       required:
       - job_key
       title: EmailCronConfigCreate
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    EmailCronConfigPreviewRequest:
-      properties:
-        subject:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Subject
-        html_body:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Html Body
-      type: object
-      title: EmailCronConfigPreviewRequest
   securitySchemes:
     HTTPBearer:
       type: http

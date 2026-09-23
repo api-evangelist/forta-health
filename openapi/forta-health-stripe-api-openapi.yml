@@ -3,12 +3,12 @@ info:
   title: Fast Stripe API
   version: 0.1.0
 tags:
-- name: stripe
+- name: Stripe
 paths:
   /webhooks/stripe/:
     post:
       tags:
-      - stripe
+      - Stripe
       summary: Handle Stripe Webhook
       operationId: handle_stripe_webhook_webhooks_stripe__post
       responses:

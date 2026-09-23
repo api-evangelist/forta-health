@@ -3,12 +3,12 @@ info:
   title: Fast Claims API
   version: 0.1.0
 tags:
-- name: claims
+- name: Claims
 paths:
   /api/v1/claims/preview/:
     post:
       tags:
-      - claims
+      - Claims
       summary: Generate Form 1500 Preview
       operationId: generate_form_1500_preview_api_v1_claims_preview__post
       requestBody:
@@ -35,7 +35,7 @@ paths:
   /api/v1/claims/:
     post:
       tags:
-      - claims
+      - Claims
       summary: Create Claim
       operationId: create_claim_api_v1_claims__post
       security:
@@ -61,7 +61,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - claims
+      - Claims
       summary: Get Claims
       operationId: get_claims_api_v1_claims__get
       security:
@@ -222,7 +222,7 @@ paths:
   /api/v1/claims/{claim_id}/resubmit/:
     post:
       tags:
-      - claims
+      - Claims
       summary: Resubmit Claim
       operationId: resubmit_claim_api_v1_claims__claim_id__resubmit__post
       security:
@@ -256,7 +256,7 @@ paths:
   /api/v1/claims/{claim_id}/:
     get:
       tags:
-      - claims
+      - Claims
       summary: Get Claim
       operationId: get_claim_api_v1_claims__claim_id___get
       security:
@@ -283,7 +283,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - claims
+      - Claims
       summary: Delete Claim
       operationId: delete_claim_api_v1_claims__claim_id___delete
       security:
@@ -309,7 +309,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - claims
+      - Claims
       summary: Patch Claim
       operationId: patch_claim_api_v1_claims__claim_id___patch
       security:
@@ -343,7 +343,7 @@ paths:
   /api/v1/claims/admin/{claim_id}/:
     delete:
       tags:
-      - claims
+      - Claims
       summary: Admin Delete Claim
       description: 'Admin-only force delete: remove a claim in ANY status, no status guardrails.
 
@@ -386,7 +386,7 @@ paths:
   /api/v1/claims/admin/{claim_id}/status/:
     patch:
       tags:
-      - claims
+      - Claims
       summary: Admin Override Claim Status
       description: 'Admin-only override of the claim status and the payment status.
 
@@ -432,7 +432,7 @@ paths:
   /api/v1/claims/{claim_id}/follow_up_notes/:
     post:
       tags:
-      - claims
+      - Claims
       summary: Create Follow Up Notes
       operationId: create_follow_up_notes_api_v1_claims__claim_id__follow_up_notes__post
       security:
@@ -466,7 +466,7 @@ paths:
   /api/v1/claims/{claim_id}/follow_up_notes/{claim_follow_up_notes_id}/:
     patch:
       tags:
-      - claims
+      - Claims
       summary: Patch Follow Up Notes
       operationId: patch_follow_up_notes_api_v1_claims__claim_id__follow_up_notes__claim_follow_up_notes_id___patch
       security:
@@ -506,7 +506,7 @@ paths:
   /api/v1/claims/{claim_id}/payment_status/:
     patch:
       tags:
-      - claims
+      - Claims
       summary: Patch Claim Payment Status
       operationId: patch_claim_payment_status_api_v1_claims__claim_id__payment_status__patch
       security:
@@ -540,7 +540,7 @@ paths:
   /api/v1/claims/{claim_id}/procedures/download/:
     get:
       tags:
-      - claims
+      - Claims
       summary: Download Procedure Pdfs
       operationId: download_procedure_pdfs_api_v1_claims__claim_id__procedures_download__get
       security:
@@ -571,7 +571,7 @@ paths:
   /api/v1/claims/{claim_id}/service_lines/{service_line_id}/payments/:
     post:
       tags:
-      - claims
+      - Claims
       summary: Create Service Line Payment
       operationId: create_service_line_payment_api_v1_claims__claim_id__service_lines__service_line_id__payments__post
       security:
@@ -611,7 +611,7 @@ paths:
   /api/v1/claims/{claim_id}/service_lines/{service_line_id}/payments/{payment_id}/:
     patch:
       tags:
-      - claims
+      - Claims
       summary: Patch Service Line Payment
       operationId: patch_service_line_payment_api_v1_claims__claim_id__service_lines__service_line_id__payments__payment_id___patch
       security:
@@ -656,7 +656,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - claims
+      - Claims
       summary: Delete Service Line Payment
       operationId: delete_service_line_payment_api_v1_claims__claim_id__service_lines__service_line_id__payments__payment_id___delete
       security:
@@ -696,7 +696,7 @@ paths:
   /api/v1/claims/{claim_id}/certify_claim/:
     put:
       tags:
-      - claims
+      - Claims
       summary: Certify Claim
       operationId: certify_claim_api_v1_claims__claim_id__certify_claim__put
       security:
@@ -730,7 +730,7 @@ paths:
   /api/v1/claims/{claim_id}/eob_documents/:
     post:
       tags:
-      - claims
+      - Claims
       summary: Create Eob Document
       operationId: create_eob_document_api_v1_claims__claim_id__eob_documents__post
       security:
@@ -764,7 +764,7 @@ paths:
   /api/v1/claims/{claim_id}/eob_documents/{eob_document_id}/:
     delete:
       tags:
-      - claims
+      - Claims
       summary: Delete Eob Document
       operationId: delete_eob_document_api_v1_claims__claim_id__eob_documents__eob_document_id___delete
       security:
@@ -791,8 +791,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/EOBDocumentResponse'
-                title: Response Delete Eob Document Api V1 Claims  Claim Id  Eob Documents  Eob Document
-                  Id   Delete
+                title: Response Delete Eob Document Api V1 Claims  Claim Id  Eob Documents  Eob Document Id   Delete
         '422':
           description: Validation Error
           content:
@@ -802,7 +801,7 @@ paths:
   /api/v1/claims/{claim_id}/tebra/submit/:
     post:
       tags:
-      - claims
+      - Claims
       summary: Submit Claim To Tebra
       operationId: submit_claim_to_tebra_api_v1_claims__claim_id__tebra_submit__post
       security:
@@ -830,7 +829,7 @@ paths:
   /api/v1/claims/admin/bulk-unbillable:
     post:
       tags:
-      - claims
+      - Claims
       summary: Bulk Mark Notes Unbillable
       description: 'Admin-only: create Unbillable claims from a CSV of notes.
 
@@ -862,6 +861,110 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
+    BulkUnbillableSummary:
+      properties:
+        claims_created:
+          type: integer
+          title: Claims Created
+        procedures_attached:
+          type: integer
+          title: Procedures Attached
+        rows_skipped:
+          type: integer
+          title: Rows Skipped
+        rows_failed:
+          type: integer
+          title: Rows Failed
+        failures_csv:
+          type: string
+          title: Failures Csv
+      type: object
+      required:
+      - claims_created
+      - procedures_attached
+      - rows_skipped
+      - rows_failed
+      - failures_csv
+      title: BulkUnbillableSummary
+    ClaimCreationSourceEnum:
+      type: string
+      enum:
+      - APP
+      - RETOOL_LINK
+      - BULK_UNBILLABLE
+      title: ClaimCreationSourceEnum
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+    PaymentStatusEnum:
+      type: string
+      enum:
+      - Check received
+      - EFT received
+      - Not paid
+      - Virtual cc received
+      - Partial payment received
+      - Paid to Subscriber
+      title: PaymentStatusEnum
     EOBDocumentResponse:
       properties:
         id:
@@ -886,201 +989,15 @@ components:
       - policy
       - document_url
       title: EOBDocumentResponse
-    LinkedClaimResponse:
+    ClaimPaymentStatusPatch:
       properties:
-        id:
-          type: integer
-          title: Id
-        status:
-          $ref: '#/components/schemas/ClaimStatusEnum'
-        secondary_status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        total_charge:
-          type: number
-          minimum: 0.0
-          title: Total Charge
-        clearing_house_claim_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Clearing House Claim Id
+        payment_status:
+          $ref: '#/components/schemas/PaymentStatusEnum'
       type: object
       required:
-      - id
-      - status
-      - total_charge
-      title: LinkedClaimResponse
-    ClaimPreview:
-      properties:
-        date_generated:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Generated
-        utc_offset_date_generated:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Generated
-          description: Offset from UTC in seconds
-          default: 0
-        client_id:
-          type: integer
-          title: Client Id
-        service_code_id:
-          type: integer
-          title: Service Code Id
-        procedure_ids:
-          items:
-            type: integer
-          type: array
-          title: Procedure Ids
-        skip_prior_authorization:
-          type: boolean
-          title: Skip Prior Authorization
-        billing_facility_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Billing Facility Id
-        use_custom_billing_facility:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Use Custom Billing Facility
-          default: false
-        relax_validations:
-          type: boolean
-          title: Relax Validations
-          default: false
-      type: object
-      required:
-      - client_id
-      - service_code_id
-      - procedure_ids
-      - skip_prior_authorization
-      title: ClaimPreview
-    Form1500PayorInformation:
-      properties:
-        primary_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Primary Id
-      type: object
-      title: Form1500PayorInformation
-    EOBDocumentCreateResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        claim_id:
-          type: integer
-          title: Claim Id
-        file_name:
-          type: string
-          title: File Name
-        policy:
-          $ref: '#/components/schemas/PolicyVitals'
-        document_url:
-          type: string
-          title: Document Url
-        presigned_url_upload:
-          type: string
-          title: Presigned Url Upload
-      type: object
-      required:
-      - id
-      - claim_id
-      - file_name
-      - policy
-      - document_url
-      - presigned_url_upload
-      title: EOBDocumentCreateResponse
-    JobTitleEnum:
-      type: string
-      enum:
-      - Behavior Technician
-      - Registered Behavior Technician
-      - Behavior Technician Trainee
-      - Virtual Therapy Assistant
-      - Lead Virtual Therapy Assistant
-      - Certified Behavioral Technician
-      - BCBA
-      - Lead BCBA
-      - Clinical Director
-      title: JobTitleEnum
-    Form1500RenderingProvider:
-      properties:
-        npi:
-          type: string
-          minLength: 1
-          title: Npi
-        taxonomy:
-          type: string
-          const: 103K00000X
-          title: Taxonomy
-        first_name:
-          type: string
-          title: First Name
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        last_or_organization_name:
-          type: string
-          title: Last Or Organization Name
-      type: object
-      required:
-      - npi
-      - taxonomy
-      - first_name
-      - last_or_organization_name
-      title: Form1500RenderingProvider
-    Form1500BillingProviderInfo:
-      properties:
-        npi:
-          type: string
-          title: Npi
-        zip:
-          type: string
-          const: '917231722'
-          title: Zip
-        city:
-          type: string
-          const: Covina
-          title: City
-        state:
-          type: string
-          const: CA
-          title: State
-        organization:
-          type: string
-          title: Organization
-        address_line_one:
-          type: string
-          const: 440 N Barranca Ave
-          title: Address Line One
-        address_line_two:
-          type: string
-          const: '#9605'
-          title: Address Line Two
-      type: object
-      required:
-      - npi
-      - zip
-      - city
-      - state
-      - organization
-      - address_line_one
-      - address_line_two
-      title: Form1500BillingProviderInfo
-    ServiceLinePaymentPatch:
+      - payment_status
+      title: ClaimPaymentStatusPatch
+    ServiceLinePaymentResponse:
       properties:
         policy_id:
           anyOf:
@@ -1144,8 +1061,186 @@ components:
           - type: 'null'
           title: Is Amount Paid To Subscriber
           default: false
+        id:
+          type: integer
+          title: Id
+        claim_service_line_id:
+          type: integer
+          title: Claim Service Line Id
+        policy:
+          anyOf:
+          - $ref: '#/components/schemas/PolicyVitals'
+          - type: 'null'
       type: object
-      title: ServiceLinePaymentPatch
+      required:
+      - id
+      - claim_service_line_id
+      title: ServiceLinePaymentResponse
+    Form1500Data:
+      properties:
+        qc:
+          type: string
+          const: Prior Authorization
+          title: Qc
+        insured:
+          anyOf:
+          - $ref: '#/components/schemas/Form1500InsuredData'
+          - type: 'null'
+        member_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Member Id
+        patient:
+          $ref: '#/components/schemas/Form1500PatientData'
+        payor_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payor Id
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        other_insured:
+          anyOf:
+          - $ref: '#/components/schemas/Form1500OtherInsuredData'
+          - type: 'null'
+        service_lines:
+          items:
+            $ref: '#/components/schemas/Form1500ServiceLine'
+          type: array
+          title: Service Lines
+        federal_tax_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Federal Tax Id
+        insurance_type:
+          anyOf:
+          - $ref: '#/components/schemas/PayorTypeEnum'
+          - type: 'null'
+        accept_assignment:
+          type: string
+          const: A
+          title: Accept Assignment
+        resubmission_code:
+          $ref: '#/components/schemas/Form1500ResubmissionCodeEnum'
+        billing_provider_info:
+          anyOf:
+          - $ref: '#/components/schemas/Form1500BillingProviderInfo'
+          - type: 'null'
+        additional_information:
+          anyOf:
+          - type: string
+            const: BT SVCS PROVIDED BY CLIENTS PARENT A MONTERA EMPL VISIT FORTA DOT LEGAL
+          - type: 'null'
+          title: Additional Information
+        service_facility_address:
+          anyOf:
+          - $ref: '#/components/schemas/Form1500ServiceFacilityAddress'
+          - type: 'null'
+        prior_authorization_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prior Authorization Number
+        related_patient_conditions:
+          $ref: '#/components/schemas/Form1500RelatedPatientConditions'
+        claim_and_service_line_details:
+          $ref: '#/components/schemas/Form1500ClaimAndServiceLineDetails'
+        is_there_another_health_benefit_plan:
+          type: boolean
+          title: Is There Another Health Benefit Plan
+        diagnosis_or_nature_of_illness_or_injury_related_al_service_lines:
+          type: string
+          const: F840
+          title: Diagnosis Or Nature Of Illness Or Injury Related Al Service Lines
+        is_unbillable_placeholder:
+          type: boolean
+          title: Is Unbillable Placeholder
+          default: false
+      type: object
+      required:
+      - qc
+      - patient
+      - total_charge
+      - service_lines
+      - accept_assignment
+      - resubmission_code
+      - related_patient_conditions
+      - claim_and_service_line_details
+      - is_there_another_health_benefit_plan
+      - diagnosis_or_nature_of_illness_or_injury_related_al_service_lines
+      title: Form1500Data
+    Form1500PayToProviderAddress:
+      properties:
+        zip:
+          type: string
+          const: '917231722'
+          title: Zip
+        city:
+          type: string
+          const: Covina
+          title: City
+        state:
+          type: string
+          const: CA
+          title: State
+        address_line_one:
+          type: string
+          const: 440 N Barranca Ave
+          title: Address Line One
+        address_line_two:
+          type: string
+          const: '#9605'
+          title: Address Line Two
+      type: object
+      required:
+      - zip
+      - city
+      - state
+      - address_line_one
+      - address_line_two
+      title: Form1500PayToProviderAddress
+    ClaimFollowUpNotesCreate:
+      properties:
+        follow_up_notes:
+          type: string
+          minLength: 4
+          title: Follow Up Notes
+        author:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderResponse'
+          - type: 'null'
+        date_written:
+          type: string
+          format: date-time
+          title: Date Written
+        utc_offset_date_written:
+          type: integer
+          title: Utc Offset Date Written
+      type: object
+      required:
+      - follow_up_notes
+      - date_written
+      - utc_offset_date_written
+      title: ClaimFollowUpNotesCreate
+    Form1500ClaimAndServiceLineDetails:
+      properties:
+        rendering_provider:
+          $ref: '#/components/schemas/Form1500RenderingProvider'
+        pay_to_provider_address:
+          $ref: '#/components/schemas/Form1500PayToProviderAddress'
+        payor_information:
+          $ref: '#/components/schemas/Form1500PayorInformation'
+      type: object
+      required:
+      - rendering_provider
+      - pay_to_provider_address
+      - payor_information
+      title: Form1500ClaimAndServiceLineDetails
     ServiceLineAndClaimPaymentDetailsResponse:
       properties:
         service_line:
@@ -1172,6 +1267,96 @@ components:
       - start
       - end
       title: ServiceLinesDateRange
+    QABillingStatusEnum:
+      type: string
+      enum:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    Form1500PatientData:
+      properties:
+        street_address_line_one:
+          type: string
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_city:
+          type: string
+          minLength: 2
+          title: Street Address City
+        street_address_state:
+          type: string
+          maxLength: 2
+          title: Street Address State
+        street_address_zip:
+          type: string
+          minLength: 5
+          title: Street Address Zip
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        dob:
+          type: string
+          format: date
+          title: Dob
+        sex:
+          type: string
+          title: Sex
+        name:
+          type: string
+          title: Name
+        account_number:
+          type: string
+          title: Account Number
+        relationship_to_insured:
+          anyOf:
+          - $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
+          - type: 'null'
+      type: object
+      required:
+      - street_address_line_one
+      - street_address_city
+      - street_address_state
+      - street_address_zip
+      - dob
+      - sex
+      - name
+      - account_number
+      title: Form1500PatientData
     ClaimPatchRequest:
       properties:
         date_submitted_to_clearinghouse:
@@ -1304,96 +1489,31 @@ components:
       required:
       - status
       title: ClaimPatchRequest
-    Form1500ResubmissionCodeEnum:
-      type: string
-      enum:
-      - '1'
-      - '7'
-      title: Form1500ResubmissionCodeEnum
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ServiceLineResponse:
+    ClaimResubmit:
       properties:
-        id:
-          type: integer
-          title: Id
-        units:
-          type: integer
-          title: Units
-        billed:
-          type: number
-          title: Billed
-        deductibles:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Deductibles
-        co_insurance:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Co Insurance
-        co_pay:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Co Pay
-        amount:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Amount
-        allowable:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Allowable
-        adjustments:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Adjustments
-        service_date:
-          type: string
-          format: date
-          title: Service Date
-        charges_per_unit:
-          type: number
-          title: Charges Per Unit
-        location:
+        date_generated:
           anyOf:
           - type: string
+            format: date-time
           - type: 'null'
-          title: Location
-        modifier:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Modifier
+          title: Date Generated
+        utc_offset_date_generated:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Generated
+          description: Offset from UTC in seconds
+          default: 0
       type: object
-      required:
-      - id
-      - units
-      - billed
-      - service_date
-      - charges_per_unit
-      title: ServiceLineResponse
-    PayorResponsibilityEnum:
+      title: ClaimResubmit
+    RelationshipToPolicyHolderEnum:
       type: string
       enum:
-      - PRIMARY
-      - SECONDARY
-      - TERTIARY
-      title: PayorResponsibilityEnum
+      - SELF
+      - SPOUSE
+      - CHILD
+      - OTHER
+      title: RelationshipToPolicyHolderEnum
     IsPaymentExpectedEnum:
       type: string
       enum:
@@ -1401,16 +1521,56 @@ components:
       - No (Before PA Start Date)
       - No (Experimentally Billed)
       title: IsPaymentExpectedEnum
-    ClaimFollowUpNotesPatch:
+    EOBDocumentCreateResponse:
       properties:
-        follow_up_notes:
+        id:
+          type: integer
+          title: Id
+        claim_id:
+          type: integer
+          title: Claim Id
+        file_name:
           type: string
-          minLength: 4
-          title: Follow Up Notes
+          title: File Name
+        policy:
+          $ref: '#/components/schemas/PolicyVitals'
+        document_url:
+          type: string
+          title: Document Url
+        presigned_url_upload:
+          type: string
+          title: Presigned Url Upload
       type: object
       required:
-      - follow_up_notes
-      title: ClaimFollowUpNotesPatch
+      - id
+      - claim_id
+      - file_name
+      - policy
+      - document_url
+      - presigned_url_upload
+      title: EOBDocumentCreateResponse
+    TebraSubmitResponse:
+      properties:
+        claim_id:
+          type: integer
+          title: Claim Id
+        tebra_encounter_id:
+          type: integer
+          title: Tebra Encounter Id
+        tebra_patient_id:
+          type: integer
+          title: Tebra Patient Id
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - claim_id
+      - tebra_encounter_id
+      - tebra_patient_id
+      - status
+      title: TebraSubmitResponse
+      description: API response for submitting a claim to Tebra.
     ClaimListResponse:
       properties:
         id:
@@ -1505,38 +1665,574 @@ components:
       - date_generated
       - utc_offset_date_generated
       title: ClaimListResponse
-    ClaimPaymentStatusPatch:
+    Form1500OtherInsuredData:
       properties:
-        payment_status:
-          $ref: '#/components/schemas/PaymentStatusEnum'
+        name:
+          type: string
+          title: Name
+        insurance_plan_name:
+          type: string
+          title: Insurance Plan Name
+        member_id:
+          type: string
+          minLength: 1
+          title: Member Id
       type: object
       required:
-      - payment_status
-      title: ClaimPaymentStatusPatch
-    ClaimCertificationRequest:
+      - name
+      - insurance_plan_name
+      - member_id
+      title: Form1500OtherInsuredData
+    Form1500ResubmissionCodeEnum:
+      type: string
+      enum:
+      - '1'
+      - '7'
+      title: Form1500ResubmissionCodeEnum
+    SubmissionMethod:
+      type: string
+      enum:
+      - Change Healthcare
+      - Availity
+      - Fax
+      - Payor Portal
+      - Tebra
+      title: SubmissionMethod
+    ClaimFollowUpNotesPatch:
+      properties:
+        follow_up_notes:
+          type: string
+          minLength: 4
+          title: Follow Up Notes
+      type: object
+      required:
+      - follow_up_notes
+      title: ClaimFollowUpNotesPatch
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
+    PaymentModeEnum:
+      type: string
+      enum:
+      - Check
+      - Direct Deposit
+      - Credit Card
+      - Payroll Withheld
+      title: PaymentModeEnum
+    ClaimCertificationResponse:
       properties:
         is_invoiceable:
           type: boolean
           title: Is Invoiceable
-        date_certified:
+        date_last_certified:
           anyOf:
           - type: string
             format: date-time
           - type: 'null'
-          title: Date Certified
-          default: '2026-08-04T17:13:57.734719Z'
-        utc_offset_date_certified:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Certified
-          description: Offset from UTC in seconds
-          default: 0
+          title: Date Last Certified
+        utc_offset_date_last_certified:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset Date Last Certified
+        last_certified_by:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderListResponse'
+          - type: 'null'
       type: object
       required:
       - is_invoiceable
-      title: ClaimCertificationRequest
-    ServiceLinePaymentResponse:
+      title: ClaimCertificationResponse
+    PayorVitals:
+      properties:
+        id:
+          type: integer
+          title: Id
+        label:
+          type: string
+          title: Label
+        state:
+          type: string
+          title: State
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/PayorTypeEnum'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - label
+      - state
+      title: PayorVitals
+    ProviderResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+        id:
+          type: integer
+          title: Id
+        roles:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Roles
+          default: []
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        qa_billing_status:
+          $ref: '#/components/schemas/QABillingStatusEnum'
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      - qa_billing_status
+      title: ProviderResponse
+    PayorResponsibilityEnum:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      - TERTIARY
+      title: PayorResponsibilityEnum
+    ClaimWithInvoiceHistoryResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        earliest_date_of_service:
+          type: string
+          format: date
+          title: Earliest Date Of Service
+        latest_date_of_service:
+          type: string
+          format: date
+          title: Latest Date Of Service
+        invoice_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Invoice Id
+        patient_responsibility:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Patient Responsibility
+        service_code:
+          $ref: '#/components/schemas/AssociatedServiceCodeResponse'
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        is_invoiceable:
+          type: boolean
+          title: Is Invoiceable
+        is_amount_paid_to_subscriber:
+          type: boolean
+          title: Is Amount Paid To Subscriber
+      type: object
+      required:
+      - id
+      - earliest_date_of_service
+      - latest_date_of_service
+      - service_code
+      - status
+      - is_invoiceable
+      - is_amount_paid_to_subscriber
+      title: ClaimWithInvoiceHistoryResponse
+    PolicyVitals:
+      properties:
+        id:
+          type: integer
+          title: Id
+        payor_responsibility:
+          $ref: '#/components/schemas/PayorResponsibilityEnum'
+        payor:
+          $ref: '#/components/schemas/PayorVitals'
+        billing_payor:
+          $ref: '#/components/schemas/PayorVitals'
+      type: object
+      required:
+      - id
+      - payor_responsibility
+      - payor
+      - billing_payor
+      title: PolicyVitals
+    ServiceLineResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        units:
+          type: integer
+          title: Units
+        billed:
+          type: number
+          title: Billed
+        deductibles:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Deductibles
+        co_insurance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Co Insurance
+        co_pay:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Co Pay
+        amount:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Amount
+        allowable:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Allowable
+        adjustments:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Adjustments
+        service_date:
+          type: string
+          format: date
+          title: Service Date
+        charges_per_unit:
+          type: number
+          title: Charges Per Unit
+        location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Location
+        modifier:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Modifier
+      type: object
+      required:
+      - id
+      - units
+      - billed
+      - service_date
+      - charges_per_unit
+      title: ServiceLineResponse
+    AssociatedServiceCodeResponse:
+      properties:
+        code:
+          type: string
+          title: Code
+        label:
+          type: string
+          title: Label
+        is_billable:
+          type: boolean
+          title: Is Billable
+        is_timesheet_usable:
+          type: boolean
+          title: Is Timesheet Usable
+        type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          default: CPT
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - code
+      - label
+      - is_billable
+      - is_timesheet_usable
+      - id
+      title: AssociatedServiceCodeResponse
+    ClaimProcedureResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        procedure_id:
+          type: integer
+          title: Procedure Id
+        location:
+          type: string
+          title: Location
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - id
+      - procedure_id
+      - location
+      - date_start
+      - utc_offset_date_start
+      - duration
+      title: ClaimProcedureResponse
+    ClaimPaymentDetails:
+      properties:
+        billed:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Billed
+        units:
+          type: integer
+          title: Units
+        allowable:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Allowable
+        amount_insurance_paid:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Amount Insurance Paid
+        adjustments:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Adjustments
+        deductible:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Deductible
+        co_insurance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Co Insurance
+        co_pay:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Co Pay
+        primary_insurance_balance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Primary Insurance Balance
+        secondary_insurance_balance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Secondary Insurance Balance
+        balance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Balance
+        amount_paid_to_subscriber:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Amount Paid To Subscriber
+        patient_responsibility:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Patient Responsibility
+        is_amount_paid_to_subscriber:
+          type: boolean
+          title: Is Amount Paid To Subscriber
+      type: object
+      required:
+      - units
+      - is_amount_paid_to_subscriber
+      title: ClaimPaymentDetails
+    Form1500InsuredData:
+      properties:
+        street_address_line_one:
+          type: string
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_city:
+          type: string
+          minLength: 2
+          title: Street Address City
+        street_address_state:
+          type: string
+          maxLength: 2
+          title: Street Address State
+        street_address_zip:
+          type: string
+          minLength: 5
+          title: Street Address Zip
+        dob:
+          type: string
+          format: date
+          title: Dob
+        sex:
+          type: string
+          title: Sex
+        name:
+          type: string
+          title: Name
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - street_address_line_one
+      - street_address_city
+      - street_address_state
+      - street_address_zip
+      - dob
+      - sex
+      - name
+      title: Form1500InsuredData
+    ServiceLinePaymentCreate:
       properties:
         policy_id:
           anyOf:
@@ -1600,96 +2296,93 @@ components:
           - type: 'null'
           title: Is Amount Paid To Subscriber
           default: false
-        id:
-          type: integer
-          title: Id
-        claim_service_line_id:
-          type: integer
-          title: Claim Service Line Id
-        policy:
-          anyOf:
-          - $ref: '#/components/schemas/PolicyVitals'
-          - type: 'null'
       type: object
-      required:
-      - id
-      - claim_service_line_id
-      title: ServiceLinePaymentResponse
-    AssociatedServiceCodeResponse:
+      title: ServiceLinePaymentCreate
+    Form1500RenderingProvider:
       properties:
-        code:
+        npi:
           type: string
-          title: Code
-        label:
+          minLength: 1
+          title: Npi
+        taxonomy:
           type: string
-          title: Label
-        is_billable:
-          type: boolean
-          title: Is Billable
-        is_timesheet_usable:
-          type: boolean
-          title: Is Timesheet Usable
-        type:
-          $ref: '#/components/schemas/ServiceCodeTypeEnum'
-          default: CPT
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - code
-      - label
-      - is_billable
-      - is_timesheet_usable
-      - id
-      title: AssociatedServiceCodeResponse
-    ClaimCertificationResponse:
-      properties:
-        is_invoiceable:
-          type: boolean
-          title: Is Invoiceable
-        date_last_certified:
+          const: 103K00000X
+          title: Taxonomy
+        first_name:
+          type: string
+          title: First Name
+        middle_name:
           anyOf:
           - type: string
-            format: date-time
           - type: 'null'
-          title: Date Last Certified
-        utc_offset_date_last_certified:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Utc Offset Date Last Certified
-        last_certified_by:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderListResponse'
-          - type: 'null'
-      type: object
-      required:
-      - is_invoiceable
-      title: ClaimCertificationResponse
-    TebraSubmitResponse:
-      properties:
-        claim_id:
-          type: integer
-          title: Claim Id
-        tebra_encounter_id:
-          type: integer
-          title: Tebra Encounter Id
-        tebra_patient_id:
-          type: integer
-          title: Tebra Patient Id
-        status:
+          title: Middle Name
+        last_or_organization_name:
           type: string
-          title: Status
+          title: Last Or Organization Name
       type: object
       required:
-      - claim_id
-      - tebra_encounter_id
-      - tebra_patient_id
+      - npi
+      - taxonomy
+      - first_name
+      - last_or_organization_name
+      title: Form1500RenderingProvider
+    PayorTypeEnum:
+      type: string
+      enum:
+      - Medicare Part A
+      - Medicare Part B
+      - Medicaid
+      - Tricare
+      - ChampVa
+      - Group Health Plan
+      - FECA Blk Lung
+      - Other
+      title: PayorTypeEnum
+      description: Enum for payor types.
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
       - status
-      title: TebraSubmitResponse
-      description: API response for submitting a claim to Tebra.
-    ClaimResubmit:
+      - total_charge
+      title: LinkedClaimResponse
+    Form1500PayorInformation:
+      properties:
+        primary_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Primary Id
+      type: object
+      title: Form1500PayorInformation
+    ClaimPreview:
       properties:
         date_generated:
           anyOf:
@@ -1704,69 +2397,177 @@ components:
           title: Utc Offset Date Generated
           description: Offset from UTC in seconds
           default: 0
-      type: object
-      title: ClaimResubmit
-    PayorVitals:
-      properties:
-        id:
+        client_id:
           type: integer
-          title: Id
-        label:
+          title: Client Id
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        procedure_ids:
+          items:
+            type: integer
+          type: array
+          title: Procedure Ids
+        skip_prior_authorization:
+          type: boolean
+          title: Skip Prior Authorization
+        billing_facility_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Billing Facility Id
+        use_custom_billing_facility:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Use Custom Billing Facility
+          default: false
+        relax_validations:
+          type: boolean
+          title: Relax Validations
+          default: false
+      type: object
+      required:
+      - client_id
+      - service_code_id
+      - procedure_ids
+      - skip_prior_authorization
+      title: ClaimPreview
+    ClaimCreate:
+      properties:
+        date_generated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Generated
+        utc_offset_date_generated:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Generated
+          description: Offset from UTC in seconds
+          default: 0
+        client_id:
+          type: integer
+          title: Client Id
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        procedure_ids:
+          items:
+            type: integer
+          type: array
+          title: Procedure Ids
+        skip_prior_authorization:
+          type: boolean
+          title: Skip Prior Authorization
+        billing_facility_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Billing Facility Id
+        use_custom_billing_facility:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Use Custom Billing Facility
+          default: false
+        relax_validations:
+          type: boolean
+          title: Relax Validations
+          default: false
+        source:
+          $ref: '#/components/schemas/ClaimCreationSourceEnum'
+      type: object
+      required:
+      - client_id
+      - service_code_id
+      - procedure_ids
+      - skip_prior_authorization
+      - source
+      title: ClaimCreate
+    Form1500RelatedPatientConditions:
+      properties:
+        employment:
           type: string
-          title: Label
+          const: 'No'
+          title: Employment
+        auto_accident:
+          type: string
+          const: 'No'
+          title: Auto Accident
+        other_accident:
+          type: string
+          const: 'No'
+          title: Other Accident
+      type: object
+      required:
+      - employment
+      - auto_accident
+      - other_accident
+      title: Form1500RelatedPatientConditions
+    Form1500BillingProviderInfo:
+      properties:
+        npi:
+          type: string
+          title: Npi
+        zip:
+          type: string
+          const: '917231722'
+          title: Zip
+        city:
+          type: string
+          const: Covina
+          title: City
         state:
           type: string
+          const: CA
           title: State
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/PayorTypeEnum'
-          - type: 'null'
+        organization:
+          type: string
+          title: Organization
+        address_line_one:
+          type: string
+          const: 440 N Barranca Ave
+          title: Address Line One
+        address_line_two:
+          type: string
+          const: '#9605'
+          title: Address Line Two
       type: object
       required:
-      - id
-      - label
+      - npi
+      - zip
+      - city
       - state
-      title: PayorVitals
-    ClaimStatusEnum:
-      type: string
-      enum:
-      - On Hold
-      - Generated
-      - Full Denial
-      - In Appeals
-      - Rejected & Resubmitted
-      - Rejected, Needs Appeal
-      - Rejected, Needs Resubmission
-      - Rejected, Not Resubmitted
-      - Approved
-      - Submitted
-      - Unbillable
-      - Approved - Recouped
-      - Approved - Recouped & Resubmitted
-      title: ClaimStatusEnum
-    ClaimFollowUpNotesCreate:
+      - organization
+      - address_line_one
+      - address_line_two
+      title: Form1500BillingProviderInfo
+    ClaimCertificationRequest:
       properties:
-        follow_up_notes:
-          type: string
-          minLength: 4
-          title: Follow Up Notes
-        author:
+        is_invoiceable:
+          type: boolean
+          title: Is Invoiceable
+        date_certified:
           anyOf:
-          - $ref: '#/components/schemas/ProviderResponse'
+          - type: string
+            format: date-time
           - type: 'null'
-        date_written:
-          type: string
-          format: date-time
-          title: Date Written
-        utc_offset_date_written:
+          title: Date Certified
+          default: '2026-08-04T17:13:57.734719Z'
+        utc_offset_date_certified:
           type: integer
-          title: Utc Offset Date Written
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Certified
+          description: Offset from UTC in seconds
+          default: 0
       type: object
       required:
-      - follow_up_notes
-      - date_written
-      - utc_offset_date_written
-      title: ClaimFollowUpNotesCreate
+      - is_invoiceable
+      title: ClaimCertificationRequest
     DetailedServiceLineResponse:
       properties:
         id:
@@ -1841,307 +2642,6 @@ components:
       - charges_per_unit
       - payments
       title: DetailedServiceLineResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
-    ClaimCreationSourceEnum:
-      type: string
-      enum:
-      - APP
-      - RETOOL_LINK
-      - BULK_UNBILLABLE
-      title: ClaimCreationSourceEnum
-    PaymentModeEnum:
-      type: string
-      enum:
-      - Check
-      - Direct Deposit
-      - Credit Card
-      - Payroll Withheld
-      title: PaymentModeEnum
-    ClientListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    Form1500ServiceLine:
-      properties:
-        units:
-          type: integer
-          minimum: 0.0
-          title: Units
-        charges:
-          type: number
-          minimum: 0.0
-          title: Charges
-        id_qual:
-          type: string
-          const: NPI
-          title: Id Qual
-        bcba_npi:
-          type: string
-          minLength: 1
-          title: Bcba Npi
-        cpt_or_hcpcs_code:
-          type: string
-          title: Cpt Or Hcpcs Code
-        modifier:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Modifier
-        location:
-          type: string
-          title: Location
-        date_of_service:
-          type: string
-          format: date
-          title: Date Of Service
-        charges_per_unit:
-          type: number
-          minimum: 0.0
-          title: Charges Per Unit
-        diagnosis_pointer:
-          type: string
-          const: A
-          title: Diagnosis Pointer
-        is_unbillable_placeholder:
-          type: boolean
-          title: Is Unbillable Placeholder
-          default: false
-      type: object
-      required:
-      - units
-      - charges
-      - id_qual
-      - bcba_npi
-      - cpt_or_hcpcs_code
-      - location
-      - date_of_service
-      - charges_per_unit
-      - diagnosis_pointer
-      title: Form1500ServiceLine
-    RejectionReason:
-      type: string
-      enum:
-      - Inactive insurance
-      - Not by bobber
-      - PA Gap
-      - Code not billable
-      - Incorrect payor - wrong portal
-      - Incorrect payor - wrong ID
-      - Incorrect data - NPI
-      - Incorrect Data - Modifier
-      - Incorrect data - Entity
-      - Incorrect data - Wrong BCBA
-      - Incorrect data - Other
-      - C&C - Needs PA
-      - C&C - Needs Contract / SCA
-      - C&C - Needs Credentialing
-      - C&C - Needs Bobbing
-      - C&C - No RBT
-      - C&C - Model Denial
-      - Sub Error - Timely Filing
-      - Sub Error - Claim Not Found
-      - Sub Error - Duplicate Submission
-      - Sub Error - Exceeded Filing Frequency
-      - Missing Doc - Needs Medical Records
-      - Missing Doc - Medical Necessity
-      - Missing Doc - Need Provider Information
-      - Missing Doc - Need W9
-      - Codes Not Billable
-      - Lost Insurance
-      - Recouped - Claim Resubmission Needed
-      - Appeal Denied
-      - Needs Availity Submission
-      - Needs Contract
-      - Needs Credentialed BCBA
-      - Needs Modifier
-      - Needs PA
-      - Needs Paper Claim
-      - Needs Provider Registration
-      - Needs SCA
-      - Needs Updated Insurance Info
-      - Pending
-      - Rejected in Error
-      - Requires H codes
-      - Submit via Provider Portal
-      - Waiting on OON App
-      - Claim Not On File
-      - Duplicate Claim
-      - Needs Alternate Submission Method
-      - Needs C&C
-      - Needs COB Update
-      - Needs Corrected Claim
-      - Needs EFT Setup
-      - Needs Medical Records
-      - Needs PA / SCA
-      - Needs W9
-      - No ABA Coverage
-      - Termed Insurance
-      - Timely Filing
-      - C&C - Exceeded/Exhausted approved units
-      title: RejectionReason
-    Form1500PayToProviderAddress:
-      properties:
-        zip:
-          type: string
-          const: '917231722'
-          title: Zip
-        city:
-          type: string
-          const: Covina
-          title: City
-        state:
-          type: string
-          const: CA
-          title: State
-        address_line_one:
-          type: string
-          const: 440 N Barranca Ave
-          title: Address Line One
-        address_line_two:
-          type: string
-          const: '#9605'
-          title: Address Line Two
-      type: object
-      required:
-      - zip
-      - city
-      - state
-      - address_line_one
-      - address_line_two
-      title: Form1500PayToProviderAddress
-    ClaimAdminStatusOverridePatch:
-      properties:
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        payment_status:
-          anyOf:
-          - $ref: '#/components/schemas/PaymentStatusEnum'
-          - type: 'null'
-        reason:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Reason
-        date_rejected:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Rejected
-        reason_for_rejection:
-          anyOf:
-          - $ref: '#/components/schemas/RejectionReason'
-          - type: 'null'
-      type: object
-      title: ClaimAdminStatusOverridePatch
-    PolicyVitals:
-      properties:
-        id:
-          type: integer
-          title: Id
-        payor_responsibility:
-          $ref: '#/components/schemas/PayorResponsibilityEnum'
-        payor:
-          $ref: '#/components/schemas/PayorVitals'
-        billing_payor:
-          $ref: '#/components/schemas/PayorVitals'
-      type: object
-      required:
-      - id
-      - payor_responsibility
-      - payor
-      - billing_payor
-      title: PolicyVitals
-    PayorTypeEnum:
-      type: string
-      enum:
-      - Medicare Part A
-      - Medicare Part B
-      - Medicaid
-      - Tricare
-      - ChampVa
-      - Group Health Plan
-      - FECA Blk Lung
-      - Other
-      title: PayorTypeEnum
-      description: Enum for payor types.
-    Form1500RelatedPatientConditions:
-      properties:
-        employment:
-          type: string
-          const: 'No'
-          title: Employment
-        auto_accident:
-          type: string
-          const: 'No'
-          title: Auto Accident
-        other_accident:
-          type: string
-          const: 'No'
-          title: Other Accident
-      type: object
-      required:
-      - employment
-      - auto_accident
-      - other_accident
-      title: Form1500RelatedPatientConditions
-    Form1500ClaimAndServiceLineDetails:
-      properties:
-        rendering_provider:
-          $ref: '#/components/schemas/Form1500RenderingProvider'
-        pay_to_provider_address:
-          $ref: '#/components/schemas/Form1500PayToProviderAddress'
-        payor_information:
-          $ref: '#/components/schemas/Form1500PayorInformation'
-      type: object
-      required:
-      - rendering_provider
-      - pay_to_provider_address
-      - payor_information
-      title: Form1500ClaimAndServiceLineDetails
     ClaimResponse:
       properties:
         is_invoiceable:
@@ -2493,171 +2993,43 @@ components:
       - source
       - is_session_author_bcba
       title: ClaimResponse
-    ServiceLinePaymentCreate:
+    ClaimAdminStatusOverridePatch:
       properties:
-        policy_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Policy Id
-        deductibles:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Deductibles
-        co_insurance:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Co Insurance
-        co_pay:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Co Pay
-        amount:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Amount
-        allowable:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Allowable
-        adjustments:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Adjustments
-        date_received:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Received
-        date_cleared:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Cleared
-        mode:
-          anyOf:
-          - $ref: '#/components/schemas/PaymentModeEnum'
-          - type: 'null'
-        transaction_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Transaction Id
-        is_amount_paid_to_subscriber:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Amount Paid To Subscriber
-          default: false
-      type: object
-      title: ServiceLinePaymentCreate
-    ProviderListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
         status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        payment_status:
+          anyOf:
+          - $ref: '#/components/schemas/PaymentStatusEnum'
+          - type: 'null'
+        reason:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Reason
+        date_rejected:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Rejected
+        reason_for_rejection:
+          anyOf:
+          - $ref: '#/components/schemas/RejectionReason'
+          - type: 'null'
       type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    Form1500PatientData:
+      title: ClaimAdminStatusOverridePatch
+    HTTPValidationError:
       properties:
-        street_address_line_one:
-          type: string
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_city:
-          type: string
-          minLength: 2
-          title: Street Address City
-        street_address_state:
-          type: string
-          maxLength: 2
-          title: Street Address State
-        street_address_zip:
-          type: string
-          minLength: 5
-          title: Street Address Zip
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        dob:
-          type: string
-          format: date
-          title: Dob
-        sex:
-          type: string
-          title: Sex
-        name:
-          type: string
-          title: Name
-        account_number:
-          type: string
-          title: Account Number
-        relationship_to_insured:
-          anyOf:
-          - $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
-          - type: 'null'
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - street_address_line_one
-      - street_address_city
-      - street_address_state
-      - street_address_zip
-      - dob
-      - sex
-      - name
-      - account_number
-      title: Form1500PatientData
-    RelationshipToPolicyHolderEnum:
-      type: string
-      enum:
-      - SELF
-      - SPOUSE
-      - CHILD
-      - OTHER
-      title: RelationshipToPolicyHolderEnum
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -2679,55 +3051,34 @@ components:
       - msg
       - type
       title: ValidationError
-    PaymentStatusEnum:
+    Sex:
       type: string
       enum:
-      - Check received
-      - EFT received
-      - Not paid
-      - Virtual cc received
-      - Partial payment received
-      - Paid to Subscriber
-      title: PaymentStatusEnum
-    EmploymentTypeEnum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    JobTitleEnum:
       type: string
       enum:
-      - Contractor / 1099
-      - Hourly, full-time
-      - Hourly, part-time
-      - Salaried, full-time
-      title: EmploymentTypeEnum
-    ClaimProcedureResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        procedure_id:
-          type: integer
-          title: Procedure Id
-        location:
-          type: string
-          title: Location
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        duration:
-          type: integer
-          title: Duration
-      type: object
-      required:
-      - id
-      - procedure_id
-      - location
-      - date_start
-      - utc_offset_date_start
-      - duration
-      title: ClaimProcedureResponse
-    Form1500InsuredData:
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
+    ProviderStatusEnum:
+      type: string
+      enum:
+      - Not Training
+      - Training
+      title: ProviderStatusEnum
+    Form1500ServiceFacilityAddress:
       properties:
         street_address_line_one:
           type: string
@@ -2749,232 +3100,92 @@ components:
           type: string
           minLength: 5
           title: Street Address Zip
-        dob:
+        npi:
           type: string
-          format: date
-          title: Dob
-        sex:
-          type: string
-          title: Sex
+          title: Npi
         name:
           type: string
           title: Name
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
       type: object
       required:
       - street_address_line_one
       - street_address_city
       - street_address_state
       - street_address_zip
-      - dob
-      - sex
+      - npi
       - name
-      title: Form1500InsuredData
-    Form1500OtherInsuredData:
+      title: Form1500ServiceFacilityAddress
+    Form1500ServiceLine:
       properties:
-        name:
-          type: string
-          title: Name
-        insurance_plan_name:
-          type: string
-          title: Insurance Plan Name
-        member_id:
-          type: string
-          minLength: 1
-          title: Member Id
-      type: object
-      required:
-      - name
-      - insurance_plan_name
-      - member_id
-      title: Form1500OtherInsuredData
-    EOBDocumentCreate:
-      properties:
-        policy_id:
+        units:
           type: integer
-          title: Policy Id
-        file_name:
-          type: string
-          title: File Name
-      type: object
-      required:
-      - policy_id
-      - file_name
-      title: EOBDocumentCreate
-    ClaimWithInvoiceHistoryResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        earliest_date_of_service:
-          type: string
-          format: date
-          title: Earliest Date Of Service
-        latest_date_of_service:
-          type: string
-          format: date
-          title: Latest Date Of Service
-        invoice_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Invoice Id
-        patient_responsibility:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Patient Responsibility
-        service_code:
-          $ref: '#/components/schemas/AssociatedServiceCodeResponse'
-        status:
-          $ref: '#/components/schemas/ClaimStatusEnum'
-        secondary_status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        is_invoiceable:
-          type: boolean
-          title: Is Invoiceable
-        is_amount_paid_to_subscriber:
-          type: boolean
-          title: Is Amount Paid To Subscriber
-      type: object
-      required:
-      - id
-      - earliest_date_of_service
-      - latest_date_of_service
-      - service_code
-      - status
-      - is_invoiceable
-      - is_amount_paid_to_subscriber
-      title: ClaimWithInvoiceHistoryResponse
-    SubmissionMethod:
-      type: string
-      enum:
-      - Change Healthcare
-      - Availity
-      - Fax
-      - Payor Portal
-      - Tebra
-      title: SubmissionMethod
-    QABillingStatusEnum:
-      type: string
-      enum:
-      - Billable
-      - Not Billable
-      title: QABillingStatusEnum
-    Body_bulk_mark_notes_unbillable_api_v1_claims_admin_bulk_unbillable_post:
-      properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_bulk_mark_notes_unbillable_api_v1_claims_admin_bulk_unbillable_post
-    Form1500Data:
-      properties:
-        qc:
-          type: string
-          const: Prior Authorization
-          title: Qc
-        insured:
-          anyOf:
-          - $ref: '#/components/schemas/Form1500InsuredData'
-          - type: 'null'
-        member_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Member Id
-        patient:
-          $ref: '#/components/schemas/Form1500PatientData'
-        payor_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Payor Id
-        total_charge:
+          minimum: 0.0
+          title: Units
+        charges:
           type: number
           minimum: 0.0
-          title: Total Charge
-        other_insured:
+          title: Charges
+        id_qual:
+          type: string
+          const: NPI
+          title: Id Qual
+        bcba_npi:
+          type: string
+          minLength: 1
+          title: Bcba Npi
+        cpt_or_hcpcs_code:
+          type: string
+          title: Cpt Or Hcpcs Code
+        modifier:
           anyOf:
-          - $ref: '#/components/schemas/Form1500OtherInsuredData'
+          - items:
+              type: string
+            type: array
           - type: 'null'
-        service_lines:
-          items:
-            $ref: '#/components/schemas/Form1500ServiceLine'
-          type: array
-          title: Service Lines
-        federal_tax_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Federal Tax Id
-        insurance_type:
-          anyOf:
-          - $ref: '#/components/schemas/PayorTypeEnum'
-          - type: 'null'
-        accept_assignment:
+          title: Modifier
+        location:
+          type: string
+          title: Location
+        date_of_service:
+          type: string
+          format: date
+          title: Date Of Service
+        charges_per_unit:
+          type: number
+          minimum: 0.0
+          title: Charges Per Unit
+        diagnosis_pointer:
           type: string
           const: A
-          title: Accept Assignment
-        resubmission_code:
-          $ref: '#/components/schemas/Form1500ResubmissionCodeEnum'
-        billing_provider_info:
-          anyOf:
-          - $ref: '#/components/schemas/Form1500BillingProviderInfo'
-          - type: 'null'
-        additional_information:
-          anyOf:
-          - type: string
-            const: BT SVCS PROVIDED BY CLIENTS PARENT A MONTERA EMPL VISIT FORTA DOT LEGAL
-          - type: 'null'
-          title: Additional Information
-        service_facility_address:
-          anyOf:
-          - $ref: '#/components/schemas/Form1500ServiceFacilityAddress'
-          - type: 'null'
-        prior_authorization_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Prior Authorization Number
-        related_patient_conditions:
-          $ref: '#/components/schemas/Form1500RelatedPatientConditions'
-        claim_and_service_line_details:
-          $ref: '#/components/schemas/Form1500ClaimAndServiceLineDetails'
-        is_there_another_health_benefit_plan:
-          type: boolean
-          title: Is There Another Health Benefit Plan
-        diagnosis_or_nature_of_illness_or_injury_related_al_service_lines:
-          type: string
-          const: F840
-          title: Diagnosis Or Nature Of Illness Or Injury Related Al Service Lines
+          title: Diagnosis Pointer
         is_unbillable_placeholder:
           type: boolean
           title: Is Unbillable Placeholder
           default: false
       type: object
       required:
-      - qc
-      - patient
-      - total_charge
-      - service_lines
-      - accept_assignment
-      - resubmission_code
-      - related_patient_conditions
-      - claim_and_service_line_details
-      - is_there_another_health_benefit_plan
-      - diagnosis_or_nature_of_illness_or_injury_related_al_service_lines
-      title: Form1500Data
+      - units
+      - charges
+      - id_qual
+      - bcba_npi
+      - cpt_or_hcpcs_code
+      - location
+      - date_of_service
+      - charges_per_unit
+      - diagnosis_pointer
+      title: Form1500ServiceLine
+    Bay:
+      type: string
+      enum:
+      - BAY 1
+      - BAY 2
+      - BAY 2.5
+      - BAY 2.6
+      - BAY 2.7
+      - BAY 3
+      - BAY 6
+      - BAY 7
+      title: Bay
     DetailedServiceLinePaymentResponse:
       properties:
         policy_id:
@@ -3060,280 +3271,102 @@ components:
       - service_line
       - claim_payment_details
       title: DetailedServiceLinePaymentResponse
-    Bay:
-      type: string
-      enum:
-      - BAY 1
-      - BAY 2
-      - BAY 2.5
-      - BAY 2.6
-      - BAY 2.7
-      - BAY 3
-      - BAY 6
-      - BAY 7
-      title: Bay
-    ProviderStatusEnum:
-      type: string
-      enum:
-      - Not Training
-      - Training
-      title: ProviderStatusEnum
-    ClaimCreate:
+    Body_bulk_mark_notes_unbillable_api_v1_claims_admin_bulk_unbillable_post:
       properties:
-        date_generated:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Generated
-        utc_offset_date_generated:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_bulk_mark_notes_unbillable_api_v1_claims_admin_bulk_unbillable_post
+    RejectionReason:
+      type: string
+      enum:
+      - Inactive insurance
+      - Not by bobber
+      - PA Gap
+      - Code not billable
+      - Incorrect payor - wrong portal
+      - Incorrect payor - wrong ID
+      - Incorrect data - NPI
+      - Incorrect Data - Modifier
+      - Incorrect data - Entity
+      - Incorrect data - Wrong BCBA
+      - Incorrect data - Other
+      - C&C - Needs PA
+      - C&C - Needs Contract / SCA
+      - C&C - Needs Credentialing
+      - C&C - Needs Bobbing
+      - C&C - No RBT
+      - C&C - Model Denial
+      - Sub Error - Timely Filing
+      - Sub Error - Claim Not Found
+      - Sub Error - Duplicate Submission
+      - Sub Error - Exceeded Filing Frequency
+      - Missing Doc - Needs Medical Records
+      - Missing Doc - Medical Necessity
+      - Missing Doc - Need Provider Information
+      - Missing Doc - Need W9
+      - Codes Not Billable
+      - Lost Insurance
+      - Recouped - Claim Resubmission Needed
+      - Appeal Denied
+      - Needs Availity Submission
+      - Needs Contract
+      - Needs Credentialed BCBA
+      - Needs Modifier
+      - Needs PA
+      - Needs Paper Claim
+      - Needs Provider Registration
+      - Needs SCA
+      - Needs Updated Insurance Info
+      - Pending
+      - Rejected in Error
+      - Requires H codes
+      - Submit via Provider Portal
+      - Waiting on OON App
+      - Claim Not On File
+      - Duplicate Claim
+      - Needs Alternate Submission Method
+      - Needs C&C
+      - Needs COB Update
+      - Needs Corrected Claim
+      - Needs EFT Setup
+      - Needs Medical Records
+      - Needs PA / SCA
+      - Needs W9
+      - No ABA Coverage
+      - Termed Insurance
+      - Timely Filing
+      - C&C - Exceeded/Exhausted approved units
+      title: RejectionReason
+    EOBDocumentCreate:
+      properties:
+        policy_id:
           type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Generated
-          description: Offset from UTC in seconds
-          default: 0
-        client_id:
-          type: integer
-          title: Client Id
-        service_code_id:
-          type: integer
-          title: Service Code Id
-        procedure_ids:
-          items:
-            type: integer
-          type: array
-          title: Procedure Ids
-        skip_prior_authorization:
-          type: boolean
-          title: Skip Prior Authorization
-        billing_facility_id:
+          title: Policy Id
+        file_name:
+          type: string
+          title: File Name
+      type: object
+      required:
+      - policy_id
+      - file_name
+      title: EOBDocumentCreate
+    ServiceLinePaymentPatch:
+      properties:
+        policy_id:
           anyOf:
           - type: integer
           - type: 'null'
-          title: Billing Facility Id
-        use_custom_billing_facility:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Use Custom Billing Facility
-          default: false
-        relax_validations:
-          type: boolean
-          title: Relax Validations
-          default: false
-        source:
-          $ref: '#/components/schemas/ClaimCreationSourceEnum'
-      type: object
-      required:
-      - client_id
-      - service_code_id
-      - procedure_ids
-      - skip_prior_authorization
-      - source
-      title: ClaimCreate
-    ProviderResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        npi:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Npi
-        certification:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Certification
-        date_certification_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification Start
-        date_certification_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification End
-        state_license:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: State License
-        caqh_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Caqh Id
-        payroll_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Payroll Id
-        employment_type:
-          anyOf:
-          - $ref: '#/components/schemas/EmploymentTypeEnum'
-          - type: 'null'
-        job_title:
-          anyOf:
-          - $ref: '#/components/schemas/JobTitleEnum'
-          - type: 'null'
-        preferred_language:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Preferred Language
-        supported_languages:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Supported Languages
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderStatusEnum'
-          - type: 'null'
-          default: Not Training
-        id:
-          type: integer
-          title: Id
-        roles:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Roles
-          default: []
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        clinical_status_reason:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
-          - type: 'null'
-        qa_billing_status:
-          $ref: '#/components/schemas/QABillingStatusEnum'
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - id
-      - clinical_status
-      - qa_billing_status
-      title: ProviderResponse
-    BulkUnbillableSummary:
-      properties:
-        claims_created:
-          type: integer
-          title: Claims Created
-        procedures_attached:
-          type: integer
-          title: Procedures Attached
-        rows_skipped:
-          type: integer
-          title: Rows Skipped
-        rows_failed:
-          type: integer
-          title: Rows Failed
-        failures_csv:
-          type: string
-          title: Failures Csv
-      type: object
-      required:
-      - claims_created
-      - procedures_attached
-      - rows_skipped
-      - rows_failed
-      - failures_csv
-      title: BulkUnbillableSummary
-    ClaimPaymentDetails:
-      properties:
-        billed:
+          title: Policy Id
+        deductibles:
           anyOf:
           - type: number
           - type: 'null'
-          title: Billed
-        units:
-          type: integer
-          title: Units
-        allowable:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Allowable
-        amount_insurance_paid:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Amount Insurance Paid
-        adjustments:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Adjustments
-        deductible:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Deductible
+          title: Deductibles
         co_insurance:
           anyOf:
           - type: number
@@ -3344,84 +3377,50 @@ components:
           - type: number
           - type: 'null'
           title: Co Pay
-        primary_insurance_balance:
+        amount:
           anyOf:
           - type: number
           - type: 'null'
-          title: Primary Insurance Balance
-        secondary_insurance_balance:
+          title: Amount
+        allowable:
           anyOf:
           - type: number
           - type: 'null'
-          title: Secondary Insurance Balance
-        balance:
+          title: Allowable
+        adjustments:
           anyOf:
           - type: number
           - type: 'null'
-          title: Balance
-        amount_paid_to_subscriber:
+          title: Adjustments
+        date_received:
           anyOf:
-          - type: number
+          - type: string
+            format: date
           - type: 'null'
-          title: Amount Paid To Subscriber
-        patient_responsibility:
+          title: Date Received
+        date_cleared:
           anyOf:
-          - type: number
+          - type: string
+            format: date
           - type: 'null'
-          title: Patient Responsibility
-        is_amount_paid_to_subscriber:
-          type: boolean
-          title: Is Amount Paid To Subscriber
-      type: object
-      required:
-      - units
-      - is_amount_paid_to_subscriber
-      title: ClaimPaymentDetails
-    Form1500ServiceFacilityAddress:
-      properties:
-        street_address_line_one:
-          type: string
-          title: Street Address Line One
-        street_address_line_two:
+          title: Date Cleared
+        mode:
+          anyOf:
+          - $ref: '#/components/schemas/PaymentModeEnum'
+          - type: 'null'
+        transaction_id:
           anyOf:
           - type: string
           - type: 'null'
-          title: Street Address Line Two
-        street_address_city:
-          type: string
-          minLength: 2
-          title: Street Address City
-        street_address_state:
-          type: string
-          maxLength: 2
-          title: Street Address State
-        street_address_zip:
-          type: string
-          minLength: 5
-          title: Street Address Zip
-        npi:
-          type: string
-          title: Npi
-        name:
-          type: string
-          title: Name
+          title: Transaction Id
+        is_amount_paid_to_subscriber:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Amount Paid To Subscriber
+          default: false
       type: object
-      required:
-      - street_address_line_one
-      - street_address_city
-      - street_address_state
-      - street_address_zip
-      - npi
-      - name
-      title: Form1500ServiceFacilityAddress
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
+      title: ServiceLinePaymentPatch
     ClaimFollowUpNotesResponse:
       properties:
         follow_up_notes:

@@ -3,12 +3,12 @@ info:
   title: Fast Feature Flags API
   version: 0.1.0
 tags:
-- name: feature_flags
+- name: Feature Flags
 paths:
   /api/v1/feature_flags/:
     get:
       tags:
-      - feature_flags
+      - Feature Flags
       summary: Get Feature Flags
       operationId: get_feature_flags_api_v1_feature_flags__get
       responses:
@@ -26,7 +26,7 @@ paths:
   /api/v1/feature_flags/{key}:
     put:
       tags:
-      - feature_flags
+      - Feature Flags
       summary: Set Feature Flag
       operationId: set_feature_flag_api_v1_feature_flags__key__put
       security:
@@ -59,6 +59,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     FeatureFlagUpdate:
       properties:
         enabled:
@@ -68,19 +77,6 @@ components:
       required:
       - enabled
       title: FeatureFlagUpdate
-    FeatureFlagResponse:
-      properties:
-        key:
-          type: string
-          title: Key
-        enabled:
-          type: boolean
-          title: Enabled
-      type: object
-      required:
-      - key
-      - enabled
-      title: FeatureFlagResponse
     ValidationError:
       properties:
         loc:
@@ -102,15 +98,19 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    FeatureFlagResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        key:
+          type: string
+          title: Key
+        enabled:
+          type: boolean
+          title: Enabled
       type: object
-      title: HTTPValidationError
+      required:
+      - key
+      - enabled
+      title: FeatureFlagResponse
   securitySchemes:
     HTTPBearer:
       type: http

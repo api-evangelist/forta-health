@@ -10,11 +10,33 @@ paths:
       tags:
       - assessment_surveys
       summary: Send Assessment
-      description: "Sends an autism analytica survey to a client's BT\nOnly allows 1 survey to be sent\
-        \ per client ever for now\nby enforcing uniqueness on client_id in the database\nRoles allowed:\
-        \ pRBT, BCBA, Admin\nArgs:\n    request:\n    client_model_converter:\n    assessment_survey_service:\n\
-        \    provider_assignment_repo:\n    provider:\nReturns:\n    Client (ClientSchema): client schema\
-        \ defined in pydantic\nRaises:\n    404: Client id not found"
+      description: 'Sends an autism analytica survey to a client''s BT
+
+        Only allows 1 survey to be sent per client ever for now
+
+        by enforcing uniqueness on client_id in the database
+
+        Roles allowed: pRBT, BCBA, Admin
+
+        Args:
+
+        request:
+
+        client_model_converter:
+
+        assessment_survey_service:
+
+        provider_assignment_repo:
+
+        provider:
+
+        Returns:
+
+        Client (ClientSchema): client schema defined in pydantic
+
+        Raises:
+
+        404: Client id not found'
       operationId: send_assessment_api_v1_assessment_surveys__post
       security:
       - HTTPBearer: []
@@ -56,9 +78,25 @@ paths:
       tags:
       - assessment_surveys
       summary: Get Treaat Prediction
-      description: "Gets the latest treaat prediction for a client based off of the latest assessment\
-        \ survey\n\nReturns\nArgs:\n    assessment_survey_service:\n    client_model_converter:\n    provider_assignment_repo:\n\
-        \    client_id:\n    provider:\n\nReturns:"
+      description: 'Gets the latest treaat prediction for a client based off of the latest assessment survey
+
+
+        Returns
+
+        Args:
+
+        assessment_survey_service:
+
+        client_model_converter:
+
+        provider_assignment_repo:
+
+        client_id:
+
+        provider:
+
+
+        Returns:'
       operationId: get_treaat_prediction_api_v1_assessment_surveys__get
       security:
       - HTTPBearer: []
@@ -98,6 +136,56 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    AssessmentSurveyResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        recipient_email:
+          type: string
+          title: Recipient Email
+        date_survey_sent:
+          type: string
+          format: date-time
+          title: Date Survey Sent
+        assessment_data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Assessment Data
+        treaat_prediction:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Treaat Prediction
+        date_predicted:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Predicted
+      type: object
+      required:
+      - id
+      - client
+      - recipient_email
+      - date_survey_sent
+      title: AssessmentSurveyResponse
     ClientResponse:
       properties:
         first_name:
@@ -186,47 +274,15 @@ components:
       - id
       - clinical_status
       title: ClientResponse
-    AssessmentSurveyResponse:
+    HTTPValidationError:
       properties:
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientResponse'
-        recipient_email:
-          type: string
-          title: Recipient Email
-        date_survey_sent:
-          type: string
-          format: date-time
-          title: Date Survey Sent
-        assessment_data:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - items: {}
-            type: array
-          - type: 'null'
-          title: Assessment Data
-        treaat_prediction:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Treaat Prediction
-        date_predicted:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Predicted
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - client
-      - recipient_email
-      - date_survey_sent
-      title: AssessmentSurveyResponse
+      title: HTTPValidationError
     AssessmentSurveyCreate:
       properties:
         bt_provider_id:
@@ -247,13 +303,14 @@ components:
       required:
       - client_id
       title: AssessmentSurveyCreate
-    ClinicalStatusReasonEnum:
+    Sex:
       type: string
       enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
     ValidationError:
       properties:
         loc:
@@ -275,32 +332,13 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Sex:
+    ClinicalStatusReasonEnum:
       type: string
       enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
   securitySchemes:
     HTTPBearer:
       type: http

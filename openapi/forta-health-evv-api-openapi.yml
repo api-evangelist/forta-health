@@ -3,12 +3,12 @@ info:
   title: Fast Evv API
   version: 0.1.0
 tags:
-- name: evv
+- name: EVV
 paths:
   /api/v1/evv/capture_gps:
     post:
       tags:
-      - evv
+      - EVV
       summary: Capture Evv Gps
       operationId: capture_evv_gps_api_v1_evv_capture_gps_post
       parameters:
@@ -69,15 +69,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    EVVCaptureGpsResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - status
-      title: EVVCaptureGpsResponse
     EVVCaptureGpsRequest:
       properties:
         lat:
@@ -103,6 +94,15 @@ components:
       - lat
       - long
       title: EVVCaptureGpsRequest
+    EVVCaptureGpsResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: EVVCaptureGpsResponse
   securitySchemes:
     HTTPBearer:
       type: http

@@ -63,26 +63,15 @@ components:
       - READ_ONLY
       title: TreatmentPlanStatusLabelEnum
       description: Enum for treatment plan status labels.
-    TreatmentPlanStatusResponse:
+    HTTPValidationError:
       properties:
-        label:
-          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
-        id:
-          type: integer
-          title: Id
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - label
-      - id
-      title: TreatmentPlanStatusResponse
-    TreatmentPlanStatusBase:
-      properties:
-        label:
-          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
-      type: object
-      required:
-      - label
-      title: TreatmentPlanStatusBase
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -104,15 +93,26 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    TreatmentPlanStatusBase:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        label:
+          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
       type: object
-      title: HTTPValidationError
+      required:
+      - label
+      title: TreatmentPlanStatusBase
+    TreatmentPlanStatusResponse:
+      properties:
+        label:
+          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: TreatmentPlanStatusResponse
   securitySchemes:
     HTTPBearer:
       type: http

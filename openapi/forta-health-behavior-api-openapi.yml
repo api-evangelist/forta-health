@@ -246,45 +246,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    GoalNameCreate:
+    HTTPValidationError:
       properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        prefix:
-          type: string
-          minLength: 2
-          title: Prefix
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - label
-      - prefix
-      title: GoalNameCreate
-    BehaviorCreate:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-      type: object
-      required:
-      - label
-      title: BehaviorCreate
-    BehaviorResponse:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - id
-      title: BehaviorResponse
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -306,15 +276,31 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    BehaviorCreate:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        label:
+          type: string
+          minLength: 2
+          title: Label
       type: object
-      title: HTTPValidationError
+      required:
+      - label
+      title: BehaviorCreate
+    GoalNameCreate:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        prefix:
+          type: string
+          minLength: 2
+          title: Prefix
+      type: object
+      required:
+      - label
+      - prefix
+      title: GoalNameCreate
     GoalNameResponse:
       properties:
         label:
@@ -345,6 +331,20 @@ components:
       - behavior
       - is_active
       title: GoalNameResponse
+    BehaviorResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: BehaviorResponse
   securitySchemes:
     HTTPBearer:
       type: http

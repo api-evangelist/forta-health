@@ -3,14 +3,18 @@ info:
   title: Fast Health API
   version: 0.1.0
 tags:
-- name: health
+- name: Health
 paths:
   /api/v1/health/:
     get:
       tags:
-      - health
+      - Health
       summary: Health Check
-      description: "Basic health check to determine if the API is up\nReturns:\n    200"
+      description: 'Basic health check to determine if the API is up
+
+        Returns:
+
+        200'
       operationId: health_check_api_v1_health__get
       responses:
         '200':

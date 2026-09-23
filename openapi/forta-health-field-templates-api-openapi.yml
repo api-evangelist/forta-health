@@ -3,12 +3,12 @@ info:
   title: Fast Field Templates API
   version: 0.1.0
 tags:
-- name: field_templates
+- name: Field Templates
 paths:
   /api/v1/field_templates/fields/:
     get:
       tags:
-      - field_templates
+      - Field Templates
       summary: List Fields
       description: List catalog fields, optionally filtered by resource and enriched with templates.
       operationId: list_fields_api_v1_field_templates_fields__get
@@ -53,7 +53,7 @@ paths:
   /api/v1/field_templates/{identifier}/:
     get:
       tags:
-      - field_templates
+      - Field Templates
       summary: Get Field Template
       description: Get the template bound to a field by its unique identifier (template is null if unset).
       operationId: get_field_template_api_v1_field_templates__identifier___get
@@ -81,7 +81,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       tags:
-      - field_templates
+      - Field Templates
       summary: Upsert Field Template
       description: Create or replace the template bound to a field (sanitized server-side).
       operationId: upsert_field_template_api_v1_field_templates__identifier___put
@@ -115,36 +115,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     FieldResponse:
       properties:
         resource:
@@ -197,6 +167,36 @@ components:
         otherwise they are ``None``. Shape is identical whether or not the list was
 
         filtered by resource, so the client can rely on it.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     FieldTemplateUpsertRequest:
       properties:
         content:

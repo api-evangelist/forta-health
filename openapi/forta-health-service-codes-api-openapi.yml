@@ -3,12 +3,12 @@ info:
   title: Fast Service Codes API
   version: 0.1.0
 tags:
-- name: service_codes
+- name: Service Codes
 paths:
   /api/v1/service_codes/:
     post:
       tags:
-      - service_codes
+      - Service Codes
       summary: Create Service Code
       operationId: create_service_code_api_v1_service_codes__post
       security:
@@ -34,7 +34,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - service_codes
+      - Service Codes
       summary: Get Service Codes
       operationId: get_service_codes_api_v1_service_codes__get
       security:
@@ -99,6 +99,15 @@ components:
       - is_timesheet_usable
       - id
       title: ServiceCodeResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -120,15 +129,12 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
     ServiceCodeBase:
       properties:
         code:
@@ -158,12 +164,6 @@ components:
       - is_billable
       - is_timesheet_usable
       title: ServiceCodeBase
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
   securitySchemes:
     HTTPBearer:
       type: http

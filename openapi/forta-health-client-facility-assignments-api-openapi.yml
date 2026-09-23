@@ -135,43 +135,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    FacilityListResponse:
-      properties:
-        label:
-          type: string
-          title: Label
-        tin:
-          type: string
-          title: Tin
-        npi:
-          type: string
-          title: Npi
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - tin
-      - npi
-      - id
-      title: FacilityListResponse
-    ClientFacilityAssignmentPatch:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-      type: object
-      required:
-      - date_start
-      title: ClientFacilityAssignmentPatch
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
     ClientFacilityAssignmentResponse:
       properties:
         date_start:
@@ -201,33 +173,6 @@ components:
       - facility
       - assignment_type
       title: ClientFacilityAssignmentResponse
-    ClientFacilityAssignmentTypeEnum:
-      type: string
-      enum:
-      - billing
-      - service
-      title: ClientFacilityAssignmentTypeEnum
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -237,50 +182,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ClientFacilityAssignmentCreate:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        client_id:
-          type: integer
-          title: Client Id
-        facility_id:
-          type: integer
-          title: Facility Id
-        assignment_type:
-          $ref: '#/components/schemas/ClientFacilityAssignmentTypeEnum'
-      type: object
-      required:
-      - date_start
-      - client_id
-      - facility_id
-      - assignment_type
-      title: ClientFacilityAssignmentCreate
     ClientListResponse:
       properties:
         first_name:
@@ -309,6 +210,105 @@ components:
       - clinical_status
       - id
       title: ClientListResponse
+    FacilityListResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        tin:
+          type: string
+          title: Tin
+        npi:
+          type: string
+          title: Npi
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - tin
+      - npi
+      - id
+      title: FacilityListResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ClientFacilityAssignmentPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+      type: object
+      required:
+      - date_start
+      title: ClientFacilityAssignmentPatch
+    ClientFacilityAssignmentCreate:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        client_id:
+          type: integer
+          title: Client Id
+        facility_id:
+          type: integer
+          title: Facility Id
+        assignment_type:
+          $ref: '#/components/schemas/ClientFacilityAssignmentTypeEnum'
+      type: object
+      required:
+      - date_start
+      - client_id
+      - facility_id
+      - assignment_type
+      title: ClientFacilityAssignmentCreate
+    ClientFacilityAssignmentTypeEnum:
+      type: string
+      enum:
+      - billing
+      - service
+      title: ClientFacilityAssignmentTypeEnum
   securitySchemes:
     HTTPBearer:
       type: http

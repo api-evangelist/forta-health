@@ -139,39 +139,26 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ProviderAvailabilityResponse:
-      properties:
-        day_of_week:
-          $ref: '#/components/schemas/DayOfWeek'
-        time_start:
-          type: string
-          format: time
-          title: Time Start
-        time_end:
-          type: string
-          format: time
-          title: Time End
-        provider_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Provider Id
-        timezone:
-          $ref: '#/components/schemas/TimeZoneEnum'
-        id:
-          type: integer
-          title: Id
-        provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-      type: object
-      required:
-      - day_of_week
-      - time_start
-      - time_end
-      - timezone
-      - id
-      - provider
-      title: ProviderAvailabilityResponse
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+      title: DayOfWeek
     ProviderListResponse:
       properties:
         id:
@@ -201,27 +188,24 @@ components:
       - status
       - clinical_status
       title: ProviderListResponse
-    ValidationError:
+    ProviderAvailabilityPatch:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        time_start:
           type: string
-          title: Message
-        type:
+          format: time
+          title: Time Start
+        time_end:
           type: string
-          title: Error Type
+          format: time
+          title: Time End
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - day_of_week
+      - time_start
+      - time_end
+      title: ProviderAvailabilityPatch
     HTTPValidationError:
       properties:
         detail:
@@ -268,18 +252,28 @@ components:
       - time_end
       - timezone
       title: ProviderAvailabilityCreate
-    DayOfWeek:
-      type: string
-      enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-      title: DayOfWeek
-    ProviderAvailabilityPatch:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ProviderAvailabilityResponse:
       properties:
         day_of_week:
           $ref: '#/components/schemas/DayOfWeek'
@@ -291,21 +285,27 @@ components:
           type: string
           format: time
           title: Time End
+        provider_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Provider Id
+        timezone:
+          $ref: '#/components/schemas/TimeZoneEnum'
+        id:
+          type: integer
+          title: Id
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
       type: object
       required:
       - day_of_week
       - time_start
       - time_end
-      title: ProviderAvailabilityPatch
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
+      - timezone
+      - id
+      - provider
+      title: ProviderAvailabilityResponse
   securitySchemes:
     HTTPBearer:
       type: http
