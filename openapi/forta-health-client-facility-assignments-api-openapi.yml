@@ -135,6 +135,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ClinicalStatusEnum:
       type: string
       enum:
@@ -144,6 +153,22 @@ components:
       - OFFBOARDED
       - LIMITED ACCESS GUARDIAN
       title: ClinicalStatusEnum
+    ClientFacilityAssignmentPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+      type: object
+      required:
+      - date_start
+      title: ClientFacilityAssignmentPatch
     ClientFacilityAssignmentResponse:
       properties:
         date_start:
@@ -173,15 +198,6 @@ components:
       - facility
       - assignment_type
       title: ClientFacilityAssignmentResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ClientListResponse:
       properties:
         first_name:
@@ -210,27 +226,12 @@ components:
       - clinical_status
       - id
       title: ClientListResponse
-    FacilityListResponse:
-      properties:
-        label:
-          type: string
-          title: Label
-        tin:
-          type: string
-          title: Tin
-        npi:
-          type: string
-          title: Npi
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - tin
-      - npi
-      - id
-      title: FacilityListResponse
+    ClientFacilityAssignmentTypeEnum:
+      type: string
+      enum:
+      - billing
+      - service
+      title: ClientFacilityAssignmentTypeEnum
     Sex:
       type: string
       enum:
@@ -260,22 +261,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ClientFacilityAssignmentPatch:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-      type: object
-      required:
-      - date_start
-      title: ClientFacilityAssignmentPatch
     ClientFacilityAssignmentCreate:
       properties:
         date_start:
@@ -303,12 +288,27 @@ components:
       - facility_id
       - assignment_type
       title: ClientFacilityAssignmentCreate
-    ClientFacilityAssignmentTypeEnum:
-      type: string
-      enum:
-      - billing
-      - service
-      title: ClientFacilityAssignmentTypeEnum
+    FacilityListResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        tin:
+          type: string
+          title: Tin
+        npi:
+          type: string
+          title: Npi
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - tin
+      - npi
+      - id
+      title: FacilityListResponse
   securitySchemes:
     HTTPBearer:
       type: http

@@ -72,15 +72,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
     HTTPValidationError:
       properties:
         detail:
@@ -90,6 +81,53 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    DurationAggregatesResponse:
+      properties:
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        session_duration:
+          type: integer
+          title: Session Duration
+        client_supervision_duration:
+          type: integer
+          title: Client Supervision Duration
+        parent_supervision_duration:
+          type: integer
+          title: Parent Supervision Duration
+        csn_session_ratio:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Csn Session Ratio
+        additional_csn_duration_required:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Additional Csn Duration Required
+        client_assessment_duration:
+          type: integer
+          title: Client Assessment Duration
+        group_parent_supervision_duration:
+          type: integer
+          title: Group Parent Supervision Duration
+      type: object
+      required:
+      - client
+      - session_duration
+      - client_supervision_duration
+      - parent_supervision_duration
+      - client_assessment_duration
+      - group_parent_supervision_duration
+      title: DurationAggregatesResponse
     ClientListResponse:
       properties:
         first_name:
@@ -147,44 +185,6 @@ components:
       - msg
       - type
       title: ValidationError
-    DurationAggregatesResponse:
-      properties:
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        session_duration:
-          type: integer
-          title: Session Duration
-        client_supervision_duration:
-          type: integer
-          title: Client Supervision Duration
-        parent_supervision_duration:
-          type: integer
-          title: Parent Supervision Duration
-        csn_session_ratio:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Csn Session Ratio
-        additional_csn_duration_required:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Additional Csn Duration Required
-        client_assessment_duration:
-          type: integer
-          title: Client Assessment Duration
-        group_parent_supervision_duration:
-          type: integer
-          title: Group Parent Supervision Duration
-      type: object
-      required:
-      - client
-      - session_duration
-      - client_supervision_duration
-      - parent_supervision_duration
-      - client_assessment_duration
-      - group_parent_supervision_duration
-      title: DurationAggregatesResponse
   securitySchemes:
     HTTPBearer:
       type: http

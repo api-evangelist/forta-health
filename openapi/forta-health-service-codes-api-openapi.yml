@@ -66,6 +66,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ServiceCodeResponse:
       properties:
         code:
@@ -99,15 +108,6 @@ components:
       - is_timesheet_usable
       - id
       title: ServiceCodeResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -129,12 +129,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
     ServiceCodeBase:
       properties:
         code:
@@ -164,6 +158,12 @@ components:
       - is_billable
       - is_timesheet_usable
       title: ServiceCodeBase
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
   securitySchemes:
     HTTPBearer:
       type: http

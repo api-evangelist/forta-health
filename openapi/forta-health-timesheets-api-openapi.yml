@@ -194,6 +194,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     AssociatedServiceCodeResponse:
       properties:
         code:
@@ -222,44 +231,6 @@ components:
       - is_timesheet_usable
       - id
       title: AssociatedServiceCodeResponse
-    PayPeriodResponse:
-      properties:
-        present:
-          items: {}
-          type: array
-          title: Present
-        past_payperiod_data_input_end_date:
-          type: string
-          format: date
-          title: Past Payperiod Data Input End Date
-        past:
-          items:
-            items: {}
-            type: array
-          type: array
-          title: Past
-          default: []
-        future:
-          items:
-            items: {}
-            type: array
-          type: array
-          title: Future
-          default: []
-      type: object
-      required:
-      - present
-      - past_payperiod_data_input_end_date
-      title: PayPeriodResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     TimesheetCreate:
       properties:
         client_id:
@@ -293,33 +264,35 @@ components:
       - service_code_id
       - utc_offset
       title: TimesheetCreate
-    ValidationError:
+    PayPeriodResponse:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
+        present:
+          items: {}
           type: array
-          title: Location
-        msg:
+          title: Present
+        past_payperiod_data_input_end_date:
           type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          format: date
+          title: Past Payperiod Data Input End Date
+        past:
+          items:
+            items: {}
+            type: array
+          type: array
+          title: Past
+          default: []
+        future:
+          items:
+            items: {}
+            type: array
+          type: array
+          title: Future
+          default: []
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
+      - present
+      - past_payperiod_data_input_end_date
+      title: PayPeriodResponse
     TimesheetPatch:
       properties:
         client_id:
@@ -356,6 +329,27 @@ components:
           title: Utc Offset
       type: object
       title: TimesheetPatch
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     TimesheetResponse:
       properties:
         client_id:
@@ -416,6 +410,12 @@ components:
       - provider_id
       - service_code
       title: TimesheetResponse
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
   securitySchemes:
     HTTPBearer:
       type: http

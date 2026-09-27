@@ -54,15 +54,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    TreatmentPlanStatusLabelEnum:
-      type: string
-      enum:
-      - STARTED
-      - COMPLETED
-      - EDITING
-      - READ_ONLY
-      title: TreatmentPlanStatusLabelEnum
-      description: Enum for treatment plan status labels.
     HTTPValidationError:
       properties:
         detail:
@@ -72,6 +63,15 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    TreatmentPlanStatusLabelEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      - EDITING
+      - READ_ONLY
+      title: TreatmentPlanStatusLabelEnum
+      description: Enum for treatment plan status labels.
     ValidationError:
       properties:
         loc:

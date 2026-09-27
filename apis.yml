@@ -54,7 +54,7 @@ tags:
 - Medicaid
 - Health Insurance
 - EHR
-- Machine-Learning
+- Machine Learning
 tags_raw:
 - healthcare
 - autism
@@ -68,6 +68,7 @@ tags_raw:
 - health-insurance
 - ehr
 - machine-learning
+- Machine-Learning
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

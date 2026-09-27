@@ -136,56 +136,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    AssessmentSurveyResponse:
+    HTTPValidationError:
       properties:
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientResponse'
-        recipient_email:
-          type: string
-          title: Recipient Email
-        date_survey_sent:
-          type: string
-          format: date-time
-          title: Date Survey Sent
-        assessment_data:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - items: {}
-            type: array
-          - type: 'null'
-          title: Assessment Data
-        treaat_prediction:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Treaat Prediction
-        date_predicted:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Predicted
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - client
-      - recipient_email
-      - date_survey_sent
-      title: AssessmentSurveyResponse
+      title: HTTPValidationError
     ClientResponse:
       properties:
         first_name:
@@ -274,15 +233,77 @@ components:
       - id
       - clinical_status
       title: ClientResponse
-    HTTPValidationError:
+    AssessmentSurveyResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        recipient_email:
+          type: string
+          title: Recipient Email
+        date_survey_sent:
+          type: string
+          format: date-time
+          title: Date Survey Sent
+        assessment_data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Assessment Data
+        treaat_prediction:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Treaat Prediction
+        date_predicted:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Predicted
       type: object
-      title: HTTPValidationError
+      required:
+      - id
+      - client
+      - recipient_email
+      - date_survey_sent
+      title: AssessmentSurveyResponse
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     AssessmentSurveyCreate:
       properties:
         bt_provider_id:
@@ -311,27 +332,6 @@ components:
       - other
       - unknown
       title: Sex
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     ClinicalStatusReasonEnum:
       type: string
       enum:

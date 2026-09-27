@@ -115,6 +115,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     FieldResponse:
       properties:
         resource:
@@ -167,47 +176,6 @@ components:
         otherwise they are ``None``. Shape is identical whether or not the list was
 
         filtered by resource, so the client can rely on it.'
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    FieldTemplateUpsertRequest:
-      properties:
-        content:
-          type: string
-          maxLength: 50000
-          minLength: 1
-          title: Content
-      type: object
-      required:
-      - content
-      title: FieldTemplateUpsertRequest
     FieldTemplateResponse:
       properties:
         resource:
@@ -246,6 +214,38 @@ components:
       - value
       - label
       title: FieldTemplateResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    FieldTemplateUpsertRequest:
+      properties:
+        content:
+          type: string
+          maxLength: 50000
+          minLength: 1
+          title: Content
+      type: object
+      required:
+      - content
+      title: FieldTemplateUpsertRequest
   securitySchemes:
     HTTPBearer:
       type: http

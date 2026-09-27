@@ -916,6 +916,222 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ParentSupervisionUtilizationResponse:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          type: integer
+          title: Duration
+        count:
+          type: integer
+          title: Count
+      type: object
+      required:
+      - client_id
+      - duration
+      - count
+      title: ParentSupervisionUtilizationResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    app__api__schemas__parent_supervision__TrialPatch:
+      properties:
+        successful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Successful Attempts
+        unsuccessful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Unsuccessful Attempts
+        occurrence:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Occurrence
+      type: object
+      title: TrialPatch
+    app__api__schemas__parent_supervision__TrialResponse:
+      properties:
+        successful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Successful Attempts
+        unsuccessful_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Unsuccessful Attempts
+        occurrence:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Occurrence
+        target_id:
+          type: integer
+          title: Target Id
+        id:
+          type: integer
+          title: Id
+        target_label:
+          type: string
+          title: Target Label
+        total_attempts:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Total Attempts
+      type: object
+      required:
+      - target_id
+      - id
+      - target_label
+      title: TrialResponse
+    RateTrialResponse:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+        id:
+          type: integer
+          title: Id
+        target_label:
+          type: string
+          title: Target Label
+        rate_events:
+          items:
+            $ref: '#/components/schemas/app__api__schemas__parent_supervision__RateEventResponse'
+          type: array
+          title: Rate Events
+        num_rate_events:
+          type: integer
+          title: Num Rate Events
+      type: object
+      required:
+      - target_id
+      - id
+      - target_label
+      - rate_events
+      - num_rate_events
+      title: RateTrialResponse
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    GoalGroupedTrialsResponse:
+      properties:
+        goal_label:
+          type: string
+          title: Goal Label
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+        is_data_collection_method_percentage:
+          type: boolean
+          title: Is Data Collection Method Percentage
+        is_data_collection_method_rate:
+          type: boolean
+          title: Is Data Collection Method Rate
+        is_data_collection_method_duration:
+          type: boolean
+          title: Is Data Collection Method Duration
+        is_data_collection_method_instances:
+          type: boolean
+          title: Is Data Collection Method Instances
+        target_evaluations:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/app__api__schemas__parent_supervision__TrialResponse'
+            type: array
+          - items:
+              $ref: '#/components/schemas/RateTrialResponse'
+            type: array
+          - items:
+              $ref: '#/components/schemas/DurationTrialResponse'
+            type: array
+          title: Target Evaluations
+      type: object
+      required:
+      - goal_label
+      - data_collection_method
+      - is_data_collection_method_percentage
+      - is_data_collection_method_rate
+      - is_data_collection_method_duration
+      - is_data_collection_method_instances
+      - target_evaluations
+      title: GoalGroupedTrialsResponse
     ParentSupervisionBackdate:
       properties:
         date_start:
@@ -930,20 +1146,95 @@ components:
       - date_start
       - utc_offset_date_start
       title: ParentSupervisionBackdate
-    ClinicalStatusEnum:
+    SettingEnumV2:
       type: string
       enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ParentSupervisionResponseWithClaimHistory:
+      - Telehealth
+      title: SettingEnumV2
+    ParentAndCaregiverRoleEnum:
+      type: string
+      enum:
+      - parent
+      - caregiver
+      - parent and caregiver
+      title: ParentAndCaregiverRoleEnum
+    ParentSupervisionStop:
       properties:
+        signature:
+          type: string
+          title: Signature
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+        date_signed:
+          type: string
+          format: date-time
+          title: Date Signed
+      type: object
+      required:
+      - signature
+      - utc_offset_date_signed
+      - date_signed
+      title: ParentSupervisionStop
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    LocationEnumV1:
+      type: string
+      enum:
+      - HOME
+      - COMMUNITY
+      - TELEHEALTH
+      title: LocationEnumV1
+    ParentSupervisionGoalProgressResponse:
+      properties:
+        goal_evaluation:
+          $ref: '#/components/schemas/GoalProgressEnum'
+        goal_id:
+          type: integer
+          title: Goal Id
         id:
           type: integer
           title: Id
+      type: object
+      required:
+      - goal_evaluation
+      - goal_id
+      - id
+      title: ParentSupervisionGoalProgressResponse
+    DurationTrialResponse:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+        id:
+          type: integer
+          title: Id
+        target_label:
+          type: string
+          title: Target Label
+        duration_events:
+          items:
+            $ref: '#/components/schemas/app__api__schemas__parent_supervision__DurationEventResponse'
+          type: array
+          title: Duration Events
+        num_duration_events:
+          type: integer
+          title: Num Duration Events
+      type: object
+      required:
+      - target_id
+      - id
+      - target_label
+      - duration_events
+      - num_duration_events
+      title: DurationTrialResponse
+    ParentSupervisionCreate:
+      properties:
         date_start:
           type: string
           format: date-time
@@ -956,94 +1247,22 @@ components:
           maximum: 14400.0
           minimum: 900.0
           title: Expected Duration
-        client:
-          $ref: '#/components/schemas/ClientResponse'
-        status:
-          type: string
-          title: Status
-        version:
-          $ref: '#/components/schemas/VersionEnum'
-        bcba:
-          $ref: '#/components/schemas/ProviderListResponse'
+        client_id:
+          type: integer
+          title: Client Id
         location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumV1'
-          - $ref: '#/components/schemas/LocationEnumV2'
-          title: Location
-        is_billable:
-          type: boolean
-          title: Is Billable
-        claim_history:
-          items:
-            $ref: '#/components/schemas/LinkedClaimResponse'
-          type: array
-          title: Claim History
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
+          $ref: '#/components/schemas/LocationEnumV2'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
       type: object
       required:
-      - id
       - date_start
       - utc_offset_date_start
       - expected_duration
-      - client
-      - status
-      - version
-      - bcba
+      - client_id
       - location
-      - is_billable
-      - claim_history
-      title: ParentSupervisionResponseWithClaimHistory
-    ClaimStatusEnum:
-      type: string
-      enum:
-      - On Hold
-      - Generated
-      - Full Denial
-      - In Appeals
-      - Rejected & Resubmitted
-      - Rejected, Needs Appeal
-      - Rejected, Needs Resubmission
-      - Rejected, Not Resubmitted
-      - Approved
-      - Submitted
-      - Unbillable
-      - Approved - Recouped
-      - Approved - Recouped & Resubmitted
-      title: ClaimStatusEnum
-    ParentAndCaregiverListResponse:
-      properties:
-        role:
-          $ref: '#/components/schemas/ParentAndCaregiverRoleEnum'
-        name:
-          type: string
-          maxLength: 1000
-          minLength: 2
-          title: Name
-        id:
-          type: integer
-          title: Id
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-            pattern: ^[1-9][0-9]{9}$
-          - type: 'null'
-          title: Phone
-      type: object
-      required:
-      - role
-      - name
-      - id
-      title: ParentAndCaregiverListResponse
+      - setting
+      title: ParentSupervisionCreate
     app__api__schemas__parent_supervision__RateEventPatch:
       properties:
         date_of_event:
@@ -1054,6 +1273,93 @@ components:
           title: Date Of Event
       type: object
       title: RateEventPatch
+    SettingEnumV1:
+      type: string
+      enum:
+      - In-person
+      - Remote
+      title: SettingEnumV1
+    app__api__schemas__parent_supervision__RateEventCreate:
+      properties:
+        date_of_event:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Of Event
+      type: object
+      title: RateEventCreate
+    ParentSupervisionGoalProgressPatch:
+      properties:
+        goal_evaluation:
+          $ref: '#/components/schemas/GoalProgressEnum'
+      type: object
+      required:
+      - goal_evaluation
+      title: ParentSupervisionGoalProgressPatch
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    DurationEventCreate:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - duration
+      title: DurationEventCreate
+    ParentSupervisionGoalProgressCreate:
+      properties:
+        goal_evaluation:
+          $ref: '#/components/schemas/GoalProgressEnum'
+        goal_id:
+          type: integer
+          title: Goal Id
+      type: object
+      required:
+      - goal_evaluation
+      - goal_id
+      title: ParentSupervisionGoalProgressCreate
+    VersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: VersionEnum
+    DurationEventPatch:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - duration
+      title: DurationEventPatch
     ParentSupervisionDetailedResponse:
       properties:
         id:
@@ -1175,459 +1481,15 @@ components:
       - target_progress
       - active_treatment_plan_id
       title: ParentSupervisionDetailedResponse
-    LocationEnumV1:
-      type: string
-      enum:
-      - HOME
-      - COMMUNITY
-      - TELEHEALTH
-      title: LocationEnumV1
-    VersionEnum:
-      type: string
-      enum:
-      - v1
-      - v2
-      title: VersionEnum
-    SettingEnumV1:
-      type: string
-      enum:
-      - In-person
-      - Remote
-      title: SettingEnumV1
-    ProviderListResponse:
+    HTTPValidationError:
       properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
-    ParentSupervisionCreate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        expected_duration:
-          type: integer
-          maximum: 14400.0
-          minimum: 900.0
-          title: Expected Duration
-        client_id:
-          type: integer
-          title: Client Id
-        location:
-          $ref: '#/components/schemas/LocationEnumV2'
-        setting:
-          $ref: '#/components/schemas/SettingEnumV2'
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      - expected_duration
-      - client_id
-      - location
-      - setting
-      title: ParentSupervisionCreate
-    DurationEventPatch:
-      properties:
-        duration:
-          type: integer
-          title: Duration
-      type: object
-      required:
-      - duration
-      title: DurationEventPatch
-    TrialCreate:
-      properties:
-        target_id:
-          type: integer
-          title: Target Id
-      type: object
-      required:
-      - target_id
-      title: TrialCreate
-    app__api__schemas__parent_supervision__TrialPatch:
-      properties:
-        successful_attempts:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Successful Attempts
-        unsuccessful_attempts:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Unsuccessful Attempts
-        occurrence:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Occurrence
-      type: object
-      title: TrialPatch
-    DurationEventCreate:
-      properties:
-        duration:
-          type: integer
-          title: Duration
-      type: object
-      required:
-      - duration
-      title: DurationEventCreate
-    ParentSupervisionTrialsResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        target_progress:
+        detail:
           items:
-            $ref: '#/components/schemas/GoalGroupedTrialsResponse'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Target Progress
+          title: Detail
       type: object
-      required:
-      - id
-      - target_progress
-      title: ParentSupervisionTrialsResponse
-    DurationTrialResponse:
-      properties:
-        target_id:
-          type: integer
-          title: Target Id
-        id:
-          type: integer
-          title: Id
-        target_label:
-          type: string
-          title: Target Label
-        duration_events:
-          items:
-            $ref: '#/components/schemas/app__api__schemas__parent_supervision__DurationEventResponse'
-          type: array
-          title: Duration Events
-        num_duration_events:
-          type: integer
-          title: Num Duration Events
-      type: object
-      required:
-      - target_id
-      - id
-      - target_label
-      - duration_events
-      - num_duration_events
-      title: DurationTrialResponse
-    app__api__schemas__parent_supervision__TrialResponse:
-      properties:
-        successful_attempts:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Successful Attempts
-        unsuccessful_attempts:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Unsuccessful Attempts
-        occurrence:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Occurrence
-        target_id:
-          type: integer
-          title: Target Id
-        id:
-          type: integer
-          title: Id
-        target_label:
-          type: string
-          title: Target Label
-        total_attempts:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Total Attempts
-      type: object
-      required:
-      - target_id
-      - id
-      - target_label
-      title: TrialResponse
-    ParentSupervisionGoalProgressResponse:
-      properties:
-        goal_evaluation:
-          $ref: '#/components/schemas/GoalProgressEnum'
-        goal_id:
-          type: integer
-          title: Goal Id
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - goal_evaluation
-      - goal_id
-      - id
-      title: ParentSupervisionGoalProgressResponse
-    app__api__schemas__parent_supervision__DurationEventResponse:
-      properties:
-        duration:
-          type: integer
-          title: Duration
-        id:
-          type: integer
-          title: Id
-        formatted_duration:
-          type: string
-          title: Formatted Duration
-      type: object
-      required:
-      - duration
-      - id
-      - formatted_duration
-      title: DurationEventResponse
-    ParentProgressEnum:
-      type: string
-      enum:
-      - POSITIVE
-      - NEUTRAL
-      - NEGATIVE
-      title: ParentProgressEnum
-    ParentSupervisionDownloadPdfResponse:
-      properties:
-        document_url:
-          type: string
-          title: Document Url
-      type: object
-      required:
-      - document_url
-      title: ParentSupervisionDownloadPdfResponse
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    app__api__schemas__parent_supervision__RateEventCreate:
-      properties:
-        date_of_event:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Of Event
-      type: object
-      title: RateEventCreate
-    ParentSupervisionGoalProgressCreate:
-      properties:
-        goal_evaluation:
-          $ref: '#/components/schemas/GoalProgressEnum'
-        goal_id:
-          type: integer
-          title: Goal Id
-      type: object
-      required:
-      - goal_evaluation
-      - goal_id
-      title: ParentSupervisionGoalProgressCreate
-    LinkedClaimResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        status:
-          $ref: '#/components/schemas/ClaimStatusEnum'
-        secondary_status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        total_charge:
-          type: number
-          minimum: 0.0
-          title: Total Charge
-        clearing_house_claim_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Clearing House Claim Id
-      type: object
-      required:
-      - id
-      - status
-      - total_charge
-      title: LinkedClaimResponse
-    SettingEnumV2:
-      type: string
-      enum:
-      - Telehealth
-      title: SettingEnumV2
-    ParentSupervisionUtilizationResponse:
-      properties:
-        client_id:
-          type: integer
-          title: Client Id
-        duration:
-          type: integer
-          title: Duration
-        count:
-          type: integer
-          title: Count
-      type: object
-      required:
-      - client_id
-      - duration
-      - count
-      title: ParentSupervisionUtilizationResponse
-    ParentSupervisionPatch:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        expected_duration:
-          type: integer
-          maximum: 14400.0
-          minimum: 900.0
-          title: Expected Duration
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumV1'
-          - $ref: '#/components/schemas/LocationEnumV2'
-          title: Location
-        setting:
-          anyOf:
-          - $ref: '#/components/schemas/SettingEnumV1'
-          - $ref: '#/components/schemas/SettingEnumV2'
-          title: Setting
-        parent_one_parent_and_caregiver_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Parent One Parent And Caregiver Id
-        parent_two_parent_and_caregiver_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Parent Two Parent And Caregiver Id
-        parent_progress:
-          anyOf:
-          - $ref: '#/components/schemas/ParentProgressEnum'
-          - type: 'null'
-        goals_and_targets_adhered:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Goals And Targets Adhered
-        session_narrative:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Session Narrative
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      - expected_duration
-      - location
-      - setting
-      title: ParentSupervisionPatch
-    GoalGroupedTrialsResponse:
-      properties:
-        goal_label:
-          type: string
-          title: Goal Label
-        data_collection_method:
-          type: string
-          title: Data Collection Method
-        is_data_collection_method_percentage:
-          type: boolean
-          title: Is Data Collection Method Percentage
-        is_data_collection_method_rate:
-          type: boolean
-          title: Is Data Collection Method Rate
-        is_data_collection_method_duration:
-          type: boolean
-          title: Is Data Collection Method Duration
-        is_data_collection_method_instances:
-          type: boolean
-          title: Is Data Collection Method Instances
-        target_evaluations:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/app__api__schemas__parent_supervision__TrialResponse'
-            type: array
-          - items:
-              $ref: '#/components/schemas/RateTrialResponse'
-            type: array
-          - items:
-              $ref: '#/components/schemas/DurationTrialResponse'
-            type: array
-          title: Target Evaluations
-      type: object
-      required:
-      - goal_label
-      - data_collection_method
-      - is_data_collection_method_percentage
-      - is_data_collection_method_rate
-      - is_data_collection_method_duration
-      - is_data_collection_method_instances
-      - target_evaluations
-      title: GoalGroupedTrialsResponse
-    ParentSupervisionStop:
-      properties:
-        signature:
-          type: string
-          title: Signature
-        utc_offset_date_signed:
-          type: integer
-          title: Utc Offset Date Signed
-        date_signed:
-          type: string
-          format: date-time
-          title: Date Signed
-      type: object
-      required:
-      - signature
-      - utc_offset_date_signed
-      - date_signed
-      title: ParentSupervisionStop
+      title: HTTPValidationError
     ClientResponse:
       properties:
         first_name:
@@ -1716,23 +1578,61 @@ components:
       - id
       - clinical_status
       title: ClientResponse
-    ParentSupervisionGoalProgressPatch:
+    ParentSupervisionDownloadPdfResponse:
       properties:
-        goal_evaluation:
-          $ref: '#/components/schemas/GoalProgressEnum'
+        document_url:
+          type: string
+          title: Document Url
       type: object
       required:
-      - goal_evaluation
-      title: ParentSupervisionGoalProgressPatch
-    HTTPValidationError:
+      - document_url
+      title: ParentSupervisionDownloadPdfResponse
+    TrialCreate:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        target_id:
+          type: integer
+          title: Target Id
       type: object
-      title: HTTPValidationError
+      required:
+      - target_id
+      title: TrialCreate
+    LocationEnumV2:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: LocationEnumV2
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    GoalProgressEnum:
+      type: string
+      enum:
+      - NEEDS_IMPROVEMENT
+      - MEETS_EXPECTATIONS
+      - EXCEEDS_EXPECTATIONS
+      title: GoalProgressEnum
+    ParentProgressEnum:
+      type: string
+      enum:
+      - POSITIVE
+      - NEUTRAL
+      - NEGATIVE
+      title: ParentProgressEnum
     app__api__schemas__parent_supervision__RateEventResponse:
       properties:
         date_of_event:
@@ -1752,42 +1652,21 @@ components:
       - id
       - time_of_event
       title: RateEventResponse
-    ValidationError:
+    ParentSupervisionTrialsResponse:
       properties:
-        loc:
+        id:
+          type: integer
+          title: Id
+        target_progress:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/GoalGroupedTrialsResponse'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Target Progress
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    GoalProgressEnum:
-      type: string
-      enum:
-      - NEEDS_IMPROVEMENT
-      - MEETS_EXPECTATIONS
-      - EXCEEDS_EXPECTATIONS
-      title: GoalProgressEnum
+      - id
+      - target_progress
+      title: ParentSupervisionTrialsResponse
     ParentSupervisionListResponse:
       properties:
         id:
@@ -1835,46 +1714,167 @@ components:
       - location
       - is_billable
       title: ParentSupervisionListResponse
-    LocationEnumV2:
-      type: string
-      enum:
-      - Home
-      - Community settings
-      title: LocationEnumV2
-    RateTrialResponse:
+    ParentAndCaregiverListResponse:
       properties:
-        target_id:
-          type: integer
-          title: Target Id
+        role:
+          $ref: '#/components/schemas/ParentAndCaregiverRoleEnum'
+        name:
+          type: string
+          maxLength: 1000
+          minLength: 2
+          title: Name
         id:
           type: integer
           title: Id
-        target_label:
-          type: string
-          title: Target Label
-        rate_events:
-          items:
-            $ref: '#/components/schemas/app__api__schemas__parent_supervision__RateEventResponse'
-          type: array
-          title: Rate Events
-        num_rate_events:
-          type: integer
-          title: Num Rate Events
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{9}$
+          - type: 'null'
+          title: Phone
       type: object
       required:
-      - target_id
+      - role
+      - name
       - id
-      - target_label
-      - rate_events
-      - num_rate_events
-      title: RateTrialResponse
-    ParentAndCaregiverRoleEnum:
-      type: string
-      enum:
-      - parent
-      - caregiver
-      - parent and caregiver
-      title: ParentAndCaregiverRoleEnum
+      title: ParentAndCaregiverListResponse
+    ParentSupervisionResponseWithClaimHistory:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        expected_duration:
+          type: integer
+          maximum: 14400.0
+          minimum: 900.0
+          title: Expected Duration
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        status:
+          type: string
+          title: Status
+        version:
+          $ref: '#/components/schemas/VersionEnum'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        is_billable:
+          type: boolean
+          title: Is Billable
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - expected_duration
+      - client
+      - status
+      - version
+      - bcba
+      - location
+      - is_billable
+      - claim_history
+      title: ParentSupervisionResponseWithClaimHistory
+    ParentSupervisionPatch:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        expected_duration:
+          type: integer
+          maximum: 14400.0
+          minimum: 900.0
+          title: Expected Duration
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        parent_one_parent_and_caregiver_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Parent One Parent And Caregiver Id
+        parent_two_parent_and_caregiver_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Parent Two Parent And Caregiver Id
+        parent_progress:
+          anyOf:
+          - $ref: '#/components/schemas/ParentProgressEnum'
+          - type: 'null'
+        goals_and_targets_adhered:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Goals And Targets Adhered
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - expected_duration
+      - location
+      - setting
+      title: ParentSupervisionPatch
+    app__api__schemas__parent_supervision__DurationEventResponse:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+        id:
+          type: integer
+          title: Id
+        formatted_duration:
+          type: string
+          title: Formatted Duration
+      type: object
+      required:
+      - duration
+      - id
+      - formatted_duration
+      title: DurationEventResponse
   securitySchemes:
     HTTPBearer:
       type: http
