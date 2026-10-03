@@ -115,6 +115,17 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    FieldTemplateUpsertRequest:
+      properties:
+        content:
+          type: string
+          maxLength: 50000
+          minLength: 1
+          title: Content
+      type: object
+      required:
+      - content
+      title: FieldTemplateUpsertRequest
     HTTPValidationError:
       properties:
         detail:
@@ -124,6 +135,65 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    FieldTemplateResponse:
+      properties:
+        resource:
+          type: string
+          title: Resource
+        identifier:
+          type: string
+          title: Identifier
+        value:
+          type: string
+          title: Value
+        label:
+          type: string
+          title: Label
+        template:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Template
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+      type: object
+      required:
+      - resource
+      - identifier
+      - value
+      - label
+      title: FieldTemplateResponse
     FieldResponse:
       properties:
         resource:
@@ -176,76 +246,6 @@ components:
         otherwise they are ``None``. Shape is identical whether or not the list was
 
         filtered by resource, so the client can rely on it.'
-    FieldTemplateResponse:
-      properties:
-        resource:
-          type: string
-          title: Resource
-        identifier:
-          type: string
-          title: Identifier
-        value:
-          type: string
-          title: Value
-        label:
-          type: string
-          title: Label
-        template:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Template
-        date_row_created:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Row Created
-        date_row_updated:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Row Updated
-      type: object
-      required:
-      - resource
-      - identifier
-      - value
-      - label
-      title: FieldTemplateResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    FieldTemplateUpsertRequest:
-      properties:
-        content:
-          type: string
-          maxLength: 50000
-          minLength: 1
-          title: Content
-      type: object
-      required:
-      - content
-      title: FieldTemplateUpsertRequest
   securitySchemes:
     HTTPBearer:
       type: http

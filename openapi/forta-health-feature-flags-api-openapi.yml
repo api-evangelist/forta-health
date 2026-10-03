@@ -59,24 +59,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    FeatureFlagResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    FeatureFlagUpdate:
-      properties:
+        key:
+          type: string
+          title: Key
         enabled:
           type: boolean
           title: Enabled
       type: object
       required:
+      - key
       - enabled
-      title: FeatureFlagUpdate
+      title: FeatureFlagResponse
     ValidationError:
       properties:
         loc:
@@ -98,19 +93,24 @@ components:
       - msg
       - type
       title: ValidationError
-    FeatureFlagResponse:
+    HTTPValidationError:
       properties:
-        key:
-          type: string
-          title: Key
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    FeatureFlagUpdate:
+      properties:
         enabled:
           type: boolean
           title: Enabled
       type: object
       required:
-      - key
       - enabled
-      title: FeatureFlagResponse
+      title: FeatureFlagUpdate
   securitySchemes:
     HTTPBearer:
       type: http

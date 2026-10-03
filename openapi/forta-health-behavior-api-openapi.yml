@@ -246,15 +246,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    BehaviorCreate:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        label:
+          type: string
+          minLength: 2
+          title: Label
       type: object
-      title: HTTPValidationError
+      required:
+      - label
+      title: BehaviorCreate
     GoalNameCreate:
       properties:
         label:
@@ -270,16 +271,29 @@ components:
       - label
       - prefix
       title: GoalNameCreate
-    BehaviorCreate:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BehaviorResponse:
       properties:
         label:
           type: string
           minLength: 2
           title: Label
+        id:
+          type: integer
+          title: Id
       type: object
       required:
       - label
-      title: BehaviorCreate
+      - id
+      title: BehaviorResponse
     GoalNameResponse:
       properties:
         label:
@@ -310,20 +324,6 @@ components:
       - behavior
       - is_active
       title: GoalNameResponse
-    BehaviorResponse:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - id
-      title: BehaviorResponse
     ValidationError:
       properties:
         loc:

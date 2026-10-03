@@ -66,69 +66,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ServiceCodeResponse:
-      properties:
-        code:
-          type: string
-          title: Code
-        label:
-          type: string
-          title: Label
-        is_billable:
-          type: boolean
-          title: Is Billable
-        is_timesheet_usable:
-          type: boolean
-          title: Is Timesheet Usable
-        type:
-          $ref: '#/components/schemas/ServiceCodeTypeEnum'
-          default: CPT
-        hcpcs_code:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Hcpcs Code
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - code
-      - label
-      - is_billable
-      - is_timesheet_usable
-      - id
-      title: ServiceCodeResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     ServiceCodeBase:
       properties:
         code:
@@ -164,6 +101,69 @@ components:
       - CPT
       - HCPCS
       title: ServiceCodeTypeEnum
+    ServiceCodeResponse:
+      properties:
+        code:
+          type: string
+          title: Code
+        label:
+          type: string
+          title: Label
+        is_billable:
+          type: boolean
+          title: Is Billable
+        is_timesheet_usable:
+          type: boolean
+          title: Is Timesheet Usable
+        type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          default: CPT
+        hcpcs_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hcpcs Code
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - code
+      - label
+      - is_billable
+      - is_timesheet_usable
+      - id
+      title: ServiceCodeResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

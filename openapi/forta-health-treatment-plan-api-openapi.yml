@@ -4674,6 +4674,85 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    PercentageMethodMeasurementUnits:
+      properties:
+        total_attempts:
+          type: integer
+          title: Total Attempts
+      type: object
+      required:
+      - total_attempts
+      title: PercentageMethodMeasurementUnits
+    RateMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: RateMethodMasteryCriteriaResponse
+    TreatmentSymptomsEnum:
+      type: string
+      enum:
+      - Deficits in social-emotional reciprocity, ranging, for example, from abnormal social approach and failure of normal back- and- forth conversation; to reduced sharing of interests, emotions, or affect; to failure to initiate or respond to social interactions.
+      - Deficits in nonverbal communicative behaviors used for social interaction, ranging, for example, from poorly integrated verbal and nonverbal communication; to abnormalities in eye contact and body language or deficits in understanding and use of gestures; to a total lack of facial expressions and nonverbal communication.
+      - Deficits in developing, maintaining, and understanding relationships, ranging, for example, from difficulties adjusting behavior to suit various social contexts; to difficulties in sharing imaginative play or in making friends; to absences of interest in peers.
+      - Stereotyped or repetitive motor movements, use of objects, or speech (e.g., simple motor stereotypies, lining up toys or flipping objects, echolalia, idiosyncratic phrases).
+      - Insistence on sameness, inflexible adherence to routines, or ritualized patterns of verbal or nonverbal behavior (e.g. extreme distress at small changes, difficulties with transitions, rigid thinking patterns, greeting rituals, need to take same route or eat same food everyday).
+      - Highly restricted, fixated interests that are abnormal in intensity or focus (e.g., strong attachment to or preoccupation with unusual objects, excessively circumscribed or preservative interest).
+      - Hyper- or hyporeactivity to sensory input or unusual interest in sensory aspects of the environment (e.g., apparent indifference to pain/temperature, adverse response to specific sounds or textures, excessive smelling or touching of objects, visual fascination with lights or movement)
+      title: TreatmentSymptomsEnum
+    PriorAuthorizationResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        date_end:
+          type: string
+          format: date
+          title: Date End
+        days_until_expiry:
+          type: integer
+          title: Days Until Expiry
+        active_treatment_plan_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active Treatment Plan Id
+        payor_responsibility:
+          anyOf:
+          - $ref: '#/components/schemas/PayorResponsibilityEnum'
+          - type: 'null'
+        policy_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Policy Id
+      type: object
+      required:
+      - id
+      - client
+      - date_end
+      - days_until_expiry
+      title: PriorAuthorizationResponse
     EducationSettingEnum:
       type: string
       enum:
@@ -4682,30 +4761,671 @@ components:
       - Remote
       - Not specified
       title: EducationSettingEnum
-    DischargeReasonCreate:
-      properties:
+    ? Body_patch_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id___patch
+    : properties:
         label:
-          $ref: '#/components/schemas/DischargeReasonEnum'
+          type: string
+          title: Label
         description:
-          anyOf:
-          - type: string
-            maxLength: 10000
-            minLength: 2
-          - type: 'null'
+          type: string
+          maxLength: 25000
           title: Description
       type: object
       required:
       - label
-      title: DischargeReasonCreate
-    ClinicalStatusEnum:
+      - description
+      title: Body_patch_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id___patch
+    TreatmentRecommendationServiceResponse:
+      properties:
+        hours:
+          type: number
+          minimum: 0.0
+          title: Hours
+        frequency:
+          $ref: '#/components/schemas/RecommendedServiceFrequencyEnum'
+        service_code:
+          $ref: '#/components/schemas/AssociatedServiceCodeResponse'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - hours
+      - frequency
+      - service_code
+      - id
+      title: TreatmentRecommendationServiceResponse
+    RateMethodMasteryCriteria:
+      properties:
+        change_type:
+          $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+        desired_amount:
+          type: integer
+          title: Desired Amount
+        practice_duration_count:
+          type: integer
+          exclusiveMaximum: 1000.0
+          exclusiveMinimum: 0.0
+          title: Practice Duration Count
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: RateMethodMasteryCriteria
+    TreatmentPlanResponse:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        has_medication:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Medication
+        id:
+          type: integer
+          title: Id
+        status_id:
+          type: integer
+          title: Status Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        date_treatment_plan_started:
+          type: string
+          format: date-time
+          title: Date Treatment Plan Started
+        date_treatment_plan_ended:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Treatment Plan Ended
+        signature:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Signature
+        utc_offset_date_end:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset Date End
+        is_active:
+          type: boolean
+          title: Is Active
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        provider:
+          $ref: '#/components/schemas/ProviderResponseWithoutAddress'
+        resource_versions:
+          $ref: '#/components/schemas/TreatmentPlanResourceVersions'
+        parent_treatment_plan_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Parent Treatment Plan Id
+        bay:
+          $ref: '#/components/schemas/Bay'
+      type: object
+      required:
+      - client_id
+      - id
+      - status_id
+      - provider_id
+      - date_treatment_plan_started
+      - is_active
+      - client
+      - provider
+      - resource_versions
+      - bay
+      title: TreatmentPlanResponse
+    TreatmentPlanClientAndFamilyBackgroundVersionEnum:
       type: string
       enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
+      - v1
+      - v2
+      title: TreatmentPlanClientAndFamilyBackgroundVersionEnum
+    MasteryCriteriaChangeTypeEnum:
+      type: string
+      enum:
+      - decrease
+      - increase
+      title: MasteryCriteriaChangeTypeEnum
+    PercentageMethodV1MasteryCriteria:
+      properties:
+        desired_amount:
+          type: integer
+          title: Desired Amount
+        practice_duration_count:
+          type: integer
+          exclusiveMaximum: 1000.0
+          exclusiveMinimum: 0.0
+          title: Practice Duration Count
+        total_attempts:
+          type: integer
+          title: Total Attempts
+      type: object
+      required:
+      - desired_amount
+      - practice_duration_count
+      - total_attempts
+      title: PercentageMethodV1MasteryCriteria
+    DurationMethodMasteryCriteriaMeasurementModeEnum:
+      type: string
+      enum:
+      - average
+      - total
+      title: DurationMethodMasteryCriteriaMeasurementModeEnum
+    AssessmentBarrierEnum:
+      type: string
+      enum:
+      - Lack of or inability to collaborate
+      - Patient and family schedule/ availability
+      - Difficulty obtaining consistent services
+      - Frequent cancellations
+      - Staff barriers
+      - COVID
+      - Medical barriers
+      - Lack of support
+      - Lack of treatment fidelity or carry-out of the treatment plan
+      - Cost of materials or resources
+      - Other
+      title: AssessmentBarrierEnum
+    SkillAcquisitionGoalCreate:
+      properties:
+        goal_name_id:
+          type: integer
+          title: Goal Name Id
+        status_at_creation:
+          anyOf:
+          - $ref: '#/components/schemas/PresentStatusEnum'
+          - type: 'null'
+        date_introduced:
+          type: string
+          format: date
+          title: Date Introduced
+        current_level_at_creation:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current Level At Creation
+        baseline_at_creation:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Baseline At Creation
+        expected_mastery_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Expected Mastery Date
+        data_collection_method:
+          $ref: '#/components/schemas/GoalDataCollectionMethodEnum'
+        goal_type:
+          type: string
+          const: skill_acquisition
+          title: Goal Type
+        mastery_criteria:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
+          - $ref: '#/components/schemas/SkillAcquisitionGoalMasteryCriteriaV2'
+          title: Mastery Criteria
+        measurement_units:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMeasurementUnits'
+          - $ref: '#/components/schemas/PercentageMethodMeasurementUnits'
+          - $ref: '#/components/schemas/DurationMethodMeasurementUnits'
+          - type: 'null'
+          title: Measurement Units
+        description:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Description
+      type: object
+      required:
+      - goal_name_id
+      - date_introduced
+      - data_collection_method
+      - goal_type
+      - mastery_criteria
+      - measurement_units
+      - description
+      title: SkillAcquisitionGoalCreate
+    HypothesizedFunctionCreate:
+      properties:
+        date_selected:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Selected
+        is_sensory:
+          type: boolean
+          title: Is Sensory
+        is_escape_or_avoidance:
+          type: boolean
+          title: Is Escape Or Avoidance
+        is_attention:
+          type: boolean
+          title: Is Attention
+        is_tangible:
+          type: boolean
+          title: Is Tangible
+      type: object
+      required:
+      - is_sensory
+      - is_escape_or_avoidance
+      - is_attention
+      - is_tangible
+      title: HypothesizedFunctionCreate
+    SiblingResponse:
+      properties:
+        age:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Age
+        name:
+          type: string
+          maxLength: 1000
+          minLength: 2
+          title: Name
+        diagnosis:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Diagnosis
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - age
+      - name
+      - id
+      title: SiblingResponse
+    DischargeReasonEnum:
+      type: string
+      enum:
+      - The client has mastered all treatment goals, and no new goals are identified
+      - All maladaptive behavior goals have been mastered and generalized
+      - No new behaviors have emerged
+      - Client’s Vineland-3 scores have reached a level in accordance with similar-aged peers
+      - Client’s AFLS scores have reached a level in accordance with similar-aged peers
+      - Client’s parents/caregivers report confidence in continuing ABA intervention techniques
+      - Client no longer able to participate due to medical reasons
+      - Parents prefer a new provider
+      - Client no longer able to participate due to personal changes
+      - No progress has been made for 3 months
+      - Goals are not maintaining or generalizing
+      - Other
+      title: DischargeReasonEnum
+    ClientAndFamilyBackgroundCreate:
+      properties:
+        other_individuals_in_home:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Other Individuals In Home
+        member_language:
+          anyOf:
+          - type: string
+            minLength: 5
+          - type: 'null'
+          title: Member Language
+        family_medical_history_maternal:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Family Medical History Maternal
+        family_medical_history_paternal:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Family Medical History Paternal
+        community_involvement_religious_affiliations:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Community Involvement Religious Affiliations
+      type: object
+      title: ClientAndFamilyBackgroundCreate
+    DetailedTargetResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        order:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Order
+        instruction:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Instruction
+        description:
+          anyOf:
+          - type: string
+            maxLength: 2000
+            minLength: 2
+          - type: 'null'
+          title: Description
+        stage:
+          anyOf:
+          - $ref: '#/components/schemas/TargetStageEnum'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+        reason:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Reason
+        stage_change_logs:
+          items:
+            $ref: '#/components/schemas/TargetStageChangeLogResponse'
+          type: array
+          title: Stage Change Logs
+        is_goal_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Goal Active
+        is_goal_linkable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Goal Linkable
+        last_activation_log:
+          anyOf:
+          - $ref: '#/components/schemas/ActivationLogResponse'
+          - type: 'null'
+        is_event_duration_required:
+          type: boolean
+          title: Is Event Duration Required
+        event_duration_measurement_unit:
+          anyOf:
+          - $ref: '#/components/schemas/EventMeasurementUnitEnum'
+          - type: 'null'
+      type: object
+      required:
+      - label
+      - id
+      - stage_change_logs
+      - is_event_duration_required
+      title: DetailedTargetResponse
+    ParentAndCaregiverCreate:
+      properties:
+        role:
+          $ref: '#/components/schemas/ParentAndCaregiverRoleEnum'
+        name:
+          type: string
+          maxLength: 1000
+          minLength: 2
+          title: Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{9}$
+          - type: 'null'
+          title: Phone
+        parent_marital_status:
+          anyOf:
+          - $ref: '#/components/schemas/ParentMaritalStatusEnum'
+          - type: 'null'
+        parent_mental_health_history:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Mental Health History
+        job:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Job
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+            minLength: 5
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+      type: object
+      required:
+      - role
+      - name
+      title: ParentAndCaregiverCreate
+    MedicalHistoryCreate:
+      properties:
+        allergies:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Allergies
+        special_diets:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Special Diets
+        autism_severity_level:
+          $ref: '#/components/schemas/DiagnosisSeverityLevelEnum'
+        provider_name:
+          type: string
+          minLength: 2
+          title: Provider Name
+        year_autism_diagnosis_made:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Year Autism Diagnosis Made
+        city_autism_diagnosis_made:
+          type: string
+          minLength: 2
+          title: City Autism Diagnosis Made
+        state_autism_diagnosis_made:
+          $ref: '#/components/schemas/StateEnum'
+        trauma_history:
+          anyOf:
+          - type: string
+            minLength: 4
+          - type: 'null'
+          title: Trauma History
+        pregnancy_delivery_history:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Pregnancy Delivery History
+        hearing_vision_screening:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Hearing Vision Screening
+        early_childhood_development:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Early Childhood Development
+        early_childhood_intervention:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Early Childhood Intervention
+        surgical_hospitalization_history:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Surgical Hospitalization History
+      type: object
+      required:
+      - autism_severity_level
+      - provider_name
+      - year_autism_diagnosis_made
+      - city_autism_diagnosis_made
+      - state_autism_diagnosis_made
+      title: MedicalHistoryCreate
+    ReferralHistoryAssessmentToolResponse:
+      properties:
+        tool_name:
+          type: string
+          minLength: 2
+          title: Tool Name
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - tool_name
+      - id
+      title: ReferralHistoryAssessmentToolResponse
+    TherapyResponseEnum:
+      type: string
+      enum:
+      - Positive improvement
+      - No progress
+      - Unfavorable outcome
+      title: TherapyResponseEnum
+    DurationMethodMasteryCriteria:
+      properties:
+        change_type:
+          $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+        measurement_mode:
+          $ref: '#/components/schemas/DurationMethodMasteryCriteriaMeasurementModeEnum'
+        desired_amount:
+          type: integer
+          title: Desired Amount
+        practice_duration_count:
+          type: integer
+          exclusiveMaximum: 1000.0
+          exclusiveMinimum: 0.0
+          title: Practice Duration Count
+      type: object
+      required:
+      - change_type
+      - measurement_mode
+      - desired_amount
+      - practice_duration_count
+      title: DurationMethodMasteryCriteria
+    TherapyFrequencyEnum:
+      type: string
+      enum:
+      - daily
+      - weekly
+      - semi-weekly
+      - monthly
+      - semi-monthly
+      title: TherapyFrequencyEnum
+    GoalNameResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        prefix:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prefix
+        id:
+          type: integer
+          title: Id
+        behavior_id:
+          type: integer
+          title: Behavior Id
+        behavior:
+          $ref: '#/components/schemas/BehaviorResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - label
+      - id
+      - behavior_id
+      - behavior
+      - is_active
+      title: GoalNameResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MeasurementFrequency:
+      type: string
+      enum:
+      - Daily
+      - Twice a week
+      - Once a week
+      - Bi monthly
+      - Monthly
+      title: MeasurementFrequency
     TherapyHistoryServiceCreate:
       properties:
         is_parents_authorization_provided:
@@ -4757,33 +5477,73 @@ components:
       required:
       - is_parents_authorization_provided
       title: TherapyHistoryServiceCreate
-    TreatmentPlanTargetVersionEnum:
-      type: string
-      enum:
-      - v1
-      - v2
-      title: TreatmentPlanTargetVersionEnum
-    ValidationError:
+    TreatmentRecommendationServicePatch:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+        hours:
+          type: number
+          minimum: 0.0
+          title: Hours
+        frequency:
+          $ref: '#/components/schemas/RecommendedServiceFrequencyEnum'
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - hours
+      - frequency
+      title: TreatmentRecommendationServicePatch
+    DurationMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        measurement_mode:
+          anyOf:
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaMeasurementModeEnum'
+          - type: 'null'
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - measurement_mode
+      - practice_duration_count
+      title: DurationMethodMasteryCriteriaResponse
+    BulkTargetStageChange:
+      properties:
+        date_stage_changed:
+          type: string
+          format: date
+          title: Date Stage Changed
+        stage:
+          $ref: '#/components/schemas/TargetStageEnum'
+        reason_for_change:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason For Change
+        target_ids:
+          items:
+            type: integer
+          type: array
+          uniqueItems: true
+          title: Target Ids
+      type: object
+      required:
+      - date_stage_changed
+      - stage
+      - target_ids
+      title: BulkTargetStageChange
     MedicalHistoryResponse:
       properties:
         allergies:
@@ -4869,229 +5629,83 @@ components:
       - state_autism_diagnosis_made
       - id
       title: MedicalHistoryResponse
-    TreatmentPlanPatch:
+    AssessmentToolCreateResponse:
       properties:
-        client_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Client Id
-        has_medication:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Medication
-      type: object
-      title: TreatmentPlanPatch
-    HypothesizedFunctionResponse:
-      properties:
-        date_selected:
+        tool_name:
+          $ref: '#/components/schemas/AssessmentToolTypeEnum'
+        reason_for_use_age_group:
           type: string
-          format: date
-          title: Date Selected
-        is_sensory:
-          type: boolean
-          title: Is Sensory
-        is_escape_or_avoidance:
-          type: boolean
-          title: Is Escape Or Avoidance
-        is_attention:
-          type: boolean
-          title: Is Attention
-        is_tangible:
-          type: boolean
-          title: Is Tangible
-        id:
-          type: integer
-          title: Id
-        date_edits_blocked:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Edits Blocked
-      type: object
-      required:
-      - date_selected
-      - is_sensory
-      - is_escape_or_avoidance
-      - is_attention
-      - is_tangible
-      - id
-      title: HypothesizedFunctionResponse
-    UpdateTargetStageChange:
-      properties:
-        date_stage_changed:
-          type: string
-          format: date
-          title: Date Stage Changed
-      type: object
-      required:
-      - date_stage_changed
-      title: UpdateTargetStageChange
-    TherapyHistoryServiceResponse:
-      properties:
-        is_parents_authorization_provided:
-          type: boolean
-          title: Is Parents Authorization Provided
-        provider_name:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Provider Name
-        service_type:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Service Type
-        hours:
-          anyOf:
-          - type: number
-            minimum: 0.0
-          - type: 'null'
-          title: Hours
-        frequency:
-          anyOf:
-          - $ref: '#/components/schemas/TherapyFrequencyEnum'
-          - type: 'null'
-        response_to_treatment:
-          anyOf:
-          - $ref: '#/components/schemas/TherapyResponseEnum'
-          - type: 'null'
-        is_record_shared:
-          anyOf:
-          - $ref: '#/components/schemas/TherapyRecordSharedEnum'
-          - type: 'null'
-        date_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - is_parents_authorization_provided
-      - id
-      title: TherapyHistoryServiceResponse
-    SkillAcquisitionGoalMasteryCriteriaV2Response:
-      properties:
-        acquisition:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
-          title: Acquisition
-        generalization:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
-          title: Generalization
-        maintenance:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
-          title: Maintenance
-        maintenance_frequency:
-          anyOf:
-          - $ref: '#/components/schemas/MeasurementFrequency'
-          - type: 'null'
-      type: object
-      required:
-      - acquisition
-      - generalization
-      - maintenance
-      title: SkillAcquisitionGoalMasteryCriteriaV2Response
-    TreatmentPlanActivationLogUpdate:
-      properties:
-        activation_log_id:
-          type: integer
-          title: Activation Log Id
-        date_changed:
-          type: string
-          format: date-time
-          title: Date Changed
-      type: object
-      required:
-      - activation_log_id
-      - date_changed
-      title: TreatmentPlanActivationLogUpdate
-    TargetCreate:
-      properties:
-        label:
-          type: string
-          maxLength: 50
+          maxLength: 10000
           minLength: 2
-          title: Label
-        order:
-          type: number
-          title: Order
-        instruction:
+          title: Reason For Use Age Group
+        reason_for_use_symptoms:
           type: string
-          maxLength: 2000
+          maxLength: 10000
           minLength: 2
-          title: Instruction
+          title: Reason For Use Symptoms
+        score:
+          type: string
+          title: Score
         description:
+          type: string
+          title: Description
+        date_tool_used:
           anyOf:
           - type: string
-            maxLength: 2000
-            minLength: 2
+            format: date
           - type: 'null'
-          title: Description
-        stage:
-          anyOf:
-          - $ref: '#/components/schemas/TargetStageEnum'
-          - type: 'null'
-      type: object
-      required:
-      - label
-      - order
-      - instruction
-      title: TargetCreate
-    TreatmentPlanPDFUrl:
-      properties:
-        document_url:
-          type: string
-          title: Document Url
-      type: object
-      required:
-      - document_url
-      title: TreatmentPlanPDFUrl
-    GoalSimpleResponse:
-      properties:
+          title: Date Tool Used
         id:
           type: integer
           title: Id
-        goal_name:
-          $ref: '#/components/schemas/GoalNameResponse'
-        is_active:
-          type: boolean
-          title: Is Active
-        data_collection_method:
-          type: string
-          title: Data Collection Method
       type: object
       required:
+      - tool_name
+      - reason_for_use_age_group
+      - reason_for_use_symptoms
+      - score
+      - description
       - id
-      - goal_name
-      - is_active
-      - data_collection_method
-      title: GoalSimpleResponse
+      title: AssessmentToolCreateResponse
+    TreatmentPlanEducationBackgroundCreate:
+      properties:
+        is_iep:
+          type: boolean
+          title: Is Iep
+        is_504:
+          type: boolean
+          title: Is 504
+        education_setting:
+          $ref: '#/components/schemas/EducationSettingEnum'
+        education_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Education Description
+        focus_area_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Focus Area Description
+        hours_per_week:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hours Per Week
+        education_support:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Education Support
+        education_evaluation:
+          $ref: '#/components/schemas/EducationEvaluationEnum'
+      type: object
+      required:
+      - is_iep
+      - is_504
+      - education_setting
+      - education_evaluation
+      title: TreatmentPlanEducationBackgroundCreate
     ReferralHistoryResponse:
       properties:
         referring_provider_name:
@@ -5124,18 +5738,93 @@ components:
       - reason_for_referral
       - id
       title: ReferralHistoryResponse
-    TreatmentSymptomsEnum:
+    TherapyRecordSharedEnum:
       type: string
       enum:
-      - Deficits in social-emotional reciprocity, ranging, for example, from abnormal social approach and failure of normal back- and- forth conversation; to reduced sharing of interests, emotions, or affect; to failure to initiate or respond to social interactions.
-      - Deficits in nonverbal communicative behaviors used for social interaction, ranging, for example, from poorly integrated verbal and nonverbal communication; to abnormalities in eye contact and body language or deficits in understanding and use of gestures; to a total lack of facial expressions and nonverbal communication.
-      - Deficits in developing, maintaining, and understanding relationships, ranging, for example, from difficulties adjusting behavior to suit various social contexts; to difficulties in sharing imaginative play or in making friends; to absences of interest in peers.
-      - Stereotyped or repetitive motor movements, use of objects, or speech (e.g., simple motor stereotypies, lining up toys or flipping objects, echolalia, idiosyncratic phrases).
-      - Insistence on sameness, inflexible adherence to routines, or ritualized patterns of verbal or nonverbal behavior (e.g. extreme distress at small changes, difficulties with transitions, rigid thinking patterns, greeting rituals, need to take same route or eat same food everyday).
-      - Highly restricted, fixated interests that are abnormal in intensity or focus (e.g., strong attachment to or preoccupation with unusual objects, excessively circumscribed or preservative interest).
-      - Hyper- or hyporeactivity to sensory input or unusual interest in sensory aspects of the environment (e.g., apparent indifference to pain/temperature, adverse response to specific sounds or textures, excessive smelling or touching of objects, visual fascination with lights or movement)
-      title: TreatmentSymptomsEnum
-    MedicalHistoryDiagnosisResponse:
+      - Shared
+      - Will be shared
+      title: TherapyRecordSharedEnum
+    ClientStrengthsRequest:
+      properties:
+        client_strengths:
+          items:
+            type: string
+            minLength: 1
+          type: array
+          title: Client Strengths
+      type: object
+      required:
+      - client_strengths
+      title: ClientStrengthsRequest
+    ProviderResponseWithoutAddress:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderResponseWithoutAddress
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
+    AssessmentBarrierResponse:
+      properties:
+        label:
+          $ref: '#/components/schemas/AssessmentBarrierEnum'
+        description:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Description
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: AssessmentBarrierResponse
+    UpdateTargetStageChange:
+      properties:
+        date_stage_changed:
+          type: string
+          format: date
+          title: Date Stage Changed
+      type: object
+      required:
+      - date_stage_changed
+      title: UpdateTargetStageChange
+    MedicalHistoryDiagnosisCreate:
       properties:
         diagnosis_name:
           type: string
@@ -5154,9 +5843,6 @@ components:
           title: City Diagnosis Made
         state_diagnosis_made:
           $ref: '#/components/schemas/StateEnum'
-        id:
-          type: integer
-          title: Id
       type: object
       required:
       - diagnosis_name
@@ -5164,169 +5850,452 @@ components:
       - year_diagnosis_made
       - city_diagnosis_made
       - state_diagnosis_made
-      - id
-      title: MedicalHistoryDiagnosisResponse
-    TreatmentPlanResponse:
+      title: MedicalHistoryDiagnosisCreate
+    DischargeResponse:
       properties:
-        client_id:
-          type: integer
-          title: Client Id
-        has_medication:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Medication
+        mastery_of_goals:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Mastery Of Goals
+        readiness_to_move_on_from_current_service:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Readiness To Move On From Current Service
+        step_down_in_program_hours:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Step Down In Program Hours
+        communication_amongst_providers:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Communication Amongst Providers
         id:
           type: integer
           title: Id
-        status_id:
-          type: integer
-          title: Status Id
-        provider_id:
-          type: integer
-          title: Provider Id
-        date_treatment_plan_started:
+      type: object
+      required:
+      - mastery_of_goals
+      - readiness_to_move_on_from_current_service
+      - step_down_in_program_hours
+      - communication_amongst_providers
+      - id
+      title: DischargeResponse
+    MedicationResponse:
+      properties:
+        medication_name:
+          type: string
+          title: Medication Name
+        dosage:
+          type: string
+          title: Dosage
+        physician:
+          type: string
+          title: Physician
+        reason:
+          type: string
+          title: Reason
+        date_start:
           type: string
           format: date-time
-          title: Date Treatment Plan Started
-        date_treatment_plan_ended:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Treatment Plan Ended
-        signature:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Signature
-        utc_offset_date_end:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Utc Offset Date End
-        is_active:
-          type: boolean
-          title: Is Active
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        provider:
-          $ref: '#/components/schemas/ProviderResponseWithoutAddress'
-        resource_versions:
-          $ref: '#/components/schemas/TreatmentPlanResourceVersions'
-        parent_treatment_plan_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Parent Treatment Plan Id
-        bay:
-          $ref: '#/components/schemas/Bay'
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+          default: 0
+        treatment_plan_id:
+          type: integer
+          title: Treatment Plan Id
+        id:
+          type: integer
+          title: Id
       type: object
       required:
-      - client_id
+      - medication_name
+      - dosage
+      - physician
+      - reason
+      - date_start
+      - treatment_plan_id
       - id
-      - status_id
-      - provider_id
-      - date_treatment_plan_started
-      - is_active
-      - client
-      - provider
-      - resource_versions
-      - bay
-      title: TreatmentPlanResponse
-    TreatmentPlanCreate:
+      title: MedicationResponse
+    GoalResourceVersions:
       properties:
-        client_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Client Id
-        has_medication:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Medication
-        clone_source_tp_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Clone Source Tp Id
-        bay:
-          $ref: '#/components/schemas/Bay'
+        baseline_measurement:
+          type: string
+          title: Baseline Measurement
       type: object
       required:
-      - bay
-      title: TreatmentPlanCreate
-    AssessmentBarrierCreate:
+      - baseline_measurement
+      title: GoalResourceVersions
+    TreatmentPlanActivationLogResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        previous_value:
+          type: boolean
+          title: Previous Value
+        new_value:
+          type: boolean
+          title: New Value
+        date_changed:
+          type: string
+          format: date-time
+          title: Date Changed
+      type: object
+      required:
+      - id
+      - previous_value
+      - new_value
+      - date_changed
+      title: TreatmentPlanActivationLogResponse
+    RecommendedServiceFrequencyEnum:
+      type: string
+      enum:
+      - weekly
+      - bi-weekly
+      - monthly
+      - 6 month authorization period
+      title: RecommendedServiceFrequencyEnum
+    RateMethodMeasurementUnits:
+      properties:
+        interval_size:
+          type: integer
+          title: Interval Size
+        interval_unit:
+          $ref: '#/components/schemas/RateMethodMeasurementUnitsIntervalUnitEnum'
+      type: object
+      required:
+      - interval_size
+      - interval_unit
+      title: RateMethodMeasurementUnits
+    InstancesMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+        practice_duration_unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Practice Duration Unit
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: InstancesMethodMasteryCriteriaResponse
+    TreatmentPlanMedicalHistoryVersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: TreatmentPlanMedicalHistoryVersionEnum
+    StateEnum:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - PR
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: StateEnum
+    DischargeReasonCreate:
       properties:
         label:
-          $ref: '#/components/schemas/AssessmentBarrierEnum'
+          $ref: '#/components/schemas/DischargeReasonEnum'
         description:
           anyOf:
           - type: string
+            maxLength: 10000
             minLength: 2
           - type: 'null'
           title: Description
       type: object
       required:
       - label
-      title: AssessmentBarrierCreate
-    TreatmentPlanCrisisPlanResponse:
+      title: DischargeReasonCreate
+    AssessmentResponse:
       properties:
-        crisis_description:
+        date_of_assessment:
+          type: string
+          format: date
+          title: Date Of Assessment
+        date_of_reassessment:
           anyOf:
           - type: string
+            format: date
           - type: 'null'
-          title: Crisis Description
-        precursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Precursor
-        consequence_strategy:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Consequence Strategy
-        antecedent_intervention:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Antecedent Intervention
-        behavior_intervention_plan:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Behavior Intervention Plan
-        follow_up_step:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Follow Up Step
-        is_needed:
+          title: Date Of Reassessment
+        clinical_interview_or_summary:
+          type: string
+          maxLength: 100000
+          minLength: 60
+          title: Clinical Interview Or Summary
+        is_diagnostic_reports_reviewed:
           type: boolean
-          title: Is Needed
+          title: Is Diagnostic Reports Reviewed
+        is_previous_assessment_reports_reviewed:
+          type: boolean
+          title: Is Previous Assessment Reports Reviewed
+        is_medical_reports_reviewed:
+          type: boolean
+          title: Is Medical Reports Reviewed
+        is_reports_by_other_providers_reviewed:
+          type: boolean
+          title: Is Reports By Other Providers Reviewed
+        is_school_reports_reviewed:
+          type: boolean
+          title: Is School Reports Reviewed
+        is_previous_intervention_plans_and_treatment_plans_reviewed:
+          type: boolean
+          title: Is Previous Intervention Plans And Treatment Plans Reviewed
         id:
           type: integer
           title: Id
+        summary_observations_during_assessment:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary Observations During Assessment
+        summary_assessment_result:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary Assessment Result
+        summary_priorities_based_on_assessment:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary Priorities Based On Assessment
+      additionalProperties: true
       type: object
       required:
-      - is_needed
+      - date_of_assessment
+      - clinical_interview_or_summary
+      - is_diagnostic_reports_reviewed
+      - is_previous_assessment_reports_reviewed
+      - is_medical_reports_reviewed
+      - is_reports_by_other_providers_reviewed
+      - is_school_reports_reviewed
+      - is_previous_intervention_plans_and_treatment_plans_reviewed
       - id
-      title: TreatmentPlanCrisisPlanResponse
-    EducationEvaluationEnum:
+      title: AssessmentResponse
+    TreatmentPlanResourceVersions:
+      properties:
+        goal:
+          anyOf:
+          - $ref: '#/components/schemas/TreatmentPlanGoalVersionEnum'
+          - type: 'null'
+        target:
+          anyOf:
+          - $ref: '#/components/schemas/TreatmentPlanTargetVersionEnum'
+          - type: 'null'
+        medical_history:
+          anyOf:
+          - $ref: '#/components/schemas/TreatmentPlanMedicalHistoryVersionEnum'
+          - type: 'null'
+        client_and_family_background:
+          anyOf:
+          - $ref: '#/components/schemas/TreatmentPlanClientAndFamilyBackgroundVersionEnum'
+          - type: 'null'
+        assessment:
+          anyOf:
+          - $ref: '#/components/schemas/TreatmentPlanAssessmentVersionEnum'
+          - type: 'null'
+      type: object
+      title: TreatmentPlanResourceVersions
+    TargetCreate:
+      properties:
+        label:
+          type: string
+          maxLength: 50
+          minLength: 2
+          title: Label
+        order:
+          type: number
+          title: Order
+        instruction:
+          type: string
+          maxLength: 2000
+          minLength: 2
+          title: Instruction
+        description:
+          anyOf:
+          - type: string
+            maxLength: 2000
+            minLength: 2
+          - type: 'null'
+          title: Description
+        stage:
+          anyOf:
+          - $ref: '#/components/schemas/TargetStageEnum'
+          - type: 'null'
+      type: object
+      required:
+      - label
+      - order
+      - instruction
+      title: TargetCreate
+    TreatmentPlanStopResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status_id:
+          type: integer
+          title: Status Id
+        resource_versions:
+          $ref: '#/components/schemas/TreatmentPlanResourceVersions'
+      type: object
+      required:
+      - id
+      - status_id
+      - resource_versions
+      title: TreatmentPlanStopResponse
+    PercentageMethodV2MasteryCriteria:
+      properties:
+        desired_amount:
+          type: integer
+          title: Desired Amount
+        practice_duration_count:
+          type: integer
+          exclusiveMaximum: 1000.0
+          exclusiveMinimum: 0.0
+          title: Practice Duration Count
+      type: object
+      required:
+      - desired_amount
+      - practice_duration_count
+      title: PercentageMethodV2MasteryCriteria
+    TargetStageChangeLogResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        new_stage:
+          $ref: '#/components/schemas/TargetStageEnum'
+        old_stage:
+          anyOf:
+          - $ref: '#/components/schemas/TargetStageEnum'
+          - type: 'null'
+        date_stage_changed:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Stage Changed
+        reason_for_change:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason For Change
+        order:
+          type: number
+          title: Order
+        date_edits_blocked:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Edits Blocked
+      type: object
+      required:
+      - id
+      - new_stage
+      - order
+      title: TargetStageChangeLogResponse
+    DiagnosisSeverityLevelEnum:
       type: string
       enum:
-      - Request was made during initial assessment to obtain copies of any academic evaluations and/or assessments previously conducted.
-      - Parent/Guardian provided academic evaluations and/or assessments for intake which were reviewed and considered.
-      - No academic evaluations and/or assessments were completed.
-      title: EducationEvaluationEnum
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
+      - Level 1
+      - Level 2
+      - Level 3
+      - Unknown
+      title: DiagnosisSeverityLevelEnum
+    GoalSimpleResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        goal_name:
+          $ref: '#/components/schemas/GoalNameResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+      type: object
+      required:
+      - id
+      - goal_name
+      - is_active
+      - data_collection_method
+      title: GoalSimpleResponse
     TreatmentPlanEducationBackgroundResponse:
       properties:
         is_iep:
@@ -5378,6 +6347,869 @@ components:
       - education_evaluation
       - id
       title: TreatmentPlanEducationBackgroundResponse
+    AssessmentCreate:
+      properties:
+        date_of_assessment:
+          type: string
+          format: date
+          title: Date Of Assessment
+        date_of_reassessment:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Of Reassessment
+        clinical_interview_or_summary:
+          type: string
+          maxLength: 100000
+          minLength: 60
+          title: Clinical Interview Or Summary
+        is_diagnostic_reports_reviewed:
+          type: boolean
+          title: Is Diagnostic Reports Reviewed
+        is_previous_assessment_reports_reviewed:
+          type: boolean
+          title: Is Previous Assessment Reports Reviewed
+        is_medical_reports_reviewed:
+          type: boolean
+          title: Is Medical Reports Reviewed
+        is_reports_by_other_providers_reviewed:
+          type: boolean
+          title: Is Reports By Other Providers Reviewed
+        is_school_reports_reviewed:
+          type: boolean
+          title: Is School Reports Reviewed
+        is_previous_intervention_plans_and_treatment_plans_reviewed:
+          type: boolean
+          title: Is Previous Intervention Plans And Treatment Plans Reviewed
+      type: object
+      required:
+      - date_of_assessment
+      - clinical_interview_or_summary
+      - is_diagnostic_reports_reviewed
+      - is_previous_assessment_reports_reviewed
+      - is_medical_reports_reviewed
+      - is_reports_by_other_providers_reviewed
+      - is_school_reports_reviewed
+      - is_previous_intervention_plans_and_treatment_plans_reviewed
+      title: AssessmentCreate
+    TreatmentPlanCreate:
+      properties:
+        client_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+        has_medication:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Medication
+        clone_source_tp_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Clone Source Tp Id
+        bay:
+          $ref: '#/components/schemas/Bay'
+      type: object
+      required:
+      - bay
+      title: TreatmentPlanCreate
+    TreatmentPlanAssignmentCreate:
+      properties:
+        provider_id:
+          type: integer
+          title: Provider Id
+        utc_offset_date_assigned:
+          type: integer
+          title: Utc Offset Date Assigned
+      type: object
+      required:
+      - provider_id
+      - utc_offset_date_assigned
+      title: TreatmentPlanAssignmentCreate
+    SiblingCreate:
+      properties:
+        age:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Age
+        name:
+          type: string
+          maxLength: 1000
+          minLength: 2
+          title: Name
+        diagnosis:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Diagnosis
+      type: object
+      required:
+      - age
+      - name
+      title: SiblingCreate
+    TherapyHistoryCreate:
+      properties:
+        has_service_history:
+          type: boolean
+          title: Has Service History
+      type: object
+      required:
+      - has_service_history
+      title: TherapyHistoryCreate
+    TreatmentRecommendationCreate:
+      properties:
+        explanation:
+          type: string
+          minLength: 60
+          title: Explanation
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        duration:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Duration
+        considered_factors:
+          anyOf:
+          - type: string
+            minLength: 60
+          - type: 'null'
+          title: Considered Factors
+        provision_description:
+          anyOf:
+          - type: string
+            minLength: 60
+          - type: 'null'
+          title: Provision Description
+      type: object
+      required:
+      - explanation
+      - date_start
+      - duration
+      title: TreatmentRecommendationCreate
+    DischargeReasonResponse:
+      properties:
+        label:
+          $ref: '#/components/schemas/DischargeReasonEnum'
+        description:
+          anyOf:
+          - type: string
+            maxLength: 10000
+            minLength: 2
+          - type: 'null'
+          title: Description
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: DischargeReasonResponse
+    SkillAcquisitionGoalMasteryCriteriaV2:
+      properties:
+        acquisition:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
+          title: Acquisition
+        generalization:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
+          title: Generalization
+        maintenance:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
+          title: Maintenance
+        maintenance_frequency:
+          anyOf:
+          - $ref: '#/components/schemas/MeasurementFrequency'
+          - type: 'null'
+      type: object
+      required:
+      - acquisition
+      - generalization
+      - maintenance
+      title: SkillAcquisitionGoalMasteryCriteriaV2
+    AssessmentToolCreate:
+      properties:
+        tool_name:
+          $ref: '#/components/schemas/AssessmentToolTypeEnum'
+        reason_for_use_age_group:
+          type: string
+          maxLength: 10000
+          minLength: 2
+          title: Reason For Use Age Group
+        reason_for_use_symptoms:
+          type: string
+          maxLength: 10000
+          minLength: 2
+          title: Reason For Use Symptoms
+        score:
+          type: string
+          title: Score
+        description:
+          type: string
+          title: Description
+        date_tool_used:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Tool Used
+      type: object
+      required:
+      - tool_name
+      - reason_for_use_age_group
+      - reason_for_use_symptoms
+      - score
+      - description
+      title: AssessmentToolCreate
+    ? Body_create_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__post
+    : properties:
+        file:
+          type: string
+          format: binary
+          title: File
+        label:
+          type: string
+          title: Label
+        description:
+          type: string
+          maxLength: 25000
+          title: Description
+      type: object
+      required:
+      - file
+      - label
+      - description
+      title: Body_create_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__post
+    AssessmentToolDocumentResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        description:
+          type: string
+          maxLength: 25000
+          minLength: 2
+          title: Description
+        label:
+          type: string
+          maxLength: 10000
+          minLength: 2
+          title: Label
+        document_url:
+          type: string
+          title: Document Url
+        tool_id:
+          type: integer
+          title: Tool Id
+        file_type:
+          type: string
+          title: File Type
+      type: object
+      required:
+      - id
+      - description
+      - label
+      - document_url
+      - tool_id
+      - file_type
+      title: AssessmentToolDocumentResponse
+    AssociatedServiceCodeResponse:
+      properties:
+        code:
+          type: string
+          title: Code
+        label:
+          type: string
+          title: Label
+        is_billable:
+          type: boolean
+          title: Is Billable
+        is_timesheet_usable:
+          type: boolean
+          title: Is Timesheet Usable
+        type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          default: CPT
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - code
+      - label
+      - is_billable
+      - is_timesheet_usable
+      - id
+      title: AssociatedServiceCodeResponse
+    EducationEvaluationEnum:
+      type: string
+      enum:
+      - Request was made during initial assessment to obtain copies of any academic evaluations and/or assessments previously conducted.
+      - Parent/Guardian provided academic evaluations and/or assessments for intake which were reviewed and considered.
+      - No academic evaluations and/or assessments were completed.
+      title: EducationEvaluationEnum
+    PayorResponsibilityEnum:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      - TERTIARY
+      title: PayorResponsibilityEnum
+    TreatmentRecommendationResponse:
+      properties:
+        explanation:
+          type: string
+          minLength: 60
+          title: Explanation
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        duration:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Duration
+        considered_factors:
+          anyOf:
+          - type: string
+            minLength: 60
+          - type: 'null'
+          title: Considered Factors
+        provision_description:
+          anyOf:
+          - type: string
+            minLength: 60
+          - type: 'null'
+          title: Provision Description
+        id:
+          type: integer
+          title: Id
+        services:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/TreatmentRecommendationServiceResponse'
+            type: array
+          - type: 'null'
+          title: Services
+      type: object
+      required:
+      - explanation
+      - date_start
+      - duration
+      - id
+      title: TreatmentRecommendationResponse
+    TreatmentSymptomsCreate:
+      properties:
+        label:
+          type: string
+          maxLength: 10000
+          minLength: 5
+          title: Label
+        associated_dsm5_symptom:
+          $ref: '#/components/schemas/TreatmentSymptomsEnum'
+        maladaptive_concerns:
+          anyOf:
+          - type: string
+            minLength: 60
+          - type: 'null'
+          title: Maladaptive Concerns
+      type: object
+      required:
+      - label
+      - associated_dsm5_symptom
+      title: TreatmentSymptomsCreate
+    TreatmentPlanCrisisPlanResponse:
+      properties:
+        crisis_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Crisis Description
+        precursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Precursor
+        consequence_strategy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Consequence Strategy
+        antecedent_intervention:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Antecedent Intervention
+        behavior_intervention_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Behavior Intervention Plan
+        follow_up_step:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Follow Up Step
+        is_needed:
+          type: boolean
+          title: Is Needed
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - is_needed
+      - id
+      title: TreatmentPlanCrisisPlanResponse
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    TreatmentSymptomsResponse:
+      properties:
+        label:
+          type: string
+          maxLength: 10000
+          minLength: 5
+          title: Label
+        associated_dsm5_symptom:
+          $ref: '#/components/schemas/TreatmentSymptomsEnum'
+        maladaptive_concerns:
+          anyOf:
+          - type: string
+            minLength: 60
+          - type: 'null'
+          title: Maladaptive Concerns
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - associated_dsm5_symptom
+      - id
+      title: TreatmentSymptomsResponse
+    TreatmentPlanAssignmentResponse:
+      properties:
+        provider_id:
+          type: integer
+          title: Provider Id
+        utc_offset_date_assigned:
+          type: integer
+          title: Utc Offset Date Assigned
+        id:
+          type: integer
+          title: Id
+        treatment_plan_id:
+          type: integer
+          title: Treatment Plan Id
+        previously_assigned_provider_id:
+          type: integer
+          title: Previously Assigned Provider Id
+        admin_id:
+          type: integer
+          title: Admin Id
+        date_assigned:
+          type: string
+          format: date-time
+          title: Date Assigned
+      type: object
+      required:
+      - provider_id
+      - utc_offset_date_assigned
+      - id
+      - treatment_plan_id
+      - previously_assigned_provider_id
+      - admin_id
+      - date_assigned
+      title: TreatmentPlanAssignmentResponse
+    ParentAndCaregiverRoleEnum:
+      type: string
+      enum:
+      - parent
+      - caregiver
+      - parent and caregiver
+      title: ParentAndCaregiverRoleEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TreatmentPlanPatch:
+      properties:
+        client_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+        has_medication:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Medication
+      type: object
+      title: TreatmentPlanPatch
+    UpdateActivationStatus:
+      properties:
+        reason:
+          type: string
+          minLength: 2
+          title: Reason
+      type: object
+      required:
+      - reason
+      title: UpdateActivationStatus
+    GoalDataCollectionMethodEnum:
+      type: string
+      enum:
+      - INSTANCES
+      - DURATION
+      - PERCENTAGE
+      - RATE
+      title: GoalDataCollectionMethodEnum
+    SkillAcquisitionGoalMasteryCriteriaV2Response:
+      properties:
+        acquisition:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Acquisition
+        generalization:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Generalization
+        maintenance:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Maintenance
+        maintenance_frequency:
+          anyOf:
+          - $ref: '#/components/schemas/MeasurementFrequency'
+          - type: 'null'
+      type: object
+      required:
+      - acquisition
+      - generalization
+      - maintenance
+      title: SkillAcquisitionGoalMasteryCriteriaV2Response
+    ReferralHistoryAssessmentToolCreate:
+      properties:
+        tool_name:
+          type: string
+          minLength: 2
+          title: Tool Name
+      type: object
+      required:
+      - tool_name
+      title: ReferralHistoryAssessmentToolCreate
+    InstancesMethodMasteryCriteria:
+      properties:
+        change_type:
+          $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+        desired_amount:
+          type: integer
+          title: Desired Amount
+        practice_duration_count:
+          type: integer
+          exclusiveMaximum: 1000.0
+          exclusiveMinimum: 0.0
+          title: Practice Duration Count
+        practice_duration_unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Practice Duration Unit
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: InstancesMethodMasteryCriteria
+    HypothesizedFunctionResponse:
+      properties:
+        date_selected:
+          type: string
+          format: date
+          title: Date Selected
+        is_sensory:
+          type: boolean
+          title: Is Sensory
+        is_escape_or_avoidance:
+          type: boolean
+          title: Is Escape Or Avoidance
+        is_attention:
+          type: boolean
+          title: Is Attention
+        is_tangible:
+          type: boolean
+          title: Is Tangible
+        id:
+          type: integer
+          title: Id
+        date_edits_blocked:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Edits Blocked
+      type: object
+      required:
+      - date_selected
+      - is_sensory
+      - is_escape_or_avoidance
+      - is_attention
+      - is_tangible
+      - id
+      title: HypothesizedFunctionResponse
+    ? Body_reupload_assessment_tool_document_visual_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id__reupload_visual__patch
+    : properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_reupload_assessment_tool_document_visual_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id__reupload_visual__patch
+    TreatmentPlanPDFUrl:
+      properties:
+        document_url:
+          type: string
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: TreatmentPlanPDFUrl
+    MedicalHistoryDiagnosisResponse:
+      properties:
+        diagnosis_name:
+          type: string
+          minLength: 10
+          title: Diagnosis Name
+        provider_name:
+          type: string
+          minLength: 2
+          title: Provider Name
+        year_diagnosis_made:
+          type: integer
+          title: Year Diagnosis Made
+        city_diagnosis_made:
+          type: string
+          minLength: 2
+          title: City Diagnosis Made
+        state_diagnosis_made:
+          $ref: '#/components/schemas/StateEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - diagnosis_name
+      - provider_name
+      - year_diagnosis_made
+      - city_diagnosis_made
+      - state_diagnosis_made
+      - id
+      title: MedicalHistoryDiagnosisResponse
+    AssessmentSummaryCreate:
+      properties:
+        summary_observations_during_assessment:
+          type: string
+          title: Summary Observations During Assessment
+        summary_assessment_result:
+          type: string
+          title: Summary Assessment Result
+        summary_priorities_based_on_assessment:
+          type: string
+          title: Summary Priorities Based On Assessment
+      type: object
+      required:
+      - summary_observations_during_assessment
+      - summary_assessment_result
+      - summary_priorities_based_on_assessment
+      title: AssessmentSummaryCreate
+    RateMethodMeasurementUnitsIntervalUnitEnum:
+      type: string
+      enum:
+      - minutes
+      - hours
+      - seconds
+      title: RateMethodMeasurementUnitsIntervalUnitEnum
+    TherapyHistoryResponse:
+      properties:
+        has_service_history:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Service History
+        id:
+          type: integer
+          title: Id
+        services:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/TherapyHistoryServiceResponse'
+            type: array
+          - type: 'null'
+          title: Services
+      type: object
+      required:
+      - id
+      title: TherapyHistoryResponse
+    TreatmentPlanSubResource:
+      type: string
+      enum:
+      - medical_history
+      - client_and_family_background
+      - treatment_recommendation
+      title: TreatmentPlanSubResource
+    AssessmentBarrierCreate:
+      properties:
+        label:
+          $ref: '#/components/schemas/AssessmentBarrierEnum'
+        description:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Description
+      type: object
+      required:
+      - label
+      title: AssessmentBarrierCreate
+    ReferralHistoryCreate:
+      properties:
+        referring_provider_name:
+          type: string
+          minLength: 2
+          title: Referring Provider Name
+        reason_for_referral:
+          type: string
+          minLength: 60
+          title: Reason For Referral
+        date_of_diagnosis:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Of Diagnosis
+      type: object
+      required:
+      - referring_provider_name
+      - reason_for_referral
+      title: ReferralHistoryCreate
+    ParentMaritalStatusEnum:
+      type: string
+      enum:
+      - married
+      - divorced
+      - single
+      - domestic partnership
+      title: ParentMaritalStatusEnum
+    TreatmentPlanGoalVersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: TreatmentPlanGoalVersionEnum
+    HypothesizedFunctionPatch:
+      properties:
+        date_selected:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Selected
+        is_sensory:
+          type: boolean
+          title: Is Sensory
+        is_escape_or_avoidance:
+          type: boolean
+          title: Is Escape Or Avoidance
+        is_attention:
+          type: boolean
+          title: Is Attention
+        is_tangible:
+          type: boolean
+          title: Is Tangible
+      type: object
+      required:
+      - is_sensory
+      - is_escape_or_avoidance
+      - is_attention
+      - is_tangible
+      title: HypothesizedFunctionPatch
+    GoalTypeEnum:
+      type: string
+      enum:
+      - behavior_reduction
+      - skill_acquisition
+      - caregiver
+      title: GoalTypeEnum
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
     TreatmentPlanCrisisPlanCreate:
       properties:
         crisis_description:
@@ -5417,200 +7249,27 @@ components:
       required:
       - is_needed
       title: TreatmentPlanCrisisPlanCreate
-    TreatmentPlanMedicalHistoryVersionEnum:
+    Bay:
       type: string
       enum:
-      - v1
-      - v2
-      title: TreatmentPlanMedicalHistoryVersionEnum
-    ClientListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    HypothesizedFunctionCreate:
-      properties:
-        date_selected:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Selected
-        is_sensory:
-          type: boolean
-          title: Is Sensory
-        is_escape_or_avoidance:
-          type: boolean
-          title: Is Escape Or Avoidance
-        is_attention:
-          type: boolean
-          title: Is Attention
-        is_tangible:
-          type: boolean
-          title: Is Tangible
-      type: object
-      required:
-      - is_sensory
-      - is_escape_or_avoidance
-      - is_attention
-      - is_tangible
-      title: HypothesizedFunctionCreate
-    SkillAcquisitionGoalCreate:
-      properties:
-        goal_name_id:
-          type: integer
-          title: Goal Name Id
-        status_at_creation:
-          anyOf:
-          - $ref: '#/components/schemas/PresentStatusEnum'
-          - type: 'null'
-        date_introduced:
-          type: string
-          format: date
-          title: Date Introduced
-        current_level_at_creation:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Current Level At Creation
-        baseline_at_creation:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Baseline At Creation
-        expected_mastery_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Expected Mastery Date
-        data_collection_method:
-          $ref: '#/components/schemas/GoalDataCollectionMethodEnum'
-        goal_type:
-          type: string
-          const: skill_acquisition
-          title: Goal Type
-        mastery_criteria:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
-          - $ref: '#/components/schemas/SkillAcquisitionGoalMasteryCriteriaV2'
-          title: Mastery Criteria
-        measurement_units:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMeasurementUnits'
-          - $ref: '#/components/schemas/PercentageMethodMeasurementUnits'
-          - $ref: '#/components/schemas/DurationMethodMeasurementUnits'
-          - type: 'null'
-          title: Measurement Units
-        description:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Description
-      type: object
-      required:
-      - goal_name_id
-      - date_introduced
-      - data_collection_method
-      - goal_type
-      - mastery_criteria
-      - measurement_units
-      - description
-      title: SkillAcquisitionGoalCreate
-    DurationMethodMasteryCriteriaResponse:
-      properties:
-        change_type:
-          anyOf:
-          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-          - type: 'null'
-        desired_amount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Desired Amount
-        measurement_mode:
-          anyOf:
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaMeasurementModeEnum'
-          - type: 'null'
-        practice_duration_count:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1000.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Practice Duration Count
-      type: object
-      required:
-      - change_type
-      - desired_amount
-      - measurement_mode
-      - practice_duration_count
-      title: DurationMethodMasteryCriteriaResponse
-    MedicationResponse:
-      properties:
-        medication_name:
-          type: string
-          title: Medication Name
-        dosage:
-          type: string
-          title: Dosage
-        physician:
-          type: string
-          title: Physician
-        reason:
-          type: string
-          title: Reason
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset:
-          type: integer
-          title: Utc Offset
-          default: 0
-        treatment_plan_id:
-          type: integer
-          title: Treatment Plan Id
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - medication_name
-      - dosage
-      - physician
-      - reason
-      - date_start
-      - treatment_plan_id
-      - id
-      title: MedicationResponse
+      - BAY 1
+      - BAY 2
+      - BAY 2.5
+      - BAY 2.6
+      - BAY 2.7
+      - BAY 3
+      - BAY 6
+      - BAY 7
+      title: Bay
+    TreatmentPlanStatusLabelEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      - EDITING
+      - READ_ONLY
+      title: TreatmentPlanStatusLabelEnum
+      description: Enum for treatment plan status labels.
     GoalResponse:
       properties:
         goal_name_id:
@@ -5790,356 +7449,28 @@ components:
       - hypothesized_functions
       - targets
       title: GoalResponse
-    TreatmentPlanActivationLogResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        previous_value:
-          type: boolean
-          title: Previous Value
-        new_value:
-          type: boolean
-          title: New Value
-        date_changed:
-          type: string
-          format: date-time
-          title: Date Changed
-      type: object
-      required:
-      - id
-      - previous_value
-      - new_value
-      - date_changed
-      title: TreatmentPlanActivationLogResponse
-    GoalDataCollectionMethodEnum:
+    EventMeasurementUnitEnum:
       type: string
       enum:
-      - INSTANCES
-      - DURATION
-      - PERCENTAGE
-      - RATE
-      title: GoalDataCollectionMethodEnum
-    SkillAcquisitionGoalMasteryCriteriaV2:
-      properties:
-        acquisition:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
-          title: Acquisition
-        generalization:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
-          title: Generalization
-        maintenance:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
-          title: Maintenance
-        maintenance_frequency:
-          anyOf:
-          - $ref: '#/components/schemas/MeasurementFrequency'
-          - type: 'null'
-      type: object
-      required:
-      - acquisition
-      - generalization
-      - maintenance
-      title: SkillAcquisitionGoalMasteryCriteriaV2
-    ? Body_reupload_assessment_tool_document_visual_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id__reupload_visual__patch
-    : properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_reupload_assessment_tool_document_visual_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id__reupload_visual__patch
-    AssessmentSummaryResponse:
-      properties:
-        summary_observations_during_assessment:
-          type: string
-          title: Summary Observations During Assessment
-        summary_assessment_result:
-          type: string
-          title: Summary Assessment Result
-        summary_priorities_based_on_assessment:
-          type: string
-          title: Summary Priorities Based On Assessment
-        id:
-          type: integer
-          title: Id
-      additionalProperties: true
-      type: object
-      required:
-      - summary_observations_during_assessment
-      - summary_assessment_result
-      - summary_priorities_based_on_assessment
-      - id
-      title: AssessmentSummaryResponse
-    TreatmentRecommendationResponse:
-      properties:
-        explanation:
-          type: string
-          minLength: 60
-          title: Explanation
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        duration:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Duration
-        considered_factors:
-          anyOf:
-          - type: string
-            minLength: 60
-          - type: 'null'
-          title: Considered Factors
-        provision_description:
-          anyOf:
-          - type: string
-            minLength: 60
-          - type: 'null'
-          title: Provision Description
-        id:
-          type: integer
-          title: Id
-        services:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/TreatmentRecommendationServiceResponse'
-            type: array
-          - type: 'null'
-          title: Services
-      type: object
-      required:
-      - explanation
-      - date_start
-      - duration
-      - id
-      title: TreatmentRecommendationResponse
-    DischargeReasonEnum:
+      - SECOND
+      - MINUTE
+      - HOUR
+      title: EventMeasurementUnitEnum
+    AssessmentToolTypeEnum:
       type: string
       enum:
-      - The client has mastered all treatment goals, and no new goals are identified
-      - All maladaptive behavior goals have been mastered and generalized
-      - No new behaviors have emerged
-      - Client’s Vineland-3 scores have reached a level in accordance with similar-aged peers
-      - Client’s AFLS scores have reached a level in accordance with similar-aged peers
-      - Client’s parents/caregivers report confidence in continuing ABA intervention techniques
-      - Client no longer able to participate due to medical reasons
-      - Parents prefer a new provider
-      - Client no longer able to participate due to personal changes
-      - No progress has been made for 3 months
-      - Goals are not maintaining or generalizing
-      - Other
-      title: DischargeReasonEnum
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    PayorResponsibilityEnum:
-      type: string
-      enum:
-      - PRIMARY
-      - SECONDARY
-      - TERTIARY
-      title: PayorResponsibilityEnum
-    TreatmentPlanResourceVersions:
-      properties:
-        goal:
-          anyOf:
-          - $ref: '#/components/schemas/TreatmentPlanGoalVersionEnum'
-          - type: 'null'
-        target:
-          anyOf:
-          - $ref: '#/components/schemas/TreatmentPlanTargetVersionEnum'
-          - type: 'null'
-        medical_history:
-          anyOf:
-          - $ref: '#/components/schemas/TreatmentPlanMedicalHistoryVersionEnum'
-          - type: 'null'
-        client_and_family_background:
-          anyOf:
-          - $ref: '#/components/schemas/TreatmentPlanClientAndFamilyBackgroundVersionEnum'
-          - type: 'null'
-        assessment:
-          anyOf:
-          - $ref: '#/components/schemas/TreatmentPlanAssessmentVersionEnum'
-          - type: 'null'
-      type: object
-      title: TreatmentPlanResourceVersions
-    AssessmentBarrierResponse:
-      properties:
-        label:
-          $ref: '#/components/schemas/AssessmentBarrierEnum'
-        description:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Description
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - id
-      title: AssessmentBarrierResponse
-    ProviderResponseWithoutAddress:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderResponseWithoutAddress
-    InstancesMethodMasteryCriteriaResponse:
-      properties:
-        change_type:
-          anyOf:
-          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-          - type: 'null'
-        desired_amount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Desired Amount
-        practice_duration_count:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1000.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Practice Duration Count
-        practice_duration_unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Practice Duration Unit
-      type: object
-      required:
-      - change_type
-      - desired_amount
-      - practice_duration_count
-      title: InstancesMethodMasteryCriteriaResponse
-    InstancesMethodMasteryCriteria:
-      properties:
-        change_type:
-          $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-        desired_amount:
-          type: integer
-          title: Desired Amount
-        practice_duration_count:
-          type: integer
-          exclusiveMaximum: 1000.0
-          exclusiveMinimum: 0.0
-          title: Practice Duration Count
-        practice_duration_unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Practice Duration Unit
-      type: object
-      required:
-      - change_type
-      - desired_amount
-      - practice_duration_count
-      title: InstancesMethodMasteryCriteria
-    DischargeCreate:
-      properties:
-        mastery_of_goals:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Mastery Of Goals
-        readiness_to_move_on_from_current_service:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Readiness To Move On From Current Service
-        step_down_in_program_hours:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Step Down In Program Hours
-        communication_amongst_providers:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Communication Amongst Providers
-      type: object
-      required:
-      - mastery_of_goals
-      - readiness_to_move_on_from_current_service
-      - step_down_in_program_hours
-      - communication_amongst_providers
-      title: DischargeCreate
-    TreatmentRecommendationServiceResponse:
-      properties:
-        hours:
-          type: number
-          minimum: 0.0
-          title: Hours
-        frequency:
-          $ref: '#/components/schemas/RecommendedServiceFrequencyEnum'
-        service_code:
-          $ref: '#/components/schemas/AssociatedServiceCodeResponse'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - hours
-      - frequency
-      - service_code
-      - id
-      title: TreatmentRecommendationServiceResponse
-    BulkTargetStageChange:
+      - vineland_3
+      - afls
+      - vb_mapp
+      - pddbi
+      - ablls_r
+      - peak
+      - fast
+      - socially_savvy
+      - qabf
+      - asap
+      title: AssessmentToolTypeEnum
+    TargetStageChange:
       properties:
         date_stage_changed:
           type: string
@@ -6152,172 +7483,11 @@ components:
           - type: string
           - type: 'null'
           title: Reason For Change
-        target_ids:
-          items:
-            type: integer
-          type: array
-          uniqueItems: true
-          title: Target Ids
       type: object
       required:
       - date_stage_changed
       - stage
-      - target_ids
-      title: BulkTargetStageChange
-    PercentageMethodV1MasteryCriteria:
-      properties:
-        desired_amount:
-          type: integer
-          title: Desired Amount
-        practice_duration_count:
-          type: integer
-          exclusiveMaximum: 1000.0
-          exclusiveMinimum: 0.0
-          title: Practice Duration Count
-        total_attempts:
-          type: integer
-          title: Total Attempts
-      type: object
-      required:
-      - desired_amount
-      - practice_duration_count
-      - total_attempts
-      title: PercentageMethodV1MasteryCriteria
-    AssessmentToolCreateResponse:
-      properties:
-        tool_name:
-          $ref: '#/components/schemas/AssessmentToolTypeEnum'
-        reason_for_use_age_group:
-          type: string
-          maxLength: 10000
-          minLength: 2
-          title: Reason For Use Age Group
-        reason_for_use_symptoms:
-          type: string
-          maxLength: 10000
-          minLength: 2
-          title: Reason For Use Symptoms
-        score:
-          type: string
-          title: Score
-        description:
-          type: string
-          title: Description
-        date_tool_used:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Tool Used
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - tool_name
-      - reason_for_use_age_group
-      - reason_for_use_symptoms
-      - score
-      - description
-      - id
-      title: AssessmentToolCreateResponse
-    ParentAndCaregiverCreate:
-      properties:
-        role:
-          $ref: '#/components/schemas/ParentAndCaregiverRoleEnum'
-        name:
-          type: string
-          maxLength: 1000
-          minLength: 2
-          title: Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-            pattern: ^[1-9][0-9]{9}$
-          - type: 'null'
-          title: Phone
-        parent_marital_status:
-          anyOf:
-          - $ref: '#/components/schemas/ParentMaritalStatusEnum'
-          - type: 'null'
-        parent_mental_health_history:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Mental Health History
-        job:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Job
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-            minLength: 5
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-      type: object
-      required:
-      - role
-      - name
-      title: ParentAndCaregiverCreate
-    Bay:
-      type: string
-      enum:
-      - BAY 1
-      - BAY 2
-      - BAY 2.5
-      - BAY 2.6
-      - BAY 2.7
-      - BAY 3
-      - BAY 6
-      - BAY 7
-      title: Bay
-    TreatmentRecommendationServiceCreate:
-      properties:
-        hours:
-          type: number
-          minimum: 0.0
-          title: Hours
-        frequency:
-          $ref: '#/components/schemas/RecommendedServiceFrequencyEnum'
-        service_code:
-          type: string
-          title: Service Code
-      type: object
-      required:
-      - hours
-      - frequency
-      - service_code
-      title: TreatmentRecommendationServiceCreate
+      title: TargetStageChange
     ClientAndFamilyBackgroundResponse:
       properties:
         other_individuals_in_home:
@@ -6382,1535 +7552,6 @@ components:
       required:
       - id
       title: ClientAndFamilyBackgroundResponse
-    ClientAndFamilyBackgroundCreate:
-      properties:
-        other_individuals_in_home:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Other Individuals In Home
-        member_language:
-          anyOf:
-          - type: string
-            minLength: 5
-          - type: 'null'
-          title: Member Language
-        family_medical_history_maternal:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Family Medical History Maternal
-        family_medical_history_paternal:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Family Medical History Paternal
-        community_involvement_religious_affiliations:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Community Involvement Religious Affiliations
-      type: object
-      title: ClientAndFamilyBackgroundCreate
-    DischargeReasonResponse:
-      properties:
-        label:
-          $ref: '#/components/schemas/DischargeReasonEnum'
-        description:
-          anyOf:
-          - type: string
-            maxLength: 10000
-            minLength: 2
-          - type: 'null'
-          title: Description
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - id
-      title: DischargeReasonResponse
-    TreatmentPlanSubResource:
-      type: string
-      enum:
-      - medical_history
-      - client_and_family_background
-      - treatment_recommendation
-      title: TreatmentPlanSubResource
-    MeasurementFrequency:
-      type: string
-      enum:
-      - Daily
-      - Twice a week
-      - Once a week
-      - Bi monthly
-      - Monthly
-      title: MeasurementFrequency
-    GoalTypeEnum:
-      type: string
-      enum:
-      - behavior_reduction
-      - skill_acquisition
-      - caregiver
-      title: GoalTypeEnum
-    PercentageMethodMeasurementUnits:
-      properties:
-        total_attempts:
-          type: integer
-          title: Total Attempts
-      type: object
-      required:
-      - total_attempts
-      title: PercentageMethodMeasurementUnits
-    MedicalHistoryDiagnosisCreate:
-      properties:
-        diagnosis_name:
-          type: string
-          minLength: 10
-          title: Diagnosis Name
-        provider_name:
-          type: string
-          minLength: 2
-          title: Provider Name
-        year_diagnosis_made:
-          type: integer
-          title: Year Diagnosis Made
-        city_diagnosis_made:
-          type: string
-          minLength: 2
-          title: City Diagnosis Made
-        state_diagnosis_made:
-          $ref: '#/components/schemas/StateEnum'
-      type: object
-      required:
-      - diagnosis_name
-      - provider_name
-      - year_diagnosis_made
-      - city_diagnosis_made
-      - state_diagnosis_made
-      title: MedicalHistoryDiagnosisCreate
-    PercentageMethodV2MasteryCriteria:
-      properties:
-        desired_amount:
-          type: integer
-          title: Desired Amount
-        practice_duration_count:
-          type: integer
-          exclusiveMaximum: 1000.0
-          exclusiveMinimum: 0.0
-          title: Practice Duration Count
-      type: object
-      required:
-      - desired_amount
-      - practice_duration_count
-      title: PercentageMethodV2MasteryCriteria
-    GoalResourceVersions:
-      properties:
-        baseline_measurement:
-          type: string
-          title: Baseline Measurement
-      type: object
-      required:
-      - baseline_measurement
-      title: GoalResourceVersions
-    DurationMethodMasteryCriteriaMeasurementModeEnum:
-      type: string
-      enum:
-      - average
-      - total
-      title: DurationMethodMasteryCriteriaMeasurementModeEnum
-    AssessmentToolTypeEnum:
-      type: string
-      enum:
-      - vineland_3
-      - afls
-      - vb_mapp
-      - pddbi
-      - ablls_r
-      - peak
-      - fast
-      - socially_savvy
-      - qabf
-      - asap
-      title: AssessmentToolTypeEnum
-    TreatmentSymptomsResponse:
-      properties:
-        label:
-          type: string
-          maxLength: 10000
-          minLength: 5
-          title: Label
-        associated_dsm5_symptom:
-          $ref: '#/components/schemas/TreatmentSymptomsEnum'
-        maladaptive_concerns:
-          anyOf:
-          - type: string
-            minLength: 60
-          - type: 'null'
-          title: Maladaptive Concerns
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - associated_dsm5_symptom
-      - id
-      title: TreatmentSymptomsResponse
-    GoalNameResponse:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        prefix:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Prefix
-        id:
-          type: integer
-          title: Id
-        behavior_id:
-          type: integer
-          title: Behavior Id
-        behavior:
-          $ref: '#/components/schemas/BehaviorResponse'
-        is_active:
-          type: boolean
-          title: Is Active
-      type: object
-      required:
-      - label
-      - id
-      - behavior_id
-      - behavior
-      - is_active
-      title: GoalNameResponse
-    ReferralHistoryCreate:
-      properties:
-        referring_provider_name:
-          type: string
-          minLength: 2
-          title: Referring Provider Name
-        reason_for_referral:
-          type: string
-          minLength: 60
-          title: Reason For Referral
-        date_of_diagnosis:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Of Diagnosis
-      type: object
-      required:
-      - referring_provider_name
-      - reason_for_referral
-      title: ReferralHistoryCreate
-    TreatmentSymptomsCreate:
-      properties:
-        label:
-          type: string
-          maxLength: 10000
-          minLength: 5
-          title: Label
-        associated_dsm5_symptom:
-          $ref: '#/components/schemas/TreatmentSymptomsEnum'
-        maladaptive_concerns:
-          anyOf:
-          - type: string
-            minLength: 60
-          - type: 'null'
-          title: Maladaptive Concerns
-      type: object
-      required:
-      - label
-      - associated_dsm5_symptom
-      title: TreatmentSymptomsCreate
-    ParentAndCaregiverResponse:
-      properties:
-        role:
-          $ref: '#/components/schemas/ParentAndCaregiverRoleEnum'
-        name:
-          type: string
-          maxLength: 1000
-          minLength: 2
-          title: Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-            pattern: ^[1-9][0-9]{9}$
-          - type: 'null'
-          title: Phone
-        parent_marital_status:
-          anyOf:
-          - $ref: '#/components/schemas/ParentMaritalStatusEnum'
-          - type: 'null'
-        parent_mental_health_history:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Mental Health History
-        job:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Job
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-            minLength: 5
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - role
-      - name
-      - id
-      title: ParentAndCaregiverResponse
-    AssessmentToolDocumentResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        description:
-          type: string
-          maxLength: 25000
-          minLength: 2
-          title: Description
-        label:
-          type: string
-          maxLength: 10000
-          minLength: 2
-          title: Label
-        document_url:
-          type: string
-          title: Document Url
-        tool_id:
-          type: integer
-          title: Tool Id
-        file_type:
-          type: string
-          title: File Type
-      type: object
-      required:
-      - id
-      - description
-      - label
-      - document_url
-      - tool_id
-      - file_type
-      title: AssessmentToolDocumentResponse
-    RateMethodMasteryCriteria:
-      properties:
-        change_type:
-          $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-        desired_amount:
-          type: integer
-          title: Desired Amount
-        practice_duration_count:
-          type: integer
-          exclusiveMaximum: 1000.0
-          exclusiveMinimum: 0.0
-          title: Practice Duration Count
-      type: object
-      required:
-      - change_type
-      - desired_amount
-      - practice_duration_count
-      title: RateMethodMasteryCriteria
-    TreatmentRecommendationServicePatch:
-      properties:
-        hours:
-          type: number
-          minimum: 0.0
-          title: Hours
-        frequency:
-          $ref: '#/components/schemas/RecommendedServiceFrequencyEnum'
-      type: object
-      required:
-      - hours
-      - frequency
-      title: TreatmentRecommendationServicePatch
-    AssociatedServiceCodeResponse:
-      properties:
-        code:
-          type: string
-          title: Code
-        label:
-          type: string
-          title: Label
-        is_billable:
-          type: boolean
-          title: Is Billable
-        is_timesheet_usable:
-          type: boolean
-          title: Is Timesheet Usable
-        type:
-          $ref: '#/components/schemas/ServiceCodeTypeEnum'
-          default: CPT
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - code
-      - label
-      - is_billable
-      - is_timesheet_usable
-      - id
-      title: AssociatedServiceCodeResponse
-    DurationMethodMasteryCriteria:
-      properties:
-        change_type:
-          $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-        measurement_mode:
-          $ref: '#/components/schemas/DurationMethodMasteryCriteriaMeasurementModeEnum'
-        desired_amount:
-          type: integer
-          title: Desired Amount
-        practice_duration_count:
-          type: integer
-          exclusiveMaximum: 1000.0
-          exclusiveMinimum: 0.0
-          title: Practice Duration Count
-      type: object
-      required:
-      - change_type
-      - measurement_mode
-      - desired_amount
-      - practice_duration_count
-      title: DurationMethodMasteryCriteria
-    TreatmentPlanClientAndFamilyBackgroundVersionEnum:
-      type: string
-      enum:
-      - v1
-      - v2
-      title: TreatmentPlanClientAndFamilyBackgroundVersionEnum
-    TreatmentPlanAssignmentResponse:
-      properties:
-        provider_id:
-          type: integer
-          title: Provider Id
-        utc_offset_date_assigned:
-          type: integer
-          title: Utc Offset Date Assigned
-        id:
-          type: integer
-          title: Id
-        treatment_plan_id:
-          type: integer
-          title: Treatment Plan Id
-        previously_assigned_provider_id:
-          type: integer
-          title: Previously Assigned Provider Id
-        admin_id:
-          type: integer
-          title: Admin Id
-        date_assigned:
-          type: string
-          format: date-time
-          title: Date Assigned
-      type: object
-      required:
-      - provider_id
-      - utc_offset_date_assigned
-      - id
-      - treatment_plan_id
-      - previously_assigned_provider_id
-      - admin_id
-      - date_assigned
-      title: TreatmentPlanAssignmentResponse
-    ? Body_patch_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id___patch
-    : properties:
-        label:
-          type: string
-          title: Label
-        description:
-          type: string
-          maxLength: 25000
-          title: Description
-      type: object
-      required:
-      - label
-      - description
-      title: Body_patch_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__document_id___patch
-    MedicalHistoryCreate:
-      properties:
-        allergies:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Allergies
-        special_diets:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Special Diets
-        autism_severity_level:
-          $ref: '#/components/schemas/DiagnosisSeverityLevelEnum'
-        provider_name:
-          type: string
-          minLength: 2
-          title: Provider Name
-        year_autism_diagnosis_made:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Year Autism Diagnosis Made
-        city_autism_diagnosis_made:
-          type: string
-          minLength: 2
-          title: City Autism Diagnosis Made
-        state_autism_diagnosis_made:
-          $ref: '#/components/schemas/StateEnum'
-        trauma_history:
-          anyOf:
-          - type: string
-            minLength: 4
-          - type: 'null'
-          title: Trauma History
-        pregnancy_delivery_history:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Pregnancy Delivery History
-        hearing_vision_screening:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Hearing Vision Screening
-        early_childhood_development:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Early Childhood Development
-        early_childhood_intervention:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Early Childhood Intervention
-        surgical_hospitalization_history:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Surgical Hospitalization History
-      type: object
-      required:
-      - autism_severity_level
-      - provider_name
-      - year_autism_diagnosis_made
-      - city_autism_diagnosis_made
-      - state_autism_diagnosis_made
-      title: MedicalHistoryCreate
-    ParentAndCaregiverRoleEnum:
-      type: string
-      enum:
-      - parent
-      - caregiver
-      - parent and caregiver
-      title: ParentAndCaregiverRoleEnum
-    EventMeasurementUnitEnum:
-      type: string
-      enum:
-      - SECOND
-      - MINUTE
-      - HOUR
-      title: EventMeasurementUnitEnum
-    TreatmentPlanAssessmentVersionEnum:
-      type: string
-      enum:
-      - v1
-      - v2
-      title: TreatmentPlanAssessmentVersionEnum
-    TherapyResponseEnum:
-      type: string
-      enum:
-      - Positive improvement
-      - No progress
-      - Unfavorable outcome
-      title: TherapyResponseEnum
-    TargetStageEnum:
-      type: string
-      enum:
-      - Baseline
-      - Mastered
-      - On Hold
-      - Discontinued
-      - Acquisition
-      - Generalization
-      - Maintenance
-      - In Progress
-      title: TargetStageEnum
-    RateMethodMeasurementUnits:
-      properties:
-        interval_size:
-          type: integer
-          title: Interval Size
-        interval_unit:
-          $ref: '#/components/schemas/RateMethodMeasurementUnitsIntervalUnitEnum'
-      type: object
-      required:
-      - interval_size
-      - interval_unit
-      title: RateMethodMeasurementUnits
-    RateMethodMasteryCriteriaResponse:
-      properties:
-        change_type:
-          anyOf:
-          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-          - type: 'null'
-        desired_amount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Desired Amount
-        practice_duration_count:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1000.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Practice Duration Count
-      type: object
-      required:
-      - change_type
-      - desired_amount
-      - practice_duration_count
-      title: RateMethodMasteryCriteriaResponse
-    DetailedTargetResponse:
-      properties:
-        label:
-          type: string
-          title: Label
-        order:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Order
-        instruction:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Instruction
-        description:
-          anyOf:
-          - type: string
-            maxLength: 2000
-            minLength: 2
-          - type: 'null'
-          title: Description
-        stage:
-          anyOf:
-          - $ref: '#/components/schemas/TargetStageEnum'
-          - type: 'null'
-        id:
-          type: integer
-          title: Id
-        is_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Active
-        reason:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Reason
-        stage_change_logs:
-          items:
-            $ref: '#/components/schemas/TargetStageChangeLogResponse'
-          type: array
-          title: Stage Change Logs
-        is_goal_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Goal Active
-        is_goal_linkable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Goal Linkable
-        last_activation_log:
-          anyOf:
-          - $ref: '#/components/schemas/ActivationLogResponse'
-          - type: 'null'
-        is_event_duration_required:
-          type: boolean
-          title: Is Event Duration Required
-        event_duration_measurement_unit:
-          anyOf:
-          - $ref: '#/components/schemas/EventMeasurementUnitEnum'
-          - type: 'null'
-      type: object
-      required:
-      - label
-      - id
-      - stage_change_logs
-      - is_event_duration_required
-      title: DetailedTargetResponse
-    TargetStageChangeLogResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        new_stage:
-          $ref: '#/components/schemas/TargetStageEnum'
-        old_stage:
-          anyOf:
-          - $ref: '#/components/schemas/TargetStageEnum'
-          - type: 'null'
-        date_stage_changed:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Stage Changed
-        reason_for_change:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reason For Change
-        order:
-          type: number
-          title: Order
-        date_edits_blocked:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Edits Blocked
-      type: object
-      required:
-      - id
-      - new_stage
-      - order
-      title: TargetStageChangeLogResponse
-    MasteryCriteriaChangeTypeEnum:
-      type: string
-      enum:
-      - decrease
-      - increase
-      title: MasteryCriteriaChangeTypeEnum
-    TherapyRecordSharedEnum:
-      type: string
-      enum:
-      - Shared
-      - Will be shared
-      title: TherapyRecordSharedEnum
-    DurationMethodMeasurementUnits:
-      properties:
-        duration_unit:
-          $ref: '#/components/schemas/EventMeasurementUnitEnum'
-        duration_unit_formatted:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Duration Unit Formatted
-      type: object
-      required:
-      - duration_unit
-      title: DurationMethodMeasurementUnits
-    PresentStatusEnum:
-      type: string
-      enum:
-      - New Goal
-      - In Progress
-      - Maintenance
-      - Generalization
-      - Mastered
-      - On Hold
-      - Terminated / Discontinued
-      title: PresentStatusEnum
-    HypothesizedFunctionPatch:
-      properties:
-        date_selected:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Selected
-        is_sensory:
-          type: boolean
-          title: Is Sensory
-        is_escape_or_avoidance:
-          type: boolean
-          title: Is Escape Or Avoidance
-        is_attention:
-          type: boolean
-          title: Is Attention
-        is_tangible:
-          type: boolean
-          title: Is Tangible
-      type: object
-      required:
-      - is_sensory
-      - is_escape_or_avoidance
-      - is_attention
-      - is_tangible
-      title: HypothesizedFunctionPatch
-    TherapyFrequencyEnum:
-      type: string
-      enum:
-      - daily
-      - weekly
-      - semi-weekly
-      - monthly
-      - semi-monthly
-      title: TherapyFrequencyEnum
-    PriorAuthorizationResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        date_end:
-          type: string
-          format: date
-          title: Date End
-        days_until_expiry:
-          type: integer
-          title: Days Until Expiry
-        active_treatment_plan_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Active Treatment Plan Id
-        payor_responsibility:
-          anyOf:
-          - $ref: '#/components/schemas/PayorResponsibilityEnum'
-          - type: 'null'
-        policy_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Policy Id
-      type: object
-      required:
-      - id
-      - client
-      - date_end
-      - days_until_expiry
-      title: PriorAuthorizationResponse
-    ReferralHistoryAssessmentToolResponse:
-      properties:
-        tool_name:
-          type: string
-          minLength: 2
-          title: Tool Name
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - tool_name
-      - id
-      title: ReferralHistoryAssessmentToolResponse
-    TreatmentPlanAssignmentCreate:
-      properties:
-        provider_id:
-          type: integer
-          title: Provider Id
-        utc_offset_date_assigned:
-          type: integer
-          title: Utc Offset Date Assigned
-      type: object
-      required:
-      - provider_id
-      - utc_offset_date_assigned
-      title: TreatmentPlanAssignmentCreate
-    TreatmentPlanEducationBackgroundCreate:
-      properties:
-        is_iep:
-          type: boolean
-          title: Is Iep
-        is_504:
-          type: boolean
-          title: Is 504
-        education_setting:
-          $ref: '#/components/schemas/EducationSettingEnum'
-        education_description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Education Description
-        focus_area_description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Focus Area Description
-        hours_per_week:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Hours Per Week
-        education_support:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Education Support
-        education_evaluation:
-          $ref: '#/components/schemas/EducationEvaluationEnum'
-      type: object
-      required:
-      - is_iep
-      - is_504
-      - education_setting
-      - education_evaluation
-      title: TreatmentPlanEducationBackgroundCreate
-    AssessmentToolCreate:
-      properties:
-        tool_name:
-          $ref: '#/components/schemas/AssessmentToolTypeEnum'
-        reason_for_use_age_group:
-          type: string
-          maxLength: 10000
-          minLength: 2
-          title: Reason For Use Age Group
-        reason_for_use_symptoms:
-          type: string
-          maxLength: 10000
-          minLength: 2
-          title: Reason For Use Symptoms
-        score:
-          type: string
-          title: Score
-        description:
-          type: string
-          title: Description
-        date_tool_used:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Tool Used
-      type: object
-      required:
-      - tool_name
-      - reason_for_use_age_group
-      - reason_for_use_symptoms
-      - score
-      - description
-      title: AssessmentToolCreate
-    MedicationCreate:
-      properties:
-        medication_name:
-          type: string
-          title: Medication Name
-        dosage:
-          type: string
-          title: Dosage
-        physician:
-          type: string
-          title: Physician
-        reason:
-          type: string
-          title: Reason
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset:
-          type: integer
-          title: Utc Offset
-          default: 0
-      type: object
-      required:
-      - medication_name
-      - dosage
-      - physician
-      - reason
-      - date_start
-      title: MedicationCreate
-    ReferralHistoryAssessmentToolCreate:
-      properties:
-        tool_name:
-          type: string
-          minLength: 2
-          title: Tool Name
-      type: object
-      required:
-      - tool_name
-      title: ReferralHistoryAssessmentToolCreate
-    ? Body_create_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__post
-    : properties:
-        file:
-          type: string
-          format: binary
-          title: File
-        label:
-          type: string
-          title: Label
-        description:
-          type: string
-          maxLength: 25000
-          title: Description
-      type: object
-      required:
-      - file
-      - label
-      - description
-      title: Body_create_assessment_tool_document_api_v1_treatment_plans__treatment_plan_id__assessments__assessment_id__tools__tool_id__documents__post
-    StateEnum:
-      type: string
-      enum:
-      - AL
-      - AK
-      - AZ
-      - AR
-      - CA
-      - CO
-      - CT
-      - DE
-      - FL
-      - GA
-      - HI
-      - ID
-      - IL
-      - IN
-      - IA
-      - KS
-      - KY
-      - LA
-      - ME
-      - MD
-      - MA
-      - MI
-      - MN
-      - MS
-      - MO
-      - MT
-      - NE
-      - NV
-      - NH
-      - NJ
-      - NM
-      - NY
-      - NC
-      - ND
-      - OH
-      - OK
-      - OR
-      - PA
-      - PR
-      - RI
-      - SC
-      - SD
-      - TN
-      - TX
-      - UT
-      - VT
-      - VA
-      - WA
-      - WV
-      - WI
-      - WY
-      title: StateEnum
-    TargetStageChange:
-      properties:
-        date_stage_changed:
-          type: string
-          format: date
-          title: Date Stage Changed
-        stage:
-          $ref: '#/components/schemas/TargetStageEnum'
-        reason_for_change:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reason For Change
-      type: object
-      required:
-      - date_stage_changed
-      - stage
-      title: TargetStageChange
-    CaregiverGoalCreate:
-      properties:
-        goal_name_id:
-          type: integer
-          title: Goal Name Id
-        status_at_creation:
-          anyOf:
-          - $ref: '#/components/schemas/PresentStatusEnum'
-          - type: 'null'
-        date_introduced:
-          type: string
-          format: date
-          title: Date Introduced
-        current_level_at_creation:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Current Level At Creation
-        baseline_at_creation:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Baseline At Creation
-        expected_mastery_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Expected Mastery Date
-        data_collection_method:
-          $ref: '#/components/schemas/GoalDataCollectionMethodEnum'
-        goal_type:
-          type: string
-          const: caregiver
-          title: Goal Type
-        mastery_criteria:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
-          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
-          title: Mastery Criteria
-        measurement_units:
-          anyOf:
-          - $ref: '#/components/schemas/RateMethodMeasurementUnits'
-          - $ref: '#/components/schemas/PercentageMethodMeasurementUnits'
-          - $ref: '#/components/schemas/DurationMethodMeasurementUnits'
-          - type: 'null'
-          title: Measurement Units
-        description:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Description
-      type: object
-      required:
-      - goal_name_id
-      - date_introduced
-      - data_collection_method
-      - goal_type
-      - mastery_criteria
-      - description
-      title: CaregiverGoalCreate
-    DiagnosisSeverityLevelEnum:
-      type: string
-      enum:
-      - Level 1
-      - Level 2
-      - Level 3
-      - Unknown
-      title: DiagnosisSeverityLevelEnum
-    TreatmentPlanStatusWithTimeResponse:
-      properties:
-        label:
-          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
-        date:
-          type: string
-          format: date-time
-          title: Date
-      type: object
-      required:
-      - label
-      - date
-      title: TreatmentPlanStatusWithTimeResponse
-    TreatmentRecommendationCreate:
-      properties:
-        explanation:
-          type: string
-          minLength: 60
-          title: Explanation
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        duration:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Duration
-        considered_factors:
-          anyOf:
-          - type: string
-            minLength: 60
-          - type: 'null'
-          title: Considered Factors
-        provision_description:
-          anyOf:
-          - type: string
-            minLength: 60
-          - type: 'null'
-          title: Provision Description
-      type: object
-      required:
-      - explanation
-      - date_start
-      - duration
-      title: TreatmentRecommendationCreate
-    AssessmentCreate:
-      properties:
-        date_of_assessment:
-          type: string
-          format: date
-          title: Date Of Assessment
-        date_of_reassessment:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Of Reassessment
-        clinical_interview_or_summary:
-          type: string
-          maxLength: 100000
-          minLength: 60
-          title: Clinical Interview Or Summary
-        is_diagnostic_reports_reviewed:
-          type: boolean
-          title: Is Diagnostic Reports Reviewed
-        is_previous_assessment_reports_reviewed:
-          type: boolean
-          title: Is Previous Assessment Reports Reviewed
-        is_medical_reports_reviewed:
-          type: boolean
-          title: Is Medical Reports Reviewed
-        is_reports_by_other_providers_reviewed:
-          type: boolean
-          title: Is Reports By Other Providers Reviewed
-        is_school_reports_reviewed:
-          type: boolean
-          title: Is School Reports Reviewed
-        is_previous_intervention_plans_and_treatment_plans_reviewed:
-          type: boolean
-          title: Is Previous Intervention Plans And Treatment Plans Reviewed
-      type: object
-      required:
-      - date_of_assessment
-      - clinical_interview_or_summary
-      - is_diagnostic_reports_reviewed
-      - is_previous_assessment_reports_reviewed
-      - is_medical_reports_reviewed
-      - is_reports_by_other_providers_reviewed
-      - is_school_reports_reviewed
-      - is_previous_intervention_plans_and_treatment_plans_reviewed
-      title: AssessmentCreate
-    RateMethodMeasurementUnitsIntervalUnitEnum:
-      type: string
-      enum:
-      - minutes
-      - hours
-      - seconds
-      title: RateMethodMeasurementUnitsIntervalUnitEnum
-    ClientStrengthsRequest:
-      properties:
-        client_strengths:
-          items:
-            type: string
-            minLength: 1
-          type: array
-          title: Client Strengths
-      type: object
-      required:
-      - client_strengths
-      title: ClientStrengthsRequest
-    TreatmentPlanStop:
-      properties:
-        signature:
-          type: string
-          minLength: 2
-          title: Signature
-        utc_offset_date_end:
-          type: integer
-          title: Utc Offset Date End
-        date_treatment_plan_ended:
-          type: string
-          format: date-time
-          title: Date Treatment Plan Ended
-      type: object
-      required:
-      - signature
-      - utc_offset_date_end
-      - date_treatment_plan_ended
-      title: TreatmentPlanStop
-    TreatmentPlanGoalVersionEnum:
-      type: string
-      enum:
-      - v1
-      - v2
-      title: TreatmentPlanGoalVersionEnum
-    TreatmentPlanStatusLabelEnum:
-      type: string
-      enum:
-      - STARTED
-      - COMPLETED
-      - EDITING
-      - READ_ONLY
-      title: TreatmentPlanStatusLabelEnum
-      description: Enum for treatment plan status labels.
-    AssessmentBarrierEnum:
-      type: string
-      enum:
-      - Lack of or inability to collaborate
-      - Patient and family schedule/ availability
-      - Difficulty obtaining consistent services
-      - Frequent cancellations
-      - Staff barriers
-      - COVID
-      - Medical barriers
-      - Lack of support
-      - Lack of treatment fidelity or carry-out of the treatment plan
-      - Cost of materials or resources
-      - Other
-      title: AssessmentBarrierEnum
-    TherapyHistoryResponse:
-      properties:
-        has_service_history:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Service History
-        id:
-          type: integer
-          title: Id
-        services:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/TherapyHistoryServiceResponse'
-            type: array
-          - type: 'null'
-          title: Services
-      type: object
-      required:
-      - id
-      title: TherapyHistoryResponse
-    TherapyHistoryCreate:
-      properties:
-        has_service_history:
-          type: boolean
-          title: Has Service History
-      type: object
-      required:
-      - has_service_history
-      title: TherapyHistoryCreate
-    SiblingCreate:
-      properties:
-        age:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Age
-        name:
-          type: string
-          maxLength: 1000
-          minLength: 2
-          title: Name
-        diagnosis:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Diagnosis
-      type: object
-      required:
-      - age
-      - name
-      title: SiblingCreate
-    AssessmentResponse:
-      properties:
-        date_of_assessment:
-          type: string
-          format: date
-          title: Date Of Assessment
-        date_of_reassessment:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Of Reassessment
-        clinical_interview_or_summary:
-          type: string
-          maxLength: 100000
-          minLength: 60
-          title: Clinical Interview Or Summary
-        is_diagnostic_reports_reviewed:
-          type: boolean
-          title: Is Diagnostic Reports Reviewed
-        is_previous_assessment_reports_reviewed:
-          type: boolean
-          title: Is Previous Assessment Reports Reviewed
-        is_medical_reports_reviewed:
-          type: boolean
-          title: Is Medical Reports Reviewed
-        is_reports_by_other_providers_reviewed:
-          type: boolean
-          title: Is Reports By Other Providers Reviewed
-        is_school_reports_reviewed:
-          type: boolean
-          title: Is School Reports Reviewed
-        is_previous_intervention_plans_and_treatment_plans_reviewed:
-          type: boolean
-          title: Is Previous Intervention Plans And Treatment Plans Reviewed
-        id:
-          type: integer
-          title: Id
-        summary_observations_during_assessment:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary Observations During Assessment
-        summary_assessment_result:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary Assessment Result
-        summary_priorities_based_on_assessment:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary Priorities Based On Assessment
-      additionalProperties: true
-      type: object
-      required:
-      - date_of_assessment
-      - clinical_interview_or_summary
-      - is_diagnostic_reports_reviewed
-      - is_previous_assessment_reports_reviewed
-      - is_medical_reports_reviewed
-      - is_reports_by_other_providers_reviewed
-      - is_school_reports_reviewed
-      - is_previous_intervention_plans_and_treatment_plans_reviewed
-      - id
-      title: AssessmentResponse
-    TreatmentPlanStopResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        status_id:
-          type: integer
-          title: Status Id
-        resource_versions:
-          $ref: '#/components/schemas/TreatmentPlanResourceVersions'
-      type: object
-      required:
-      - id
-      - status_id
-      - resource_versions
-      title: TreatmentPlanStopResponse
-    PercentageMethodMasteryCriteriaResponse:
-      properties:
-        desired_amount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Desired Amount
-        practice_duration_count:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1000.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Practice Duration Count
-        total_attempts:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total Attempts
-      type: object
-      required:
-      - desired_amount
-      - practice_duration_count
-      title: PercentageMethodMasteryCriteriaResponse
-    ParentMaritalStatusEnum:
-      type: string
-      enum:
-      - married
-      - divorced
-      - single
-      - domestic partnership
-      title: ParentMaritalStatusEnum
-    ClientInterestsRequest:
-      properties:
-        client_interests:
-          items:
-            type: string
-            minLength: 1
-          type: array
-          title: Client Interests
-      type: object
-      required:
-      - client_interests
-      title: ClientInterestsRequest
-    SiblingResponse:
-      properties:
-        age:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Age
-        name:
-          type: string
-          maxLength: 1000
-          minLength: 2
-          title: Name
-        diagnosis:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Diagnosis
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - age
-      - name
-      - id
-      title: SiblingResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     TreatmentPlanDetailedResponse:
       properties:
         client_id:
@@ -8001,16 +7642,387 @@ components:
       - bay
       - status
       title: TreatmentPlanDetailedResponse
-    UpdateActivationStatus:
+    TargetStageEnum:
+      type: string
+      enum:
+      - Baseline
+      - Mastered
+      - On Hold
+      - Discontinued
+      - Acquisition
+      - Generalization
+      - Maintenance
+      - In Progress
+      title: TargetStageEnum
+    AssessmentSummaryResponse:
       properties:
-        reason:
+        summary_observations_during_assessment:
           type: string
-          minLength: 2
-          title: Reason
+          title: Summary Observations During Assessment
+        summary_assessment_result:
+          type: string
+          title: Summary Assessment Result
+        summary_priorities_based_on_assessment:
+          type: string
+          title: Summary Priorities Based On Assessment
+        id:
+          type: integer
+          title: Id
+      additionalProperties: true
       type: object
       required:
+      - summary_observations_during_assessment
+      - summary_assessment_result
+      - summary_priorities_based_on_assessment
+      - id
+      title: AssessmentSummaryResponse
+    TherapyHistoryServiceResponse:
+      properties:
+        is_parents_authorization_provided:
+          type: boolean
+          title: Is Parents Authorization Provided
+        provider_name:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Provider Name
+        service_type:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Service Type
+        hours:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Hours
+        frequency:
+          anyOf:
+          - $ref: '#/components/schemas/TherapyFrequencyEnum'
+          - type: 'null'
+        response_to_treatment:
+          anyOf:
+          - $ref: '#/components/schemas/TherapyResponseEnum'
+          - type: 'null'
+        is_record_shared:
+          anyOf:
+          - $ref: '#/components/schemas/TherapyRecordSharedEnum'
+          - type: 'null'
+        date_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - is_parents_authorization_provided
+      - id
+      title: TherapyHistoryServiceResponse
+    ParentAndCaregiverResponse:
+      properties:
+        role:
+          $ref: '#/components/schemas/ParentAndCaregiverRoleEnum'
+        name:
+          type: string
+          maxLength: 1000
+          minLength: 2
+          title: Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{9}$
+          - type: 'null'
+          title: Phone
+        parent_marital_status:
+          anyOf:
+          - $ref: '#/components/schemas/ParentMaritalStatusEnum'
+          - type: 'null'
+        parent_mental_health_history:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Mental Health History
+        job:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Job
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+            minLength: 5
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - role
+      - name
+      - id
+      title: ParentAndCaregiverResponse
+    PresentStatusEnum:
+      type: string
+      enum:
+      - New Goal
+      - In Progress
+      - Maintenance
+      - Generalization
+      - Mastered
+      - On Hold
+      - Terminated / Discontinued
+      title: PresentStatusEnum
+    TreatmentPlanTargetVersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: TreatmentPlanTargetVersionEnum
+    TreatmentPlanAssessmentVersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: TreatmentPlanAssessmentVersionEnum
+    PercentageMethodMasteryCriteriaResponse:
+      properties:
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+        total_attempts:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Attempts
+      type: object
+      required:
+      - desired_amount
+      - practice_duration_count
+      title: PercentageMethodMasteryCriteriaResponse
+    DurationMethodMeasurementUnits:
+      properties:
+        duration_unit:
+          $ref: '#/components/schemas/EventMeasurementUnitEnum'
+        duration_unit_formatted:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Duration Unit Formatted
+      type: object
+      required:
+      - duration_unit
+      title: DurationMethodMeasurementUnits
+    MedicationCreate:
+      properties:
+        medication_name:
+          type: string
+          title: Medication Name
+        dosage:
+          type: string
+          title: Dosage
+        physician:
+          type: string
+          title: Physician
+        reason:
+          type: string
+          title: Reason
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+          default: 0
+      type: object
+      required:
+      - medication_name
+      - dosage
+      - physician
       - reason
-      title: UpdateActivationStatus
+      - date_start
+      title: MedicationCreate
+    ClientInterestsRequest:
+      properties:
+        client_interests:
+          items:
+            type: string
+            minLength: 1
+          type: array
+          title: Client Interests
+      type: object
+      required:
+      - client_interests
+      title: ClientInterestsRequest
+    TreatmentPlanStop:
+      properties:
+        signature:
+          type: string
+          minLength: 2
+          title: Signature
+        utc_offset_date_end:
+          type: integer
+          title: Utc Offset Date End
+        date_treatment_plan_ended:
+          type: string
+          format: date-time
+          title: Date Treatment Plan Ended
+      type: object
+      required:
+      - signature
+      - utc_offset_date_end
+      - date_treatment_plan_ended
+      title: TreatmentPlanStop
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    TreatmentPlanStatusWithTimeResponse:
+      properties:
+        label:
+          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
+        date:
+          type: string
+          format: date-time
+          title: Date
+      type: object
+      required:
+      - label
+      - date
+      title: TreatmentPlanStatusWithTimeResponse
+    BehaviorResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: BehaviorResponse
+    TreatmentRecommendationServiceCreate:
+      properties:
+        hours:
+          type: number
+          minimum: 0.0
+          title: Hours
+        frequency:
+          $ref: '#/components/schemas/RecommendedServiceFrequencyEnum'
+        service_code:
+          type: string
+          title: Service Code
+      type: object
+      required:
+      - hours
+      - frequency
+      - service_code
+      title: TreatmentRecommendationServiceCreate
+    DischargeCreate:
+      properties:
+        mastery_of_goals:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Mastery Of Goals
+        readiness_to_move_on_from_current_service:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Readiness To Move On From Current Service
+        step_down_in_program_hours:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Step Down In Program Hours
+        communication_amongst_providers:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Communication Amongst Providers
+      type: object
+      required:
+      - mastery_of_goals
+      - readiness_to_move_on_from_current_service
+      - step_down_in_program_hours
+      - communication_amongst_providers
+      title: DischargeCreate
+    ActivationLogResponse:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        reason:
+          type: string
+          title: Reason
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - date
+      - reason
+      - is_active
+      title: ActivationLogResponse
     BehaviorReductionGoalCreate:
       properties:
         goal_name_id:
@@ -8112,96 +8124,84 @@ components:
       - consequence_modifications
       - is_maladaptive_correction
       title: BehaviorReductionGoalCreate
-    BehaviorResponse:
+    CaregiverGoalCreate:
       properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        id:
+        goal_name_id:
           type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - id
-      title: BehaviorResponse
-    DischargeResponse:
-      properties:
-        mastery_of_goals:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Mastery Of Goals
-        readiness_to_move_on_from_current_service:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Readiness To Move On From Current Service
-        step_down_in_program_hours:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Step Down In Program Hours
-        communication_amongst_providers:
-          type: string
-          maxLength: 10000
-          minLength: 60
-          title: Communication Amongst Providers
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - mastery_of_goals
-      - readiness_to_move_on_from_current_service
-      - step_down_in_program_hours
-      - communication_amongst_providers
-      - id
-      title: DischargeResponse
-    ActivationLogResponse:
-      properties:
-        date:
+          title: Goal Name Id
+        status_at_creation:
+          anyOf:
+          - $ref: '#/components/schemas/PresentStatusEnum'
+          - type: 'null'
+        date_introduced:
           type: string
           format: date
-          title: Date
-        reason:
+          title: Date Introduced
+        current_level_at_creation:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current Level At Creation
+        baseline_at_creation:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Baseline At Creation
+        expected_mastery_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Expected Mastery Date
+        data_collection_method:
+          $ref: '#/components/schemas/GoalDataCollectionMethodEnum'
+        goal_type:
           type: string
-          title: Reason
-        is_active:
-          type: boolean
-          title: Is Active
+          const: caregiver
+          title: Goal Type
+        mastery_criteria:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV1MasteryCriteria'
+          - $ref: '#/components/schemas/PercentageMethodV2MasteryCriteria'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteria'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteria'
+          title: Mastery Criteria
+        measurement_units:
+          anyOf:
+          - $ref: '#/components/schemas/RateMethodMeasurementUnits'
+          - $ref: '#/components/schemas/PercentageMethodMeasurementUnits'
+          - $ref: '#/components/schemas/DurationMethodMeasurementUnits'
+          - type: 'null'
+          title: Measurement Units
+        description:
+          type: string
+          maxLength: 10000
+          minLength: 60
+          title: Description
       type: object
       required:
-      - date
-      - reason
-      - is_active
-      title: ActivationLogResponse
-    RecommendedServiceFrequencyEnum:
-      type: string
-      enum:
-      - weekly
-      - bi-weekly
-      - monthly
-      - 6 month authorization period
-      title: RecommendedServiceFrequencyEnum
-    AssessmentSummaryCreate:
+      - goal_name_id
+      - date_introduced
+      - data_collection_method
+      - goal_type
+      - mastery_criteria
+      - description
+      title: CaregiverGoalCreate
+    TreatmentPlanActivationLogUpdate:
       properties:
-        summary_observations_during_assessment:
+        activation_log_id:
+          type: integer
+          title: Activation Log Id
+        date_changed:
           type: string
-          title: Summary Observations During Assessment
-        summary_assessment_result:
-          type: string
-          title: Summary Assessment Result
-        summary_priorities_based_on_assessment:
-          type: string
-          title: Summary Priorities Based On Assessment
+          format: date-time
+          title: Date Changed
       type: object
       required:
-      - summary_observations_during_assessment
-      - summary_assessment_result
-      - summary_priorities_based_on_assessment
-      title: AssessmentSummaryCreate
+      - activation_log_id
+      - date_changed
+      title: TreatmentPlanActivationLogUpdate
   securitySchemes:
     HTTPBearer:
       type: http

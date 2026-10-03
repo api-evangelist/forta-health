@@ -376,212 +376,13 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ClientPayorModifierMatrixCreate:
-      properties:
-        payor_id:
-          type: integer
-          title: Payor Id
-        service_code_id:
-          type: integer
-          title: Service Code Id
-        location:
-          $ref: '#/components/schemas/LocationEnumVersion1'
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
-        modifier_1:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 1
-        modifier_2:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 2
-        modifier_3:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 3
-        modifier_4:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 4
-      type: object
-      required:
-      - payor_id
-      - service_code_id
-      - location
-      - delivery_method
-      title: ClientPayorModifierMatrixCreate
-    ClinicalStatusEnum:
+    LocationEnumVersion1:
       type: string
       enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ClientFamilyListResponse:
-      properties:
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        parents_and_caregivers:
-          items:
-            $ref: '#/components/schemas/ProviderListResponseForGPSN'
-          type: array
-          title: Parents And Caregivers
-      type: object
-      required:
-      - client
-      - parents_and_caregivers
-      title: ClientFamilyListResponse
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ClientPatch:
-      properties:
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        sex:
-          anyOf:
-          - $ref: '#/components/schemas/Sex'
-          - type: 'null'
-        dob:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Dob
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        street_address_latitude:
-          anyOf:
-          - type: number
-            maximum: 90.0
-            minimum: -90.0
-          - type: 'null'
-          title: Street Address Latitude
-        street_address_longitude:
-          anyOf:
-          - type: number
-            maximum: 180.0
-            minimum: -180.0
-          - type: 'null'
-          title: Street Address Longitude
-      type: object
-      title: ClientPatch
-      description: 'Partial client update. Omitted fields are unchanged; explicit nulls are applied
-
-        only for nullable fields. Required identity fields may be omitted but not nulled.'
-    ProviderResponseWithoutAddress:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderResponseWithoutAddress
+      - Home
+      - Community
+      - School
+      title: LocationEnumVersion1
     ClientDetailedResponse:
       properties:
         first_name:
@@ -681,28 +482,6 @@ components:
       - clinical_status
       - providers
       title: ClientDetailedResponse
-    ClientAssessmentAllocationReset:
-      properties:
-        date_allocated:
-          type: string
-          format: date
-          title: Date Allocated
-      type: object
-      required:
-      - date_allocated
-      title: ClientAssessmentAllocationReset
-    ClientClinicalStatusUpdateRequest:
-      properties:
-        status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        reason:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
-          - type: 'null'
-      type: object
-      required:
-      - status
-      title: ClientClinicalStatusUpdateRequest
     ClinicalStatusReasonEnum:
       type: string
       enum:
@@ -710,7 +489,30 @@ components:
       - TERMINATED
       - RESIGNED
       title: ClinicalStatusReasonEnum
-    ClientWithAddressListResponse:
+    ProviderListResponseForGPSN:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          format: email
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - id
+      - name
+      - email
+      title: ProviderListResponseForGPSN
+    ClientListResponse:
       properties:
         first_name:
           type: string
@@ -729,21 +531,6 @@ components:
         id:
           type: integer
           title: Id
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address State
       type: object
       required:
       - first_name
@@ -752,111 +539,7 @@ components:
       - dob
       - clinical_status
       - id
-      title: ClientWithAddressListResponse
-    ServiceCodeEnum:
-      type: string
-      enum:
-      - '97151'
-      - '97152'
-      - '97153'
-      - '97155'
-      - '97156'
-      - '97157'
-      - '99366'
-      title: ServiceCodeEnum
-    ClientCreate:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        street_address_latitude:
-          anyOf:
-          - type: number
-            maximum: 90.0
-            minimum: -90.0
-          - type: 'null'
-          title: Street Address Latitude
-        street_address_longitude:
-          anyOf:
-          - type: number
-            maximum: 180.0
-            minimum: -180.0
-          - type: 'null'
-          title: Street Address Longitude
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      title: ClientCreate
-    LocationEnumVersion1:
-      type: string
-      enum:
-      - Home
-      - Community
-      - School
-      title: LocationEnumVersion1
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      title: ClientListResponse
     ClientResponse:
       properties:
         first_name:
@@ -945,7 +628,28 @@ components:
       - id
       - clinical_status
       title: ClientResponse
-    ClientListResponse:
+    ClientClinicalStatusUpdateRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ClientClinicalStatusUpdateRequest
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClientWithAddressListResponse:
       properties:
         first_name:
           type: string
@@ -964,6 +668,21 @@ components:
         id:
           type: integer
           title: Id
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address State
       type: object
       required:
       - first_name
@@ -972,30 +691,7 @@ components:
       - dob
       - clinical_status
       - id
-      title: ClientListResponse
-    ProviderListResponseForGPSN:
-      properties:
-        id:
-          type: integer
-          title: Id
-        name:
-          type: string
-          title: Name
-        email:
-          type: string
-          format: email
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-      type: object
-      required:
-      - id
-      - name
-      - email
-      title: ProviderListResponseForGPSN
+      title: ClientWithAddressListResponse
     ClientPayorModifierMatrixResponse:
       properties:
         payor_id:
@@ -1053,12 +749,316 @@ components:
       - client_id
       - service_code
       title: ClientPayorModifierMatrixResponse
+    ClientAssessmentAllocationReset:
+      properties:
+        date_allocated:
+          type: string
+          format: date
+          title: Date Allocated
+      type: object
+      required:
+      - date_allocated
+      title: ClientAssessmentAllocationReset
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     app__api__schemas__sessions__session_enums__DeliveryMethodEnum:
       type: string
       enum:
       - Telehealth
       - In-person
       title: DeliveryMethodEnum
+    ClientPatch:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        sex:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          - type: 'null'
+        dob:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Dob
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        street_address_latitude:
+          anyOf:
+          - type: number
+            maximum: 90.0
+            minimum: -90.0
+          - type: 'null'
+          title: Street Address Latitude
+        street_address_longitude:
+          anyOf:
+          - type: number
+            maximum: 180.0
+            minimum: -180.0
+          - type: 'null'
+          title: Street Address Longitude
+      type: object
+      title: ClientPatch
+      description: 'Partial client update. Omitted fields are unchanged; explicit nulls are applied
+
+        only for nullable fields. Required identity fields may be omitted but not nulled.'
+    ClientCreate:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        street_address_latitude:
+          anyOf:
+          - type: number
+            maximum: 90.0
+            minimum: -90.0
+          - type: 'null'
+          title: Street Address Latitude
+        street_address_longitude:
+          anyOf:
+          - type: number
+            maximum: 180.0
+            minimum: -180.0
+          - type: 'null'
+          title: Street Address Longitude
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      title: ClientCreate
+    ServiceCodeEnum:
+      type: string
+      enum:
+      - '97151'
+      - '97152'
+      - '97153'
+      - '97155'
+      - '97156'
+      - '97157'
+      - '99366'
+      title: ServiceCodeEnum
+    ClientFamilyListResponse:
+      properties:
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        parents_and_caregivers:
+          items:
+            $ref: '#/components/schemas/ProviderListResponseForGPSN'
+          type: array
+          title: Parents And Caregivers
+      type: object
+      required:
+      - client
+      - parents_and_caregivers
+      title: ClientFamilyListResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClientPayorModifierMatrixCreate:
+      properties:
+        payor_id:
+          type: integer
+          title: Payor Id
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        location:
+          $ref: '#/components/schemas/LocationEnumVersion1'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
+        modifier_1:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 1
+        modifier_2:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 2
+        modifier_3:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 3
+        modifier_4:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 4
+      type: object
+      required:
+      - payor_id
+      - service_code_id
+      - location
+      - delivery_method
+      title: ClientPayorModifierMatrixCreate
+    ProviderResponseWithoutAddress:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderResponseWithoutAddress
   securitySchemes:
     HTTPBearer:
       type: http

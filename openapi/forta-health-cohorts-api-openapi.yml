@@ -165,15 +165,18 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+    CohortServiceClass:
+      type: string
+      enum:
+      - 97151 CLAIMS
+      - 97152 CLAIMS
+      - 97153 CLAIMS
+      - 97155 CLAIMS
+      - 97156 CLAIMS
+      - 97157 CLAIMS
+      - NO SERVICE
+      - NON THERAPY HOURS TIMESHEETS
+      title: CohortServiceClass
     ClinicalStatusEnum:
       type: string
       enum:
@@ -183,6 +186,23 @@ components:
       - OFFBOARDED
       - LIMITED ACCESS GUARDIAN
       title: ClinicalStatusEnum
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     CohortCreate:
       properties:
         name:
@@ -199,7 +219,7 @@ components:
       - name
       - service_classes
       title: CohortCreate
-    CohortResponse:
+    CohortPatch:
       properties:
         name:
           type: string
@@ -210,15 +230,32 @@ components:
             $ref: '#/components/schemas/CohortServiceClass'
           type: array
           title: Service Classes
-        id:
-          type: integer
-          title: Id
       type: object
       required:
       - name
       - service_classes
-      - id
-      title: CohortResponse
+      title: CohortPatch
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ClientListResponse:
       properties:
         first_name:
@@ -247,58 +284,6 @@ components:
       - clinical_status
       - id
       title: ClientListResponse
-    ClientAssignmentResponse:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-      type: object
-      required:
-      - date_start
-      - id
-      - client
-      title: ClientAssignmentResponse
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     CohortWithClientAssignmentsResponse:
       properties:
         name:
@@ -325,19 +310,30 @@ components:
       - id
       - client_assignments
       title: CohortWithClientAssignmentsResponse
-    CohortServiceClass:
-      type: string
-      enum:
-      - 97151 CLAIMS
-      - 97152 CLAIMS
-      - 97153 CLAIMS
-      - 97155 CLAIMS
-      - 97156 CLAIMS
-      - 97157 CLAIMS
-      - NO SERVICE
-      - NON THERAPY HOURS TIMESHEETS
-      title: CohortServiceClass
-    CohortPatch:
+    ClientAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - client
+      title: ClientAssignmentResponse
+    CohortResponse:
       properties:
         name:
           type: string
@@ -348,11 +344,15 @@ components:
             $ref: '#/components/schemas/CohortServiceClass'
           type: array
           title: Service Classes
+        id:
+          type: integer
+          title: Id
       type: object
       required:
       - name
       - service_classes
-      title: CohortPatch
+      - id
+      title: CohortResponse
   securitySchemes:
     HTTPBearer:
       type: http
