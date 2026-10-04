@@ -139,84 +139,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ProviderAvailabilityPatch:
-      properties:
-        day_of_week:
-          $ref: '#/components/schemas/DayOfWeek'
-        time_start:
-          type: string
-          format: time
-          title: Time Start
-        time_end:
-          type: string
-          format: time
-          title: Time End
-      type: object
-      required:
-      - day_of_week
-      - time_start
-      - time_end
-      title: ProviderAvailabilityPatch
-    ProviderListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
-    TimeZoneEnum:
-      type: string
-      enum:
-      - America/New_York
-      - America/Los_Angeles
-      - America/Chicago
-      - America/Denver
-      - America/Phoenix
-      - America/Honolulu
-      - America/Anchorage
-      title: TimeZoneEnum
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    DayOfWeek:
-      type: string
-      enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-      title: DayOfWeek
     ValidationError:
       properties:
         loc:
@@ -238,6 +160,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ProviderAvailabilityResponse:
       properties:
         day_of_week:
@@ -271,15 +202,46 @@ components:
       - id
       - provider
       title: ProviderAvailabilityResponse
-    ClinicalStatusEnum:
+    TimeZoneEnum:
       type: string
       enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
+      - America/New_York
+      - America/Los_Angeles
+      - America/Chicago
+      - America/Denver
+      - America/Phoenix
+      - America/Honolulu
+      - America/Anchorage
+      title: TimeZoneEnum
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
     ProviderAvailabilityCreate:
       properties:
         day_of_week:
@@ -306,6 +268,44 @@ components:
       - time_end
       - timezone
       title: ProviderAvailabilityCreate
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+      title: DayOfWeek
+    ProviderAvailabilityPatch:
+      properties:
+        day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        time_start:
+          type: string
+          format: time
+          title: Time Start
+        time_end:
+          type: string
+          format: time
+          title: Time End
+      type: object
+      required:
+      - day_of_week
+      - time_start
+      - time_end
+      title: ProviderAvailabilityPatch
   securitySchemes:
     HTTPBearer:
       type: http

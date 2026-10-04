@@ -161,6 +161,255 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ClientSupervisionCriteria:
+      properties:
+        minimum_percentage:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Minimum Percentage
+        minimum_hours:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Minimum Hours
+        operator:
+          anyOf:
+          - $ref: '#/components/schemas/OperatorEnum'
+          - type: 'null'
+          default: OR
+      type: object
+      title: ClientSupervisionCriteria
+    PayorContractResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        rate_per_unit:
+          type: number
+          title: Rate Per Unit
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - date_start
+      - rate_per_unit
+      - service_code_id
+      - id
+      title: PayorContractResponse
+    PayorSectorEnum:
+      type: string
+      enum:
+      - Commercial
+      - Medicaid
+      - MCO
+      - Government Plan
+      title: PayorSectorEnum
+      description: Enum for payor sectors.
+    PolicyCreate:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        policyholder:
+          $ref: '#/components/schemas/PolicyHolder'
+        relationship_to_policyholder:
+          $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
+        payor_responsibility:
+          $ref: '#/components/schemas/PayorResponsibilityEnum'
+        group_number:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Group Number
+        member_id:
+          type: string
+          minLength: 1
+          title: Member Id
+        billing_payor_id:
+          type: integer
+          title: Billing Payor Id
+        is_monthly_plan:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Monthly Plan
+        is_PA1_required:
+          type: boolean
+          title: Is Pa1 Required
+        is_PA2_required:
+          type: boolean
+          title: Is Pa2 Required
+        client_id:
+          type: integer
+          title: Client Id
+        payor_id:
+          type: integer
+          title: Payor Id
+        create_eb_tracker_entry:
+          type: boolean
+          title: Create Eb Tracker Entry
+          default: true
+      type: object
+      required:
+      - date_start
+      - policyholder
+      - relationship_to_policyholder
+      - payor_responsibility
+      - member_id
+      - billing_payor_id
+      - is_PA1_required
+      - is_PA2_required
+      - client_id
+      - payor_id
+      title: PolicyCreate
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PolicyPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        policyholder:
+          $ref: '#/components/schemas/PolicyHolder'
+        relationship_to_policyholder:
+          $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
+        payor_responsibility:
+          $ref: '#/components/schemas/PayorResponsibilityEnum'
+        group_number:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Group Number
+        member_id:
+          type: string
+          minLength: 1
+          title: Member Id
+        billing_payor_id:
+          type: integer
+          title: Billing Payor Id
+        is_monthly_plan:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Monthly Plan
+        is_PA1_required:
+          type: boolean
+          title: Is Pa1 Required
+        is_PA2_required:
+          type: boolean
+          title: Is Pa2 Required
+      type: object
+      required:
+      - date_start
+      - policyholder
+      - relationship_to_policyholder
+      - payor_responsibility
+      - member_id
+      - billing_payor_id
+      - is_PA1_required
+      - is_PA2_required
+      title: PolicyPatch
+    ClientSupervisionRequirements-Output:
+      properties:
+        is_required:
+          type: boolean
+          title: Is Required
+        criteria:
+          anyOf:
+          - $ref: '#/components/schemas/ClientSupervisionCriteria'
+          - type: 'null'
+      type: object
+      required:
+      - is_required
+      title: ClientSupervisionRequirements
+    ServiceCodeEnum:
+      type: string
+      enum:
+      - '97151'
+      - '97152'
+      - '97153'
+      - '97155'
+      - '97156'
+      - '97157'
+      - '99366'
+      title: ServiceCodeEnum
+    PayorServiceCodeDescriptionResponse:
+      properties:
+        description:
+          type: string
+          minLength: 2
+          title: Description
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        id:
+          type: integer
+          title: Id
+        payor_id:
+          type: integer
+          title: Payor Id
+        service_code:
+          anyOf:
+          - $ref: '#/components/schemas/ServiceCodeEnum'
+          - type: string
+          title: Service Code
+      type: object
+      required:
+      - description
+      - service_code_id
+      - id
+      - payor_id
+      - service_code
+      title: PayorServiceCodeDescriptionResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
     PayorDetailedResponse:
       properties:
         label:
@@ -268,343 +517,6 @@ components:
       - contracts
       - service_code_descriptions
       title: PayorDetailedResponse
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
-    PolicyHolder:
-      properties:
-        street_address_line_one:
-          type: string
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_city:
-          type: string
-          minLength: 2
-          title: Street Address City
-        street_address_state:
-          type: string
-          maxLength: 2
-          title: Street Address State
-        street_address_zip:
-          type: string
-          minLength: 5
-          title: Street Address Zip
-        name:
-          type: string
-          title: Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        phone:
-          type: string
-          pattern: ^[1-9][0-9]{9}$
-          title: Phone
-      type: object
-      required:
-      - street_address_line_one
-      - street_address_city
-      - street_address_state
-      - street_address_zip
-      - name
-      - sex
-      - dob
-      - phone
-      title: PolicyHolder
-    PayorResponsibilityEnum:
-      type: string
-      enum:
-      - PRIMARY
-      - SECONDARY
-      - TERTIARY
-      title: PayorResponsibilityEnum
-    OperatorEnum:
-      type: string
-      enum:
-      - AND
-      - OR
-      title: OperatorEnum
-    ClientSupervisionCriteria:
-      properties:
-        minimum_percentage:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Minimum Percentage
-        minimum_hours:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Minimum Hours
-        operator:
-          anyOf:
-          - $ref: '#/components/schemas/OperatorEnum'
-          - type: 'null'
-          default: OR
-      type: object
-      title: ClientSupervisionCriteria
-    PayorSectorEnum:
-      type: string
-      enum:
-      - Commercial
-      - Medicaid
-      - MCO
-      - Government Plan
-      title: PayorSectorEnum
-      description: Enum for payor sectors.
-    PolicyPatch:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        policyholder:
-          $ref: '#/components/schemas/PolicyHolder'
-        relationship_to_policyholder:
-          $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
-        payor_responsibility:
-          $ref: '#/components/schemas/PayorResponsibilityEnum'
-        group_number:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Group Number
-        member_id:
-          type: string
-          minLength: 1
-          title: Member Id
-        billing_payor_id:
-          type: integer
-          title: Billing Payor Id
-        is_monthly_plan:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Monthly Plan
-        is_PA1_required:
-          type: boolean
-          title: Is Pa1 Required
-        is_PA2_required:
-          type: boolean
-          title: Is Pa2 Required
-      type: object
-      required:
-      - date_start
-      - policyholder
-      - relationship_to_policyholder
-      - payor_responsibility
-      - member_id
-      - billing_payor_id
-      - is_PA1_required
-      - is_PA2_required
-      title: PolicyPatch
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PayorServiceCodeDefaultDescriptionResponse:
-      properties:
-        description:
-          type: string
-          minLength: 2
-          title: Description
-        service_code_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Service Code Id
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-        payor_id:
-          type: integer
-          title: Payor Id
-        service_code:
-          anyOf:
-          - $ref: '#/components/schemas/ServiceCodeEnum'
-          - type: string
-          title: Service Code
-      type: object
-      required:
-      - description
-      - payor_id
-      - service_code
-      title: PayorServiceCodeDefaultDescriptionResponse
-    BTTypeEnum:
-      type: string
-      enum:
-      - BT
-      - RBT
-      - RLT
-      - CBT
-      title: BTTypeEnum
-    PolicyCreate:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        policyholder:
-          $ref: '#/components/schemas/PolicyHolder'
-        relationship_to_policyholder:
-          $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
-        payor_responsibility:
-          $ref: '#/components/schemas/PayorResponsibilityEnum'
-        group_number:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Group Number
-        member_id:
-          type: string
-          minLength: 1
-          title: Member Id
-        billing_payor_id:
-          type: integer
-          title: Billing Payor Id
-        is_monthly_plan:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Monthly Plan
-        is_PA1_required:
-          type: boolean
-          title: Is Pa1 Required
-        is_PA2_required:
-          type: boolean
-          title: Is Pa2 Required
-        client_id:
-          type: integer
-          title: Client Id
-        payor_id:
-          type: integer
-          title: Payor Id
-        create_eb_tracker_entry:
-          type: boolean
-          title: Create Eb Tracker Entry
-          default: true
-      type: object
-      required:
-      - date_start
-      - policyholder
-      - relationship_to_policyholder
-      - payor_responsibility
-      - member_id
-      - billing_payor_id
-      - is_PA1_required
-      - is_PA2_required
-      - client_id
-      - payor_id
-      title: PolicyCreate
-    PolicyResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        client_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Client Id
-        payor_responsibility:
-          type: string
-          title: Payor Responsibility
-        relationship_to_policyholder:
-          anyOf:
-          - $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
-          - type: 'null'
-        group_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group Number
-        member_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Member Id
-        date_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Start
-        policyholder:
-          anyOf:
-          - $ref: '#/components/schemas/PolicyHolder'
-          - type: 'null'
-        payor:
-          $ref: '#/components/schemas/PayorDetailedResponse'
-        billing_payor:
-          $ref: '#/components/schemas/PayorDetailedResponse'
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        is_PA1_required:
-          type: boolean
-          title: Is Pa1 Required
-        is_PA2_required:
-          type: boolean
-          title: Is Pa2 Required
-        is_monthly_plan:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Monthly Plan
-      type: object
-      required:
-      - id
-      - payor_responsibility
-      - payor
-      - billing_payor
-      - is_PA1_required
-      - is_PA2_required
-      title: PolicyResponse
-    ServiceCodeEnum:
-      type: string
-      enum:
-      - '97151'
-      - '97152'
-      - '97153'
-      - '97155'
-      - '97156'
-      - '97157'
-      - '99366'
-      title: ServiceCodeEnum
     ValidationError:
       properties:
         loc:
@@ -626,47 +538,14 @@ components:
       - msg
       - type
       title: ValidationError
-    PayorContractResponse:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        rate_per_unit:
-          type: number
-          title: Rate Per Unit
-        service_code_id:
-          type: integer
-          title: Service Code Id
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - date_start
-      - rate_per_unit
-      - service_code_id
-      - id
-      title: PayorContractResponse
-    PayorTypeEnum:
+    RelationshipToPolicyHolderEnum:
       type: string
       enum:
-      - Medicare Part A
-      - Medicare Part B
-      - Medicaid
-      - Tricare
-      - ChampVa
-      - Group Health Plan
-      - FECA Blk Lung
-      - Other
-      title: PayorTypeEnum
-      description: Enum for payor types.
+      - SELF
+      - SPOUSE
+      - CHILD
+      - OTHER
+      title: RelationshipToPolicyHolderEnum
     PolicyPriorAuthorizationDetails:
       properties:
         prior_authorization_request_id:
@@ -748,46 +627,88 @@ components:
           title: Max Units Per Claim
       type: object
       title: PolicyPriorAuthorizationDetails
-    RelationshipToPolicyHolderEnum:
+    BTTypeEnum:
       type: string
       enum:
-      - SELF
-      - SPOUSE
-      - CHILD
-      - OTHER
-      title: RelationshipToPolicyHolderEnum
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ClientSupervisionRequirements-Output:
+      - BT
+      - RBT
+      - RLT
+      - CBT
+      title: BTTypeEnum
+    PolicyHolder:
       properties:
-        is_required:
-          type: boolean
-          title: Is Required
-        criteria:
+        street_address_line_one:
+          type: string
+          title: Street Address Line One
+        street_address_line_two:
           anyOf:
-          - $ref: '#/components/schemas/ClientSupervisionCriteria'
+          - type: string
           - type: 'null'
+          title: Street Address Line Two
+        street_address_city:
+          type: string
+          minLength: 2
+          title: Street Address City
+        street_address_state:
+          type: string
+          maxLength: 2
+          title: Street Address State
+        street_address_zip:
+          type: string
+          minLength: 5
+          title: Street Address Zip
+        name:
+          type: string
+          title: Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        phone:
+          type: string
+          pattern: ^[1-9][0-9]{9}$
+          title: Phone
       type: object
       required:
-      - is_required
-      title: ClientSupervisionRequirements
-    PayorServiceCodeDescriptionResponse:
+      - street_address_line_one
+      - street_address_city
+      - street_address_state
+      - street_address_zip
+      - name
+      - sex
+      - dob
+      - phone
+      title: PolicyHolder
+    PayorTypeEnum:
+      type: string
+      enum:
+      - Medicare Part A
+      - Medicare Part B
+      - Medicaid
+      - Tricare
+      - ChampVa
+      - Group Health Plan
+      - FECA Blk Lung
+      - Other
+      title: PayorTypeEnum
+      description: Enum for payor types.
+    PayorServiceCodeDefaultDescriptionResponse:
       properties:
         description:
           type: string
           minLength: 2
           title: Description
         service_code_id:
-          type: integer
+          anyOf:
+          - type: integer
+          - type: 'null'
           title: Service Code Id
         id:
-          type: integer
+          anyOf:
+          - type: integer
+          - type: 'null'
           title: Id
         payor_id:
           type: integer
@@ -800,11 +721,90 @@ components:
       type: object
       required:
       - description
-      - service_code_id
-      - id
       - payor_id
       - service_code
-      title: PayorServiceCodeDescriptionResponse
+      title: PayorServiceCodeDefaultDescriptionResponse
+    OperatorEnum:
+      type: string
+      enum:
+      - AND
+      - OR
+      title: OperatorEnum
+    PayorResponsibilityEnum:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      - TERTIARY
+      title: PayorResponsibilityEnum
+    PolicyResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        client_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+        payor_responsibility:
+          type: string
+          title: Payor Responsibility
+        relationship_to_policyholder:
+          anyOf:
+          - $ref: '#/components/schemas/RelationshipToPolicyHolderEnum'
+          - type: 'null'
+        group_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Number
+        member_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Member Id
+        date_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Start
+        policyholder:
+          anyOf:
+          - $ref: '#/components/schemas/PolicyHolder'
+          - type: 'null'
+        payor:
+          $ref: '#/components/schemas/PayorDetailedResponse'
+        billing_payor:
+          $ref: '#/components/schemas/PayorDetailedResponse'
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        is_PA1_required:
+          type: boolean
+          title: Is Pa1 Required
+        is_PA2_required:
+          type: boolean
+          title: Is Pa2 Required
+        is_monthly_plan:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Monthly Plan
+      type: object
+      required:
+      - id
+      - payor_responsibility
+      - payor
+      - billing_payor
+      - is_PA1_required
+      - is_PA2_required
+      title: PolicyResponse
   securitySchemes:
     HTTPBearer:
       type: http

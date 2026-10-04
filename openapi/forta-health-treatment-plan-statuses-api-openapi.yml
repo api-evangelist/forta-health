@@ -66,32 +66,6 @@ components:
       - label
       - id
       title: TreatmentPlanStatusResponse
-    TreatmentPlanStatusLabelEnum:
-      type: string
-      enum:
-      - STARTED
-      - COMPLETED
-      - EDITING
-      - READ_ONLY
-      title: TreatmentPlanStatusLabelEnum
-      description: Enum for treatment plan status labels.
-    TreatmentPlanStatusBase:
-      properties:
-        label:
-          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
-      type: object
-      required:
-      - label
-      title: TreatmentPlanStatusBase
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -113,6 +87,32 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TreatmentPlanStatusLabelEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      - EDITING
+      - READ_ONLY
+      title: TreatmentPlanStatusLabelEnum
+      description: Enum for treatment plan status labels.
+    TreatmentPlanStatusBase:
+      properties:
+        label:
+          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
+      type: object
+      required:
+      - label
+      title: TreatmentPlanStatusBase
   securitySchemes:
     HTTPBearer:
       type: http

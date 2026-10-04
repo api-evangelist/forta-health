@@ -246,54 +246,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    BehaviorCreate:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-      type: object
-      required:
-      - label
-      title: BehaviorCreate
-    GoalNameCreate:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        prefix:
-          type: string
-          minLength: 2
-          title: Prefix
-      type: object
-      required:
-      - label
-      - prefix
-      title: GoalNameCreate
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    BehaviorResponse:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - label
-      - id
-      title: BehaviorResponse
     GoalNameResponse:
       properties:
         label:
@@ -345,6 +297,54 @@ components:
       - msg
       - type
       title: ValidationError
+    BehaviorResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: BehaviorResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GoalNameCreate:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        prefix:
+          type: string
+          minLength: 2
+          title: Prefix
+      type: object
+      required:
+      - label
+      - prefix
+      title: GoalNameCreate
+    BehaviorCreate:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+      type: object
+      required:
+      - label
+      title: BehaviorCreate
   securitySchemes:
     HTTPBearer:
       type: http

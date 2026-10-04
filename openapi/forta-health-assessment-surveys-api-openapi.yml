@@ -136,26 +136,51 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    AssessmentSurveyCreate:
+    ValidationError:
       properties:
-        bt_provider_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Bt Provider Id
-        client_id:
-          type: integer
-          title: Client Id
-        overriding_email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Overriding Email
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - client_id
-      title: AssessmentSurveyCreate
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
     AssessmentSurveyResponse:
       properties:
         id:
@@ -197,51 +222,26 @@ components:
       - recipient_email
       - date_survey_sent
       title: AssessmentSurveyResponse
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    HTTPValidationError:
+    AssessmentSurveyCreate:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+        bt_provider_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bt Provider Id
+        client_id:
+          type: integer
+          title: Client Id
+        overriding_email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Overriding Email
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - client_id
+      title: AssessmentSurveyCreate
     ClientResponse:
       properties:
         first_name:

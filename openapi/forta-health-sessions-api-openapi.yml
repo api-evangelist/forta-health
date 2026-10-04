@@ -1741,38 +1741,407 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    app__api__schemas__sessions__trial__RateEventPatch:
+    SessionListResponse:
       properties:
-        date_of_event:
+        id:
+          type: integer
+          title: Id
+        client_id:
+          type: integer
+          title: Client Id
+        date_start:
           type: string
           format: date-time
-          title: Date Of Event
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        status:
+          $ref: '#/components/schemas/SessionStatusEnum'
+        date_provider_signed:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Provider Signed
+        provider_signature:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Signature
+        utc_offset_date_provider_signed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset Date Provider Signed
+        expected_duration:
+          type: integer
+          title: Expected Duration
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        session_provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        clinical_qa_review:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalQAListResponse'
+          - type: 'null'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumVersion1'
+          - $ref: '#/components/schemas/LocationEnumVersion2'
+          title: Location
+        is_billable:
+          type: boolean
+          title: Is Billable
+        clinical_relationship:
+          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
+        note_version:
+          $ref: '#/components/schemas/SessionNoteVersionEnum'
+          default: v1
+        treatment_plan_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Treatment Plan Id
+        evv_required:
+          type: boolean
+          title: Evv Required
+          default: false
+        evv_start_captured:
+          type: boolean
+          title: Evv Start Captured
+          default: false
+        evv_end_captured:
+          type: boolean
+          title: Evv End Captured
+          default: false
       type: object
       required:
-      - date_of_event
-      title: RateEventPatch
-    ClinicalQAReviewSubmit:
+      - id
+      - client_id
+      - date_start
+      - utc_offset_date_start
+      - status
+      - expected_duration
+      - client
+      - session_provider
+      - location
+      - is_billable
+      - clinical_relationship
+      title: SessionListResponse
+    OccurrenceInstance:
       properties:
-        date_reviewed:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - duration
+      title: OccurrenceInstance
+    LocationEnumVersion2:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: LocationEnumVersion2
+    ProviderStatusEnum:
+      type: string
+      enum:
+      - Not Training
+      - Training
+      title: ProviderStatusEnum
+    SessionTerminateResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        narrative:
+          type: string
+          title: Narrative
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - id
+      - narrative
+      - duration
+      title: SessionTerminateResponse
+    EvalSchemaVersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: EvalSchemaVersionEnum
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    ClinicalQAReviewResponse:
+      properties:
+        is_datetime_accurate:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Datetime Accurate
+        is_data_collected_per_forta_protocols:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Data Collected Per Forta Protocols
+        is_language_objective:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Language Objective
+        is_note_submitted_within_48hours_of_session:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Note Submitted Within 48Hours Of Session
+        has_10data_points_per_hour:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has 10Data Points Per Hour
+        is_at_least_2programs_run_per_hour:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is At Least 2Programs Run Per Hour
+        is_all_active_programs_used_within_7days:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is All Active Programs Used Within 7Days
+        is_detail_sufficient_quantity:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Detail Sufficient Quantity
+        is_detail_sufficient_quality:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Detail Sufficient Quality
+        is_overall_coherent:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Overall Coherent
+        one_setting_per_session_note:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: One Setting Per Session Note
+        therapist_role_aligns_with_tp_goals:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Therapist Role Aligns With Tp Goals
+        date_start:
           type: string
           format: date-time
-          title: Date Reviewed
-        utc_offset_date_reviewed:
+          title: Date Start
+        utc_offset_date_start:
           type: integer
           maximum: 50400.0
           minimum: -43200.0
+          title: Utc Offset Date Start
+          description: Offset from UTC in seconds
+        id:
+          type: integer
+          title: Id
+        score:
+          type: number
+          maximum: 100.0
+          minimum: 0.0
+          title: Score
+        verdict:
+          $ref: '#/components/schemas/ClinicalQAReviewVerdict'
+        status:
+          $ref: '#/components/schemas/ClinicalQAReviewStatusEnum'
+        reviewing_provider:
+          $ref: '#/components/schemas/ProviderResponse'
+        date_reviewed:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Reviewed
+        utc_offset_date_reviewed:
+          anyOf:
+          - type: integer
+            maximum: 50400.0
+            minimum: -43200.0
+          - type: 'null'
           title: Utc Offset Date Reviewed
+          description: Offset from UTC in seconds
+        session_id:
+          type: integer
+          title: Session Id
+        acknowledged_signature:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Acknowledged Signature
+        date_review_acknowledged:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Review Acknowledged
+        utc_offset_date_review_acknowledged:
+          anyOf:
+          - type: integer
+            maximum: 50400.0
+            minimum: -43200.0
+          - type: 'null'
+          title: Utc Offset Date Review Acknowledged
+          description: Offset from UTC in seconds
+        discourses:
+          items:
+            $ref: '#/components/schemas/ClinicalQAReviewSubmissionDiscourseResponse'
+          type: array
+          title: Discourses
+        eval_schema_version:
+          $ref: '#/components/schemas/EvalSchemaVersionEnum'
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - id
+      - score
+      - verdict
+      - status
+      - reviewing_provider
+      - session_id
+      - discourses
+      - eval_schema_version
+      title: ClinicalQAReviewResponse
+    QABillingStatusEnum:
+      type: string
+      enum:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
+    GuardianSignRequest:
+      properties:
+        guardian_provider_signature:
+          type: string
+          title: Guardian Provider Signature
+        date_guardian_provider_signed:
+          type: string
+          format: date-time
+          title: Date Guardian Provider Signed
+        utc_offset_date_guardian_provider_signed:
+          type: integer
+          title: Utc Offset Date Guardian Provider Signed
+      type: object
+      required:
+      - guardian_provider_signature
+      - date_guardian_provider_signed
+      - utc_offset_date_guardian_provider_signed
+      title: GuardianSignRequest
+    Bay:
+      type: string
+      enum:
+      - BAY 1
+      - BAY 2
+      - BAY 2.5
+      - BAY 2.6
+      - BAY 2.7
+      - BAY 3
+      - BAY 6
+      - BAY 7
+      title: Bay
+    ClinicalQAReviewAcknowledge:
+      properties:
+        acknowledged_signature:
+          type: string
+          minLength: 2
+          title: Acknowledged Signature
+        date_review_acknowledged:
+          type: string
+          format: date-time
+          title: Date Review Acknowledged
+        utc_offset_date_review_acknowledged:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Review Acknowledged
           description: Offset from UTC in seconds
       type: object
       required:
-      - date_reviewed
-      - utc_offset_date_reviewed
-      title: ClinicalQAReviewSubmit
-    GoalsAndTrialsResponse:
-      additionalProperties:
-        $ref: '#/components/schemas/GoalAndTrialsResponse'
+      - acknowledged_signature
+      - date_review_acknowledged
+      - utc_offset_date_review_acknowledged
+      title: ClinicalQAReviewAcknowledge
+    SessionGoalTimingResponse:
+      properties:
+        timing_type:
+          $ref: '#/components/schemas/SessionGoalTimingTypeEnum'
+        start_offset_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Start Offset Seconds
+        end_offset_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: End Offset Seconds
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        duration_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Seconds
+        order_index:
+          type: integer
+          title: Order Index
       type: object
-      title: GoalsAndTrialsResponse
+      required:
+      - timing_type
+      - order_index
+      title: SessionGoalTimingResponse
+    DurationEventCreate:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - duration
+      title: DurationEventCreate
     ClientResponse:
       properties:
         first_name:
@@ -1861,290 +2230,61 @@ components:
       - id
       - clinical_status
       title: ClientResponse
-    SessionBreakResponse:
-      properties:
-        start_offset_seconds:
-          type: integer
-          minimum: 0.0
-          title: Start Offset Seconds
-        end_offset_seconds:
-          type: integer
-          minimum: 0.0
-          title: End Offset Seconds
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-        duration_seconds:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Duration Seconds
-      type: object
-      required:
-      - start_offset_seconds
-      - end_offset_seconds
-      title: SessionBreakResponse
-    EVVSessionStatusResponse:
-      properties:
-        start:
-          $ref: '#/components/schemas/EVVSideStatusResponse'
-        end:
-          $ref: '#/components/schemas/EVVSideStatusResponse'
-      type: object
-      required:
-      - start
-      - end
-      title: EVVSessionStatusResponse
-    PatchSessionNarrative:
-      properties:
-        narrative:
-          type: string
-          title: Narrative
-      type: object
-      required:
-      - narrative
-      title: PatchSessionNarrative
-    TargetTrialSummary:
-      properties:
-        target_id:
-          type: integer
-          title: Target Id
-        goal_type:
-          $ref: '#/components/schemas/GoalTypeEnum'
-        data_collection_method:
-          type: string
-          title: Data Collection Method
-        label:
-          type: string
-          title: Label
-        trials:
-          items:
-            $ref: '#/components/schemas/TrialData'
-          type: array
-          title: Trials
-        phase_changes:
-          items:
-            $ref: '#/components/schemas/TargetPhaseChangeData'
-          type: array
-          title: Phase Changes
-        event_duration_measurement_unit:
-          anyOf:
-          - $ref: '#/components/schemas/EventMeasurementUnitEnum'
-          - type: 'null'
-      type: object
-      required:
-      - target_id
-      - goal_type
-      - data_collection_method
-      - label
-      - trials
-      - phase_changes
-      title: TargetTrialSummary
-    ProviderAssignmentClinicalRelationshipEnum:
+    SessionStatusEnum:
       type: string
       enum:
-      - home_bcba
-      - bobbing_bcba
-      - substitute_bcba
-      - prbt
-      - assistant_assessor
-      - vbt
-      - practicing_guardian
-      - parent
-      - caregiver
-      - parent_and_caregiver
-      - limited_access_guardian
-      title: ProviderAssignmentClinicalRelationshipEnum
-    QABillingStatusEnum:
-      type: string
-      enum:
-      - Billable
-      - Not Billable
-      title: QABillingStatusEnum
-    ClinicalQAListResponse:
+      - STARTED
+      - AWAITING REVIEW
+      - AWAITING GUARDIAN SIGNATURE
+      - EDITS REQUESTED
+      - COMPLETED
+      title: SessionStatusEnum
+    SessionDownloadPdfResponse:
       properties:
-        date_start:
+        document_url:
           type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Start
-          description: Offset from UTC in seconds
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: SessionDownloadPdfResponse
+    ClinicalQAReviewSubmissionDiscourseResponse:
+      properties:
+        comment:
+          anyOf:
+          - type: string
+            minLength: 4
+          - type: 'null'
+          title: Comment
+        is_edit_requested:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Edit Requested
         id:
           type: integer
           title: Id
-        verdict:
-          $ref: '#/components/schemas/ClinicalQAReviewVerdict'
-        status:
-          $ref: '#/components/schemas/ClinicalQAReviewStatusEnum'
-        date_reviewed:
+        date_submitted:
           anyOf:
           - type: string
             format: date-time
           - type: 'null'
-          title: Date Reviewed
-        utc_offset_date_reviewed:
+          title: Date Submitted
+        utc_offset_date_submitted:
           anyOf:
           - type: integer
             maximum: 50400.0
             minimum: -43200.0
           - type: 'null'
-          title: Utc Offset Date Reviewed
+          title: Utc Offset Date Submitted
           description: Offset from UTC in seconds
-        date_review_acknowledged:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Review Acknowledged
-        utc_offset_date_review_acknowledged:
-          anyOf:
-          - type: integer
-            maximum: 50400.0
-            minimum: -43200.0
-          - type: 'null'
-          title: Utc Offset Date Review Acknowledged
-          description: Offset from UTC in seconds
-        has_submission_discourse_comments:
-          type: boolean
-          title: Has Submission Discourse Comments
-        score:
-          type: number
-          maximum: 100.0
-          minimum: 0.0
-          title: Score
+        reviewing_provider:
+          $ref: '#/components/schemas/ProviderResponse'
       type: object
       required:
-      - date_start
-      - utc_offset_date_start
       - id
-      - verdict
-      - status
-      - has_submission_discourse_comments
-      - score
-      title: ClinicalQAListResponse
-    PatchSessionProgressSynopsisRequest:
-      properties:
-        client_progress:
-          anyOf:
-          - $ref: '#/components/schemas/ClientProgressEnum'
-          - type: 'null'
-        synopsis:
-          $ref: '#/components/schemas/Synopsis'
-        goal_techniques:
-          anyOf:
-          - additionalProperties:
-              items:
-                type: string
-              type: array
-            type: object
-          - type: 'null'
-          title: Goal Techniques
-        goal_timings:
-          anyOf:
-          - additionalProperties:
-              items:
-                $ref: '#/components/schemas/SessionGoalTimingRequest'
-              type: array
-            type: object
-          - type: 'null'
-          title: Goal Timings
-      type: object
-      required:
-      - synopsis
-      title: PatchSessionProgressSynopsisRequest
-    ClientSignsSymptomsObserved:
-      properties:
-        other:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Other
-        play_skills_deficit:
-          type: boolean
-          title: Play Skills Deficit
-        motor_skills_deficit:
-          type: boolean
-          title: Motor Skills Deficit
-        maladaptive_behaviors:
-          type: boolean
-          title: Maladaptive Behaviors
-        adaptive_skills_deficit:
-          type: boolean
-          title: Adaptive Skills Deficit
-        cognitive_skills_deficit:
-          type: boolean
-          title: Cognitive Skills Deficit
-        social_interaction_deficit:
-          type: boolean
-          title: Social Interaction Deficit
-        social_communication_deficit:
-          type: boolean
-          title: Social Communication Deficit
-        joint_attention_skills_deficit:
-          type: boolean
-          title: Joint Attention Skills Deficit
-        community_safety_skills_deficit:
-          type: boolean
-          title: Community Safety Skills Deficit
-        restricted_repetitive_behaviors:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Restricted Repetitive Behaviors
-        restricted_receptive_behaviors:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Restricted Receptive Behaviors
-        school_readiness_skills_deficit:
-          type: boolean
-          title: School Readiness Skills Deficit
-        nonverbal_communication_deficit:
-          type: boolean
-          title: Nonverbal Communication Deficit
-        social_emotional_reciprocity_deficit:
-          type: boolean
-          title: Social Emotional Reciprocity Deficit
-        expressive_receptive_communication_deficit:
-          type: boolean
-          title: Expressive Receptive Communication Deficit
-      type: object
-      required:
-      - play_skills_deficit
-      - motor_skills_deficit
-      - maladaptive_behaviors
-      - adaptive_skills_deficit
-      - cognitive_skills_deficit
-      - social_interaction_deficit
-      - social_communication_deficit
-      - joint_attention_skills_deficit
-      - community_safety_skills_deficit
-      - school_readiness_skills_deficit
-      - nonverbal_communication_deficit
-      - social_emotional_reciprocity_deficit
-      - expressive_receptive_communication_deficit
-      title: ClientSignsSymptomsObserved
-    SessionBreakRequest:
-      properties:
-        start_offset_seconds:
-          type: integer
-          minimum: 0.0
-          title: Start Offset Seconds
-        end_offset_seconds:
-          type: integer
-          minimum: 0.0
-          title: End Offset Seconds
-      type: object
-      required:
-      - start_offset_seconds
-      - end_offset_seconds
-      title: SessionBreakRequest
+      - reviewing_provider
+      title: ClinicalQAReviewSubmissionDiscourseResponse
     GoalNameResponse:
       properties:
         label:
@@ -2175,163 +2315,6 @@ components:
       - behavior
       - is_active
       title: GoalNameResponse
-    app__api__schemas__sessions__trial__TrialPatch:
-      properties:
-        attempts:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Attempts
-        expected_response:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Expected Response
-        occurrence:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Occurrence
-        instances:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/OccurrenceInstance'
-            type: array
-          - type: 'null'
-          title: Instances
-      type: object
-      title: TrialPatch
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    SessionListResponseWithClaimHistory:
-      properties:
-        id:
-          type: integer
-          title: Id
-        client_id:
-          type: integer
-          title: Client Id
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        status:
-          $ref: '#/components/schemas/SessionStatusEnum'
-        date_provider_signed:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Provider Signed
-        provider_signature:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Signature
-        utc_offset_date_provider_signed:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Utc Offset Date Provider Signed
-        expected_duration:
-          type: integer
-          title: Expected Duration
-        client:
-          $ref: '#/components/schemas/ClientResponse'
-        session_provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-        clinical_qa_review:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalQAListResponse'
-          - type: 'null'
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumVersion1'
-          - $ref: '#/components/schemas/LocationEnumVersion2'
-          title: Location
-        is_billable:
-          type: boolean
-          title: Is Billable
-        clinical_relationship:
-          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
-        note_version:
-          $ref: '#/components/schemas/SessionNoteVersionEnum'
-          default: v1
-        treatment_plan_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Treatment Plan Id
-        evv_required:
-          type: boolean
-          title: Evv Required
-          default: false
-        evv_start_captured:
-          type: boolean
-          title: Evv Start Captured
-          default: false
-        evv_end_captured:
-          type: boolean
-          title: Evv End Captured
-          default: false
-        claim_history:
-          items:
-            $ref: '#/components/schemas/LinkedClaimResponse'
-          type: array
-          title: Claim History
-        bcba:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderListResponse'
-          - type: 'null'
-      type: object
-      required:
-      - id
-      - client_id
-      - date_start
-      - utc_offset_date_start
-      - status
-      - expected_duration
-      - client
-      - session_provider
-      - location
-      - is_billable
-      - clinical_relationship
-      - claim_history
-      title: SessionListResponseWithClaimHistory
-    ClinicalQAReviewStatusEnum:
-      type: string
-      enum:
-      - IN_PROGRESS
-      - AWAITING_ACKNOWLEDGEMENT
-      - ACKNOWLEDGED
-      title: ClinicalQAReviewStatusEnum
     app__api__schemas__sessions__trial__TrialResponse:
       properties:
         attempts:
@@ -2382,21 +2365,110 @@ components:
       - target_id
       - target
       title: TrialResponse
-    SessionNoteVersionEnum:
-      type: string
-      enum:
-      - v1
-      - v2
-      title: SessionNoteVersionEnum
-    ClinicalQAReviewPDFUrl:
+    ProviderListResponse:
       properties:
-        document_url:
+        id:
+          type: integer
+          title: Id
+        first_name:
           type: string
-          title: Document Url
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
       type: object
       required:
-      - document_url
-      title: ClinicalQAReviewPDFUrl
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SessionPatch:
+      properties:
+        expected_duration:
+          type: integer
+          title: Expected Duration
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+        client_id:
+          type: integer
+          title: Client Id
+        is_supervised:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Supervised
+        geo_location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Geo Location
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumVersion1'
+          - $ref: '#/components/schemas/LocationEnumVersion2'
+          title: Location
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
+        breaks:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SessionBreakRequest'
+            type: array
+          - type: 'null'
+          title: Breaks
+      type: object
+      required:
+      - expected_duration
+      - date_start
+      - utc_offset
+      - client_id
+      - location
+      - delivery_method
+      title: SessionPatch
+    SessionGoalTimingRequest:
+      properties:
+        timing_type:
+          $ref: '#/components/schemas/SessionGoalTimingTypeEnum'
+        start_offset_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Start Offset Seconds
+        end_offset_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: End Offset Seconds
+      type: object
+      required:
+      - timing_type
+      title: SessionGoalTimingRequest
     ProviderResponse:
       properties:
         first_name:
@@ -2544,6 +2616,423 @@ components:
       - clinical_status
       - qa_billing_status
       title: ProviderResponse
+    app__api__schemas__sessions__trial__RateEventPatch:
+      properties:
+        date_of_event:
+          type: string
+          format: date-time
+          title: Date Of Event
+      type: object
+      required:
+      - date_of_event
+      title: RateEventPatch
+    ClinicalQAListResponse:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Start
+          description: Offset from UTC in seconds
+        id:
+          type: integer
+          title: Id
+        verdict:
+          $ref: '#/components/schemas/ClinicalQAReviewVerdict'
+        status:
+          $ref: '#/components/schemas/ClinicalQAReviewStatusEnum'
+        date_reviewed:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Reviewed
+        utc_offset_date_reviewed:
+          anyOf:
+          - type: integer
+            maximum: 50400.0
+            minimum: -43200.0
+          - type: 'null'
+          title: Utc Offset Date Reviewed
+          description: Offset from UTC in seconds
+        date_review_acknowledged:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Review Acknowledged
+        utc_offset_date_review_acknowledged:
+          anyOf:
+          - type: integer
+            maximum: 50400.0
+            minimum: -43200.0
+          - type: 'null'
+          title: Utc Offset Date Review Acknowledged
+          description: Offset from UTC in seconds
+        has_submission_discourse_comments:
+          type: boolean
+          title: Has Submission Discourse Comments
+        score:
+          type: number
+          maximum: 100.0
+          minimum: 0.0
+          title: Score
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - id
+      - verdict
+      - status
+      - has_submission_discourse_comments
+      - score
+      title: ClinicalQAListResponse
+    SessionNarrativeResponse:
+      properties:
+        narrative:
+          type: string
+          title: Narrative
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - narrative
+      - id
+      title: SessionNarrativeResponse
+    ClinicalQAReviewSubmit:
+      properties:
+        date_reviewed:
+          type: string
+          format: date-time
+          title: Date Reviewed
+        utc_offset_date_reviewed:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Reviewed
+          description: Offset from UTC in seconds
+      type: object
+      required:
+      - date_reviewed
+      - utc_offset_date_reviewed
+      title: ClinicalQAReviewSubmit
+    GoalsAndTrialsResponse:
+      additionalProperties:
+        $ref: '#/components/schemas/GoalAndTrialsResponse'
+      type: object
+      title: GoalsAndTrialsResponse
+    TrialCreate:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+      type: object
+      required:
+      - target_id
+      title: TrialCreate
+    EvidenceBasedInterventionsUsed:
+      properties:
+        antecedent_based_interventions:
+          type: boolean
+          title: Antecedent Based Interventions
+        differential_reinforcement_of_alternative_incompatible_or_other_behaviors:
+          type: boolean
+          title: Differential Reinforcement Of Alternative Incompatible Or Other Behaviors
+        discrete_trial_teaching:
+          type: boolean
+          title: Discrete Trial Teaching
+        functional_behavior_assessment:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Functional Behavior Assessment
+        modeling:
+          type: boolean
+          title: Modeling
+        naturalistic_intervention:
+          type: boolean
+          title: Naturalistic Intervention
+        parent_implemented_intervention:
+          type: boolean
+          title: Parent Implemented Intervention
+        peer_mediated_instruction_and_intervention:
+          type: boolean
+          title: Peer Mediated Instruction And Intervention
+        picture_exchange_communication_systems:
+          type: boolean
+          title: Picture Exchange Communication Systems
+        pivotal_response_training:
+          type: boolean
+          title: Pivotal Response Training
+        prompting:
+          type: boolean
+          title: Prompting
+        reinforcement:
+          type: boolean
+          title: Reinforcement
+        functional_communication_training:
+          type: boolean
+          title: Functional Communication Training
+        cognitive_behavioral_intervention:
+          type: boolean
+          title: Cognitive Behavioral Intervention
+        other:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Other
+      type: object
+      required:
+      - antecedent_based_interventions
+      - differential_reinforcement_of_alternative_incompatible_or_other_behaviors
+      - discrete_trial_teaching
+      - modeling
+      - naturalistic_intervention
+      - parent_implemented_intervention
+      - peer_mediated_instruction_and_intervention
+      - picture_exchange_communication_systems
+      - pivotal_response_training
+      - prompting
+      - reinforcement
+      - functional_communication_training
+      - cognitive_behavioral_intervention
+      title: EvidenceBasedInterventionsUsed
+    Bay7GuardianSignatureRequest:
+      properties:
+        guardian_provider_signature:
+          type: string
+          title: Guardian Provider Signature
+        date_guardian_provider_signed:
+          type: string
+          format: date-time
+          title: Date Guardian Provider Signed
+        utc_offset_date_guardian_provider_signed:
+          type: integer
+          title: Utc Offset Date Guardian Provider Signed
+        session_id:
+          type: integer
+          title: Session Id
+        guardian_auth_token:
+          type: string
+          title: Guardian Auth Token
+        session_datetime:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Session Datetime
+      type: object
+      required:
+      - guardian_provider_signature
+      - date_guardian_provider_signed
+      - utc_offset_date_guardian_provider_signed
+      - session_id
+      - guardian_auth_token
+      title: Bay7GuardianSignatureRequest
+      description: BT-authenticated request; guardian identity comes from guardian_auth_token.
+    DurationEventPatch:
+      properties:
+        duration:
+          type: integer
+          title: Duration
+      type: object
+      required:
+      - duration
+      title: DurationEventPatch
+    SessionProgressSynopsisResponse:
+      properties:
+        client_progress:
+          anyOf:
+          - $ref: '#/components/schemas/ClientProgressEnum'
+          - type: 'null'
+        synopsis:
+          $ref: '#/components/schemas/Synopsis'
+        goal_techniques:
+          anyOf:
+          - additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+          - type: 'null'
+          title: Goal Techniques
+        goal_timings:
+          anyOf:
+          - additionalProperties:
+              items:
+                $ref: '#/components/schemas/SessionGoalTimingRequest'
+              type: array
+            type: object
+          - type: 'null'
+          title: Goal Timings
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - synopsis
+      - id
+      title: SessionProgressSynopsisResponse
+    SessionNoteVersionEnum:
+      type: string
+      enum:
+      - v1
+      - v2
+      title: SessionNoteVersionEnum
+    SessionSymptomsInterventionsResponse:
+      properties:
+        signs_and_symptoms_observed:
+          $ref: '#/components/schemas/ClientSignsSymptomsObserved'
+        evidence_based_interventions_used:
+          $ref: '#/components/schemas/EvidenceBasedInterventionsUsed'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - signs_and_symptoms_observed
+      - evidence_based_interventions_used
+      - id
+      title: SessionSymptomsInterventionsResponse
+    PatchSessionSymptomsInterventionsRequest:
+      properties:
+        signs_and_symptoms_observed:
+          $ref: '#/components/schemas/ClientSignsSymptomsObserved'
+        evidence_based_interventions_used:
+          $ref: '#/components/schemas/EvidenceBasedInterventionsUsed'
+      type: object
+      required:
+      - signs_and_symptoms_observed
+      - evidence_based_interventions_used
+      title: PatchSessionSymptomsInterventionsRequest
+    SessionListResponseWithClaimHistory:
+      properties:
+        id:
+          type: integer
+          title: Id
+        client_id:
+          type: integer
+          title: Client Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        status:
+          $ref: '#/components/schemas/SessionStatusEnum'
+        date_provider_signed:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Provider Signed
+        provider_signature:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Signature
+        utc_offset_date_provider_signed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset Date Provider Signed
+        expected_duration:
+          type: integer
+          title: Expected Duration
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        session_provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        clinical_qa_review:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalQAListResponse'
+          - type: 'null'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumVersion1'
+          - $ref: '#/components/schemas/LocationEnumVersion2'
+          title: Location
+        is_billable:
+          type: boolean
+          title: Is Billable
+        clinical_relationship:
+          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
+        note_version:
+          $ref: '#/components/schemas/SessionNoteVersionEnum'
+          default: v1
+        treatment_plan_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Treatment Plan Id
+        evv_required:
+          type: boolean
+          title: Evv Required
+          default: false
+        evv_start_captured:
+          type: boolean
+          title: Evv Start Captured
+          default: false
+        evv_end_captured:
+          type: boolean
+          title: Evv End Captured
+          default: false
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+        bcba:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderListResponse'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - client_id
+      - date_start
+      - utc_offset_date_start
+      - status
+      - expected_duration
+      - client
+      - session_provider
+      - location
+      - is_billable
+      - clinical_relationship
+      - claim_history
+      title: SessionListResponseWithClaimHistory
+    BehaviorResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: BehaviorResponse
+    app__api__schemas__sessions__session_enums__DeliveryMethodEnum:
+      type: string
+      enum:
+      - Telehealth
+      - In-person
+      title: DeliveryMethodEnum
     LocationEnumVersion1:
       type: string
       enum:
@@ -2551,6 +3040,221 @@ components:
       - Community
       - School
       title: LocationEnumVersion1
+    EVVSessionStatusResponse:
+      properties:
+        start:
+          $ref: '#/components/schemas/EVVSideStatusResponse'
+        end:
+          $ref: '#/components/schemas/EVVSideStatusResponse'
+      type: object
+      required:
+      - start
+      - end
+      title: EVVSessionStatusResponse
+    ClinicalQAReviewSubmissionDiscourseCreate:
+      properties:
+        date_submitted:
+          type: string
+          format: date-time
+          title: Date Submitted
+        utc_offset_date_submitted:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Submitted
+          description: Offset from UTC in seconds
+        comment:
+          anyOf:
+          - type: string
+            minLength: 4
+          - type: 'null'
+          title: Comment
+        is_edit_requested:
+          type: boolean
+          title: Is Edit Requested
+      type: object
+      required:
+      - date_submitted
+      - utc_offset_date_submitted
+      - is_edit_requested
+      title: ClinicalQAReviewSubmissionDiscourseCreate
+    EVVSideStatusResponse:
+      properties:
+        captured:
+          type: boolean
+          title: Captured
+        captured_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Captured At
+        lat:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Lat
+        long:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Long
+        accuracy_meters:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Accuracy Meters
+        token_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token Status
+        token_expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Token Expires At
+      type: object
+      required:
+      - captured
+      title: EVVSideStatusResponse
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    app__api__schemas__sessions__trial__RateEventCreate:
+      properties:
+        date_of_event:
+          type: string
+          format: date-time
+          title: Date Of Event
+      type: object
+      required:
+      - date_of_event
+      title: RateEventCreate
+    EVVTokenCreateResponse:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: EVVTokenCreateResponse
+    EventMeasurementUnitEnum:
+      type: string
+      enum:
+      - SECOND
+      - MINUTE
+      - HOUR
+      title: EventMeasurementUnitEnum
+    GoalTypeEnum:
+      type: string
+      enum:
+      - behavior_reduction
+      - skill_acquisition
+      - caregiver
+      title: GoalTypeEnum
+    TargetTrialSummary:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+        goal_type:
+          $ref: '#/components/schemas/GoalTypeEnum'
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+        label:
+          type: string
+          title: Label
+        trials:
+          items:
+            $ref: '#/components/schemas/TrialData'
+          type: array
+          title: Trials
+        phase_changes:
+          items:
+            $ref: '#/components/schemas/TargetPhaseChangeData'
+          type: array
+          title: Phase Changes
+        event_duration_measurement_unit:
+          anyOf:
+          - $ref: '#/components/schemas/EventMeasurementUnitEnum'
+          - type: 'null'
+      type: object
+      required:
+      - target_id
+      - goal_type
+      - data_collection_method
+      - label
+      - trials
+      - phase_changes
+      title: TargetTrialSummary
+    SessionCreate:
+      properties:
+        expected_duration:
+          type: integer
+          title: Expected Duration
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+        client_id:
+          type: integer
+          title: Client Id
+        is_supervised:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Supervised
+        geo_location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Geo Location
+        location:
+          $ref: '#/components/schemas/LocationEnumVersion2'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
+        breaks:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SessionBreakRequest'
+            type: array
+          - type: 'null'
+          title: Breaks
+        note_version:
+          $ref: '#/components/schemas/SessionNoteVersionEnum'
+          default: v1
+      type: object
+      required:
+      - expected_duration
+      - date_start
+      - utc_offset
+      - client_id
+      - location
+      - delivery_method
+      title: SessionCreate
+      description: 'To create and start a session we need date_start and utc_offset
+
+        We''re inheriting client_id and provider_id from the base class'
+    ClinicalQAReviewStatusEnum:
+      type: string
+      enum:
+      - IN_PROGRESS
+      - AWAITING_ACKNOWLEDGEMENT
+      - ACKNOWLEDGED
+      title: ClinicalQAReviewStatusEnum
     app__api__schemas__sessions__trial__DurationEventResponse:
       properties:
         duration:
@@ -2564,17 +3268,600 @@ components:
       - duration
       - id
       title: DurationEventResponse
-    PatchSessionSymptomsInterventionsRequest:
+    GoalSimpleResponse:
       properties:
-        signs_and_symptoms_observed:
-          $ref: '#/components/schemas/ClientSignsSymptomsObserved'
-        evidence_based_interventions_used:
-          $ref: '#/components/schemas/EvidenceBasedInterventionsUsed'
+        id:
+          type: integer
+          title: Id
+        goal_name:
+          $ref: '#/components/schemas/GoalNameResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+        data_collection_method:
+          type: string
+          title: Data Collection Method
       type: object
       required:
-      - signs_and_symptoms_observed
-      - evidence_based_interventions_used
-      title: PatchSessionSymptomsInterventionsRequest
+      - id
+      - goal_name
+      - is_active
+      - data_collection_method
+      title: GoalSimpleResponse
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    UnacknowledgedSessionsResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        session_provider_id:
+          type: integer
+          title: Session Provider Id
+      type: object
+      required:
+      - id
+      - session_provider_id
+      title: UnacknowledgedSessionsResponse
+    ClinicalQAReviewPDFUrl:
+      properties:
+        document_url:
+          type: string
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: ClinicalQAReviewPDFUrl
+    GoalAndTrialsResponse:
+      properties:
+        goal_name:
+          type: string
+          title: Goal Name
+        goal_type:
+          type: string
+          title: Goal Type
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+        trials:
+          items:
+            $ref: '#/components/schemas/app__api__schemas__sessions__trial__TrialResponse'
+          type: array
+          title: Trials
+        linked_goals:
+          $ref: '#/components/schemas/LinkedGoals'
+        techniques:
+          items:
+            type: string
+          type: array
+          title: Techniques
+        timings:
+          items:
+            $ref: '#/components/schemas/SessionGoalTimingResponse'
+          type: array
+          title: Timings
+      type: object
+      required:
+      - goal_name
+      - goal_type
+      - data_collection_method
+      - trials
+      - linked_goals
+      title: GoalAndTrialsResponse
+    SessionStop:
+      properties:
+        provider_signature:
+          type: string
+          minLength: 1
+          title: Provider Signature
+        date_provider_signed:
+          type: string
+          format: date-time
+          title: Date Provider Signed
+        utc_offset_date_provider_signed:
+          type: integer
+          title: Utc Offset Date Provider Signed
+      type: object
+      required:
+      - provider_signature
+      - date_provider_signed
+      - utc_offset_date_provider_signed
+      title: SessionStop
+    ClinicalQAReviewVerdict:
+      type: string
+      enum:
+      - Pass
+      - Fail
+      title: ClinicalQAReviewVerdict
+    PatchSessionProgressSynopsisRequest:
+      properties:
+        client_progress:
+          anyOf:
+          - $ref: '#/components/schemas/ClientProgressEnum'
+          - type: 'null'
+        synopsis:
+          $ref: '#/components/schemas/Synopsis'
+        goal_techniques:
+          anyOf:
+          - additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+          - type: 'null'
+          title: Goal Techniques
+        goal_timings:
+          anyOf:
+          - additionalProperties:
+              items:
+                $ref: '#/components/schemas/SessionGoalTimingRequest'
+              type: array
+            type: object
+          - type: 'null'
+          title: Goal Timings
+      type: object
+      required:
+      - synopsis
+      title: PatchSessionProgressSynopsisRequest
+    SessionProviderReviewSummary:
+      properties:
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        review_pending_duration_in_days:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Review Pending Duration In Days
+        num_failed_reviews:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Num Failed Reviews
+      type: object
+      required:
+      - provider
+      title: SessionProviderReviewSummary
+    SessionNarrativeSuggestionResponse:
+      properties:
+        narrative:
+          type: string
+          title: Narrative
+      type: object
+      required:
+      - narrative
+      title: SessionNarrativeSuggestionResponse
+    SessionBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: SessionBackdate
+    ClinicalQAReviewSave:
+      properties:
+        comment:
+          anyOf:
+          - type: string
+            minLength: 4
+          - type: 'null'
+          title: Comment
+        is_edit_requested:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Edit Requested
+        is_datetime_accurate:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Datetime Accurate
+        is_data_collected_per_forta_protocols:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Data Collected Per Forta Protocols
+        is_language_objective:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Language Objective
+        is_note_submitted_within_48hours_of_session:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Note Submitted Within 48Hours Of Session
+        has_10data_points_per_hour:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has 10Data Points Per Hour
+        is_at_least_2programs_run_per_hour:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is At Least 2Programs Run Per Hour
+        is_all_active_programs_used_within_7days:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is All Active Programs Used Within 7Days
+        is_detail_sufficient_quantity:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Detail Sufficient Quantity
+        is_detail_sufficient_quality:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Detail Sufficient Quality
+        is_overall_coherent:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Overall Coherent
+        one_setting_per_session_note:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: One Setting Per Session Note
+        therapist_role_aligns_with_tp_goals:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Therapist Role Aligns With Tp Goals
+      type: object
+      title: ClinicalQAReviewSave
+    GoalWithLinkResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        goal_name:
+          $ref: '#/components/schemas/GoalNameResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+        goal_type:
+          $ref: '#/components/schemas/GoalTypeEnum'
+        linked_goals:
+          anyOf:
+          - additionalProperties:
+              items:
+                $ref: '#/components/schemas/GoalSimpleResponse'
+              type: array
+            propertyNames:
+              $ref: '#/components/schemas/GoalTypeEnum'
+            type: object
+          - type: 'null'
+          title: Linked Goals
+      type: object
+      required:
+      - id
+      - goal_name
+      - is_active
+      - data_collection_method
+      - goal_type
+      title: GoalWithLinkResponse
+    JobTitleEnum:
+      type: string
+      enum:
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
+    ClientSignsSymptomsObserved:
+      properties:
+        other:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Other
+        play_skills_deficit:
+          type: boolean
+          title: Play Skills Deficit
+        motor_skills_deficit:
+          type: boolean
+          title: Motor Skills Deficit
+        maladaptive_behaviors:
+          type: boolean
+          title: Maladaptive Behaviors
+        adaptive_skills_deficit:
+          type: boolean
+          title: Adaptive Skills Deficit
+        cognitive_skills_deficit:
+          type: boolean
+          title: Cognitive Skills Deficit
+        social_interaction_deficit:
+          type: boolean
+          title: Social Interaction Deficit
+        social_communication_deficit:
+          type: boolean
+          title: Social Communication Deficit
+        joint_attention_skills_deficit:
+          type: boolean
+          title: Joint Attention Skills Deficit
+        community_safety_skills_deficit:
+          type: boolean
+          title: Community Safety Skills Deficit
+        restricted_repetitive_behaviors:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Restricted Repetitive Behaviors
+        restricted_receptive_behaviors:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Restricted Receptive Behaviors
+        school_readiness_skills_deficit:
+          type: boolean
+          title: School Readiness Skills Deficit
+        nonverbal_communication_deficit:
+          type: boolean
+          title: Nonverbal Communication Deficit
+        social_emotional_reciprocity_deficit:
+          type: boolean
+          title: Social Emotional Reciprocity Deficit
+        expressive_receptive_communication_deficit:
+          type: boolean
+          title: Expressive Receptive Communication Deficit
+      type: object
+      required:
+      - play_skills_deficit
+      - motor_skills_deficit
+      - maladaptive_behaviors
+      - adaptive_skills_deficit
+      - cognitive_skills_deficit
+      - social_interaction_deficit
+      - social_communication_deficit
+      - joint_attention_skills_deficit
+      - community_safety_skills_deficit
+      - school_readiness_skills_deficit
+      - nonverbal_communication_deficit
+      - social_emotional_reciprocity_deficit
+      - expressive_receptive_communication_deficit
+      title: ClientSignsSymptomsObserved
+    LinkedGoals:
+      anyOf:
+      - additionalProperties:
+          items:
+            $ref: '#/components/schemas/GoalSimpleResponse'
+          type: array
+        propertyNames:
+          $ref: '#/components/schemas/GoalTypeEnum'
+        type: object
+      - type: 'null'
+      title: LinkedGoals
+    TargetPhaseChangeData:
+      properties:
+        id:
+          type: integer
+          title: Id
+        title:
+          type: string
+          title: Title
+        date_added:
+          type: string
+          format: date
+          title: Date Added
+      type: object
+      required:
+      - id
+      - title
+      - date_added
+      title: TargetPhaseChangeData
+    SessionGoalTimingTypeEnum:
+      type: string
+      enum:
+      - manual
+      - auto
+      title: SessionGoalTimingTypeEnum
+    SessionBreakRequest:
+      properties:
+        start_offset_seconds:
+          type: integer
+          minimum: 0.0
+          title: Start Offset Seconds
+        end_offset_seconds:
+          type: integer
+          minimum: 0.0
+          title: End Offset Seconds
+      type: object
+      required:
+      - start_offset_seconds
+      - end_offset_seconds
+      title: SessionBreakRequest
+    UtilizationResponse:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        week_starts_on:
+          type: string
+          format: date
+          title: Week Starts On
+        week_ends_on:
+          type: string
+          format: date
+          title: Week Ends On
+        utc_offset:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset
+          description: Offset from UTC in seconds
+        hours_completed:
+          type: number
+          title: Hours Completed
+        hours_allowed:
+          type: integer
+          title: Hours Allowed
+        utilization:
+          type: number
+          title: Utilization
+      type: object
+      required:
+      - client_id
+      - week_starts_on
+      - week_ends_on
+      - utc_offset
+      - hours_completed
+      - hours_allowed
+      - utilization
+      title: UtilizationResponse
+    ClinicalQAReviewCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          maximum: 50400.0
+          minimum: -43200.0
+          title: Utc Offset Date Start
+          description: Offset from UTC in seconds
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: ClinicalQAReviewCreate
+    app__api__schemas__sessions__trial__RateEventResponse:
+      properties:
+        date_of_event:
+          type: string
+          format: date-time
+          title: Date Of Event
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - date_of_event
+      - id
+      title: RateEventResponse
+    TargetResponseWithGoal:
+      properties:
+        id:
+          type: integer
+          title: Id
+        label:
+          type: string
+          title: Label
+        instruction:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Instruction
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        is_event_duration_required:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Event Duration Required
+        event_duration_measurement_unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Event Duration Measurement Unit
+        order:
+          type: number
+          title: Order
+        is_active:
+          type: boolean
+          title: Is Active
+        stage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stage
+        maintenance_frequency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Maintenance Frequency
+        goal:
+          $ref: '#/components/schemas/GoalWithLinkResponse'
+      type: object
+      required:
+      - id
+      - label
+      - order
+      - is_active
+      - goal
+      title: TargetResponseWithGoal
+    ClinicalQAReviewDeletion:
+      properties:
+        reason:
+          $ref: '#/components/schemas/ClinicalQAReviewDeletionReasonEnum'
+        date_deleted:
+          type: string
+          format: date-time
+          title: Date Deleted
+          default: '2026-08-04T17:13:57.594812Z'
+      type: object
+      required:
+      - reason
+      title: ClinicalQAReviewDeletion
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ProviderAssignmentClinicalRelationshipEnum:
+      type: string
+      enum:
+      - home_bcba
+      - bobbing_bcba
+      - substitute_bcba
+      - prbt
+      - assistant_assessor
+      - vbt
+      - practicing_guardian
+      - parent
+      - caregiver
+      - parent_and_caregiver
+      - limited_access_guardian
+      title: ProviderAssignmentClinicalRelationshipEnum
     TrialData:
       properties:
         session_id:
@@ -2655,1178 +3942,6 @@ components:
       - expected_duration
       - duration_events
       title: TrialData
-    ProviderListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
-    ClinicalQAReviewAcknowledge:
-      properties:
-        acknowledged_signature:
-          type: string
-          minLength: 2
-          title: Acknowledged Signature
-        date_review_acknowledged:
-          type: string
-          format: date-time
-          title: Date Review Acknowledged
-        utc_offset_date_review_acknowledged:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Review Acknowledged
-          description: Offset from UTC in seconds
-      type: object
-      required:
-      - acknowledged_signature
-      - date_review_acknowledged
-      - utc_offset_date_review_acknowledged
-      title: ClinicalQAReviewAcknowledge
-    app__api__schemas__sessions__trial__RateEventCreate:
-      properties:
-        date_of_event:
-          type: string
-          format: date-time
-          title: Date Of Event
-      type: object
-      required:
-      - date_of_event
-      title: RateEventCreate
-    ClaimStatusEnum:
-      type: string
-      enum:
-      - On Hold
-      - Generated
-      - Full Denial
-      - In Appeals
-      - Rejected & Resubmitted
-      - Rejected, Needs Appeal
-      - Rejected, Needs Resubmission
-      - Rejected, Not Resubmitted
-      - Approved
-      - Submitted
-      - Unbillable
-      - Approved - Recouped
-      - Approved - Recouped & Resubmitted
-      title: ClaimStatusEnum
-    LocationEnumVersion2:
-      type: string
-      enum:
-      - Home
-      - Community settings
-      title: LocationEnumVersion2
-    GoalSimpleResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        goal_name:
-          $ref: '#/components/schemas/GoalNameResponse'
-        is_active:
-          type: boolean
-          title: Is Active
-        data_collection_method:
-          type: string
-          title: Data Collection Method
-      type: object
-      required:
-      - id
-      - goal_name
-      - is_active
-      - data_collection_method
-      title: GoalSimpleResponse
-    app__api__schemas__sessions__trial__RateEventResponse:
-      properties:
-        date_of_event:
-          type: string
-          format: date-time
-          title: Date Of Event
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - date_of_event
-      - id
-      title: RateEventResponse
-    ClinicalQAReviewVerdict:
-      type: string
-      enum:
-      - Pass
-      - Fail
-      title: ClinicalQAReviewVerdict
-    SessionGoalTimingTypeEnum:
-      type: string
-      enum:
-      - manual
-      - auto
-      title: SessionGoalTimingTypeEnum
-    SessionGoalTimingRequest:
-      properties:
-        timing_type:
-          $ref: '#/components/schemas/SessionGoalTimingTypeEnum'
-        start_offset_seconds:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Start Offset Seconds
-        end_offset_seconds:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: End Offset Seconds
-      type: object
-      required:
-      - timing_type
-      title: SessionGoalTimingRequest
-    ClinicalQAReviewCreate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Start
-          description: Offset from UTC in seconds
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      title: ClinicalQAReviewCreate
-    GuardianSignRequest:
-      properties:
-        guardian_provider_signature:
-          type: string
-          title: Guardian Provider Signature
-        date_guardian_provider_signed:
-          type: string
-          format: date-time
-          title: Date Guardian Provider Signed
-        utc_offset_date_guardian_provider_signed:
-          type: integer
-          title: Utc Offset Date Guardian Provider Signed
-      type: object
-      required:
-      - guardian_provider_signature
-      - date_guardian_provider_signed
-      - utc_offset_date_guardian_provider_signed
-      title: GuardianSignRequest
-    ClinicalQAReviewSubmissionDiscourseCreate:
-      properties:
-        date_submitted:
-          type: string
-          format: date-time
-          title: Date Submitted
-        utc_offset_date_submitted:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Submitted
-          description: Offset from UTC in seconds
-        comment:
-          anyOf:
-          - type: string
-            minLength: 4
-          - type: 'null'
-          title: Comment
-        is_edit_requested:
-          type: boolean
-          title: Is Edit Requested
-      type: object
-      required:
-      - date_submitted
-      - utc_offset_date_submitted
-      - is_edit_requested
-      title: ClinicalQAReviewSubmissionDiscourseCreate
-    Synopsis:
-      properties:
-        client_adheres_with_targets_or_goals:
-          type: boolean
-          title: Client Adheres With Targets Or Goals
-        no_behavior_issues_or_family_changes:
-          type: boolean
-          title: No Behavior Issues Or Family Changes
-      type: object
-      required:
-      - client_adheres_with_targets_or_goals
-      - no_behavior_issues_or_family_changes
-      title: Synopsis
-    UnacknowledgedSessionsResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        session_provider_id:
-          type: integer
-          title: Session Provider Id
-      type: object
-      required:
-      - id
-      - session_provider_id
-      title: UnacknowledgedSessionsResponse
-    ClinicalQAReviewSave:
-      properties:
-        comment:
-          anyOf:
-          - type: string
-            minLength: 4
-          - type: 'null'
-          title: Comment
-        is_edit_requested:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Edit Requested
-        is_datetime_accurate:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Datetime Accurate
-        is_data_collected_per_forta_protocols:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Data Collected Per Forta Protocols
-        is_language_objective:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Language Objective
-        is_note_submitted_within_48hours_of_session:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Note Submitted Within 48Hours Of Session
-        has_10data_points_per_hour:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has 10Data Points Per Hour
-        is_at_least_2programs_run_per_hour:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is At Least 2Programs Run Per Hour
-        is_all_active_programs_used_within_7days:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is All Active Programs Used Within 7Days
-        is_detail_sufficient_quantity:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Detail Sufficient Quantity
-        is_detail_sufficient_quality:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Detail Sufficient Quality
-        is_overall_coherent:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Overall Coherent
-        one_setting_per_session_note:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: One Setting Per Session Note
-        therapist_role_aligns_with_tp_goals:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Therapist Role Aligns With Tp Goals
-      type: object
-      title: ClinicalQAReviewSave
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ClinicalQAReviewResponse:
-      properties:
-        is_datetime_accurate:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Datetime Accurate
-        is_data_collected_per_forta_protocols:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Data Collected Per Forta Protocols
-        is_language_objective:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Language Objective
-        is_note_submitted_within_48hours_of_session:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Note Submitted Within 48Hours Of Session
-        has_10data_points_per_hour:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has 10Data Points Per Hour
-        is_at_least_2programs_run_per_hour:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is At Least 2Programs Run Per Hour
-        is_all_active_programs_used_within_7days:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is All Active Programs Used Within 7Days
-        is_detail_sufficient_quantity:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Detail Sufficient Quantity
-        is_detail_sufficient_quality:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Detail Sufficient Quality
-        is_overall_coherent:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Overall Coherent
-        one_setting_per_session_note:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: One Setting Per Session Note
-        therapist_role_aligns_with_tp_goals:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Therapist Role Aligns With Tp Goals
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset Date Start
-          description: Offset from UTC in seconds
-        id:
-          type: integer
-          title: Id
-        score:
-          type: number
-          maximum: 100.0
-          minimum: 0.0
-          title: Score
-        verdict:
-          $ref: '#/components/schemas/ClinicalQAReviewVerdict'
-        status:
-          $ref: '#/components/schemas/ClinicalQAReviewStatusEnum'
-        reviewing_provider:
-          $ref: '#/components/schemas/ProviderResponse'
-        date_reviewed:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Reviewed
-        utc_offset_date_reviewed:
-          anyOf:
-          - type: integer
-            maximum: 50400.0
-            minimum: -43200.0
-          - type: 'null'
-          title: Utc Offset Date Reviewed
-          description: Offset from UTC in seconds
-        session_id:
-          type: integer
-          title: Session Id
-        acknowledged_signature:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Acknowledged Signature
-        date_review_acknowledged:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Review Acknowledged
-        utc_offset_date_review_acknowledged:
-          anyOf:
-          - type: integer
-            maximum: 50400.0
-            minimum: -43200.0
-          - type: 'null'
-          title: Utc Offset Date Review Acknowledged
-          description: Offset from UTC in seconds
-        discourses:
-          items:
-            $ref: '#/components/schemas/ClinicalQAReviewSubmissionDiscourseResponse'
-          type: array
-          title: Discourses
-        eval_schema_version:
-          $ref: '#/components/schemas/EvalSchemaVersionEnum'
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      - id
-      - score
-      - verdict
-      - status
-      - reviewing_provider
-      - session_id
-      - discourses
-      - eval_schema_version
-      title: ClinicalQAReviewResponse
-    SessionPatch:
-      properties:
-        expected_duration:
-          type: integer
-          title: Expected Duration
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset:
-          type: integer
-          title: Utc Offset
-        client_id:
-          type: integer
-          title: Client Id
-        is_supervised:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Supervised
-        geo_location:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Geo Location
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumVersion1'
-          - $ref: '#/components/schemas/LocationEnumVersion2'
-          title: Location
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
-        breaks:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/SessionBreakRequest'
-            type: array
-          - type: 'null'
-          title: Breaks
-      type: object
-      required:
-      - expected_duration
-      - date_start
-      - utc_offset
-      - client_id
-      - location
-      - delivery_method
-      title: SessionPatch
-    ClinicalQAReviewSubmissionDiscourseResponse:
-      properties:
-        comment:
-          anyOf:
-          - type: string
-            minLength: 4
-          - type: 'null'
-          title: Comment
-        is_edit_requested:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Edit Requested
-        id:
-          type: integer
-          title: Id
-        date_submitted:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Submitted
-        utc_offset_date_submitted:
-          anyOf:
-          - type: integer
-            maximum: 50400.0
-            minimum: -43200.0
-          - type: 'null'
-          title: Utc Offset Date Submitted
-          description: Offset from UTC in seconds
-        reviewing_provider:
-          $ref: '#/components/schemas/ProviderResponse'
-      type: object
-      required:
-      - id
-      - reviewing_provider
-      title: ClinicalQAReviewSubmissionDiscourseResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    OccurrenceInstance:
-      properties:
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-        duration:
-          type: integer
-          title: Duration
-      type: object
-      required:
-      - duration
-      title: OccurrenceInstance
-    SessionProgressSynopsisResponse:
-      properties:
-        client_progress:
-          anyOf:
-          - $ref: '#/components/schemas/ClientProgressEnum'
-          - type: 'null'
-        synopsis:
-          $ref: '#/components/schemas/Synopsis'
-        goal_techniques:
-          anyOf:
-          - additionalProperties:
-              items:
-                type: string
-              type: array
-            type: object
-          - type: 'null'
-          title: Goal Techniques
-        goal_timings:
-          anyOf:
-          - additionalProperties:
-              items:
-                $ref: '#/components/schemas/SessionGoalTimingRequest'
-              type: array
-            type: object
-          - type: 'null'
-          title: Goal Timings
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - synopsis
-      - id
-      title: SessionProgressSynopsisResponse
-    EVVTokenCreateResponse:
-      properties:
-        token:
-          type: string
-          title: Token
-      type: object
-      required:
-      - token
-      title: EVVTokenCreateResponse
-    UtilizationResponse:
-      properties:
-        client_id:
-          type: integer
-          title: Client Id
-        week_starts_on:
-          type: string
-          format: date
-          title: Week Starts On
-        week_ends_on:
-          type: string
-          format: date
-          title: Week Ends On
-        utc_offset:
-          type: integer
-          maximum: 50400.0
-          minimum: -43200.0
-          title: Utc Offset
-          description: Offset from UTC in seconds
-        hours_completed:
-          type: number
-          title: Hours Completed
-        hours_allowed:
-          type: integer
-          title: Hours Allowed
-        utilization:
-          type: number
-          title: Utilization
-      type: object
-      required:
-      - client_id
-      - week_starts_on
-      - week_ends_on
-      - utc_offset
-      - hours_completed
-      - hours_allowed
-      - utilization
-      title: UtilizationResponse
-    TrialCreate:
-      properties:
-        target_id:
-          type: integer
-          title: Target Id
-      type: object
-      required:
-      - target_id
-      title: TrialCreate
-    SessionListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        client_id:
-          type: integer
-          title: Client Id
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        status:
-          $ref: '#/components/schemas/SessionStatusEnum'
-        date_provider_signed:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Provider Signed
-        provider_signature:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Signature
-        utc_offset_date_provider_signed:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Utc Offset Date Provider Signed
-        expected_duration:
-          type: integer
-          title: Expected Duration
-        client:
-          $ref: '#/components/schemas/ClientResponse'
-        session_provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-        clinical_qa_review:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalQAListResponse'
-          - type: 'null'
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumVersion1'
-          - $ref: '#/components/schemas/LocationEnumVersion2'
-          title: Location
-        is_billable:
-          type: boolean
-          title: Is Billable
-        clinical_relationship:
-          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
-        note_version:
-          $ref: '#/components/schemas/SessionNoteVersionEnum'
-          default: v1
-        treatment_plan_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Treatment Plan Id
-        evv_required:
-          type: boolean
-          title: Evv Required
-          default: false
-        evv_start_captured:
-          type: boolean
-          title: Evv Start Captured
-          default: false
-        evv_end_captured:
-          type: boolean
-          title: Evv End Captured
-          default: false
-      type: object
-      required:
-      - id
-      - client_id
-      - date_start
-      - utc_offset_date_start
-      - status
-      - expected_duration
-      - client
-      - session_provider
-      - location
-      - is_billable
-      - clinical_relationship
-      title: SessionListResponse
-    SessionBackdate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      title: SessionBackdate
-    GoalAndTrialsResponse:
-      properties:
-        goal_name:
-          type: string
-          title: Goal Name
-        goal_type:
-          type: string
-          title: Goal Type
-        data_collection_method:
-          type: string
-          title: Data Collection Method
-        trials:
-          items:
-            $ref: '#/components/schemas/app__api__schemas__sessions__trial__TrialResponse'
-          type: array
-          title: Trials
-        linked_goals:
-          $ref: '#/components/schemas/LinkedGoals'
-        techniques:
-          items:
-            type: string
-          type: array
-          title: Techniques
-        timings:
-          items:
-            $ref: '#/components/schemas/SessionGoalTimingResponse'
-          type: array
-          title: Timings
-      type: object
-      required:
-      - goal_name
-      - goal_type
-      - data_collection_method
-      - trials
-      - linked_goals
-      title: GoalAndTrialsResponse
-    ProviderStatusEnum:
-      type: string
-      enum:
-      - Not Training
-      - Training
-      title: ProviderStatusEnum
-    LinkedGoals:
-      anyOf:
-      - additionalProperties:
-          items:
-            $ref: '#/components/schemas/GoalSimpleResponse'
-          type: array
-        propertyNames:
-          $ref: '#/components/schemas/GoalTypeEnum'
-        type: object
-      - type: 'null'
-      title: LinkedGoals
-    SessionProviderReviewSummary:
-      properties:
-        provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-        review_pending_duration_in_days:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Review Pending Duration In Days
-        num_failed_reviews:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Num Failed Reviews
-      type: object
-      required:
-      - provider
-      title: SessionProviderReviewSummary
-    JobTitleEnum:
-      type: string
-      enum:
-      - Behavior Technician
-      - Registered Behavior Technician
-      - Behavior Technician Trainee
-      - Virtual Therapy Assistant
-      - Lead Virtual Therapy Assistant
-      - Certified Behavioral Technician
-      - BCBA
-      - Lead BCBA
-      - Clinical Director
-      title: JobTitleEnum
-    LinkedClaimResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        status:
-          $ref: '#/components/schemas/ClaimStatusEnum'
-        secondary_status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        total_charge:
-          type: number
-          minimum: 0.0
-          title: Total Charge
-        clearing_house_claim_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Clearing House Claim Id
-      type: object
-      required:
-      - id
-      - status
-      - total_charge
-      title: LinkedClaimResponse
-    GoalTypeEnum:
-      type: string
-      enum:
-      - behavior_reduction
-      - skill_acquisition
-      - caregiver
-      title: GoalTypeEnum
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    SessionSymptomsInterventionsResponse:
-      properties:
-        signs_and_symptoms_observed:
-          $ref: '#/components/schemas/ClientSignsSymptomsObserved'
-        evidence_based_interventions_used:
-          $ref: '#/components/schemas/EvidenceBasedInterventionsUsed'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - signs_and_symptoms_observed
-      - evidence_based_interventions_used
-      - id
-      title: SessionSymptomsInterventionsResponse
-    EmploymentTypeEnum:
-      type: string
-      enum:
-      - Contractor / 1099
-      - Hourly, full-time
-      - Hourly, part-time
-      - Salaried, full-time
-      title: EmploymentTypeEnum
-    SessionStop:
-      properties:
-        provider_signature:
-          type: string
-          minLength: 1
-          title: Provider Signature
-        date_provider_signed:
-          type: string
-          format: date-time
-          title: Date Provider Signed
-        utc_offset_date_provider_signed:
-          type: integer
-          title: Utc Offset Date Provider Signed
-      type: object
-      required:
-      - provider_signature
-      - date_provider_signed
-      - utc_offset_date_provider_signed
-      title: SessionStop
-    Bay:
-      type: string
-      enum:
-      - BAY 1
-      - BAY 2
-      - BAY 2.5
-      - BAY 2.6
-      - BAY 2.7
-      - BAY 3
-      - BAY 6
-      - BAY 7
-      title: Bay
-    DurationEventPatch:
-      properties:
-        duration:
-          type: integer
-          title: Duration
-      type: object
-      required:
-      - duration
-      title: DurationEventPatch
-    GoalWithLinkResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        goal_name:
-          $ref: '#/components/schemas/GoalNameResponse'
-        is_active:
-          type: boolean
-          title: Is Active
-        data_collection_method:
-          type: string
-          title: Data Collection Method
-        goal_type:
-          $ref: '#/components/schemas/GoalTypeEnum'
-        linked_goals:
-          anyOf:
-          - additionalProperties:
-              items:
-                $ref: '#/components/schemas/GoalSimpleResponse'
-              type: array
-            propertyNames:
-              $ref: '#/components/schemas/GoalTypeEnum'
-            type: object
-          - type: 'null'
-          title: Linked Goals
-      type: object
-      required:
-      - id
-      - goal_name
-      - is_active
-      - data_collection_method
-      - goal_type
-      title: GoalWithLinkResponse
-    EvidenceBasedInterventionsUsed:
-      properties:
-        antecedent_based_interventions:
-          type: boolean
-          title: Antecedent Based Interventions
-        differential_reinforcement_of_alternative_incompatible_or_other_behaviors:
-          type: boolean
-          title: Differential Reinforcement Of Alternative Incompatible Or Other Behaviors
-        discrete_trial_teaching:
-          type: boolean
-          title: Discrete Trial Teaching
-        functional_behavior_assessment:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Functional Behavior Assessment
-        modeling:
-          type: boolean
-          title: Modeling
-        naturalistic_intervention:
-          type: boolean
-          title: Naturalistic Intervention
-        parent_implemented_intervention:
-          type: boolean
-          title: Parent Implemented Intervention
-        peer_mediated_instruction_and_intervention:
-          type: boolean
-          title: Peer Mediated Instruction And Intervention
-        picture_exchange_communication_systems:
-          type: boolean
-          title: Picture Exchange Communication Systems
-        pivotal_response_training:
-          type: boolean
-          title: Pivotal Response Training
-        prompting:
-          type: boolean
-          title: Prompting
-        reinforcement:
-          type: boolean
-          title: Reinforcement
-        functional_communication_training:
-          type: boolean
-          title: Functional Communication Training
-        cognitive_behavioral_intervention:
-          type: boolean
-          title: Cognitive Behavioral Intervention
-        other:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Other
-      type: object
-      required:
-      - antecedent_based_interventions
-      - differential_reinforcement_of_alternative_incompatible_or_other_behaviors
-      - discrete_trial_teaching
-      - modeling
-      - naturalistic_intervention
-      - parent_implemented_intervention
-      - peer_mediated_instruction_and_intervention
-      - picture_exchange_communication_systems
-      - pivotal_response_training
-      - prompting
-      - reinforcement
-      - functional_communication_training
-      - cognitive_behavioral_intervention
-      title: EvidenceBasedInterventionsUsed
-    EVVSideStatusResponse:
-      properties:
-        captured:
-          type: boolean
-          title: Captured
-        captured_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Captured At
-        lat:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Lat
-        long:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Long
-        accuracy_meters:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Accuracy Meters
-        token_status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Token Status
-        token_expires_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Token Expires At
-      type: object
-      required:
-      - captured
-      title: EVVSideStatusResponse
-    EventMeasurementUnitEnum:
-      type: string
-      enum:
-      - SECOND
-      - MINUTE
-      - HOUR
-      title: EventMeasurementUnitEnum
-    SessionNarrativeSuggestionResponse:
-      properties:
-        narrative:
-          type: string
-          title: Narrative
-      type: object
-      required:
-      - narrative
-      title: SessionNarrativeSuggestionResponse
-    ClientProgressEnum:
-      type: string
-      enum:
-      - The client appeared to learn and make positive progress during the session
-      - The client made little to no progress during the session
-      title: ClientProgressEnum
-    app__api__schemas__sessions__session_enums__DeliveryMethodEnum:
-      type: string
-      enum:
-      - Telehealth
-      - In-person
-      title: DeliveryMethodEnum
-    ClinicalQAReviewDeletionReasonEnum:
-      type: string
-      enum:
-      - Correction
-      - Incomplete
-      title: ClinicalQAReviewDeletionReasonEnum
-    SessionGoalTimingResponse:
-      properties:
-        timing_type:
-          $ref: '#/components/schemas/SessionGoalTimingTypeEnum'
-        start_offset_seconds:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Start Offset Seconds
-        end_offset_seconds:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: End Offset Seconds
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-        duration_seconds:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Duration Seconds
-        order_index:
-          type: integer
-          title: Order Index
-      type: object
-      required:
-      - timing_type
-      - order_index
-      title: SessionGoalTimingResponse
-    EvalSchemaVersionEnum:
-      type: string
-      enum:
-      - v1
-      - v2
-      title: EvalSchemaVersionEnum
     GoalTrialSummary:
       properties:
         goal_id:
@@ -3856,37 +3971,120 @@ components:
       - date_introduced
       - targets
       title: GoalTrialSummary
-    DurationEventCreate:
+    SessionBreakResponse:
       properties:
-        duration:
+        start_offset_seconds:
           type: integer
-          title: Duration
+          minimum: 0.0
+          title: Start Offset Seconds
+        end_offset_seconds:
+          type: integer
+          minimum: 0.0
+          title: End Offset Seconds
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        duration_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Seconds
       type: object
       required:
-      - duration
-      title: DurationEventCreate
-    SessionStatusEnum:
-      type: string
-      enum:
-      - STARTED
-      - AWAITING REVIEW
-      - AWAITING GUARDIAN SIGNATURE
-      - EDITS REQUESTED
-      - COMPLETED
-      title: SessionStatusEnum
-    SessionNarrativeResponse:
+      - start_offset_seconds
+      - end_offset_seconds
+      title: SessionBreakResponse
+    PatchSessionNarrative:
       properties:
         narrative:
           type: string
           title: Narrative
-        id:
-          type: integer
-          title: Id
       type: object
       required:
       - narrative
+      title: PatchSessionNarrative
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
       - id
-      title: SessionNarrativeResponse
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    ClientProgressEnum:
+      type: string
+      enum:
+      - The client appeared to learn and make positive progress during the session
+      - The client made little to no progress during the session
+      title: ClientProgressEnum
+    app__api__schemas__sessions__trial__TrialPatch:
+      properties:
+        attempts:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Attempts
+        expected_response:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expected Response
+        occurrence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Occurrence
+        instances:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/OccurrenceInstance'
+            type: array
+          - type: 'null'
+          title: Instances
+      type: object
+      title: TrialPatch
     DetailedSessionResponse:
       properties:
         id:
@@ -4046,223 +4244,25 @@ components:
       - synopsis
       - goals_and_trials
       title: DetailedSessionResponse
-    SessionTerminateResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        narrative:
-          type: string
-          title: Narrative
-        duration:
-          type: integer
-          title: Duration
-      type: object
-      required:
-      - id
-      - narrative
-      - duration
-      title: SessionTerminateResponse
-    Bay7GuardianSignatureRequest:
-      properties:
-        guardian_provider_signature:
-          type: string
-          title: Guardian Provider Signature
-        date_guardian_provider_signed:
-          type: string
-          format: date-time
-          title: Date Guardian Provider Signed
-        utc_offset_date_guardian_provider_signed:
-          type: integer
-          title: Utc Offset Date Guardian Provider Signed
-        session_id:
-          type: integer
-          title: Session Id
-        guardian_auth_token:
-          type: string
-          title: Guardian Auth Token
-        session_datetime:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Session Datetime
-      type: object
-      required:
-      - guardian_provider_signature
-      - date_guardian_provider_signed
-      - utc_offset_date_guardian_provider_signed
-      - session_id
-      - guardian_auth_token
-      title: Bay7GuardianSignatureRequest
-      description: BT-authenticated request; guardian identity comes from guardian_auth_token.
-    SessionCreate:
-      properties:
-        expected_duration:
-          type: integer
-          title: Expected Duration
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset:
-          type: integer
-          title: Utc Offset
-        client_id:
-          type: integer
-          title: Client Id
-        is_supervised:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Supervised
-        geo_location:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Geo Location
-        location:
-          $ref: '#/components/schemas/LocationEnumVersion2'
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
-        breaks:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/SessionBreakRequest'
-            type: array
-          - type: 'null'
-          title: Breaks
-        note_version:
-          $ref: '#/components/schemas/SessionNoteVersionEnum'
-          default: v1
-      type: object
-      required:
-      - expected_duration
-      - date_start
-      - utc_offset
-      - client_id
-      - location
-      - delivery_method
-      title: SessionCreate
-      description: 'To create and start a session we need date_start and utc_offset
-
-        We''re inheriting client_id and provider_id from the base class'
-    SessionDownloadPdfResponse:
-      properties:
-        document_url:
-          type: string
-          title: Document Url
-      type: object
-      required:
-      - document_url
-      title: SessionDownloadPdfResponse
-    TargetPhaseChangeData:
-      properties:
-        id:
-          type: integer
-          title: Id
-        title:
-          type: string
-          title: Title
-        date_added:
-          type: string
-          format: date
-          title: Date Added
-      type: object
-      required:
-      - id
-      - title
-      - date_added
-      title: TargetPhaseChangeData
-    TargetResponseWithGoal:
-      properties:
-        id:
-          type: integer
-          title: Id
-        label:
-          type: string
-          title: Label
-        instruction:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Instruction
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        is_event_duration_required:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Event Duration Required
-        event_duration_measurement_unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Event Duration Measurement Unit
-        order:
-          type: number
-          title: Order
-        is_active:
-          type: boolean
-          title: Is Active
-        stage:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stage
-        maintenance_frequency:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Maintenance Frequency
-        goal:
-          $ref: '#/components/schemas/GoalWithLinkResponse'
-      type: object
-      required:
-      - id
-      - label
-      - order
-      - is_active
-      - goal
-      title: TargetResponseWithGoal
-    Sex:
+    ClinicalQAReviewDeletionReasonEnum:
       type: string
       enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    BehaviorResponse:
+      - Correction
+      - Incomplete
+      title: ClinicalQAReviewDeletionReasonEnum
+    Synopsis:
       properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        id:
-          type: integer
-          title: Id
+        client_adheres_with_targets_or_goals:
+          type: boolean
+          title: Client Adheres With Targets Or Goals
+        no_behavior_issues_or_family_changes:
+          type: boolean
+          title: No Behavior Issues Or Family Changes
       type: object
       required:
-      - label
-      - id
-      title: BehaviorResponse
-    ClinicalQAReviewDeletion:
-      properties:
-        reason:
-          $ref: '#/components/schemas/ClinicalQAReviewDeletionReasonEnum'
-        date_deleted:
-          type: string
-          format: date-time
-          title: Date Deleted
-          default: '2026-08-04T17:13:57.594812Z'
-      type: object
-      required:
-      - reason
-      title: ClinicalQAReviewDeletion
+      - client_adheres_with_targets_or_goals
+      - no_behavior_issues_or_family_changes
+      title: Synopsis
   securitySchemes:
     HTTPBearer:
       type: http

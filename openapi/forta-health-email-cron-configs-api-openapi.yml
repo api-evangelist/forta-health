@@ -172,15 +172,27 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     EmailCronConfigPatch:
       properties:
         enabled:
@@ -229,17 +241,8 @@ components:
           title: Days Of Week
       type: object
       title: EmailCronConfigPatch
-    EmailCronConfigResponse:
+    EmailCronConfigPreviewRequest:
       properties:
-        id:
-          type: integer
-          title: Id
-        job_key:
-          type: string
-          title: Job Key
-        enabled:
-          type: boolean
-          title: Enabled
         subject:
           anyOf:
           - type: string
@@ -250,62 +253,17 @@ components:
           - type: string
           - type: 'null'
           title: Html Body
-        recipients:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Recipients
-        error_notification_recipient:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error Notification Recipient
-        days_of_week:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Days Of Week
-        updated_by:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Updated By
-        is_runnable:
-          type: boolean
-          title: Is Runnable
-          readOnly: true
       type: object
-      required:
-      - id
-      - job_key
-      - enabled
-      - is_runnable
-      title: EmailCronConfigResponse
-    ValidationError:
+      title: EmailCronConfigPreviewRequest
+    HTTPValidationError:
       properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
     EmailCronConfigPreviewResponse:
       properties:
         subject_rendered:
@@ -381,8 +339,17 @@ components:
       required:
       - job_key
       title: EmailCronConfigCreate
-    EmailCronConfigPreviewRequest:
+    EmailCronConfigResponse:
       properties:
+        id:
+          type: integer
+          title: Id
+        job_key:
+          type: string
+          title: Job Key
+        enabled:
+          type: boolean
+          title: Enabled
         subject:
           anyOf:
           - type: string
@@ -393,8 +360,41 @@ components:
           - type: string
           - type: 'null'
           title: Html Body
+        recipients:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Recipients
+        error_notification_recipient:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Notification Recipient
+        days_of_week:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Days Of Week
+        updated_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated By
+        is_runnable:
+          type: boolean
+          title: Is Runnable
+          readOnly: true
       type: object
-      title: EmailCronConfigPreviewRequest
+      required:
+      - id
+      - job_key
+      - enabled
+      - is_runnable
+      title: EmailCronConfigResponse
   securitySchemes:
     HTTPBearer:
       type: http
