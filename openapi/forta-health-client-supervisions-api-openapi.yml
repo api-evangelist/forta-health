@@ -530,6 +530,503 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    GoalResourceVersions:
+      properties:
+        baseline_measurement:
+          type: string
+          title: Baseline Measurement
+      type: object
+      required:
+      - baseline_measurement
+      title: GoalResourceVersions
+    ClientSupervisionResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Duration
+        status:
+          type: string
+          title: Status
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsResponse'
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        participants_names:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Participants Names
+        participants:
+          anyOf:
+          - $ref: '#/components/schemas/ClientParticipants'
+          - type: 'null'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        clinical_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Status
+        response_to_treatment:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Response To Treatment
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+        overall_progress_toward_mastery:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Overall Progress Toward Mastery
+        modified_behaviour_intervention:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified Behaviour Intervention
+        assessed_modification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Assessed Modification
+        probed_new_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Probed New Skills
+        reviewed_and_analyzed_data:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Analyzed Data
+        reviewed_and_evaluated_session_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Session Notes
+        reviewed_and_evaluated_treatment_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Treatment Plan
+        evaluated_progress:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Evaluated Progress
+        parent_demonstrated_new_or_changed_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Demonstrated New Or Changed Skills
+        target_phase:
+          items:
+            $ref: '#/components/schemas/ClientSupervisionNoteTargetPhaseResponse'
+          type: array
+          title: Target Phase
+        active_treatment_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active Treatment Id
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - client
+      - duration
+      - status
+      - bt_participants
+      - client_id
+      - location
+      - setting
+      - bcba
+      - target_phase
+      title: ClientSupervisionResponse
+    ClientSupervisionUpdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        duration:
+          $ref: '#/components/schemas/ClientSupervisionDuration'
+        setting:
+          anyOf:
+          - $ref: '#/components/schemas/SettingEnumV1'
+          - $ref: '#/components/schemas/SettingEnumV2'
+          title: Setting
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsRequest'
+        clinical_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Status
+        response_to_treatment:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Response To Treatment
+        session_narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Narrative
+        overall_progress_toward_mastery:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Overall Progress Toward Mastery
+        modified_behaviour_intervention:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified Behaviour Intervention
+        assessed_modification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Assessed Modification
+        probed_new_skills:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Probed New Skills
+        reviewed_and_analyzed_data:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Analyzed Data
+        reviewed_and_evaluated_session_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Session Notes
+        reviewed_and_evaluated_treatment_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reviewed And Evaluated Treatment Plan
+        evaluated_progress:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Evaluated Progress
+      type: object
+      required:
+      - date_start
+      - utc_offset
+      - client_id
+      - location
+      - duration
+      - setting
+      - bt_participants
+      title: ClientSupervisionUpdate
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    GoalNameResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        prefix:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prefix
+        id:
+          type: integer
+          title: Id
+        behavior_id:
+          type: integer
+          title: Behavior Id
+        behavior:
+          $ref: '#/components/schemas/BehaviorResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - label
+      - id
+      - behavior_id
+      - behavior
+      - is_active
+      title: GoalNameResponse
+    RateMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: RateMethodMasteryCriteriaResponse
+    EventMeasurementUnitEnum:
+      type: string
+      enum:
+      - SECOND
+      - MINUTE
+      - HOUR
+      title: EventMeasurementUnitEnum
+    TargetStageChangeLogResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        new_stage:
+          $ref: '#/components/schemas/TargetStageEnum'
+        old_stage:
+          anyOf:
+          - $ref: '#/components/schemas/TargetStageEnum'
+          - type: 'null'
+        date_stage_changed:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Stage Changed
+        reason_for_change:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason For Change
+        order:
+          type: number
+          title: Order
+        date_edits_blocked:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Edits Blocked
+      type: object
+      required:
+      - id
+      - new_stage
+      - order
+      title: TargetStageChangeLogResponse
+    ClientSupervisionCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset:
+          type: integer
+          title: Utc Offset
+        client_id:
+          type: integer
+          title: Client Id
+        location:
+          $ref: '#/components/schemas/LocationEnumV2'
+        duration:
+          $ref: '#/components/schemas/ClientSupervisionDuration'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+        bt_participants:
+          $ref: '#/components/schemas/BTParticipantsRequest'
+      type: object
+      required:
+      - date_start
+      - utc_offset
+      - client_id
+      - location
+      - duration
+      - setting
+      - bt_participants
+      title: ClientSupervisionCreate
+    HypothesizedFunctionResponse:
+      properties:
+        date_selected:
+          type: string
+          format: date
+          title: Date Selected
+        is_sensory:
+          type: boolean
+          title: Is Sensory
+        is_escape_or_avoidance:
+          type: boolean
+          title: Is Escape Or Avoidance
+        is_attention:
+          type: boolean
+          title: Is Attention
+        is_tangible:
+          type: boolean
+          title: Is Tangible
+        id:
+          type: integer
+          title: Id
+        date_edits_blocked:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Edits Blocked
+      type: object
+      required:
+      - date_selected
+      - is_sensory
+      - is_escape_or_avoidance
+      - is_attention
+      - is_tangible
+      - id
+      title: HypothesizedFunctionResponse
+    RateMethodMeasurementUnits:
+      properties:
+        interval_size:
+          type: integer
+          title: Interval Size
+        interval_unit:
+          $ref: '#/components/schemas/RateMethodMeasurementUnitsIntervalUnitEnum'
+      type: object
+      required:
+      - interval_size
+      - interval_unit
+      title: RateMethodMeasurementUnits
+    DurationMethodMasteryCriteriaMeasurementModeEnum:
+      type: string
+      enum:
+      - average
+      - total
+      title: DurationMethodMasteryCriteriaMeasurementModeEnum
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
+    JobTitleEnum:
+      type: string
+      enum:
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
+    GoalTypeEnum:
+      type: string
+      enum:
+      - behavior_reduction
+      - skill_acquisition
+      - caregiver
+      title: GoalTypeEnum
     ClientSupervisionListResponse:
       properties:
         id:
@@ -569,20 +1066,57 @@ components:
       - status
       - bt_participants
       title: ClientSupervisionListResponse
-    BehaviorResponse:
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ValidationError:
       properties:
-        label:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          minLength: 2
-          title: Label
-        id:
-          type: integer
-          title: Id
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - label
-      - id
-      title: BehaviorResponse
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BTParticipantsRequest:
+      properties:
+        primary:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Primary
+        secondary:
+          items:
+            type: integer
+          type: array
+          title: Secondary
+      type: object
+      required:
+      - secondary
+      title: BTParticipantsRequest
+    SettingEnumV1:
+      type: string
+      enum:
+      - In-person
+      - Remote
+      title: SettingEnumV1
     HTTPValidationError:
       properties:
         detail:
@@ -592,13 +1126,13 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    LocationEnumV2:
+    QABillingStatusEnum:
       type: string
       enum:
-      - Home
-      - Community settings
-      title: LocationEnumV2
-    RateMethodMasteryCriteriaResponse:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
+    DurationMethodMasteryCriteriaResponse:
       properties:
         change_type:
           anyOf:
@@ -609,6 +1143,10 @@ components:
           - type: integer
           - type: 'null'
           title: Desired Amount
+        measurement_mode:
+          anyOf:
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaMeasurementModeEnum'
+          - type: 'null'
         practice_duration_count:
           anyOf:
           - type: integer
@@ -620,69 +1158,9 @@ components:
       required:
       - change_type
       - desired_amount
+      - measurement_mode
       - practice_duration_count
-      title: RateMethodMasteryCriteriaResponse
-    ClientSupervisionNoteTargetPhaseResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        title:
-          type: string
-          title: Title
-        date_added:
-          type: string
-          format: date
-          title: Date Added
-        target_name:
-          type: string
-          title: Target Name
-        goal_name:
-          type: string
-          title: Goal Name
-      type: object
-      required:
-      - id
-      - title
-      - date_added
-      - target_name
-      - goal_name
-      title: ClientSupervisionNoteTargetPhaseResponse
-    ClientSupervisionUtilizationResponse:
-      properties:
-        client_id:
-          type: integer
-          title: Client Id
-        duration:
-          type: integer
-          title: Duration
-        count:
-          type: integer
-          title: Count
-      type: object
-      required:
-      - client_id
-      - duration
-      - count
-      title: ClientSupervisionUtilizationResponse
-    ClientSupervisionNoteTargetPhaseCreate:
-      properties:
-        target_id:
-          type: integer
-          title: Target Id
-        title:
-          type: string
-          title: Title
-        date_added:
-          type: string
-          format: date
-          title: Date Added
-      type: object
-      required:
-      - target_id
-      - title
-      - date_added
-      title: ClientSupervisionNoteTargetPhaseCreate
+      title: DurationMethodMasteryCriteriaResponse
     ProviderResponse:
       properties:
         first_name:
@@ -830,310 +1308,12 @@ components:
       - clinical_status
       - qa_billing_status
       title: ProviderResponse
-    ClientSupervisionUpdate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset:
-          type: integer
-          title: Utc Offset
-        client_id:
-          type: integer
-          title: Client Id
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumV1'
-          - $ref: '#/components/schemas/LocationEnumV2'
-          title: Location
-        duration:
-          $ref: '#/components/schemas/ClientSupervisionDuration'
-        setting:
-          anyOf:
-          - $ref: '#/components/schemas/SettingEnumV1'
-          - $ref: '#/components/schemas/SettingEnumV2'
-          title: Setting
-        bt_participants:
-          $ref: '#/components/schemas/BTParticipantsRequest'
-        clinical_status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Clinical Status
-        response_to_treatment:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Response To Treatment
-        session_narrative:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Session Narrative
-        overall_progress_toward_mastery:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Overall Progress Toward Mastery
-        modified_behaviour_intervention:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Modified Behaviour Intervention
-        assessed_modification:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Assessed Modification
-        probed_new_skills:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Probed New Skills
-        reviewed_and_analyzed_data:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reviewed And Analyzed Data
-        reviewed_and_evaluated_session_notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reviewed And Evaluated Session Notes
-        reviewed_and_evaluated_treatment_plan:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reviewed And Evaluated Treatment Plan
-        evaluated_progress:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Evaluated Progress
-      type: object
-      required:
-      - date_start
-      - utc_offset
-      - client_id
-      - location
-      - duration
-      - setting
-      - bt_participants
-      title: ClientSupervisionUpdate
-    ClientSupervisionBackdate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      title: ClientSupervisionBackdate
-    ClinicalStatusEnum:
+    LocationEnumV2:
       type: string
       enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    TargetStageChangeLogResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        new_stage:
-          $ref: '#/components/schemas/TargetStageEnum'
-        old_stage:
-          anyOf:
-          - $ref: '#/components/schemas/TargetStageEnum'
-          - type: 'null'
-        date_stage_changed:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Stage Changed
-        reason_for_change:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reason For Change
-        order:
-          type: number
-          title: Order
-        date_edits_blocked:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Edits Blocked
-      type: object
-      required:
-      - id
-      - new_stage
-      - order
-      title: TargetStageChangeLogResponse
-    LocationEnumV1:
-      type: string
-      enum:
-      - HOME
-      - COMMUNITY
-      - TELEHEALTH
-      title: LocationEnumV1
-    ClientListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    EventMeasurementUnitEnum:
-      type: string
-      enum:
-      - SECOND
-      - MINUTE
-      - HOUR
-      title: EventMeasurementUnitEnum
-    ProviderStatusEnum:
-      type: string
-      enum:
-      - Not Training
-      - Training
-      title: ProviderStatusEnum
-    GoalTypeEnum:
-      type: string
-      enum:
-      - behavior_reduction
-      - skill_acquisition
-      - caregiver
-      title: GoalTypeEnum
-    EmploymentTypeEnum:
-      type: string
-      enum:
-      - Contractor / 1099
-      - Hourly, full-time
-      - Hourly, part-time
-      - Salaried, full-time
-      title: EmploymentTypeEnum
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ClaimStatusEnum:
-      type: string
-      enum:
-      - On Hold
-      - Generated
-      - Full Denial
-      - In Appeals
-      - Rejected & Resubmitted
-      - Rejected, Needs Appeal
-      - Rejected, Needs Resubmission
-      - Rejected, Not Resubmitted
-      - Approved
-      - Submitted
-      - Unbillable
-      - Approved - Recouped
-      - Approved - Recouped & Resubmitted
-      title: ClaimStatusEnum
-    RateMethodMeasurementUnits:
-      properties:
-        interval_size:
-          type: integer
-          title: Interval Size
-        interval_unit:
-          $ref: '#/components/schemas/RateMethodMeasurementUnitsIntervalUnitEnum'
-      type: object
-      required:
-      - interval_size
-      - interval_unit
-      title: RateMethodMeasurementUnits
-    DurationMethodMasteryCriteriaMeasurementModeEnum:
-      type: string
-      enum:
-      - average
-      - total
-      title: DurationMethodMasteryCriteriaMeasurementModeEnum
-    ClientSupervisionStop:
-      properties:
-        signature:
-          type: string
-          title: Signature
-        utc_offset_date_signed:
-          type: integer
-          title: Utc Offset Date Signed
-        date_signed:
-          type: string
-          format: date-time
-          title: Date Signed
-      type: object
-      required:
-      - signature
-      - utc_offset_date_signed
-      - date_signed
-      title: ClientSupervisionStop
-    ClientSupervisionPdfResponse:
-      properties:
-        document_url:
-          type: string
-          title: Document Url
-      type: object
-      required:
-      - document_url
-      title: ClientSupervisionPdfResponse
-    GoalSimpleResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        goal_name:
-          $ref: '#/components/schemas/GoalNameResponse'
-        is_active:
-          type: boolean
-          title: Is Active
-        data_collection_method:
-          type: string
-          title: Data Collection Method
-      type: object
-      required:
-      - id
-      - goal_name
-      - is_active
-      - data_collection_method
-      title: GoalSimpleResponse
+      - Home
+      - Community settings
+      title: LocationEnumV2
     PresentStatusEnum:
       type: string
       enum:
@@ -1145,506 +1325,45 @@ components:
       - On Hold
       - Terminated / Discontinued
       title: PresentStatusEnum
-    MeasurementFrequency:
+    ProviderStatusEnum:
       type: string
       enum:
-      - Daily
-      - Twice a week
-      - Once a week
-      - Bi monthly
-      - Monthly
-      title: MeasurementFrequency
-    RateMethodMeasurementUnitsIntervalUnitEnum:
-      type: string
-      enum:
-      - minutes
-      - hours
-      - seconds
-      title: RateMethodMeasurementUnitsIntervalUnitEnum
-    SettingEnumV1:
-      type: string
-      enum:
-      - In-person
-      - Remote
-      title: SettingEnumV1
-    BTParticipantsRequest:
+      - Not Training
+      - Training
+      title: ProviderStatusEnum
+    SkillAcquisitionGoalMasteryCriteriaV2Response:
       properties:
-        primary:
+        acquisition:
           anyOf:
-          - type: integer
-          - type: 'null'
-          title: Primary
-        secondary:
-          items:
-            type: integer
-          type: array
-          title: Secondary
-      type: object
-      required:
-      - secondary
-      title: BTParticipantsRequest
-    DurationMethodMasteryCriteriaResponse:
-      properties:
-        change_type:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Acquisition
+        generalization:
           anyOf:
-          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-          - type: 'null'
-        desired_amount:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Generalization
+        maintenance:
           anyOf:
-          - type: integer
-          - type: 'null'
-          title: Desired Amount
-        measurement_mode:
+          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
+          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
+          title: Maintenance
+        maintenance_frequency:
           anyOf:
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaMeasurementModeEnum'
-          - type: 'null'
-        practice_duration_count:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1000.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Practice Duration Count
-      type: object
-      required:
-      - change_type
-      - desired_amount
-      - measurement_mode
-      - practice_duration_count
-      title: DurationMethodMasteryCriteriaResponse
-    QABillingStatusEnum:
-      type: string
-      enum:
-      - Billable
-      - Not Billable
-      title: QABillingStatusEnum
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    BTParticipantsResponse:
-      properties:
-        primary:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderListResponse'
-          - type: 'null'
-        secondary:
-          items:
-            $ref: '#/components/schemas/ProviderListResponse'
-          type: array
-          title: Secondary
-      type: object
-      required:
-      - secondary
-      title: BTParticipantsResponse
-    LinkedClaimResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        status:
-          $ref: '#/components/schemas/ClaimStatusEnum'
-        secondary_status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        total_charge:
-          type: number
-          minimum: 0.0
-          title: Total Charge
-        clearing_house_claim_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Clearing House Claim Id
-      type: object
-      required:
-      - id
-      - status
-      - total_charge
-      title: LinkedClaimResponse
-    MasteryCriteriaChangeTypeEnum:
-      type: string
-      enum:
-      - decrease
-      - increase
-      title: MasteryCriteriaChangeTypeEnum
-    InstancesMethodMasteryCriteriaResponse:
-      properties:
-        change_type:
-          anyOf:
-          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
-          - type: 'null'
-        desired_amount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Desired Amount
-        practice_duration_count:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1000.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Practice Duration Count
-        practice_duration_unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Practice Duration Unit
-      type: object
-      required:
-      - change_type
-      - desired_amount
-      - practice_duration_count
-      title: InstancesMethodMasteryCriteriaResponse
-    ClientParticipants:
-      properties:
-        parent:
-          type: boolean
-          title: Parent
-        sibling:
-          type: boolean
-          title: Sibling
-      type: object
-      required:
-      - parent
-      - sibling
-      title: ClientParticipants
-    DetailedTargetResponse:
-      properties:
-        label:
-          type: string
-          title: Label
-        order:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Order
-        instruction:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Instruction
-        description:
-          anyOf:
-          - type: string
-            maxLength: 2000
-            minLength: 2
-          - type: 'null'
-          title: Description
-        stage:
-          anyOf:
-          - $ref: '#/components/schemas/TargetStageEnum'
-          - type: 'null'
-        id:
-          type: integer
-          title: Id
-        is_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Active
-        reason:
-          anyOf:
-          - type: string
-            minLength: 2
-          - type: 'null'
-          title: Reason
-        stage_change_logs:
-          items:
-            $ref: '#/components/schemas/TargetStageChangeLogResponse'
-          type: array
-          title: Stage Change Logs
-        is_goal_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Goal Active
-        is_goal_linkable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Goal Linkable
-        last_activation_log:
-          anyOf:
-          - $ref: '#/components/schemas/ActivationLogResponse'
-          - type: 'null'
-        is_event_duration_required:
-          type: boolean
-          title: Is Event Duration Required
-        event_duration_measurement_unit:
-          anyOf:
-          - $ref: '#/components/schemas/EventMeasurementUnitEnum'
+          - $ref: '#/components/schemas/MeasurementFrequency'
           - type: 'null'
       type: object
       required:
-      - label
-      - id
-      - stage_change_logs
-      - is_event_duration_required
-      title: DetailedTargetResponse
-    DurationMethodMeasurementUnits:
-      properties:
-        duration_unit:
-          $ref: '#/components/schemas/EventMeasurementUnitEnum'
-        duration_unit_formatted:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Duration Unit Formatted
-      type: object
-      required:
-      - duration_unit
-      title: DurationMethodMeasurementUnits
-    ClientSupervisionDuration:
-      type: integer
-      enum:
-      - 900
-      - 1800
-      - 2700
-      - 3600
-      - 4500
-      - 5400
-      - 6300
-      - 7200
-      - 8100
-      - 9000
-      - 9900
-      - 10800
-      - 11700
-      - 12600
-      - 13500
-      - 14400
-      title: ClientSupervisionDuration
-    ClientSupervisionWithActiveGoalsResponseResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        duration:
-          anyOf:
-          - type: integer
-          - $ref: '#/components/schemas/ClientSupervisionDuration'
-          title: Duration
-        status:
-          type: string
-          title: Status
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-        bt_participants:
-          $ref: '#/components/schemas/BTParticipantsResponse'
-        client_id:
-          type: integer
-          title: Client Id
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumV1'
-          - $ref: '#/components/schemas/LocationEnumV2'
-          title: Location
-        setting:
-          anyOf:
-          - $ref: '#/components/schemas/SettingEnumV1'
-          - $ref: '#/components/schemas/SettingEnumV2'
-          title: Setting
-        participants_names:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Participants Names
-        participants:
-          anyOf:
-          - $ref: '#/components/schemas/ClientParticipants'
-          - type: 'null'
-        bcba:
-          $ref: '#/components/schemas/ProviderListResponse'
-        clinical_status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Clinical Status
-        response_to_treatment:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Response To Treatment
-        session_narrative:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Session Narrative
-        overall_progress_toward_mastery:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Overall Progress Toward Mastery
-        modified_behaviour_intervention:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Modified Behaviour Intervention
-        assessed_modification:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Assessed Modification
-        probed_new_skills:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Probed New Skills
-        reviewed_and_analyzed_data:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reviewed And Analyzed Data
-        reviewed_and_evaluated_session_notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reviewed And Evaluated Session Notes
-        reviewed_and_evaluated_treatment_plan:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reviewed And Evaluated Treatment Plan
-        evaluated_progress:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Evaluated Progress
-        parent_demonstrated_new_or_changed_skills:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Demonstrated New Or Changed Skills
-        target_phase:
-          items:
-            $ref: '#/components/schemas/ClientSupervisionNoteTargetPhaseResponse'
-          type: array
-          title: Target Phase
-        active_treatment_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Active Treatment Id
-        active_goals:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/GoalResponse'
-            type: array
-          - type: 'null'
-          title: Active Goals
-      type: object
-      required:
-      - id
-      - date_start
-      - utc_offset_date_start
-      - client
-      - duration
-      - status
-      - bt_participants
-      - client_id
-      - location
-      - setting
-      - bcba
-      - target_phase
-      title: ClientSupervisionWithActiveGoalsResponseResponse
-    ClientSupervisionListResponseWithClaimHistory:
-      properties:
-        id:
-          type: integer
-          title: Id
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        duration:
-          anyOf:
-          - type: integer
-          - $ref: '#/components/schemas/ClientSupervisionDuration'
-          title: Duration
-        expected_duration:
-          anyOf:
-          - type: integer
-          - $ref: '#/components/schemas/ClientSupervisionDuration'
-          title: Expected Duration
-        status:
-          type: string
-          title: Status
-        client:
-          $ref: '#/components/schemas/ClientResponse'
-        bcba:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderResponse'
-          - type: 'null'
-        claim_history:
-          items:
-            $ref: '#/components/schemas/LinkedClaimResponse'
-          type: array
-          title: Claim History
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/LocationEnumV1'
-          - $ref: '#/components/schemas/LocationEnumV2'
-          title: Location
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-      type: object
-      required:
-      - id
-      - date_start
-      - utc_offset_date_start
-      - duration
-      - expected_duration
-      - status
-      - client
-      - claim_history
-      - location
-      title: ClientSupervisionListResponseWithClaimHistory
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
+      - acquisition
+      - generalization
+      - maintenance
+      title: SkillAcquisitionGoalMasteryCriteriaV2Response
     ClientResponse:
       properties:
         first_name:
@@ -1733,191 +1452,6 @@ components:
       - id
       - clinical_status
       title: ClientResponse
-    SettingEnumV2:
-      type: string
-      enum:
-      - Telehealth
-      title: SettingEnumV2
-    GoalResourceVersions:
-      properties:
-        baseline_measurement:
-          type: string
-          title: Baseline Measurement
-      type: object
-      required:
-      - baseline_measurement
-      title: GoalResourceVersions
-    HypothesizedFunctionResponse:
-      properties:
-        date_selected:
-          type: string
-          format: date
-          title: Date Selected
-        is_sensory:
-          type: boolean
-          title: Is Sensory
-        is_escape_or_avoidance:
-          type: boolean
-          title: Is Escape Or Avoidance
-        is_attention:
-          type: boolean
-          title: Is Attention
-        is_tangible:
-          type: boolean
-          title: Is Tangible
-        id:
-          type: integer
-          title: Id
-        date_edits_blocked:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Edits Blocked
-      type: object
-      required:
-      - date_selected
-      - is_sensory
-      - is_escape_or_avoidance
-      - is_attention
-      - is_tangible
-      - id
-      title: HypothesizedFunctionResponse
-    GoalNameResponse:
-      properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        prefix:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Prefix
-        id:
-          type: integer
-          title: Id
-        behavior_id:
-          type: integer
-          title: Behavior Id
-        behavior:
-          $ref: '#/components/schemas/BehaviorResponse'
-        is_active:
-          type: boolean
-          title: Is Active
-      type: object
-      required:
-      - label
-      - id
-      - behavior_id
-      - behavior
-      - is_active
-      title: GoalNameResponse
-    PercentageMethodMeasurementUnits:
-      properties:
-        total_attempts:
-          type: integer
-          title: Total Attempts
-      type: object
-      required:
-      - total_attempts
-      title: PercentageMethodMeasurementUnits
-    ClientSupervisionCreate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset:
-          type: integer
-          title: Utc Offset
-        client_id:
-          type: integer
-          title: Client Id
-        location:
-          $ref: '#/components/schemas/LocationEnumV2'
-        duration:
-          $ref: '#/components/schemas/ClientSupervisionDuration'
-        setting:
-          $ref: '#/components/schemas/SettingEnumV2'
-        bt_participants:
-          $ref: '#/components/schemas/BTParticipantsRequest'
-      type: object
-      required:
-      - date_start
-      - utc_offset
-      - client_id
-      - location
-      - duration
-      - setting
-      - bt_participants
-      title: ClientSupervisionCreate
-    JobTitleEnum:
-      type: string
-      enum:
-      - Behavior Technician
-      - Registered Behavior Technician
-      - Behavior Technician Trainee
-      - Virtual Therapy Assistant
-      - Lead Virtual Therapy Assistant
-      - Certified Behavioral Technician
-      - BCBA
-      - Lead BCBA
-      - Clinical Director
-      title: JobTitleEnum
-    PercentageMethodMasteryCriteriaResponse:
-      properties:
-        desired_amount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Desired Amount
-        practice_duration_count:
-          anyOf:
-          - type: integer
-            exclusiveMaximum: 1000.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Practice Duration Count
-        total_attempts:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total Attempts
-      type: object
-      required:
-      - desired_amount
-      - practice_duration_count
-      title: PercentageMethodMasteryCriteriaResponse
-    ProviderListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
     GoalResponse:
       properties:
         goal_name_id:
@@ -2097,51 +1631,242 @@ components:
       - hypothesized_functions
       - targets
       title: GoalResponse
-    TargetStageEnum:
+    ClientSupervisionNoteTargetPhaseResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        title:
+          type: string
+          title: Title
+        date_added:
+          type: string
+          format: date
+          title: Date Added
+        target_name:
+          type: string
+          title: Target Name
+        goal_name:
+          type: string
+          title: Goal Name
+      type: object
+      required:
+      - id
+      - title
+      - date_added
+      - target_name
+      - goal_name
+      title: ClientSupervisionNoteTargetPhaseResponse
+    ClientSupervisionPdfResponse:
+      properties:
+        document_url:
+          type: string
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: ClientSupervisionPdfResponse
+    RateMethodMeasurementUnitsIntervalUnitEnum:
       type: string
       enum:
-      - Baseline
-      - Mastered
-      - On Hold
-      - Discontinued
-      - Acquisition
-      - Generalization
-      - Maintenance
-      - In Progress
-      title: TargetStageEnum
-    SkillAcquisitionGoalMasteryCriteriaV2Response:
+      - minutes
+      - hours
+      - seconds
+      title: RateMethodMeasurementUnitsIntervalUnitEnum
+    LinkedClaimResponse:
       properties:
-        acquisition:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
           anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
-          title: Acquisition
-        generalization:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
           anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
-          title: Generalization
-        maintenance:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
+    PercentageMethodMasteryCriteriaResponse:
+      properties:
+        desired_amount:
           anyOf:
-          - $ref: '#/components/schemas/RateMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/PercentageMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/DurationMethodMasteryCriteriaResponse'
-          - $ref: '#/components/schemas/InstancesMethodMasteryCriteriaResponse'
-          title: Maintenance
-        maintenance_frequency:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
           anyOf:
-          - $ref: '#/components/schemas/MeasurementFrequency'
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+        total_attempts:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Attempts
+      type: object
+      required:
+      - desired_amount
+      - practice_duration_count
+      title: PercentageMethodMasteryCriteriaResponse
+    ClientSupervisionDuration:
+      type: integer
+      enum:
+      - 900
+      - 1800
+      - 2700
+      - 3600
+      - 4500
+      - 5400
+      - 6300
+      - 7200
+      - 8100
+      - 9000
+      - 9900
+      - 10800
+      - 11700
+      - 12600
+      - 13500
+      - 14400
+      title: ClientSupervisionDuration
+    DetailedTargetResponse:
+      properties:
+        label:
+          type: string
+          title: Label
+        order:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Order
+        instruction:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Instruction
+        description:
+          anyOf:
+          - type: string
+            maxLength: 2000
+            minLength: 2
+          - type: 'null'
+          title: Description
+        stage:
+          anyOf:
+          - $ref: '#/components/schemas/TargetStageEnum'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+        reason:
+          anyOf:
+          - type: string
+            minLength: 2
+          - type: 'null'
+          title: Reason
+        stage_change_logs:
+          items:
+            $ref: '#/components/schemas/TargetStageChangeLogResponse'
+          type: array
+          title: Stage Change Logs
+        is_goal_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Goal Active
+        is_goal_linkable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Goal Linkable
+        last_activation_log:
+          anyOf:
+          - $ref: '#/components/schemas/ActivationLogResponse'
+          - type: 'null'
+        is_event_duration_required:
+          type: boolean
+          title: Is Event Duration Required
+        event_duration_measurement_unit:
+          anyOf:
+          - $ref: '#/components/schemas/EventMeasurementUnitEnum'
           - type: 'null'
       type: object
       required:
-      - acquisition
-      - generalization
-      - maintenance
-      title: SkillAcquisitionGoalMasteryCriteriaV2Response
+      - label
+      - id
+      - stage_change_logs
+      - is_event_duration_required
+      title: DetailedTargetResponse
+    ClientSupervisionNoteTargetPhaseCreate:
+      properties:
+        target_id:
+          type: integer
+          title: Target Id
+        title:
+          type: string
+          title: Title
+        date_added:
+          type: string
+          format: date
+          title: Date Added
+      type: object
+      required:
+      - target_id
+      - title
+      - date_added
+      title: ClientSupervisionNoteTargetPhaseCreate
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ClientSupervisionUtilizationResponse:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          type: integer
+          title: Duration
+        count:
+          type: integer
+          title: Count
+      type: object
+      required:
+      - client_id
+      - duration
+      - count
+      title: ClientSupervisionUtilizationResponse
     ActivationLogResponse:
       properties:
         date:
@@ -2160,7 +1885,67 @@ components:
       - reason
       - is_active
       title: ActivationLogResponse
-    ClientSupervisionResponse:
+    MasteryCriteriaChangeTypeEnum:
+      type: string
+      enum:
+      - decrease
+      - increase
+      title: MasteryCriteriaChangeTypeEnum
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    ClientParticipants:
+      properties:
+        parent:
+          type: boolean
+          title: Parent
+        sibling:
+          type: boolean
+          title: Sibling
+      type: object
+      required:
+      - parent
+      - sibling
+      title: ClientParticipants
+    BTParticipantsResponse:
+      properties:
+        primary:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderListResponse'
+          - type: 'null'
+        secondary:
+          items:
+            $ref: '#/components/schemas/ProviderListResponse'
+          type: array
+          title: Secondary
+      type: object
+      required:
+      - secondary
+      title: BTParticipantsResponse
+    ClientSupervisionWithActiveGoalsResponseResponse:
       properties:
         id:
           type: integer
@@ -2283,6 +2068,13 @@ components:
           - type: integer
           - type: 'null'
           title: Active Treatment Id
+        active_goals:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/GoalResponse'
+            type: array
+          - type: 'null'
+          title: Active Goals
       type: object
       required:
       - id
@@ -2297,7 +2089,215 @@ components:
       - setting
       - bcba
       - target_phase
-      title: ClientSupervisionResponse
+      title: ClientSupervisionWithActiveGoalsResponseResponse
+    PercentageMethodMeasurementUnits:
+      properties:
+        total_attempts:
+          type: integer
+          title: Total Attempts
+      type: object
+      required:
+      - total_attempts
+      title: PercentageMethodMeasurementUnits
+    InstancesMethodMasteryCriteriaResponse:
+      properties:
+        change_type:
+          anyOf:
+          - $ref: '#/components/schemas/MasteryCriteriaChangeTypeEnum'
+          - type: 'null'
+        desired_amount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Desired Amount
+        practice_duration_count:
+          anyOf:
+          - type: integer
+            exclusiveMaximum: 1000.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Practice Duration Count
+        practice_duration_unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Practice Duration Unit
+      type: object
+      required:
+      - change_type
+      - desired_amount
+      - practice_duration_count
+      title: InstancesMethodMasteryCriteriaResponse
+    ClientSupervisionBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: ClientSupervisionBackdate
+    ClientSupervisionListResponseWithClaimHistory:
+      properties:
+        id:
+          type: integer
+          title: Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Duration
+        expected_duration:
+          anyOf:
+          - type: integer
+          - $ref: '#/components/schemas/ClientSupervisionDuration'
+          title: Expected Duration
+        status:
+          type: string
+          title: Status
+        client:
+          $ref: '#/components/schemas/ClientResponse'
+        bcba:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderResponse'
+          - type: 'null'
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/LocationEnumV1'
+          - $ref: '#/components/schemas/LocationEnumV2'
+          title: Location
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - id
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - expected_duration
+      - status
+      - client
+      - claim_history
+      - location
+      title: ClientSupervisionListResponseWithClaimHistory
+    ClientSupervisionStop:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+        date_signed:
+          type: string
+          format: date-time
+          title: Date Signed
+      type: object
+      required:
+      - signature
+      - utc_offset_date_signed
+      - date_signed
+      title: ClientSupervisionStop
+    LocationEnumV1:
+      type: string
+      enum:
+      - HOME
+      - COMMUNITY
+      - TELEHEALTH
+      title: LocationEnumV1
+    DurationMethodMeasurementUnits:
+      properties:
+        duration_unit:
+          $ref: '#/components/schemas/EventMeasurementUnitEnum'
+        duration_unit_formatted:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Duration Unit Formatted
+      type: object
+      required:
+      - duration_unit
+      title: DurationMethodMeasurementUnits
+    SettingEnumV2:
+      type: string
+      enum:
+      - Telehealth
+      title: SettingEnumV2
+    TargetStageEnum:
+      type: string
+      enum:
+      - Baseline
+      - Mastered
+      - On Hold
+      - Discontinued
+      - Acquisition
+      - Generalization
+      - Maintenance
+      - In Progress
+      title: TargetStageEnum
+    MeasurementFrequency:
+      type: string
+      enum:
+      - Daily
+      - Twice a week
+      - Once a week
+      - Bi monthly
+      - Monthly
+      title: MeasurementFrequency
+    GoalSimpleResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        goal_name:
+          $ref: '#/components/schemas/GoalNameResponse'
+        is_active:
+          type: boolean
+          title: Is Active
+        data_collection_method:
+          type: string
+          title: Data Collection Method
+      type: object
+      required:
+      - id
+      - goal_name
+      - is_active
+      - data_collection_method
+      title: GoalSimpleResponse
+    BehaviorResponse:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - label
+      - id
+      title: BehaviorResponse
   securitySchemes:
     HTTPBearer:
       type: http

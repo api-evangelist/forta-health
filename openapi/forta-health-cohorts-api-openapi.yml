@@ -165,6 +165,49 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
+    ClientAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - client
+      title: ClientAssignmentResponse
+    CohortResponse:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - name
+      - service_classes
+      - id
+      title: CohortResponse
     ClientListResponse:
       properties:
         first_name:
@@ -193,6 +236,58 @@ components:
       - clinical_status
       - id
       title: ClientListResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    CohortPatch:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+      type: object
+      required:
+      - name
+      - service_classes
+      title: CohortPatch
+    CohortCreate:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        service_classes:
+          items:
+            $ref: '#/components/schemas/CohortServiceClass'
+          type: array
+          title: Service Classes
+      type: object
+      required:
+      - name
+      - service_classes
+      title: CohortCreate
+    CohortServiceClass:
+      type: string
+      enum:
+      - 97151 CLAIMS
+      - 97152 CLAIMS
+      - 97153 CLAIMS
+      - 97155 CLAIMS
+      - 97156 CLAIMS
+      - 97157 CLAIMS
+      - NO SERVICE
+      - NON THERAPY HOURS TIMESHEETS
+      title: CohortServiceClass
     ValidationError:
       properties:
         loc:
@@ -223,37 +318,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ClientAssignmentResponse:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-      type: object
-      required:
-      - date_start
-      - id
-      - client
-      title: ClientAssignmentResponse
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
     CohortWithClientAssignmentsResponse:
       properties:
         name:
@@ -280,50 +344,6 @@ components:
       - id
       - client_assignments
       title: CohortWithClientAssignmentsResponse
-    CohortPatch:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        service_classes:
-          items:
-            $ref: '#/components/schemas/CohortServiceClass'
-          type: array
-          title: Service Classes
-      type: object
-      required:
-      - name
-      - service_classes
-      title: CohortPatch
-    CohortServiceClass:
-      type: string
-      enum:
-      - 97151 CLAIMS
-      - 97152 CLAIMS
-      - 97153 CLAIMS
-      - 97155 CLAIMS
-      - 97156 CLAIMS
-      - 97157 CLAIMS
-      - NO SERVICE
-      - NON THERAPY HOURS TIMESHEETS
-      title: CohortServiceClass
-    CohortCreate:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        service_classes:
-          items:
-            $ref: '#/components/schemas/CohortServiceClass'
-          type: array
-          title: Service Classes
-      type: object
-      required:
-      - name
-      - service_classes
-      title: CohortCreate
     ClinicalStatusEnum:
       type: string
       enum:
@@ -333,26 +353,6 @@ components:
       - OFFBOARDED
       - LIMITED ACCESS GUARDIAN
       title: ClinicalStatusEnum
-    CohortResponse:
-      properties:
-        name:
-          type: string
-          minLength: 1
-          title: Name
-        service_classes:
-          items:
-            $ref: '#/components/schemas/CohortServiceClass'
-          type: array
-          title: Service Classes
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - name
-      - service_classes
-      - id
-      title: CohortResponse
   securitySchemes:
     HTTPBearer:
       type: http

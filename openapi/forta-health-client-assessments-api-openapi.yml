@@ -462,257 +462,44 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ClientAssessmentNoteUpdate:
+    ClientAssessmentPdfUrl:
       properties:
-        date_start:
+        document_url:
           type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        client_id:
-          type: integer
-          title: Client Id
-        duration:
-          $ref: '#/components/schemas/AssessmentDuration'
-        location:
-          $ref: '#/components/schemas/ClientLocationEnum'
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-        activity_conducted:
-          anyOf:
-          - $ref: '#/components/schemas/ActivityConducted'
-          - type: 'null'
-        notes:
-          anyOf:
-          - type: string
-            minLength: 120
-          - type: 'null'
-          title: Notes
+          title: Document Url
       type: object
       required:
-      - date_start
-      - utc_offset_date_start
-      - client_id
-      - duration
-      - location
-      - delivery_method
-      title: ClientAssessmentNoteUpdate
-    HTTPValidationError:
+      - document_url
+      title: ClientAssessmentPdfUrl
+    ProviderListResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ClientAssessmentStop:
-      properties:
-        signature:
-          type: string
-          title: Signature
-        utc_offset_date_signed:
+        id:
           type: integer
-          title: Utc Offset Date Signed
-      type: object
-      required:
-      - signature
-      - utc_offset_date_signed
-      title: ClientAssessmentStop
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ClientListResponse:
-      properties:
+          title: Id
         first_name:
           type: string
           title: First Name
         last_name:
           type: string
           title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
+        email:
           type: string
-          format: date
-          title: Dob
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
         clinical_status:
           $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
       type: object
       required:
+      - id
       - first_name
       - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    app__api__schemas__client_assessment__DeliveryMethodEnum:
-      type: string
-      enum:
-      - Telehealth
-      title: DeliveryMethodEnum
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ClaimStatusEnum:
-      type: string
-      enum:
-      - On Hold
-      - Generated
-      - Full Denial
-      - In Appeals
-      - Rejected & Resubmitted
-      - Rejected, Needs Appeal
-      - Rejected, Needs Resubmission
-      - Rejected, Not Resubmitted
-      - Approved
-      - Submitted
-      - Unbillable
-      - Approved - Recouped
-      - Approved - Recouped & Resubmitted
-      title: ClaimStatusEnum
-    ClientAssessmentCreate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        client_id:
-          type: integer
-          title: Client Id
-        duration:
-          $ref: '#/components/schemas/AssessmentDuration'
-        location:
-          $ref: '#/components/schemas/ClientLocationEnum'
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      - client_id
-      - duration
-      - location
-      - delivery_method
-      title: ClientAssessmentCreate
-    AssessmentDuration:
-      type: integer
-      enum:
-      - 900
-      - 1800
-      - 2700
-      - 3600
-      - 4500
-      - 5400
-      - 6300
-      - 7200
-      title: AssessmentDuration
-    ClientAssessmentResponseWithClaimHistory:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        client_id:
-          type: integer
-          title: Client Id
-        duration:
-          $ref: '#/components/schemas/AssessmentDuration'
-        location:
-          $ref: '#/components/schemas/ClientLocationEnum'
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-        status:
-          $ref: '#/components/schemas/AssessmentStatusEnum'
-        is_billable:
-          type: boolean
-          title: Is Billable
-        claim_history:
-          items:
-            $ref: '#/components/schemas/LinkedClaimResponse'
-          type: array
-          title: Claim History
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      - client_id
-      - duration
-      - location
-      - delivery_method
-      - id
-      - client
-      - provider
+      - email
       - status
-      - is_billable
-      - claim_history
-      title: ClientAssessmentResponseWithClaimHistory
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - clinical_status
+      title: ProviderListResponse
     ClientAssessmentResponse:
       properties:
         date_start:
@@ -798,33 +585,166 @@ components:
       - is_billable
       - service_code
       title: ClientAssessmentResponse
-    LinkedClaimResponse:
+    AssessmentStatusEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      title: AssessmentStatusEnum
+    ClientListResponse:
       properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
         id:
           type: integer
           title: Id
-        status:
-          $ref: '#/components/schemas/ClaimStatusEnum'
-        secondary_status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        total_charge:
-          type: number
-          minimum: 0.0
-          title: Total Charge
-        clearing_house_claim_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Clearing House Claim Id
       type: object
       required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
       - id
+      title: ClientListResponse
+    ClientAssessmentStop:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+      type: object
+      required:
+      - signature
+      - utc_offset_date_signed
+      title: ClientAssessmentStop
+    ClientAssessmentResponseWithClaimHistory:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          $ref: '#/components/schemas/AssessmentDuration'
+        location:
+          $ref: '#/components/schemas/ClientLocationEnum'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/AssessmentStatusEnum'
+        is_billable:
+          type: boolean
+          title: Is Billable
+        claim_history:
+          items:
+            $ref: '#/components/schemas/LinkedClaimResponse'
+          type: array
+          title: Claim History
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - client_id
+      - duration
+      - location
+      - delivery_method
+      - id
+      - client
+      - provider
       - status
-      - total_charge
-      title: LinkedClaimResponse
+      - is_billable
+      - claim_history
+      title: ClientAssessmentResponseWithClaimHistory
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ClientLocationEnum:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: ClientLocationEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ClientAssessmentBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: ClientAssessmentBackdate
     ActivityConducted:
       properties:
         is_assessment_administered:
@@ -859,19 +779,39 @@ components:
           title: Is Report Or Treatment Plan Prepared
       type: object
       title: ActivityConducted
-    AssessmentStatusEnum:
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    app__api__schemas__client_assessment__DeliveryMethodEnum:
       type: string
       enum:
-      - STARTED
-      - COMPLETED
-      title: AssessmentStatusEnum
-    ClientLocationEnum:
-      type: string
-      enum:
-      - Home
-      - Community settings
-      title: ClientLocationEnum
-    ClientAssessmentBackdate:
+      - Telehealth
+      title: DeliveryMethodEnum
+    ClientAssessmentNoteUpdate:
       properties:
         date_start:
           type: string
@@ -880,49 +820,109 @@ components:
         utc_offset_date_start:
           type: integer
           title: Utc Offset Date Start
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          $ref: '#/components/schemas/AssessmentDuration'
+        location:
+          $ref: '#/components/schemas/ClientLocationEnum'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+        activity_conducted:
+          anyOf:
+          - $ref: '#/components/schemas/ActivityConducted'
+          - type: 'null'
+        notes:
+          anyOf:
+          - type: string
+            minLength: 120
+          - type: 'null'
+          title: Notes
       type: object
       required:
       - date_start
       - utc_offset_date_start
-      title: ClientAssessmentBackdate
-    ProviderListResponse:
+      - client_id
+      - duration
+      - location
+      - delivery_method
+      title: ClientAssessmentNoteUpdate
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    AssessmentDuration:
+      type: integer
+      enum:
+      - 900
+      - 1800
+      - 2700
+      - 3600
+      - 4500
+      - 5400
+      - 6300
+      - 7200
+      title: AssessmentDuration
+    ClientAssessmentCreate:
       properties:
-        id:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
           type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
+          title: Utc Offset Date Start
+        client_id:
+          type: integer
+          title: Client Id
+        duration:
+          $ref: '#/components/schemas/AssessmentDuration'
+        location:
+          $ref: '#/components/schemas/ClientLocationEnum'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__client_assessment__DeliveryMethodEnum'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
       type: object
       required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
-    ClientAssessmentPdfUrl:
-      properties:
-        document_url:
-          type: string
-          title: Document Url
-      type: object
-      required:
-      - document_url
-      title: ClientAssessmentPdfUrl
+      - date_start
+      - utc_offset_date_start
+      - client_id
+      - duration
+      - location
+      - delivery_method
+      title: ClientAssessmentCreate
   securitySchemes:
     HTTPBearer:
       type: http

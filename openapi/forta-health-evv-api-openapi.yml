@@ -48,15 +48,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    EVVCaptureGpsResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - status
-      title: EVVCaptureGpsResponse
     EVVCaptureGpsRequest:
       properties:
         lat:
@@ -82,6 +73,15 @@ components:
       - lat
       - long
       title: EVVCaptureGpsRequest
+    EVVCaptureGpsResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: EVVCaptureGpsResponse
     ValidationError:
       properties:
         loc:

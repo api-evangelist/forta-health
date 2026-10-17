@@ -492,6 +492,335 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ProviderCreate:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          type: string
+          format: email
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - email
+      title: ProviderCreate
+    ProviderQABillingStatus:
+      properties:
+        qa_billing_status:
+          $ref: '#/components/schemas/QABillingStatusEnum'
+      type: object
+      required:
+      - qa_billing_status
+      title: ProviderQABillingStatus
+    GuardianRelationshipManagerAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        guardian_provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        relationship_manager_provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - guardian_provider
+      - relationship_manager_provider
+      title: GuardianRelationshipManagerAssignmentResponse
+    ProviderPatch:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          type: string
+          format: email
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+        relationship_manager_provider_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Relationship Manager Provider Id
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - email
+      title: ProviderPatch
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    JobTitleEnum:
+      type: string
+      enum:
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
     ProviderPromote:
       properties:
         roles:
@@ -503,25 +832,35 @@ components:
           title: Roles
       type: object
       title: ProviderPromote
-    ProviderLicenseResponse:
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ValidationError:
       properties:
-        state:
-          type: string
-          title: State
-        is_license_required_in_state:
-          type: boolean
-          title: Is License Required In State
-        licenses:
+        loc:
           items:
-            $ref: '#/components/schemas/ProviderStateLicenseDetails'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Licenses
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - state
-      - is_license_required_in_state
-      - licenses
-      title: ProviderLicenseResponse
+      - loc
+      - msg
+      - type
+      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -531,6 +870,12 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    QABillingStatusEnum:
+      type: string
+      enum:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
     ProviderResponse:
       properties:
         first_name:
@@ -678,69 +1023,12 @@ components:
       - clinical_status
       - qa_billing_status
       title: ProviderResponse
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
     ProviderStatusEnum:
       type: string
       enum:
       - Not Training
       - Training
       title: ProviderStatusEnum
-    EmploymentTypeEnum:
-      type: string
-      enum:
-      - Contractor / 1099
-      - Hourly, full-time
-      - Hourly, part-time
-      - Salaried, full-time
-      title: EmploymentTypeEnum
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    GuardianRelationshipManagerAssignmentResponse:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        id:
-          type: integer
-          title: Id
-        guardian_provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-        relationship_manager_provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-      type: object
-      required:
-      - date_start
-      - id
-      - guardian_provider
-      - relationship_manager_provider
-      title: GuardianRelationshipManagerAssignmentResponse
-    QABillingStatusEnum:
-      type: string
-      enum:
-      - Billable
-      - Not Billable
-      title: QABillingStatusEnum
     ProviderEmailUpdate:
       properties:
         email:
@@ -751,156 +1039,14 @@ components:
       required:
       - email
       title: ProviderEmailUpdate
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ProviderPatch:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        email:
-          type: string
-          format: email
-          title: Email
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        npi:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Npi
-        certification:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Certification
-        date_certification_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification Start
-        date_certification_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification End
-        state_license:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: State License
-        caqh_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Caqh Id
-        payroll_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Payroll Id
-        employment_type:
-          anyOf:
-          - $ref: '#/components/schemas/EmploymentTypeEnum'
-          - type: 'null'
-        job_title:
-          anyOf:
-          - $ref: '#/components/schemas/JobTitleEnum'
-          - type: 'null'
-        preferred_language:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Preferred Language
-        supported_languages:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Supported Languages
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderStatusEnum'
-          - type: 'null'
-          default: Not Training
-        relationship_manager_provider_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Relationship Manager Provider Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - email
-      title: ProviderPatch
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
     ProviderTypes:
       type: string
       enum:
@@ -917,233 +1063,6 @@ components:
       - invoice_coordinator
       - limited_access_guardian
       title: ProviderTypes
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    ProviderQABillingStatus:
-      properties:
-        qa_billing_status:
-          $ref: '#/components/schemas/QABillingStatusEnum'
-      type: object
-      required:
-      - qa_billing_status
-      title: ProviderQABillingStatus
-    ProviderClinicalStatusUpdateRequest:
-      properties:
-        status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        reason:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
-          - type: 'null'
-      type: object
-      required:
-      - status
-      title: ProviderClinicalStatusUpdateRequest
-    ProviderCreate:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        email:
-          type: string
-          format: email
-          title: Email
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        npi:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Npi
-        certification:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Certification
-        date_certification_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification Start
-        date_certification_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification End
-        state_license:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: State License
-        caqh_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Caqh Id
-        payroll_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Payroll Id
-        employment_type:
-          anyOf:
-          - $ref: '#/components/schemas/EmploymentTypeEnum'
-          - type: 'null'
-        job_title:
-          anyOf:
-          - $ref: '#/components/schemas/JobTitleEnum'
-          - type: 'null'
-        preferred_language:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Preferred Language
-        supported_languages:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Supported Languages
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderStatusEnum'
-          - type: 'null'
-          default: Not Training
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - email
-      title: ProviderCreate
-    ProviderStateCredentialsDetails:
-      properties:
-        id:
-          type: integer
-          title: Id
-        provider_id:
-          type: integer
-          title: Provider Id
-        payor_id:
-          type: integer
-          title: Payor Id
-        date_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        medicaid_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Medicaid Id
-      type: object
-      required:
-      - id
-      - provider_id
-      - payor_id
-      title: ProviderStateCredentialsDetails
-    JobTitleEnum:
-      type: string
-      enum:
-      - Behavior Technician
-      - Registered Behavior Technician
-      - Behavior Technician Trainee
-      - Virtual Therapy Assistant
-      - Lead Virtual Therapy Assistant
-      - Certified Behavioral Technician
-      - BCBA
-      - Lead BCBA
-      - Clinical Director
-      title: JobTitleEnum
-    ProviderListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
     ProviderStateCredentialsResponse:
       properties:
         payor_sector:
@@ -1178,6 +1097,87 @@ components:
       - credentials
       - medicaid_credentials
       title: ProviderStateCredentialsResponse
+    ProviderLicenseResponse:
+      properties:
+        state:
+          type: string
+          title: State
+        is_license_required_in_state:
+          type: boolean
+          title: Is License Required In State
+        licenses:
+          items:
+            $ref: '#/components/schemas/ProviderStateLicenseDetails'
+          type: array
+          title: Licenses
+      type: object
+      required:
+      - state
+      - is_license_required_in_state
+      - licenses
+      title: ProviderLicenseResponse
+    ProviderClinicalStatusUpdateRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ProviderClinicalStatusUpdateRequest
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      title: ClinicalStatusEnum
+    ProviderStateCredentialsDetails:
+      properties:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        payor_id:
+          type: integer
+          title: Payor Id
+        date_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        medicaid_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medicaid Id
+      type: object
+      required:
+      - id
+      - provider_id
+      - payor_id
+      title: ProviderStateCredentialsDetails
     ProviderStateLicenseDetails:
       properties:
         id:

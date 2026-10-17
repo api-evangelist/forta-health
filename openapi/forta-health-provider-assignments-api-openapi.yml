@@ -157,6 +157,64 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ProviderAssignmentPatch:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+      type: object
+      required:
+      - date_start
+      title: ProviderAssignmentPatch
+    ProviderAssignmentCreate:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        client_id:
+          type: integer
+          title: Client Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        clinical_relationship:
+          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
+      type: object
+      required:
+      - date_start
+      - client_id
+      - provider_id
+      - clinical_relationship
+      title: ProviderAssignmentCreate
+    ProviderAssignmentClinicalRelationshipEnum:
+      type: string
+      enum:
+      - home_bcba
+      - bobbing_bcba
+      - substitute_bcba
+      - prbt
+      - assistant_assessor
+      - vbt
+      - practicing_guardian
+      - parent
+      - caregiver
+      - parent_and_caregiver
+      - limited_access_guardian
+      title: ProviderAssignmentClinicalRelationshipEnum
     ProviderAssignmentListResponse:
       properties:
         date_start:
@@ -186,55 +244,6 @@ components:
       - clinical_relationship
       - client
       title: ProviderAssignmentListResponse
-    ClientListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     ProviderAssignmentResponse:
       properties:
         date_start:
@@ -264,30 +273,34 @@ components:
       - clinical_relationship
       - client
       title: ProviderAssignmentResponse
-    HTTPValidationError:
+    ClientListResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
       type: object
-      title: HTTPValidationError
-    ProviderAssignmentClinicalRelationshipEnum:
-      type: string
-      enum:
-      - home_bcba
-      - bobbing_bcba
-      - substitute_bcba
-      - prbt
-      - assistant_assessor
-      - vbt
-      - practicing_guardian
-      - parent
-      - caregiver
-      - parent_and_caregiver
-      - limited_access_guardian
-      title: ProviderAssignmentClinicalRelationshipEnum
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      title: ClientListResponse
     Sex:
       type: string
       enum:
@@ -296,22 +309,27 @@ components:
       - other
       - unknown
       title: Sex
-    ProviderAssignmentPatch:
+    ValidationError:
       properties:
-        date_start:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - date_start
-      title: ProviderAssignmentPatch
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ProviderListResponse:
       properties:
         id:
@@ -341,33 +359,15 @@ components:
       - status
       - clinical_status
       title: ProviderListResponse
-    ProviderAssignmentCreate:
+    HTTPValidationError:
       properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        client_id:
-          type: integer
-          title: Client Id
-        provider_id:
-          type: integer
-          title: Provider Id
-        clinical_relationship:
-          $ref: '#/components/schemas/ProviderAssignmentClinicalRelationshipEnum'
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - date_start
-      - client_id
-      - provider_id
-      - clinical_relationship
-      title: ProviderAssignmentCreate
+      title: HTTPValidationError
     ClientWithAddressListResponse:
       properties:
         first_name:

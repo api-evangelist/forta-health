@@ -194,6 +194,12 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
     TimesheetCreate:
       properties:
         client_id:
@@ -227,70 +233,42 @@ components:
       - service_code_id
       - utc_offset
       title: TimesheetCreate
-    ValidationError:
+    TimesheetPatch:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
-    AssociatedServiceCodeResponse:
-      properties:
-        code:
-          type: string
-          title: Code
+        client_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Client Id
+        date_start:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date End
+        service_code_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Service Code Id
         label:
-          type: string
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Label
-        is_billable:
-          type: boolean
-          title: Is Billable
-        is_timesheet_usable:
-          type: boolean
-          title: Is Timesheet Usable
-        type:
-          $ref: '#/components/schemas/ServiceCodeTypeEnum'
-          default: CPT
-        id:
-          type: integer
-          title: Id
+        utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Utc Offset
       type: object
-      required:
-      - code
-      - label
-      - is_billable
-      - is_timesheet_usable
-      - id
-      title: AssociatedServiceCodeResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      title: TimesheetPatch
     TimesheetResponse:
       properties:
         client_id:
@@ -351,6 +329,64 @@ components:
       - provider_id
       - service_code
       title: TimesheetResponse
+    AssociatedServiceCodeResponse:
+      properties:
+        code:
+          type: string
+          title: Code
+        label:
+          type: string
+          title: Label
+        is_billable:
+          type: boolean
+          title: Is Billable
+        is_timesheet_usable:
+          type: boolean
+          title: Is Timesheet Usable
+        type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          default: CPT
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - code
+      - label
+      - is_billable
+      - is_timesheet_usable
+      - id
+      title: AssociatedServiceCodeResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     PayPeriodResponse:
       properties:
         present:
@@ -380,42 +416,6 @@ components:
       - present
       - past_payperiod_data_input_end_date
       title: PayPeriodResponse
-    TimesheetPatch:
-      properties:
-        client_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Client Id
-        date_start:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date End
-        service_code_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Service Code Id
-        label:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Label
-        utc_offset:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Utc Offset
-      type: object
-      title: TimesheetPatch
   securitySchemes:
     HTTPBearer:
       type: http

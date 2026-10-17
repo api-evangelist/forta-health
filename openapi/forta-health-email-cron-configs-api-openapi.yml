@@ -172,75 +172,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    EmailCronConfigPatch:
-      properties:
-        enabled:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Enabled
-        subject:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Subject
-        html_body:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Html Body
-        recipients:
-          anyOf:
-          - items:
-              type: string
-              format: email
-            type: array
-          - type: 'null'
-          title: Recipients
-        error_notification_recipient:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Error Notification Recipient
-        days_of_week:
-          anyOf:
-          - items:
-              type: string
-              enum:
-              - MON
-              - TUE
-              - WED
-              - THU
-              - FRI
-              - SAT
-              - SUN
-            type: array
-          - type: 'null'
-          title: Days Of Week
-      type: object
-      title: EmailCronConfigPatch
     EmailCronConfigPreviewRequest:
       properties:
         subject:
@@ -255,38 +186,6 @@ components:
           title: Html Body
       type: object
       title: EmailCronConfigPreviewRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    EmailCronConfigPreviewResponse:
-      properties:
-        subject_rendered:
-          type: string
-          title: Subject Rendered
-        html_rendered:
-          type: string
-          title: Html Rendered
-        recipients_resolved:
-          items:
-            type: string
-          type: array
-          title: Recipients Resolved
-        has_data:
-          type: boolean
-          title: Has Data
-      type: object
-      required:
-      - subject_rendered
-      - html_rendered
-      - recipients_resolved
-      - has_data
-      title: EmailCronConfigPreviewResponse
     EmailCronConfigCreate:
       properties:
         job_key:
@@ -339,6 +238,54 @@ components:
       required:
       - job_key
       title: EmailCronConfigCreate
+    EmailCronConfigPatch:
+      properties:
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+        recipients:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Recipients
+        error_notification_recipient:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Error Notification Recipient
+        days_of_week:
+          anyOf:
+          - items:
+              type: string
+              enum:
+              - MON
+              - TUE
+              - WED
+              - THU
+              - FRI
+              - SAT
+              - SUN
+            type: array
+          - type: 'null'
+          title: Days Of Week
+      type: object
+      title: EmailCronConfigPatch
     EmailCronConfigResponse:
       properties:
         id:
@@ -395,6 +342,59 @@ components:
       - enabled
       - is_runnable
       title: EmailCronConfigResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EmailCronConfigPreviewResponse:
+      properties:
+        subject_rendered:
+          type: string
+          title: Subject Rendered
+        html_rendered:
+          type: string
+          title: Html Rendered
+        recipients_resolved:
+          items:
+            type: string
+          type: array
+          title: Recipients Resolved
+        has_data:
+          type: boolean
+          title: Has Data
+      type: object
+      required:
+      - subject_rendered
+      - html_rendered
+      - recipients_resolved
+      - has_data
+      title: EmailCronConfigPreviewResponse
   securitySchemes:
     HTTPBearer:
       type: http

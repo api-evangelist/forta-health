@@ -68,6 +68,19 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    FeatureFlagResponse:
+      properties:
+        key:
+          type: string
+          title: Key
+        enabled:
+          type: boolean
+          title: Enabled
+      type: object
+      required:
+      - key
+      - enabled
+      title: FeatureFlagResponse
     FeatureFlagUpdate:
       properties:
         enabled:
@@ -98,19 +111,6 @@ components:
       - msg
       - type
       title: ValidationError
-    FeatureFlagResponse:
-      properties:
-        key:
-          type: string
-          title: Key
-        enabled:
-          type: boolean
-          title: Enabled
-      type: object
-      required:
-      - key
-      - enabled
-      title: FeatureFlagResponse
   securitySchemes:
     HTTPBearer:
       type: http

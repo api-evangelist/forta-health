@@ -310,206 +310,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    SettingEnumV1:
-      type: string
-      enum:
-      - In-person
-      - Remote
-      title: SettingEnumV1
-    LocationEnumV1:
-      type: string
-      enum:
-      - HOME
-      - COMMUNITY
-      - TELEHEALTH
-      title: LocationEnumV1
-    ProviderResponseWithoutAddress:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderResponseWithoutAddress
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    BTSupervisionPatchDataRequest:
-      properties:
-        has_materials_organized_prior_to_session:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        builds_rapport_with_learner:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        implements_programs_and_collects_data_regularly:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        provides_clear_sds_and_keeps_appropriate_pace:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        varies_reinforces_assesses_as_needed:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        provides_praise_for_independent_responses:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        uses_appropriate_ratio_of_mastered_novel_tasks:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        uses_prompts_appropriately:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        implements_correction_procedures_appropriately:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        uses_more_positive_than_corrective_statements:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        uses_non_verbal_prompts_when_possible:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        remains_calm_during_challenging_behaviors:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        follows_behavior_protocol_and_records_data_as_outlined:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        professionalism:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        collaborates_effectively_with_colleagues:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        seeks_feedback_for_growth_in_clinical_skills:
-          anyOf:
-          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
-          - type: 'null'
-        additional_comments:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Additional Comments
-      type: object
-      title: BTSupervisionPatchDataRequest
-    BTSupervisionFieldEvaluation:
-      type: string
-      enum:
-      - NEEDS_IMPROVEMENT
-      - MEETS_EXPECTATIONS
-      - EXCEEDS_EXPECTATIONS
-      - NOT_EVALUATED
-      title: BTSupervisionFieldEvaluation
-    BTSupervisionPatch:
-      properties:
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        bt_provider_id:
-          type: integer
-          title: Bt Provider Id
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        duration:
-          $ref: '#/components/schemas/Duration'
-        location:
-          $ref: '#/components/schemas/LocationEnumV1'
-        setting:
-          $ref: '#/components/schemas/SettingEnumV1'
-      type: object
-      required:
-      - utc_offset_date_start
-      - bt_provider_id
-      - date_start
-      - duration
-      - location
-      - setting
-      title: BTSupervisionPatch
     BTSupervisionResponse:
       properties:
         has_materials_organized_prior_to_session:
@@ -647,6 +447,76 @@ components:
       - bt_provider
       - bcba
       title: BTSupervisionResponse
+    Duration:
+      type: integer
+      enum:
+      - 900
+      - 1800
+      - 2700
+      - 3600
+      - 4500
+      - 5400
+      - 6300
+      - 7200
+      title: Duration
+    BTSupervisionCreate:
+      properties:
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        bt_provider_id:
+          type: integer
+          title: Bt Provider Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        duration:
+          $ref: '#/components/schemas/Duration'
+        location:
+          $ref: '#/components/schemas/LocationEnumV1'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV1'
+        client_id:
+          type: integer
+          title: Client Id
+      type: object
+      required:
+      - utc_offset_date_start
+      - bt_provider_id
+      - date_start
+      - duration
+      - location
+      - setting
+      - client_id
+      title: BTSupervisionCreate
+    BTSupervisionPatch:
+      properties:
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        bt_provider_id:
+          type: integer
+          title: Bt Provider Id
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        duration:
+          $ref: '#/components/schemas/Duration'
+        location:
+          $ref: '#/components/schemas/LocationEnumV1'
+        setting:
+          $ref: '#/components/schemas/SettingEnumV1'
+      type: object
+      required:
+      - utc_offset_date_start
+      - bt_provider_id
+      - date_start
+      - duration
+      - location
+      - setting
+      title: BTSupervisionPatch
     ClientResponse:
       properties:
         first_name:
@@ -735,6 +605,55 @@ components:
       - id
       - clinical_status
       title: ClientResponse
+    ProviderResponseWithoutAddress:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderResponseWithoutAddress
+    LocationEnumV1:
+      type: string
+      enum:
+      - HOME
+      - COMMUNITY
+      - TELEHEALTH
+      title: LocationEnumV1
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
     BTSupervisionStopRequest:
       properties:
         signature:
@@ -753,6 +672,33 @@ components:
       - utc_offset_date_signed
       - date_signed
       title: BTSupervisionStopRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SettingEnumV1:
+      type: string
+      enum:
+      - In-person
+      - Remote
+      title: SettingEnumV1
     ProviderListResponse:
       properties:
         id:
@@ -782,37 +728,103 @@ components:
       - status
       - clinical_status
       title: ProviderListResponse
-    BTSupervisionCreate:
+    HTTPValidationError:
       properties:
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        bt_provider_id:
-          type: integer
-          title: Bt Provider Id
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        duration:
-          $ref: '#/components/schemas/Duration'
-        location:
-          $ref: '#/components/schemas/LocationEnumV1'
-        setting:
-          $ref: '#/components/schemas/SettingEnumV1'
-        client_id:
-          type: integer
-          title: Client Id
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - utc_offset_date_start
-      - bt_provider_id
-      - date_start
-      - duration
-      - location
-      - setting
-      - client_id
-      title: BTSupervisionCreate
+      title: HTTPValidationError
+    BTSupervisionPatchDataRequest:
+      properties:
+        has_materials_organized_prior_to_session:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        builds_rapport_with_learner:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        implements_programs_and_collects_data_regularly:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        provides_clear_sds_and_keeps_appropriate_pace:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        varies_reinforces_assesses_as_needed:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        provides_praise_for_independent_responses:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_appropriate_ratio_of_mastered_novel_tasks:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_prompts_appropriately:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        implements_correction_procedures_appropriately:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_more_positive_than_corrective_statements:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        uses_non_verbal_prompts_when_possible:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        remains_calm_during_challenging_behaviors:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        follows_behavior_protocol_and_records_data_as_outlined:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        professionalism:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        collaborates_effectively_with_colleagues:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        seeks_feedback_for_growth_in_clinical_skills:
+          anyOf:
+          - $ref: '#/components/schemas/BTSupervisionFieldEvaluation'
+          - type: 'null'
+        additional_comments:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Additional Comments
+      type: object
+      title: BTSupervisionPatchDataRequest
+    BTSupervisionFieldEvaluation:
+      type: string
+      enum:
+      - NEEDS_IMPROVEMENT
+      - MEETS_EXPECTATIONS
+      - EXCEEDS_EXPECTATIONS
+      - NOT_EVALUATED
+      title: BTSupervisionFieldEvaluation
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
     ClinicalStatusEnum:
       type: string
       enum:
@@ -822,18 +834,6 @@ components:
       - OFFBOARDED
       - LIMITED ACCESS GUARDIAN
       title: ClinicalStatusEnum
-    Duration:
-      type: integer
-      enum:
-      - 900
-      - 1800
-      - 2700
-      - 3600
-      - 4500
-      - 5400
-      - 6300
-      - 7200
-      title: Duration
   securitySchemes:
     HTTPBearer:
       type: http
