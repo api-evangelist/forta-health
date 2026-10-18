@@ -53,7 +53,7 @@ tags:
 - Clinical Operations
 - Medicaid
 - Health Insurance
-- EHR
+- Electronic Health Records
 - Machine Learning
 tags_raw:
 - healthcare
@@ -69,6 +69,7 @@ tags_raw:
 - ehr
 - machine-learning
 - Machine-Learning
+- EHR
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -311,9 +312,10 @@ apis:
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags:
-  - EVV
+  - Electronic Visit Verification
   tags_raw:
   - evv
+  - EVV
   properties:
   - type: OpenAPI
     url: openapi/forta-health-evv-api-openapi.yml
