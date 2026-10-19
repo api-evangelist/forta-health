@@ -37,8 +37,68 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/evv/sessions/{session_id}/history:
+    get:
+      tags:
+      - EVV
+      summary: Get Session Evv History
+      operationId: get_session_evv_history_api_v1_evv_sessions__session_id__history_get
+      security:
+      - _ForbiddenOnMissingCredentials: []
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Session Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EVVSessionHistoryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    EVVTokenHistoryResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        kind:
+          type: string
+          title: Kind
+        status:
+          type: string
+          title: Status
+        effective_status:
+          type: string
+          title: Effective Status
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+        captured_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Captured At
+      type: object
+      required:
+      - id
+      - kind
+      - status
+      - effective_status
+      - expires_at
+      title: EVVTokenHistoryResponse
     HTTPValidationError:
       properties:
         detail:
@@ -48,6 +108,144 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    EVVCaptureAttemptHistoryResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        token_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Token Id
+        kind:
+          type: string
+          title: Kind
+        status:
+          type: string
+          title: Status
+        failure_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Failure Reason
+        fallback_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fallback Reason
+        lat:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Lat
+        long:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Long
+        accuracy_meters:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Accuracy Meters
+        device_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Info
+        attempted_at:
+          type: string
+          format: date-time
+          title: Attempted At
+      type: object
+      required:
+      - id
+      - kind
+      - status
+      - attempted_at
+      title: EVVCaptureAttemptHistoryResponse
+    EVVSideStatusResponse:
+      properties:
+        captured:
+          type: boolean
+          title: Captured
+        captured_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Captured At
+        lat:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Lat
+        long:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Long
+        accuracy_meters:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Accuracy Meters
+        token_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token Status
+        token_expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Token Expires At
+        fallback_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fallback Reason
+      type: object
+      required:
+      - captured
+      title: EVVSideStatusResponse
+    EVVCaptureGpsResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: EVVCaptureGpsResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     EVVCaptureGpsRequest:
       properties:
         lat:
@@ -73,37 +271,34 @@ components:
       - lat
       - long
       title: EVVCaptureGpsRequest
-    EVVCaptureGpsResponse:
+    EVVSessionHistoryResponse:
       properties:
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - status
-      title: EVVCaptureGpsResponse
-    ValidationError:
-      properties:
-        loc:
+        session_id:
+          type: integer
+          title: Session Id
+        start:
+          $ref: '#/components/schemas/EVVSideStatusResponse'
+        end:
+          $ref: '#/components/schemas/EVVSideStatusResponse'
+        tokens:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/EVVTokenHistoryResponse'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Tokens
+        capture_attempts:
+          items:
+            $ref: '#/components/schemas/EVVCaptureAttemptHistoryResponse'
+          type: array
+          title: Capture Attempts
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - session_id
+      - start
+      - end
+      - tokens
+      - capture_attempts
+      title: EVVSessionHistoryResponse
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

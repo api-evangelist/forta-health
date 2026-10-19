@@ -22,7 +22,7 @@ paths:
                 type: array
                 title: Response List Email Cron Configs Api V1 Email Cron Configs  Get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
     post:
       tags:
       - email_cron_configs
@@ -48,7 +48,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
   /api/v1/email_cron_configs/{config_id}/:
     get:
       tags:
@@ -56,7 +56,7 @@ paths:
       summary: Get Email Cron Config
       operationId: get_email_cron_config_api_v1_email_cron_configs__config_id___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: config_id
         in: path
@@ -83,7 +83,7 @@ paths:
       summary: Update Email Cron Config
       operationId: update_email_cron_config_api_v1_email_cron_configs__config_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: config_id
         in: path
@@ -116,7 +116,7 @@ paths:
       summary: Delete Email Cron Config
       operationId: delete_email_cron_config_api_v1_email_cron_configs__config_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: config_id
         in: path
@@ -143,7 +143,7 @@ paths:
       summary: Preview Email Cron Config
       operationId: preview_email_cron_config_api_v1_email_cron_configs__config_id__preview__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: config_id
         in: path
@@ -172,6 +172,38 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EmailCronConfigPreviewResponse:
+      properties:
+        subject_rendered:
+          type: string
+          title: Subject Rendered
+        html_rendered:
+          type: string
+          title: Html Rendered
+        recipients_resolved:
+          items:
+            type: string
+          type: array
+          title: Recipients Resolved
+        has_data:
+          type: boolean
+          title: Has Data
+      type: object
+      required:
+      - subject_rendered
+      - html_rendered
+      - recipients_resolved
+      - has_data
+      title: EmailCronConfigPreviewResponse
     EmailCronConfigPreviewRequest:
       properties:
         subject:
@@ -186,106 +218,6 @@ components:
           title: Html Body
       type: object
       title: EmailCronConfigPreviewRequest
-    EmailCronConfigCreate:
-      properties:
-        job_key:
-          type: string
-          title: Job Key
-        enabled:
-          type: boolean
-          title: Enabled
-          default: true
-        subject:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Subject
-        html_body:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Html Body
-        recipients:
-          anyOf:
-          - items:
-              type: string
-              format: email
-            type: array
-          - type: 'null'
-          title: Recipients
-        error_notification_recipient:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Error Notification Recipient
-        days_of_week:
-          anyOf:
-          - items:
-              type: string
-              enum:
-              - MON
-              - TUE
-              - WED
-              - THU
-              - FRI
-              - SAT
-              - SUN
-            type: array
-          - type: 'null'
-          title: Days Of Week
-      type: object
-      required:
-      - job_key
-      title: EmailCronConfigCreate
-    EmailCronConfigPatch:
-      properties:
-        enabled:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Enabled
-        subject:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Subject
-        html_body:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Html Body
-        recipients:
-          anyOf:
-          - items:
-              type: string
-              format: email
-            type: array
-          - type: 'null'
-          title: Recipients
-        error_notification_recipient:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Error Notification Recipient
-        days_of_week:
-          anyOf:
-          - items:
-              type: string
-              enum:
-              - MON
-              - TUE
-              - WED
-              - THU
-              - FRI
-              - SAT
-              - SUN
-            type: array
-          - type: 'null'
-          title: Days Of Week
-      type: object
-      title: EmailCronConfigPatch
     EmailCronConfigResponse:
       properties:
         id:
@@ -357,45 +289,118 @@ components:
         type:
           type: string
           title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
       - loc
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    EmailCronConfigPatch:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+        recipients:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Recipients
+        error_notification_recipient:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Error Notification Recipient
+        days_of_week:
+          anyOf:
+          - items:
+              type: string
+              enum:
+              - MON
+              - TUE
+              - WED
+              - THU
+              - FRI
+              - SAT
+              - SUN
+            type: array
+          - type: 'null'
+          title: Days Of Week
       type: object
-      title: HTTPValidationError
-    EmailCronConfigPreviewResponse:
+      title: EmailCronConfigPatch
+    EmailCronConfigCreate:
       properties:
-        subject_rendered:
+        job_key:
           type: string
-          title: Subject Rendered
-        html_rendered:
-          type: string
-          title: Html Rendered
-        recipients_resolved:
-          items:
-            type: string
-          type: array
-          title: Recipients Resolved
-        has_data:
+          title: Job Key
+        enabled:
           type: boolean
-          title: Has Data
+          title: Enabled
+          default: true
+        subject:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject
+        html_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html Body
+        recipients:
+          anyOf:
+          - items:
+              type: string
+              format: email
+            type: array
+          - type: 'null'
+          title: Recipients
+        error_notification_recipient:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Error Notification Recipient
+        days_of_week:
+          anyOf:
+          - items:
+              type: string
+              enum:
+              - MON
+              - TUE
+              - WED
+              - THU
+              - FRI
+              - SAT
+              - SUN
+            type: array
+          - type: 'null'
+          title: Days Of Week
       type: object
       required:
-      - subject_rendered
-      - html_rendered
-      - recipients_resolved
-      - has_data
-      title: EmailCronConfigPreviewResponse
+      - job_key
+      title: EmailCronConfigCreate
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

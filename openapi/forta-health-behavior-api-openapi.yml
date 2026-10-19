@@ -18,11 +18,11 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/BehaviorResponse'
+                  $ref: '#/components/schemas/app__api__schemas__behaviors__BehaviorResponse'
                 type: array
                 title: Response Get All Behaviors Api V1 Behaviors  Get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
     post:
       tags:
       - behavior
@@ -41,7 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BehaviorResponse'
+                $ref: '#/components/schemas/app__api__schemas__behaviors__BehaviorResponse'
         '422':
           description: Validation Error
           content:
@@ -49,7 +49,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
   /api/v1/behaviors/{behavior_id}/goal_names/:
     post:
       tags:
@@ -58,7 +58,7 @@ paths:
       description: Creates a goal name with a corresponding behavior
       operationId: create_goal_name_api_v1_behaviors__behavior_id__goal_names__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: behavior_id
         in: path
@@ -92,7 +92,7 @@ paths:
       description: Reads goal names associated with a behavior
       operationId: fetch_goal_names_api_v1_behaviors__behavior_id__goal_names__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: behavior_id
         in: path
@@ -141,7 +141,7 @@ paths:
                 type: array
                 title: Response Fetch All Goal Names Api V1 Behaviors Goal Names All  Get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
   /api/v1/behaviors/{behavior_id}/goal_names/{goal_name_id}/:
     get:
       tags:
@@ -149,7 +149,7 @@ paths:
       summary: Fetch Goal Name
       operationId: fetch_goal_name_api_v1_behaviors__behavior_id__goal_names__goal_name_id___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: behavior_id
         in: path
@@ -183,7 +183,7 @@ paths:
       summary: Activate Goal Name
       operationId: activate_goal_name_api_v1_behaviors__behavior_id__goal_names__goal_name_id__activate__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: behavior_id
         in: path
@@ -217,7 +217,7 @@ paths:
       summary: Deactivate Goal Name
       operationId: deactivate_goal_name_api_v1_behaviors__behavior_id__goal_names__goal_name_id__deactivate__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: behavior_id
         in: path
@@ -264,7 +264,7 @@ components:
           type: integer
           title: Behavior Id
         behavior:
-          $ref: '#/components/schemas/BehaviorResponse'
+          $ref: '#/components/schemas/app__api__schemas__behaviors__BehaviorResponse'
         is_active:
           type: boolean
           title: Is Active
@@ -276,16 +276,15 @@ components:
       - behavior
       - is_active
       title: GoalNameResponse
-    BehaviorCreate:
+    HTTPValidationError:
       properties:
-        label:
-          type: string
-          minLength: 2
-          title: Label
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - label
-      title: BehaviorCreate
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -301,6 +300,11 @@ components:
         type:
           type: string
           title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
       - loc
@@ -322,16 +326,7 @@ components:
       - label
       - prefix
       title: GoalNameCreate
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    BehaviorResponse:
+    app__api__schemas__behaviors__BehaviorResponse:
       properties:
         label:
           type: string
@@ -345,7 +340,17 @@ components:
       - label
       - id
       title: BehaviorResponse
+    BehaviorCreate:
+      properties:
+        label:
+          type: string
+          minLength: 2
+          title: Label
+      type: object
+      required:
+      - label
+      title: BehaviorCreate
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

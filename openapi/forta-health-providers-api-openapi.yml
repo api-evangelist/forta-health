@@ -5,6 +5,135 @@ info:
 tags:
 - name: Providers
 paths:
+  /api/v1/providers/{provider_id}/ssn:
+    get:
+      tags:
+      - Providers
+      summary: Get Provider Ssn
+      operationId: get_provider_ssn_api_v1_providers__provider_id__ssn_get
+      security:
+      - _ForbiddenOnMissingCredentials: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderSsnResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - Providers
+      summary: Update Provider Ssn
+      operationId: update_provider_ssn_api_v1_providers__provider_id__ssn_put
+      security:
+      - _ForbiddenOnMissingCredentials: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderSsnUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderSsnResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/ssn/reveal:
+    post:
+      tags:
+      - Providers
+      summary: Reveal Provider Ssn
+      operationId: reveal_provider_ssn_api_v1_providers__provider_id__ssn_reveal_post
+      security:
+      - _ForbiddenOnMissingCredentials: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderSsnRevealRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderSsnResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/reviewer_bcba/:
+    put:
+      tags:
+      - Providers
+      summary: Set Provider Reviewer Bcba
+      operationId: set_provider_reviewer_bcba_api_v1_providers__provider_id__reviewer_bcba__put
+      security:
+      - _ForbiddenOnMissingCredentials: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderReviewerBcbaUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/v1/providers/{provider_id}/clinical_status/:
     put:
       tags:
@@ -12,7 +141,7 @@ paths:
       summary: Set Clinical Status
       operationId: set_clinical_status_api_v1_providers__provider_id__clinical_status__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -46,7 +175,7 @@ paths:
       summary: Promote Provider To Clinical
       operationId: promote_provider_to_clinical_api_v1_providers__provider_id__promote__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -73,6 +202,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/providers/{provider_id}/invite/:
+    put:
+      tags:
+      - Providers
+      summary: Invite Provider To Platform
+      operationId: invite_provider_to_platform_api_v1_providers__provider_id__invite__put
+      security:
+      - _ForbiddenOnMissingCredentials: []
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Provider Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderInviteResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/v1/providers/:
     post:
       tags:
@@ -80,7 +237,7 @@ paths:
       summary: Create Provider
       operationId: create_provider_api_v1_providers__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       requestBody:
         required: true
         content:
@@ -106,8 +263,18 @@ paths:
       summary: Get All Providers
       operationId: get_all_providers_api_v1_providers__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
+      - name: clinical_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Clinical Status
       - name: include_roles
         in: query
         required: false
@@ -125,7 +292,7 @@ paths:
           - type: boolean
           - type: 'null'
           title: Fail On Roles Error
-      - name: clinical_status
+      - name: role
         in: query
         required: false
         schema:
@@ -134,19 +301,7 @@ paths:
             items:
               type: string
           - type: 'null'
-          default:
-          - CLINICAL
-          title: Clinical Status
-      requestBody:
-        content:
-          application/json:
-            schema:
-              anyOf:
-              - type: array
-                items:
-                  type: string
-              - type: 'null'
-              title: Role
+          title: Role
       responses:
         '200':
           description: Successful Response
@@ -170,7 +325,7 @@ paths:
       summary: Fetch Co Assigned Providers
       operationId: fetch_co_assigned_providers_api_v1_providers_co_assigned__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: query
@@ -213,7 +368,7 @@ paths:
       summary: Get Provider
       operationId: get_provider_api_v1_providers__provider_id___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -247,7 +402,7 @@ paths:
       summary: Patch Provider
       operationId: patch_provider_api_v1_providers__provider_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -281,7 +436,7 @@ paths:
       summary: Update Provider Email
       operationId: update_provider_email_api_v1_providers__provider_id__email__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -322,7 +477,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProviderResponse'
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
   /api/v1/providers/{provider_id}/password_reset/:
     post:
       tags:
@@ -330,7 +485,7 @@ paths:
       summary: Send Password Reset Email
       operationId: send_password_reset_email_api_v1_providers__provider_id__password_reset__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -357,7 +512,7 @@ paths:
       summary: Set Provider Qa Billing Status
       operationId: set_provider_qa_billing_status_api_v1_providers__provider_id__qa_billing_status__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -391,7 +546,7 @@ paths:
       summary: Get Provider State License
       operationId: get_provider_state_license_api_v1_providers__provider_id__provider_licenses__state___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -425,7 +580,7 @@ paths:
       summary: Get Provider Payor Credentials
       operationId: get_provider_payor_credentials_api_v1_providers__provider_id__provider_payor_credentials__payor_id___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -459,7 +614,7 @@ paths:
       summary: Fetch Guardian Relationship Manager Assignments
       operationId: fetch_guardian_relationship_manager_assignments_api_v1_providers__guardian_provider_id__relationship_manager__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: guardian_provider_id
         in: path
@@ -492,6 +647,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      - GUARDIAN INVITED
+      title: ClinicalStatusEnum
     ProviderCreate:
       properties:
         first_name:
@@ -608,6 +773,10 @@ components:
           - $ref: '#/components/schemas/ProviderStatusEnum'
           - type: 'null'
           default: Not Training
+        evv_required:
+          type: boolean
+          title: Evv Required
+          default: false
       type: object
       required:
       - first_name
@@ -616,6 +785,79 @@ components:
       - dob
       - email
       title: ProviderCreate
+    RelationshipManagerProviderResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time Zone
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: RelationshipManagerProviderResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
     ProviderQABillingStatus:
       properties:
         qa_billing_status:
@@ -624,32 +866,6 @@ components:
       required:
       - qa_billing_status
       title: ProviderQABillingStatus
-    GuardianRelationshipManagerAssignmentResponse:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        id:
-          type: integer
-          title: Id
-        guardian_provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-        relationship_manager_provider:
-          $ref: '#/components/schemas/ProviderListResponse'
-      type: object
-      required:
-      - date_start
-      - id
-      - guardian_provider
-      - relationship_manager_provider
-      title: GuardianRelationshipManagerAssignmentResponse
     ProviderPatch:
       properties:
         first_name:
@@ -766,6 +982,10 @@ components:
           - $ref: '#/components/schemas/ProviderStatusEnum'
           - type: 'null'
           default: Not Training
+        evv_required:
+          type: boolean
+          title: Evv Required
+          default: false
         relationship_manager_provider_id:
           anyOf:
           - type: integer
@@ -779,103 +999,52 @@ components:
       - dob
       - email
       title: ProviderPatch
-    ProviderListResponse:
+    ProviderInviteResponse:
       properties:
         id:
           type: integer
           title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
         clinical_status:
           $ref: '#/components/schemas/ClinicalStatusEnum'
       type: object
       required:
       - id
-      - first_name
-      - last_name
-      - email
-      - status
       - clinical_status
-      title: ProviderListResponse
-    JobTitleEnum:
-      type: string
-      enum:
-      - Behavior Technician
-      - Registered Behavior Technician
-      - Behavior Technician Trainee
-      - Virtual Therapy Assistant
-      - Lead Virtual Therapy Assistant
-      - Certified Behavioral Technician
-      - BCBA
-      - Lead BCBA
-      - Clinical Director
-      title: JobTitleEnum
-    ProviderPromote:
+      title: ProviderInviteResponse
+    ProviderStateCredentialsDetails:
       properties:
-        roles:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        payor_id:
+          type: integer
+          title: Payor Id
+        date_start:
           anyOf:
-          - items:
-              $ref: '#/components/schemas/ProviderTypes'
-            type: array
+          - type: string
+            format: date
           - type: 'null'
-          title: Roles
-      type: object
-      title: ProviderPromote
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        medicaid_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medicaid Id
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    QABillingStatusEnum:
-      type: string
-      enum:
-      - Billable
-      - Not Billable
-      title: QABillingStatusEnum
+      - id
+      - provider_id
+      - payor_id
+      title: ProviderStateCredentialsDetails
     ProviderResponse:
       properties:
         first_name:
@@ -994,6 +1163,10 @@ components:
           - $ref: '#/components/schemas/ProviderStatusEnum'
           - type: 'null'
           default: Not Training
+        evv_required:
+          type: boolean
+          title: Evv Required
+          default: false
         id:
           type: integer
           title: Id
@@ -1005,6 +1178,10 @@ components:
           - type: 'null'
           title: Roles
           default: []
+        is_reviewer_bcba:
+          type: boolean
+          title: Is Reviewer Bcba
+          default: false
         clinical_status:
           $ref: '#/components/schemas/ClinicalStatusEnum'
         clinical_status_reason:
@@ -1023,46 +1200,68 @@ components:
       - clinical_status
       - qa_billing_status
       title: ProviderResponse
-    ProviderStatusEnum:
+    ClinicalStatusReasonEnum:
       type: string
       enum:
-      - Not Training
-      - Training
-      title: ProviderStatusEnum
-    ProviderEmailUpdate:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ProviderListResponse:
       properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
         email:
           type: string
           format: email
           title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
       type: object
       required:
+      - id
+      - first_name
+      - last_name
       - email
-      title: ProviderEmailUpdate
-    EmploymentTypeEnum:
-      type: string
-      enum:
-      - Contractor / 1099
-      - Hourly, full-time
-      - Hourly, part-time
-      - Salaried, full-time
-      title: EmploymentTypeEnum
-    ProviderTypes:
-      type: string
-      enum:
-      - prbt
-      - bcba
-      - admin
-      - onboarding_coordinator
-      - client_success_manager
-      - clinical_documentation_qa_specialist
-      - biller
-      - assistant_assessor
-      - vbt
-      - guardian
-      - invoice_coordinator
-      - limited_access_guardian
-      title: ProviderTypes
+      - status
+      - clinical_status
+      title: ProviderListResponse
+    GuardianRelationshipManagerAssignmentResponse:
+      properties:
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        guardian_provider:
+          $ref: '#/components/schemas/ProviderListResponse'
+        relationship_manager_provider:
+          $ref: '#/components/schemas/RelationshipManagerProviderResponse'
+      type: object
+      required:
+      - date_start
+      - id
+      - guardian_provider
+      - relationship_manager_provider
+      title: GuardianRelationshipManagerAssignmentResponse
     ProviderStateCredentialsResponse:
       properties:
         payor_sector:
@@ -1116,68 +1315,41 @@ components:
       - is_license_required_in_state
       - licenses
       title: ProviderLicenseResponse
-    ProviderClinicalStatusUpdateRequest:
+    ProviderSsnUpdateRequest:
       properties:
-        status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        reason:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
-          - type: 'null'
+        ssn:
+          type: string
+          format: password
+          title: Ssn
+          writeOnly: true
+      additionalProperties: false
       type: object
       required:
-      - status
-      title: ProviderClinicalStatusUpdateRequest
-    ClinicalStatusReasonEnum:
+      - ssn
+      title: ProviderSsnUpdateRequest
+    QABillingStatusEnum:
       type: string
       enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ProviderStateCredentialsDetails:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
+    ProviderReviewerBcbaUpdateRequest:
       properties:
-        id:
-          type: integer
-          title: Id
-        provider_id:
-          type: integer
-          title: Provider Id
-        payor_id:
-          type: integer
-          title: Payor Id
-        date_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-        medicaid_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Medicaid Id
+        active:
+          type: boolean
+          title: Active
+        password:
+          type: string
+          minLength: 8
+          format: password
+          title: Password
+          writeOnly: true
+      additionalProperties: false
       type: object
       required:
-      - id
-      - provider_id
-      - payor_id
-      title: ProviderStateCredentialsDetails
+      - active
+      - password
+      title: ProviderReviewerBcbaUpdateRequest
     ProviderStateLicenseDetails:
       properties:
         id:
@@ -1218,7 +1390,114 @@ components:
       - status
       - tasks
       title: ProviderStateLicenseDetails
+    ProviderTypes:
+      type: string
+      enum:
+      - prbt
+      - bcba
+      - admin
+      - onboarding_coordinator
+      - client_success_manager
+      - clinical_documentation_qa_specialist
+      - biller
+      - assistant_assessor
+      - vbt
+      - guardian
+      - invoice_coordinator
+      - limited_access_guardian
+      title: ProviderTypes
+    ProviderClinicalStatusUpdateRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ProviderClinicalStatusUpdateRequest
+    ProviderStatusEnum:
+      type: string
+      enum:
+      - Not Training
+      - Training
+      title: ProviderStatusEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ProviderEmailUpdate:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: ProviderEmailUpdate
+    ProviderSsnRevealRequest:
+      properties:
+        password:
+          type: string
+          minLength: 8
+          format: password
+          title: Password
+          writeOnly: true
+      additionalProperties: false
+      type: object
+      required:
+      - password
+      title: ProviderSsnRevealRequest
+    ProviderPromote:
+      properties:
+        roles:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ProviderTypes'
+            type: array
+          - type: 'null'
+          title: Roles
+      type: object
+      title: ProviderPromote
+    JobTitleEnum:
+      type: string
+      enum:
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    ProviderSsnResponse:
+      properties:
+        ssn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ssn
+      type: object
+      title: ProviderSsnResponse
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

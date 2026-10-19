@@ -19,6 +19,6 @@ paths:
               schema: {}
 components:
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

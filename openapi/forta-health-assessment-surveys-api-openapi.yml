@@ -39,7 +39,7 @@ paths:
         404: Client id not found'
       operationId: send_assessment_api_v1_assessment_surveys__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: model_path
         in: query
@@ -99,7 +99,7 @@ paths:
         Returns:'
       operationId: get_treaat_prediction_api_v1_assessment_surveys__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: query
@@ -136,6 +136,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     AssessmentSurveyResponse:
       properties:
         id:
@@ -197,6 +206,23 @@ components:
       required:
       - client_id
       title: AssessmentSurveyCreate
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      - GUARDIAN INVITED
+      title: ClinicalStatusEnum
     ClientResponse:
       properties:
         first_name:
@@ -262,6 +288,9 @@ components:
           anyOf:
           - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
           - type: 'null'
+        evv_required:
+          type: boolean
+          title: Evv Required
         street_address_latitude:
           anyOf:
           - type: number
@@ -284,15 +313,8 @@ components:
       - dob
       - id
       - clinical_status
+      - evv_required
       title: ClientResponse
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
     ValidationError:
       properties:
         loc:
@@ -308,38 +330,26 @@ components:
         type:
           type: string
           title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
       - loc
       - msg
       - type
       title: ValidationError
-    ClinicalStatusReasonEnum:
+    Sex:
       type: string
       enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

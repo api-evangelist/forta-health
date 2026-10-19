@@ -13,7 +13,7 @@ paths:
       description: List catalog fields, optionally filtered by resource and enriched with templates.
       operationId: list_fields_api_v1_field_templates_fields__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: resource
         in: query
@@ -58,7 +58,7 @@ paths:
       description: Get the template bound to a field by its unique identifier (template is null if unset).
       operationId: get_field_template_api_v1_field_templates__identifier___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: identifier
         in: path
@@ -86,7 +86,7 @@ paths:
       description: Create or replace the template bound to a field (sanitized server-side).
       operationId: upsert_field_template_api_v1_field_templates__identifier___put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: identifier
         in: path
@@ -115,6 +115,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     FieldTemplateUpsertRequest:
       properties:
         content:
@@ -141,6 +150,11 @@ components:
         type:
           type: string
           title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
       - loc
@@ -199,15 +213,6 @@ components:
         otherwise they are ``None``. Shape is identical whether or not the list was
 
         filtered by resource, so the client can rely on it.'
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     FieldTemplateResponse:
       properties:
         resource:
@@ -247,6 +252,6 @@ components:
       - label
       title: FieldTemplateResponse
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

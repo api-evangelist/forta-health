@@ -12,7 +12,7 @@ paths:
       summary: Set Clinical Status
       operationId: set_clinical_status_api_v1_clients__client_id__clinical_status__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -46,7 +46,7 @@ paths:
       summary: Create Client
       operationId: create_client_api_v1_clients__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       requestBody:
         required: true
         content:
@@ -72,7 +72,7 @@ paths:
       summary: Get All Clients
       operationId: get_all_clients_api_v1_clients__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: clinical_status
         in: query
@@ -83,8 +83,6 @@ paths:
             items:
               type: string
           - type: 'null'
-          default:
-          - CLINICAL
           title: Clinical Status
       responses:
         '200':
@@ -109,7 +107,7 @@ paths:
       summary: Patch Client
       operationId: patch_client_api_v1_clients__client_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -142,7 +140,7 @@ paths:
       summary: Get Client
       operationId: get_client_api_v1_clients__client_id___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -170,7 +168,7 @@ paths:
       summary: Fetch Client Families
       operationId: fetch_client_families_api_v1_clients_families__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: query
@@ -212,7 +210,7 @@ paths:
       summary: Reset Client Assessment Allocation
       operationId: reset_client_assessment_allocation_api_v1_clients__client_id__reset_assessment_allocation__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -245,7 +243,7 @@ paths:
       summary: Create Client Modifier Matrix Row
       operationId: create_client_modifier_matrix_row_api_v1_clients__client_id__modifier_matrix__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -278,7 +276,7 @@ paths:
       summary: Get Client Modifier Matrix Rows
       operationId: get_client_modifier_matrix_rows_api_v1_clients__client_id__modifier_matrix__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -309,7 +307,7 @@ paths:
       summary: Replace Client Modifier Matrix Row
       operationId: replace_client_modifier_matrix_row_api_v1_clients__client_id__modifier_matrix__modifier_matrix_id___put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -348,7 +346,7 @@ paths:
       summary: Delete Client Modifier Matrix Row
       operationId: delete_client_modifier_matrix_row_api_v1_clients__client_id__modifier_matrix__modifier_matrix_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: path
@@ -376,279 +374,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ClientClinicalStatusUpdateRequest:
-      properties:
-        status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        reason:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
-          - type: 'null'
-      type: object
-      required:
-      - status
-      title: ClientClinicalStatusUpdateRequest
-    ProviderResponseWithoutAddress:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderResponseWithoutAddress
-    ClientPayorModifierMatrixCreate:
-      properties:
-        payor_id:
-          type: integer
-          title: Payor Id
-        service_code_id:
-          type: integer
-          title: Service Code Id
-        location:
-          $ref: '#/components/schemas/LocationEnumVersion1'
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
-        modifier_1:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 1
-        modifier_2:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 2
-        modifier_3:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 3
-        modifier_4:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 4
-      type: object
-      required:
-      - payor_id
-      - service_code_id
-      - location
-      - delivery_method
-      title: ClientPayorModifierMatrixCreate
-    ClientWithAddressListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address State
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientWithAddressListResponse
-    ClientPayorModifierMatrixResponse:
-      properties:
-        payor_id:
-          type: integer
-          title: Payor Id
-        service_code_id:
-          type: integer
-          title: Service Code Id
-        location:
-          $ref: '#/components/schemas/LocationEnumVersion1'
-        delivery_method:
-          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
-        modifier_1:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 1
-        modifier_2:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 2
-        modifier_3:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 3
-        modifier_4:
-          anyOf:
-          - type: string
-            pattern: ^[A-Za-z0-9]{2}$
-          - type: 'null'
-          title: Modifier 4
-        id:
-          type: integer
-          title: Id
-        client_id:
-          type: integer
-          title: Client Id
-        service_code:
-          anyOf:
-          - $ref: '#/components/schemas/ServiceCodeEnum'
-          - type: string
-          title: Service Code
-      type: object
-      required:
-      - payor_id
-      - service_code_id
-      - location
-      - delivery_method
-      - id
-      - client_id
-      - service_code
-      title: ClientPayorModifierMatrixResponse
-    ClientListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    app__api__schemas__sessions__session_enums__DeliveryMethodEnum:
-      type: string
-      enum:
-      - Telehealth
-      - In-person
-      title: DeliveryMethodEnum
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ServiceCodeEnum:
-      type: string
-      enum:
-      - '97151'
-      - '97152'
-      - '97153'
-      - '97155'
-      - '97156'
-      - '97157'
-      - '99366'
-      title: ServiceCodeEnum
-    ClientResponse:
+    ClientDetailedResponse:
       properties:
         first_name:
           type: string
@@ -713,6 +439,9 @@ components:
           anyOf:
           - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
           - type: 'null'
+        evv_required:
+          type: boolean
+          title: Evv Required
         street_address_latitude:
           anyOf:
           - type: number
@@ -727,6 +456,16 @@ components:
             minimum: -180.0
           - type: 'null'
           title: Street Address Longitude
+        active_treatment_plan_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active Treatment Plan Id
+        providers:
+          items:
+            $ref: '#/components/schemas/ProviderResponseWithoutAddress'
+          type: array
+          title: Providers
       type: object
       required:
       - first_name
@@ -735,7 +474,205 @@ components:
       - dob
       - id
       - clinical_status
-      title: ClientResponse
+      - evv_required
+      - providers
+      title: ClientDetailedResponse
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      - GUARDIAN INVITED
+      title: ClinicalStatusEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ClientPayorModifierMatrixResponse:
+      properties:
+        payor_id:
+          type: integer
+          title: Payor Id
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        location:
+          $ref: '#/components/schemas/LocationEnumVersion1'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
+        modifier_1:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 1
+        modifier_2:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 2
+        modifier_3:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 3
+        modifier_4:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 4
+        id:
+          type: integer
+          title: Id
+        client_id:
+          type: integer
+          title: Client Id
+        service_code:
+          anyOf:
+          - $ref: '#/components/schemas/ServiceCodeEnum'
+          - type: string
+          title: Service Code
+      type: object
+      required:
+      - payor_id
+      - service_code_id
+      - location
+      - delivery_method
+      - id
+      - client_id
+      - service_code
+      title: ClientPayorModifierMatrixResponse
+    ClientClinicalStatusUpdateRequest:
+      properties:
+        status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ClientClinicalStatusUpdateRequest
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+        evv_required:
+          type: boolean
+          title: Evv Required
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      - evv_required
+      title: ClientListResponse
+    ClinicalStatusReasonEnum:
+      type: string
+      enum:
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    LocationEnumVersion1:
+      type: string
+      enum:
+      - Home
+      - Community
+      - School
+      title: LocationEnumVersion1
+    ServiceCodeEnum:
+      type: string
+      enum:
+      - '97151'
+      - '97152'
+      - '97153'
+      - '97155'
+      - '97156'
+      - '97157'
+      - '99366'
+      title: ServiceCodeEnum
+    ProviderResponseWithoutAddress:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderResponseWithoutAddress
     ProviderListResponseForGPSN:
       properties:
         id:
@@ -759,90 +696,20 @@ components:
       - name
       - email
       title: ProviderListResponseForGPSN
-    LocationEnumVersion1:
-      type: string
-      enum:
-      - Home
-      - Community
-      - School
-      title: LocationEnumVersion1
-    ClientPatch:
+    ClientFamilyListResponse:
       properties:
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        sex:
-          anyOf:
-          - $ref: '#/components/schemas/Sex'
-          - type: 'null'
-        dob:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Dob
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        street_address_latitude:
-          anyOf:
-          - type: number
-            maximum: 90.0
-            minimum: -90.0
-          - type: 'null'
-          title: Street Address Latitude
-        street_address_longitude:
-          anyOf:
-          - type: number
-            maximum: 180.0
-            minimum: -180.0
-          - type: 'null'
-          title: Street Address Longitude
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        parents_and_caregivers:
+          items:
+            $ref: '#/components/schemas/ProviderListResponseForGPSN'
+          type: array
+          title: Parents And Caregivers
       type: object
-      title: ClientPatch
-      description: 'Partial client update. Omitted fields are unchanged; explicit nulls are applied
-
-        only for nullable fields. Required identity fields may be omitted but not nulled.'
+      required:
+      - client
+      - parents_and_caregivers
+      title: ClientFamilyListResponse
     ClientAssessmentAllocationReset:
       properties:
         date_allocated:
@@ -909,6 +776,11 @@ components:
           - type: string
           - type: 'null'
           title: Phone
+        evv_required:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Evv Required
         street_address_latitude:
           anyOf:
           - type: number
@@ -930,37 +802,152 @@ components:
       - sex
       - dob
       title: ClientCreate
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    ClientFamilyListResponse:
+    HTTPValidationError:
       properties:
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        parents_and_caregivers:
+        detail:
           items:
-            $ref: '#/components/schemas/ProviderListResponseForGPSN'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Parents And Caregivers
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    app__api__schemas__sessions__session_enums__DeliveryMethodEnum:
+      type: string
+      enum:
+      - Telehealth
+      - In-person
+      title: DeliveryMethodEnum
+    ClientPatch:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        sex:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          - type: 'null'
+        dob:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Dob
+        evv_required:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Evv Required
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        street_address_latitude:
+          anyOf:
+          - type: number
+            maximum: 90.0
+            minimum: -90.0
+          - type: 'null'
+          title: Street Address Latitude
+        street_address_longitude:
+          anyOf:
+          - type: number
+            maximum: 180.0
+            minimum: -180.0
+          - type: 'null'
+          title: Street Address Longitude
+      type: object
+      title: ClientPatch
+      description: 'Partial client update.
+
+
+        Omitted fields are unchanged. Explicit nulls apply only to nullable fields.
+
+        Required identity fields can be omitted but cannot be null.
+
+        evv_required is unchanged when the request omits it or sends null.'
+    ClientPayorModifierMatrixCreate:
+      properties:
+        payor_id:
+          type: integer
+          title: Payor Id
+        service_code_id:
+          type: integer
+          title: Service Code Id
+        location:
+          $ref: '#/components/schemas/LocationEnumVersion1'
+        delivery_method:
+          $ref: '#/components/schemas/app__api__schemas__sessions__session_enums__DeliveryMethodEnum'
+        modifier_1:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 1
+        modifier_2:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 2
+        modifier_3:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 3
+        modifier_4:
+          anyOf:
+          - type: string
+            pattern: ^[A-Za-z0-9]{2}$
+          - type: 'null'
+          title: Modifier 4
       type: object
       required:
-      - client
-      - parents_and_caregivers
-      title: ClientFamilyListResponse
-    ClientDetailedResponse:
+      - payor_id
+      - service_code_id
+      - location
+      - delivery_method
+      title: ClientPayorModifierMatrixCreate
+    ClientResponse:
       properties:
         first_name:
           type: string
@@ -1025,6 +1012,9 @@ components:
           anyOf:
           - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
           - type: 'null'
+        evv_required:
+          type: boolean
+          title: Evv Required
         street_address_latitude:
           anyOf:
           - type: number
@@ -1039,16 +1029,6 @@ components:
             minimum: -180.0
           - type: 'null'
           title: Street Address Longitude
-        active_treatment_plan_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Active Treatment Plan Id
-        providers:
-          items:
-            $ref: '#/components/schemas/ProviderResponseWithoutAddress'
-          type: array
-          title: Providers
       type: object
       required:
       - first_name
@@ -1057,9 +1037,64 @@ components:
       - dob
       - id
       - clinical_status
-      - providers
-      title: ClientDetailedResponse
+      - evv_required
+      title: ClientResponse
+    ClientWithAddressListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+        evv_required:
+          type: boolean
+          title: Evv Required
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address State
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      - evv_required
+      title: ClientWithAddressListResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

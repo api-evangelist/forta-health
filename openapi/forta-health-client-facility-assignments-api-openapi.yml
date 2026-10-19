@@ -12,7 +12,7 @@ paths:
       summary: Create Client Facility Assignments
       operationId: create_client_facility_assignments_api_v1_client_facility_assignments__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       requestBody:
         required: true
         content:
@@ -38,7 +38,7 @@ paths:
       summary: Fetch Client Facility Assignments
       operationId: fetch_client_facility_assignments_api_v1_client_facility_assignments__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: query
@@ -80,7 +80,7 @@ paths:
       summary: Update Client Facility Assignment
       operationId: update_client_facility_assignment_api_v1_client_facility_assignments__client_facility_assignment_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_facility_assignment_id
         in: path
@@ -113,7 +113,7 @@ paths:
       summary: Delete Client Facility Assignment
       operationId: delete_client_facility_assignment_api_v1_client_facility_assignments__client_facility_assignment_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_facility_assignment_id
         in: path
@@ -135,7 +135,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ClientFacilityAssignmentResponse:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ClientFacilityAssignmentPatch:
       properties:
         date_start:
           type: string
@@ -147,23 +156,50 @@ components:
             format: date
           - type: 'null'
           title: Date End
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        facility:
-          $ref: '#/components/schemas/FacilityListResponse'
-        assignment_type:
-          $ref: '#/components/schemas/ClientFacilityAssignmentTypeEnum'
       type: object
       required:
       - date_start
+      title: ClientFacilityAssignmentPatch
+    ClientListResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
+          type: integer
+          title: Id
+        evv_required:
+          type: boolean
+          title: Evv Required
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
       - id
-      - client
-      - facility
-      - assignment_type
-      title: ClientFacilityAssignmentResponse
+      - evv_required
+      title: ClientListResponse
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
     ClientFacilityAssignmentCreate:
       properties:
         date_start:
@@ -212,58 +248,16 @@ components:
       - npi
       - id
       title: FacilityListResponse
-    ClientListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    ClientFacilityAssignmentPatch:
-      properties:
-        date_start:
-          type: string
-          format: date
-          title: Date Start
-        date_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date End
-      type: object
-      required:
-      - date_start
-      title: ClientFacilityAssignmentPatch
-    Sex:
+    ClinicalStatusEnum:
       type: string
       enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      - GUARDIAN INVITED
+      title: ClinicalStatusEnum
     ValidationError:
       properties:
         loc:
@@ -279,6 +273,11 @@ components:
         type:
           type: string
           title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
       - loc
@@ -291,25 +290,36 @@ components:
       - billing
       - service
       title: ClientFacilityAssignmentTypeEnum
-    HTTPValidationError:
+    ClientFacilityAssignmentResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        date_start:
+          type: string
+          format: date
+          title: Date Start
+        date_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date End
+        id:
+          type: integer
+          title: Id
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        facility:
+          $ref: '#/components/schemas/FacilityListResponse'
+        assignment_type:
+          $ref: '#/components/schemas/ClientFacilityAssignmentTypeEnum'
       type: object
-      title: HTTPValidationError
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
+      required:
+      - date_start
+      - id
+      - client
+      - facility
+      - assignment_type
+      title: ClientFacilityAssignmentResponse
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

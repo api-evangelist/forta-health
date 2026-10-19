@@ -12,7 +12,7 @@ paths:
       summary: Create Group Parent Supervision
       operationId: create_group_parent_supervision_api_v1_group_parent_supervisions__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       requestBody:
         required: true
         content:
@@ -38,7 +38,7 @@ paths:
       summary: Fetch Group Parent Supervisions
       operationId: fetch_group_parent_supervisions_api_v1_group_parent_supervisions__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: start
         in: query
@@ -116,7 +116,7 @@ paths:
       summary: Create Family Attendance
       operationId: create_family_attendance_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -150,7 +150,7 @@ paths:
       summary: Create Family Training Topic
       operationId: create_family_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id__topics__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -190,7 +190,7 @@ paths:
       summary: Delete Family Training Topic
       operationId: delete_family_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id__topics__topic_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -230,7 +230,7 @@ paths:
       summary: Create Training Topic
       operationId: create_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__training_topics__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -264,7 +264,7 @@ paths:
       summary: Create Bulk Family Training Topics
       operationId: create_bulk_family_training_topics_api_v1_group_parent_supervisions__group_parent_supervision_id__bulk_family_training_topics__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -298,7 +298,7 @@ paths:
       summary: Patch Group Parent Supervision
       operationId: patch_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -331,7 +331,7 @@ paths:
       summary: Fetch Group Parent Supervision
       operationId: fetch_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -358,7 +358,7 @@ paths:
       summary: Delete Group Parent Supervision
       operationId: delete_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -392,7 +392,7 @@ paths:
                 type: array
                 title: Response Fetch Training Topics Api V1 Group Parent Supervisions Training Topics  Get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
   /api/v1/group_parent_supervisions/{group_parent_supervision_id}/family_attendance/{family_attendance_id}/:
     patch:
       tags:
@@ -400,7 +400,7 @@ paths:
       summary: Update Family Attendance
       operationId: update_family_attendance_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -439,7 +439,7 @@ paths:
       summary: Delete Family Attendance
       operationId: delete_family_attendance_api_v1_group_parent_supervisions__group_parent_supervision_id__family_attendance__family_attendance_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -472,7 +472,7 @@ paths:
       summary: Update Training Topic
       operationId: update_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__training_topics__training_topic_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -511,7 +511,7 @@ paths:
       summary: Delete Training Topic
       operationId: delete_training_topic_api_v1_group_parent_supervisions__group_parent_supervision_id__training_topics__training_topic_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -544,7 +544,7 @@ paths:
       summary: Fetch Group Parent Supervisions With Claim History
       operationId: fetch_group_parent_supervisions_with_claim_history_api_v1_group_parent_supervisions_claim_history__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: start
         in: query
@@ -589,7 +589,7 @@ paths:
       summary: Stop Group Parent Supervision
       operationId: stop_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id__stop__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -622,7 +622,7 @@ paths:
       summary: Download Group Parent Supervision Pdfs
       operationId: download_group_parent_supervision_pdfs_api_v1_group_parent_supervisions__group_parent_supervision_id__download__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -653,7 +653,7 @@ paths:
       summary: Regenerate Group Parent Supervision Pdfs
       operationId: regenerate_group_parent_supervision_pdfs_api_v1_group_parent_supervisions__group_parent_supervision_id__pdf_regenerate__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -680,7 +680,7 @@ paths:
       summary: Edit Group Parent Supervision
       operationId: edit_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id__edit__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -704,7 +704,7 @@ paths:
       summary: Backdate Group Parent Supervision
       operationId: backdate_group_parent_supervision_api_v1_group_parent_supervisions__group_parent_supervision_id__backdate__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -734,7 +734,7 @@ paths:
       summary: Make Group Parent Supervision Unbillable
       operationId: make_group_parent_supervision_unbillable_api_v1_group_parent_supervisions__group_parent_supervision_id__make_unbillable__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -758,7 +758,7 @@ paths:
       summary: Make Group Parent Supervision Billable
       operationId: make_group_parent_supervision_billable_api_v1_group_parent_supervisions__group_parent_supervision_id__make_billable__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: group_parent_supervision_id
         in: path
@@ -777,7 +777,70 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    GroupParentSupervisionResponse:
+    LinkedClaimResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/ClaimStatusEnum'
+        secondary_status:
+          anyOf:
+          - $ref: '#/components/schemas/ClaimStatusEnum'
+          - type: 'null'
+        total_charge:
+          type: number
+          minimum: 0.0
+          title: Total Charge
+        clearing_house_claim_id:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Clearing House Claim Id
+      type: object
+      required:
+      - id
+      - status
+      - total_charge
+      title: LinkedClaimResponse
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      - GUARDIAN INVITED
+      title: ClinicalStatusEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    GroupParentSupervisionPatch:
       properties:
         date_start:
           type: string
@@ -791,61 +854,23 @@ components:
           title: Duration
         setting:
           $ref: '#/components/schemas/SettingEnumV2'
-        id:
-          type: integer
-          title: Id
-        bcba:
-          $ref: '#/components/schemas/ProviderListResponse'
-        status:
-          $ref: '#/components/schemas/StatusEnum'
-        is_billable:
-          type: boolean
-          title: Is Billable
       type: object
       required:
       - date_start
       - utc_offset_date_start
       - duration
       - setting
-      - id
-      - bcba
-      - status
-      - is_billable
-      title: GroupParentSupervisionResponse
-    FamilyTrainingTopicCreate:
+      title: GroupParentSupervisionPatch
+    TrainingTopicPatch:
       properties:
-        training_topic_id:
-          type: integer
-          title: Training Topic Id
+        description:
+          type: string
+          minLength: 120
+          title: Description
       type: object
       required:
-      - training_topic_id
-      title: FamilyTrainingTopicCreate
-    StatusEnum:
-      type: string
-      enum:
-      - STARTED
-      - COMPLETED
-      - EDITING
-      title: StatusEnum
-    GroupParentSupervisionStop:
-      properties:
-        signature:
-          type: string
-          title: Signature
-        date_signed:
-          type: string
-          format: date-time
-          title: Date Signed
-        utc_offset_date_signed:
-          type: integer
-          title: Utc Offset Date Signed
-      type: object
-      required:
-      - signature
-      - date_signed
-      - utc_offset_date_signed
-      title: GroupParentSupervisionStop
+      - description
+      title: TrainingTopicPatch
     GroupParentSupervisionWithClaimHistoryResponse:
       properties:
         date_start:
@@ -895,230 +920,6 @@ components:
       - client
       - claim_history
       title: GroupParentSupervisionWithClaimHistoryResponse
-    TrainingTopicResponse:
-      properties:
-        description:
-          type: string
-          minLength: 120
-          title: Description
-        label:
-          type: string
-          minLength: 2
-          title: Label
-        id:
-          type: integer
-          title: Id
-        group_parent_supervision_id:
-          type: integer
-          title: Group Parent Supervision Id
-      type: object
-      required:
-      - description
-      - label
-      - id
-      - group_parent_supervision_id
-      title: TrainingTopicResponse
-    ProviderListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
-    FamilyAttendanceCreate:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        date_end:
-          type: string
-          format: date-time
-          title: Date End
-        client_id:
-          type: integer
-          title: Client Id
-        parent_and_caregiver_one_id:
-          type: integer
-          title: Parent And Caregiver One Id
-        parent_and_caregiver_two_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Parent And Caregiver Two Id
-        location:
-          $ref: '#/components/schemas/LocationEnumV2'
-        bay:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bay
-      type: object
-      required:
-      - date_start
-      - date_end
-      - client_id
-      - parent_and_caregiver_one_id
-      - location
-      title: FamilyAttendanceCreate
-    GroupParentSupervisionListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        clients:
-          items:
-            $ref: '#/components/schemas/ClientListResponse'
-          type: array
-          title: Clients
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        duration:
-          type: integer
-          title: Duration
-        status:
-          $ref: '#/components/schemas/StatusEnum'
-        bcba:
-          $ref: '#/components/schemas/ProviderListResponse'
-      type: object
-      required:
-      - id
-      - clients
-      - date_start
-      - utc_offset_date_start
-      - duration
-      - status
-      - bcba
-      title: GroupParentSupervisionListResponse
-    TrainingTopicCreate:
-      properties:
-        description:
-          type: string
-          minLength: 120
-          title: Description
-        label:
-          type: string
-          minLength: 2
-          title: Label
-      type: object
-      required:
-      - description
-      - label
-      title: TrainingTopicCreate
-    ClientListResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - first_name
-      - last_name
-      - sex
-      - dob
-      - clinical_status
-      - id
-      title: ClientListResponse
-    GroupParentSupervisionPatch:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
-          type: integer
-          title: Utc Offset Date Start
-        duration:
-          type: integer
-          title: Duration
-        setting:
-          $ref: '#/components/schemas/SettingEnumV2'
-      type: object
-      required:
-      - date_start
-      - utc_offset_date_start
-      - duration
-      - setting
-      title: GroupParentSupervisionPatch
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     GroupParentSupervisionDetailedResponse:
       properties:
         date_start:
@@ -1166,78 +967,67 @@ components:
       - family_attendance
       - training_topics
       title: GroupParentSupervisionDetailedResponse
-    GroupParentSupervisionBackdate:
+    ClientListResponse:
       properties:
-        date_start:
+        first_name:
           type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        id:
           type: integer
-          title: Utc Offset Date Start
+          title: Id
+        evv_required:
+          type: boolean
+          title: Evv Required
       type: object
       required:
-      - date_start
-      - utc_offset_date_start
-      title: GroupParentSupervisionBackdate
-    LocationEnumV2:
-      type: string
-      enum:
-      - Home
-      - Community settings
-      title: LocationEnumV2
-    GroupParentSupervisionCreate:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - clinical_status
+      - id
+      - evv_required
+      title: ClientListResponse
+    ProviderListResponse:
       properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        utc_offset_date_start:
+        id:
           type: integer
-          title: Utc Offset Date Start
-        duration:
-          type: integer
-          title: Duration
-        setting:
-          $ref: '#/components/schemas/SettingEnumV2'
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
       type: object
       required:
-      - date_start
-      - utc_offset_date_start
-      - duration
-      - setting
-      title: GroupParentSupervisionCreate
-    FamilyAttendancePatch:
-      properties:
-        date_start:
-          type: string
-          format: date-time
-          title: Date Start
-        date_end:
-          type: string
-          format: date-time
-          title: Date End
-        response:
-          anyOf:
-          - type: string
-            minLength: 120
-          - type: 'null'
-          title: Response
-      type: object
-      required:
-      - date_start
-      - date_end
-      title: FamilyAttendancePatch
-    TrainingTopicPatch:
-      properties:
-        description:
-          type: string
-          minLength: 120
-          title: Description
-      type: object
-      required:
-      - description
-      title: TrainingTopicPatch
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
     FamilyTrainingTopicResponse:
       properties:
         training_topic_id:
@@ -1259,6 +1049,178 @@ components:
       - family_attendance_id
       - label
       title: FamilyTrainingTopicResponse
+    FamilyAttendancePatch:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        date_end:
+          type: string
+          format: date-time
+          title: Date End
+        response:
+          anyOf:
+          - type: string
+            minLength: 120
+          - type: 'null'
+          title: Response
+      type: object
+      required:
+      - date_start
+      - date_end
+      title: FamilyAttendancePatch
+    StatusEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      - EDITING
+      title: StatusEnum
+    GroupParentSupervisionResponse:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+        id:
+          type: integer
+          title: Id
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        is_billable:
+          type: boolean
+          title: Is Billable
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - setting
+      - id
+      - bcba
+      - status
+      - is_billable
+      title: GroupParentSupervisionResponse
+    FamilyTrainingTopicBulkCreate:
+      properties:
+        training_topic_ids:
+          items:
+            type: integer
+          type: array
+          title: Training Topic Ids
+        family_attendance_ids:
+          items:
+            type: integer
+          type: array
+          title: Family Attendance Ids
+      type: object
+      required:
+      - training_topic_ids
+      - family_attendance_ids
+      title: FamilyTrainingTopicBulkCreate
+    LocationEnumV2:
+      type: string
+      enum:
+      - Home
+      - Community settings
+      title: LocationEnumV2
+    FamilyAttendanceCreate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        date_end:
+          type: string
+          format: date-time
+          title: Date End
+        client_id:
+          type: integer
+          title: Client Id
+        parent_and_caregiver_one_id:
+          type: integer
+          title: Parent And Caregiver One Id
+        parent_and_caregiver_two_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Parent And Caregiver Two Id
+        location:
+          $ref: '#/components/schemas/LocationEnumV2'
+        bay:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bay
+      type: object
+      required:
+      - date_start
+      - date_end
+      - client_id
+      - parent_and_caregiver_one_id
+      - location
+      title: FamilyAttendanceCreate
+    TrainingTopic:
+      properties:
+        description:
+          type: string
+          minLength: 120
+          title: Description
+        label:
+          type: string
+          minLength: 2
+          title: Label
+      type: object
+      required:
+      - description
+      - label
+      title: TrainingTopic
+    ClaimStatusEnum:
+      type: string
+      enum:
+      - On Hold
+      - Generated
+      - Full Denial
+      - In Appeals
+      - Rejected & Resubmitted
+      - Rejected, Needs Appeal
+      - Rejected, Needs Resubmission
+      - Rejected, Not Resubmitted
+      - Approved
+      - Submitted
+      - Unbillable
+      - Approved - Recouped
+      - Approved - Recouped & Resubmitted
+      title: ClaimStatusEnum
+    GroupParentSupervisionStop:
+      properties:
+        signature:
+          type: string
+          title: Signature
+        date_signed:
+          type: string
+          format: date-time
+          title: Date Signed
+        utc_offset_date_signed:
+          type: integer
+          title: Utc Offset Date Signed
+      type: object
+      required:
+      - signature
+      - date_signed
+      - utc_offset_date_signed
+      title: GroupParentSupervisionStop
     ProviderListResponseForGPSN:
       properties:
         id:
@@ -1282,42 +1244,102 @@ components:
       - name
       - email
       title: ProviderListResponseForGPSN
-    LinkedClaimResponse:
+    GroupParentSupervisionCreate:
       properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        setting:
+          $ref: '#/components/schemas/SettingEnumV2'
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - setting
+      title: GroupParentSupervisionCreate
+    TrainingTopicResponse:
+      properties:
+        description:
+          type: string
+          minLength: 120
+          title: Description
+        label:
+          type: string
+          minLength: 2
+          title: Label
         id:
           type: integer
           title: Id
-        status:
-          $ref: '#/components/schemas/ClaimStatusEnum'
-        secondary_status:
-          anyOf:
-          - $ref: '#/components/schemas/ClaimStatusEnum'
-          - type: 'null'
-        total_charge:
-          type: number
-          minimum: 0.0
-          title: Total Charge
-        clearing_house_claim_id:
-          anyOf:
-          - type: string
-            minLength: 1
-          - type: 'null'
-          title: Clearing House Claim Id
+        group_parent_supervision_id:
+          type: integer
+          title: Group Parent Supervision Id
       type: object
       required:
+      - description
+      - label
       - id
-      - status
-      - total_charge
-      title: LinkedClaimResponse
-    ClinicalStatusEnum:
+      - group_parent_supervision_id
+      title: TrainingTopicResponse
+    TrainingTopicCreate:
+      properties:
+        description:
+          type: string
+          minLength: 120
+          title: Description
+        label:
+          type: string
+          minLength: 2
+          title: Label
+      type: object
+      required:
+      - description
+      - label
+      title: TrainingTopicCreate
+    FamilyTrainingTopicCreate:
+      properties:
+        training_topic_id:
+          type: integer
+          title: Training Topic Id
+      type: object
+      required:
+      - training_topic_id
+      title: FamilyTrainingTopicCreate
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GroupParentSupervisionBackdate:
+      properties:
+        date_start:
+          type: string
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+      type: object
+      required:
+      - date_start
+      - utc_offset_date_start
+      title: GroupParentSupervisionBackdate
+    SettingEnumV2:
       type: string
       enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
+      - Telehealth
+      title: SettingEnumV2
     FamilyAttendanceResponse:
       properties:
         date_start:
@@ -1375,61 +1397,49 @@ components:
       - duration
       - topics
       title: FamilyAttendanceResponse
-    ClaimStatusEnum:
+    Sex:
       type: string
       enum:
-      - On Hold
-      - Generated
-      - Full Denial
-      - In Appeals
-      - Rejected & Resubmitted
-      - Rejected, Needs Appeal
-      - Rejected, Needs Resubmission
-      - Rejected, Not Resubmitted
-      - Approved
-      - Submitted
-      - Unbillable
-      - Approved - Recouped
-      - Approved - Recouped & Resubmitted
-      title: ClaimStatusEnum
-    SettingEnumV2:
-      type: string
-      enum:
-      - Telehealth
-      title: SettingEnumV2
-    TrainingTopic:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
+    GroupParentSupervisionListResponse:
       properties:
-        description:
+        id:
+          type: integer
+          title: Id
+        clients:
+          items:
+            $ref: '#/components/schemas/ClientListResponse'
+          type: array
+          title: Clients
+        date_start:
           type: string
-          minLength: 120
-          title: Description
-        label:
-          type: string
-          minLength: 2
-          title: Label
+          format: date-time
+          title: Date Start
+        utc_offset_date_start:
+          type: integer
+          title: Utc Offset Date Start
+        duration:
+          type: integer
+          title: Duration
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        bcba:
+          $ref: '#/components/schemas/ProviderListResponse'
       type: object
       required:
-      - description
-      - label
-      title: TrainingTopic
-    FamilyTrainingTopicBulkCreate:
-      properties:
-        training_topic_ids:
-          items:
-            type: integer
-          type: array
-          title: Training Topic Ids
-        family_attendance_ids:
-          items:
-            type: integer
-          type: array
-          title: Family Attendance Ids
-      type: object
-      required:
-      - training_topic_ids
-      - family_attendance_ids
-      title: FamilyTrainingTopicBulkCreate
+      - id
+      - clients
+      - date_start
+      - utc_offset_date_start
+      - duration
+      - status
+      - bcba
+      title: GroupParentSupervisionListResponse
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

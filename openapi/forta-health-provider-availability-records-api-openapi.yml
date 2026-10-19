@@ -12,7 +12,7 @@ paths:
       summary: Create Provider Availability
       operationId: create_provider_availability_api_v1_provider_availability__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       requestBody:
         required: true
         content:
@@ -38,7 +38,7 @@ paths:
       summary: Get Provider Availability Records
       operationId: get_provider_availability_records_api_v1_provider_availability__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: query
@@ -87,7 +87,7 @@ paths:
       summary: Update Provider Availability
       operationId: update_provider_availability_api_v1_provider_availability__provider_availability_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_availability_id
         in: path
@@ -120,7 +120,7 @@ paths:
       summary: Delete Provider Availability
       operationId: delete_provider_availability_api_v1_provider_availability__provider_availability_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_availability_id
         in: path
@@ -139,46 +139,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    DayOfWeek:
-      type: string
-      enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-      title: DayOfWeek
-    TimeZoneEnum:
-      type: string
-      enum:
-      - America/New_York
-      - America/Los_Angeles
-      - America/Chicago
-      - America/Denver
-      - America/Phoenix
-      - America/Honolulu
-      - America/Anchorage
-      title: TimeZoneEnum
-    ProviderAvailabilityPatch:
-      properties:
-        day_of_week:
-          $ref: '#/components/schemas/DayOfWeek'
-        time_start:
-          type: string
-          format: time
-          title: Time Start
-        time_end:
-          type: string
-          format: time
-          title: Time End
-      type: object
-      required:
-      - day_of_week
-      - time_start
-      - time_end
-      title: ProviderAvailabilityPatch
     HTTPValidationError:
       properties:
         detail:
@@ -188,35 +148,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ProviderListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-      type: object
-      required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
     ProviderAvailabilityCreate:
       properties:
         day_of_week:
@@ -243,27 +174,6 @@ components:
       - time_end
       - timezone
       title: ProviderAvailabilityCreate
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     ProviderAvailabilityResponse:
       properties:
         day_of_week:
@@ -297,6 +207,64 @@ components:
       - id
       - provider
       title: ProviderAvailabilityResponse
+    TimeZoneEnum:
+      type: string
+      enum:
+      - America/New_York
+      - America/Los_Angeles
+      - America/Chicago
+      - America/Denver
+      - America/Phoenix
+      - America/Honolulu
+      - America/Anchorage
+      title: TimeZoneEnum
+    ProviderAvailabilityPatch:
+      properties:
+        day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        time_start:
+          type: string
+          format: time
+          title: Time Start
+        time_end:
+          type: string
+          format: time
+          title: Time End
+      type: object
+      required:
+      - day_of_week
+      - time_start
+      - time_end
+      title: ProviderAvailabilityPatch
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
     ClinicalStatusEnum:
       type: string
       enum:
@@ -305,8 +273,46 @@ components:
       - ON HOLD
       - OFFBOARDED
       - LIMITED ACCESS GUARDIAN
+      - GUARDIAN INVITED
       title: ClinicalStatusEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+      title: DayOfWeek
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

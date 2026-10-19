@@ -192,7 +192,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-client-cohort-assignments-api
   name: Forta Health Client Cohort Assignments API
-  description: The client_cohort_assignments API from Forta Health — 2 operation(s) for client_cohort_assignments.
+  description: >-
+    The client_cohort_assignments API from Forta Health — 2 operation(s) for client_cohort_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -211,7 +212,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-client-facility-assignments-api
   name: Forta Health Client Facility Assignments API
-  description: The client_facility_assignments API from Forta Health — 2 operation(s) for client_facility_assignments.
+  description: >-
+    The client_facility_assignments API from Forta Health — 2 operation(s) for client_facility_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -389,7 +391,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-group-parent-supervisions-api
   name: Forta Health Group Parent Supervisions API
-  description: The group_parent_supervisions API from Forta Health — 18 operation(s) for group_parent_supervisions.
+  description: >-
+    The group_parent_supervisions API from Forta Health — 18 operation(s) for group_parent_supervisions.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -428,7 +431,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-intake-questionnaires-api
   name: Forta Health Intake Questionnaires API
-  description: The intake_questionnaires API from Forta Health — 32 operation(s) for intake_questionnaires.
+  description: >-
+    The intake_questionnaires API from Forta Health — 32 operation(s) for intake_questionnaires.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -467,7 +471,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-onboarding-questionnaires-api
   name: Forta Health Onboarding Questionnaires API
-  description: The onboarding_questionnaires API from Forta Health — 17 operation(s) for onboarding_questionnaires.
+  description: >-
+    The onboarding_questionnaires API from Forta Health — 17 operation(s) for onboarding_questionnaires.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -523,7 +528,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-payor-provider-credentials-api
   name: Forta Health Payor Provider Credentials API
-  description: The payor_provider_credentials API from Forta Health — 2 operation(s) for payor_provider_credentials.
+  description: >-
+    The payor_provider_credentials API from Forta Health — 2 operation(s) for payor_provider_credentials.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -562,7 +568,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-provider-assignments-api
   name: Forta Health Provider Assignments API
-  description: The provider_assignments API from Forta Health — 2 operation(s) for provider_assignments.
+  description: >-
+    The provider_assignments API from Forta Health — 2 operation(s) for provider_assignments.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -581,7 +588,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-provider-availability-records-api
   name: Forta Health Provider Availability Records API
-  description: The provider_availability_records API from Forta Health — 2 operation(s) for provider_availability_records.
+  description: >-
+    The provider_availability_records API from Forta Health — 2 operation(s) for provider_availability_records.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -719,7 +727,8 @@ apis:
     url: data-model/forta-health-data-model.yml
 - aid: forta-health:forta-health-treatment-plan-statuses-api
   name: Forta Health Treatment Plan Statuses API
-  description: The treatment_plan_statuses API from Forta Health — 1 operation(s) for treatment_plan_statuses.
+  description: >-
+    The treatment_plan_statuses API from Forta Health — 1 operation(s) for treatment_plan_statuses.
   humanURL: https://app.fortahealth.com/
   baseURL: https://api.prod.fortahealth.com/api/v1/
   tags: []
@@ -736,6 +745,27 @@ apis:
     url: conventions/forta-health-conventions.yml
   - type: DataModel
     url: data-model/forta-health-data-model.yml
+- aid: forta-health:forta-health-narrative-suggestion-api
+  name: Forta Health Narrative Suggestion API
+  description: >-
+    The narrative_suggestion API from Forta Health — 1 operation(s) for narrative_suggestion.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - narrative_suggestion
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-narrative-suggestion-api-openapi.yml
+- aid: forta-health:forta-health-treatment-plans-v3-api
+  name: Forta Health Treatment Plans V3 API
+  description: The treatment_plans_v3 API from Forta Health — 71 operation(s) for treatment_plans_v3.
+  humanURL: https://app.fortahealth.com/
+  baseURL: https://api.prod.fortahealth.com/api/v1/
+  tags:
+  - treatment_plans_v3
+  properties:
+  - type: OpenAPI
+    url: openapi/forta-health-treatment-plans-v3-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/forta-health-capability-edges.yml

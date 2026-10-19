@@ -31,7 +31,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
   /api/v1/claim_invoices/:
     post:
       tags:
@@ -39,7 +39,7 @@ paths:
       summary: Create Invoice
       operationId: create_invoice_api_v1_claim_invoices__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       requestBody:
         required: true
         content:
@@ -65,7 +65,7 @@ paths:
       summary: Get Invoices
       operationId: get_invoices_api_v1_claim_invoices__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: client_id
         in: query
@@ -124,7 +124,7 @@ paths:
       summary: Create Invoice Payment
       operationId: create_invoice_payment_api_v1_claim_invoices__claim_invoice_id__payments__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -157,7 +157,7 @@ paths:
       summary: Get Invoice Payments
       operationId: get_invoice_payments_api_v1_claim_invoices__claim_invoice_id__payments__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -185,7 +185,7 @@ paths:
       summary: Update Invoice Payment
       operationId: update_invoice_payment_api_v1_claim_invoices__claim_invoice_id__payments__payment_id___patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -224,7 +224,7 @@ paths:
       summary: Delete Invoice Payment
       operationId: delete_invoice_payment_api_v1_claim_invoices__claim_invoice_id__payments__payment_id___delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -258,7 +258,7 @@ paths:
       summary: Send Invoice
       operationId: send_invoice_api_v1_claim_invoices__claim_invoice_id__send__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -286,7 +286,7 @@ paths:
       summary: Get Invoice
       operationId: get_invoice_api_v1_claim_invoices__claim_invoice_id___get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -324,7 +324,7 @@ paths:
       summary: Reset Invoice Sent Status
       operationId: reset_invoice_sent_status_api_v1_claim_invoices__claim_invoice_id__reset_sent_status__put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -352,7 +352,7 @@ paths:
       summary: Download Invoice Pdf
       operationId: download_invoice_pdf_api_v1_claim_invoices__claim_invoice_id__download__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -380,7 +380,7 @@ paths:
       summary: Pay Invoice
       operationId: pay_invoice_api_v1_claim_invoices__claim_invoice_id__pay__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -408,7 +408,7 @@ paths:
       summary: Apply Discount
       operationId: apply_discount_api_v1_claim_invoices__claim_invoice_id__discount__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -441,7 +441,7 @@ paths:
       summary: Remove Discount
       operationId: remove_discount_api_v1_claim_invoices__claim_invoice_id__discount__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: claim_invoice_id
         in: path
@@ -464,6 +464,64 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    InvoicePaymentMode:
+      type: string
+      enum:
+      - Check
+      - Grant
+      - Credit Card
+      - Payroll Withheld
+      - ACH
+      title: InvoicePaymentMode
+    InvoicePaymentsResponse:
+      properties:
+        invoice_id:
+          type: integer
+          title: Invoice Id
+        invoice_amount_due:
+          type: number
+          title: Invoice Amount Due
+        payments:
+          items:
+            $ref: '#/components/schemas/InvoicePaymentBaseResponse'
+          type: array
+          title: Payments
+      type: object
+      required:
+      - invoice_id
+      - invoice_amount_due
+      - payments
+      title: InvoicePaymentsResponse
+    InvoicePaymentCreate:
+      properties:
+        amount:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Amount
+        mode:
+          $ref: '#/components/schemas/InvoicePaymentMode'
+        date_received:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Received
+        date_cleared:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Cleared
+        transaction_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Transaction Id
+      type: object
+      required:
+      - mode
+      title: InvoicePaymentCreate
     InvoicePaymentResponse:
       properties:
         amount:
@@ -516,35 +574,50 @@ components:
       - invoice_id
       - invoice_amount_due
       title: InvoicePaymentResponse
-    ProviderListResponse:
+    ClinicalStatusEnum:
+      type: string
+      enum:
+      - PRE CLINICAL
+      - CLINICAL
+      - ON HOLD
+      - OFFBOARDED
+      - LIMITED ACCESS GUARDIAN
+      - GUARDIAN INVITED
+      title: ClinicalStatusEnum
+    ValidationError:
       properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: First Name
-        last_name:
+          title: Message
+        type:
           type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        status:
-          type: string
-          title: Status
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - id
-      - first_name
-      - last_name
-      - email
-      - status
-      - clinical_status
-      title: ProviderListResponse
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    EmploymentTypeEnum:
+      type: string
+      enum:
+      - Contractor / 1099
+      - Hourly, full-time
+      - Hourly, part-time
+      - Salaried, full-time
+      title: EmploymentTypeEnum
     InvoicePaymentPatch:
       properties:
         amount:
@@ -575,58 +648,14 @@ components:
       required:
       - mode
       title: InvoicePaymentPatch
-    InvoicePaymentDeleteResponse:
-      properties:
-        invoice_id:
-          type: integer
-          title: Invoice Id
-        invoice_amount_due:
-          type: number
-          title: Invoice Amount Due
-      type: object
-      required:
-      - invoice_id
-      - invoice_amount_due
-      title: InvoicePaymentDeleteResponse
-    InvoiceDiscount:
-      properties:
-        discount:
-          type: number
-          title: Discount
-      type: object
-      required:
-      - discount
-      title: InvoiceDiscount
-    InvoicePaymentCreate:
-      properties:
-        amount:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Amount
-        mode:
-          $ref: '#/components/schemas/InvoicePaymentMode'
-        date_received:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Received
-        date_cleared:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Cleared
-        transaction_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Transaction Id
-      type: object
-      required:
-      - mode
-      title: InvoicePaymentCreate
+    InvoicePaymentStatus:
+      type: string
+      enum:
+      - Pending
+      - Processing
+      - Success
+      - Failed
+      title: InvoicePaymentStatus
     InvoicedClaimResponse:
       properties:
         billed:
@@ -722,59 +751,14 @@ components:
       - latest_date_of_service
       - description
       title: InvoicedClaimResponse
-    InvoicePaymentBaseResponse:
-      properties:
-        amount:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Amount
-        mode:
-          anyOf:
-          - $ref: '#/components/schemas/InvoicePaymentMode'
-          - $ref: '#/components/schemas/InvoiceOnlinePaymentMode'
-          - type: 'null'
-          title: Mode
-        date_received:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Received
-        date_cleared:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Cleared
-        transaction_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Transaction Id
-        id:
-          type: integer
-          title: Id
-        status:
-          $ref: '#/components/schemas/InvoicePaymentStatus'
-        status_reason:
-          anyOf:
-          - $ref: '#/components/schemas/InvoicePaymentStatusReasonEnum'
-          - type: 'null'
-      type: object
-      required:
-      - id
-      - status
-      title: InvoicePaymentBaseResponse
-    InvoicePaymentMode:
+    ClaimInvoiceStatusEnum:
       type: string
       enum:
-      - Check
-      - Grant
-      - Credit Card
-      - Payroll Withheld
-      - ACH
-      title: InvoicePaymentMode
+      - Paid
+      - Not paid
+      - Partial payment
+      - In progress
+      title: ClaimInvoiceStatusEnum
     ClientListResponse:
       properties:
         first_name:
@@ -794,6 +778,9 @@ components:
         id:
           type: integer
           title: Id
+        evv_required:
+          type: boolean
+          title: Evv Required
       type: object
       required:
       - first_name
@@ -802,20 +789,212 @@ components:
       - dob
       - clinical_status
       - id
+      - evv_required
       title: ClientListResponse
-    JobTitleEnum:
+    ProviderResponse:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        sex:
+          $ref: '#/components/schemas/Sex'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        middle_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middle Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        street_address_line_one:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line One
+        street_address_line_two:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Line Two
+        street_address_zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address Zip
+        street_address_city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address City
+        street_address_state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: Street Address State
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        npi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npi
+        certification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Certification
+        date_certification_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification Start
+        date_certification_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Certification End
+        state_license:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State License
+        caqh_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caqh Id
+        payroll_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payroll Id
+        employment_type:
+          anyOf:
+          - $ref: '#/components/schemas/EmploymentTypeEnum'
+          - type: 'null'
+        job_title:
+          anyOf:
+          - $ref: '#/components/schemas/JobTitleEnum'
+          - type: 'null'
+        preferred_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preferred Language
+        supported_languages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Supported Languages
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderStatusEnum'
+          - type: 'null'
+          default: Not Training
+        evv_required:
+          type: boolean
+          title: Evv Required
+          default: false
+        id:
+          type: integer
+          title: Id
+        roles:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Roles
+          default: []
+        is_reviewer_bcba:
+          type: boolean
+          title: Is Reviewer Bcba
+          default: false
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+        clinical_status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: 'null'
+        qa_billing_status:
+          $ref: '#/components/schemas/QABillingStatusEnum'
+      type: object
+      required:
+      - first_name
+      - last_name
+      - sex
+      - dob
+      - id
+      - clinical_status
+      - qa_billing_status
+      title: ProviderResponse
+    ClinicalStatusReasonEnum:
       type: string
       enum:
-      - Behavior Technician
-      - Registered Behavior Technician
-      - Behavior Technician Trainee
-      - Virtual Therapy Assistant
-      - Lead Virtual Therapy Assistant
-      - Certified Behavioral Technician
-      - BCBA
-      - Lead BCBA
-      - Clinical Director
-      title: JobTitleEnum
+      - DISCHARGED
+      - TERMINATED
+      - RESIGNED
+      title: ClinicalStatusReasonEnum
+    InvoicePaymentDeleteResponse:
+      properties:
+        invoice_id:
+          type: integer
+          title: Invoice Id
+        invoice_amount_due:
+          type: number
+          title: Invoice Amount Due
+      type: object
+      required:
+      - invoice_id
+      - invoice_amount_due
+      title: InvoicePaymentDeleteResponse
+    ProviderListResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        status:
+          type: string
+          title: Status
+        clinical_status:
+          $ref: '#/components/schemas/ClinicalStatusEnum'
+      type: object
+      required:
+      - id
+      - first_name
+      - last_name
+      - email
+      - status
+      - clinical_status
+      title: ProviderListResponse
     ClaimInvoiceResponse:
       properties:
         id:
@@ -942,35 +1121,188 @@ components:
       - total_amount_received
       - is_any_claim_paid_to_subscriber
       title: ClaimInvoiceResponse
-    Sex:
+    InvoicePaymentStatusReasonEnum:
       type: string
       enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    ValidationError:
+      - Payment link expired
+      title: InvoicePaymentStatusReasonEnum
+    InvoicePaymentBaseResponse:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+        amount:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Amount
+        mode:
+          anyOf:
+          - $ref: '#/components/schemas/InvoicePaymentMode'
+          - $ref: '#/components/schemas/InvoiceOnlinePaymentMode'
+          - type: 'null'
+          title: Mode
+        date_received:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Received
+        date_cleared:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Date Cleared
+        transaction_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Transaction Id
+        id:
+          type: integer
+          title: Id
+        status:
+          $ref: '#/components/schemas/InvoicePaymentStatus'
+        status_reason:
+          anyOf:
+          - $ref: '#/components/schemas/InvoicePaymentStatusReasonEnum'
+          - type: 'null'
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - id
+      - status
+      title: InvoicePaymentBaseResponse
+    ClaimInvoiceCreate:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        payee_provider_id:
+          type: integer
+          title: Payee Provider Id
+        claim_ids:
+          items:
+            type: integer
+          type: array
+          title: Claim Ids
+        date_due:
+          type: string
+          format: date
+          title: Date Due
+        discount:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Discount
+        date_generated:
+          type: string
+          format: date-time
+          title: Date Generated
+        utc_offset_date_generated:
+          type: integer
+          title: Utc Offset Date Generated
+      type: object
+      required:
+      - client_id
+      - payee_provider_id
+      - claim_ids
+      - date_due
+      - date_generated
+      - utc_offset_date_generated
+      title: ClaimInvoiceCreate
+    QABillingStatusEnum:
+      type: string
+      enum:
+      - Billable
+      - Not Billable
+      title: QABillingStatusEnum
+    ClaimInvoicePreviewRequest:
+      properties:
+        client_id:
+          type: integer
+          title: Client Id
+        payee_provider_id:
+          type: integer
+          title: Payee Provider Id
+        claim_ids:
+          items:
+            type: integer
+          type: array
+          title: Claim Ids
+        date_due:
+          type: string
+          format: date
+          title: Date Due
+        discount:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Discount
+      type: object
+      required:
+      - client_id
+      - payee_provider_id
+      - claim_ids
+      - date_due
+      title: ClaimInvoicePreviewRequest
+    ClaimInvoicesFetchResponse:
+      properties:
+        total_amount_due:
+          type: number
+          title: Total Amount Due
+        invoices:
+          items:
+            $ref: '#/components/schemas/ClaimInvoiceListResponse'
+          type: array
+          title: Invoices
+      type: object
+      required:
+      - total_amount_due
+      - invoices
+      title: ClaimInvoicesFetchResponse
+    ClaimInvoicePdfUrl:
+      properties:
+        document_url:
+          type: string
+          title: Document Url
+      type: object
+      required:
+      - document_url
+      title: ClaimInvoicePdfUrl
+    ProviderStatusEnum:
+      type: string
+      enum:
+      - Not Training
+      - Training
+      title: ProviderStatusEnum
+    InvoiceDiscount:
+      properties:
+        discount:
+          type: number
+          title: Discount
+      type: object
+      required:
+      - discount
+      title: InvoiceDiscount
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CheckoutPaymentResponse:
+      properties:
+        payment_status:
+          $ref: '#/components/schemas/InvoicePaymentStatus'
+        payment_id:
+          type: integer
+          title: Payment Id
+      type: object
+      required:
+      - payment_status
+      - payment_id
+      title: CheckoutPaymentResponse
     InvoiceDiscountResponse:
       properties:
         discount:
@@ -988,183 +1320,55 @@ components:
       - invoice_id
       - invoice_amount_due
       title: InvoiceDiscountResponse
-    HTTPValidationError:
+    ClaimInvoiceListResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    QABillingStatusEnum:
-      type: string
-      enum:
-      - Billable
-      - Not Billable
-      title: QABillingStatusEnum
-    ClaimInvoicesFetchResponse:
-      properties:
-        total_amount_due:
-          type: number
-          title: Total Amount Due
-        invoices:
-          items:
-            $ref: '#/components/schemas/ClaimInvoiceListResponse'
-          type: array
-          title: Invoices
-      type: object
-      required:
-      - total_amount_due
-      - invoices
-      title: ClaimInvoicesFetchResponse
-    ProviderResponse:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        sex:
-          $ref: '#/components/schemas/Sex'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        middle_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Middle Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        street_address_line_one:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-          - type: 'null'
-          title: Street Address State
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        npi:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Npi
-        certification:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Certification
-        date_certification_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification Start
-        date_certification_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Certification End
-        state_license:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: State License
-        caqh_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Caqh Id
-        payroll_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Payroll Id
-        employment_type:
-          anyOf:
-          - $ref: '#/components/schemas/EmploymentTypeEnum'
-          - type: 'null'
-        job_title:
-          anyOf:
-          - $ref: '#/components/schemas/JobTitleEnum'
-          - type: 'null'
-        preferred_language:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Preferred Language
-        supported_languages:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Supported Languages
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderStatusEnum'
-          - type: 'null'
-          default: Not Training
         id:
           type: integer
           title: Id
-        roles:
+        client:
+          $ref: '#/components/schemas/ClientListResponse'
+        payee:
+          $ref: '#/components/schemas/ProviderListResponse'
+        biller:
+          $ref: '#/components/schemas/ProviderListResponse'
+        status:
+          $ref: '#/components/schemas/ClaimInvoiceStatusEnum'
+        amount_billed:
+          type: number
+          title: Amount Billed
+        amount_due:
+          type: number
+          title: Amount Due
+        date_sent:
           anyOf:
-          - items:
-              type: string
-            type: array
+          - type: string
+            format: date
           - type: 'null'
-          title: Roles
-          default: []
-        clinical_status:
-          $ref: '#/components/schemas/ClinicalStatusEnum'
-        clinical_status_reason:
+          title: Date Sent
+        date_due:
+          type: string
+          format: date
+          title: Date Due
+        discount:
           anyOf:
-          - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
+          - type: number
           - type: 'null'
-        qa_billing_status:
-          $ref: '#/components/schemas/QABillingStatusEnum'
+          title: Discount
+        net_billed_amount:
+          type: number
+          title: Net Billed Amount
       type: object
       required:
-      - first_name
-      - last_name
-      - sex
-      - dob
       - id
-      - clinical_status
-      - qa_billing_status
-      title: ProviderResponse
+      - client
+      - payee
+      - biller
+      - status
+      - amount_billed
+      - amount_due
+      - date_due
+      - net_billed_amount
+      title: ClaimInvoiceListResponse
     StripeCheckoutSessionResponse:
       properties:
         checkout_session_id:
@@ -1178,12 +1382,6 @@ components:
       - checkout_session_id
       - url
       title: StripeCheckoutSessionResponse
-    ProviderStatusEnum:
-      type: string
-      enum:
-      - Not Training
-      - Training
-      title: ProviderStatusEnum
     ClientResponse:
       properties:
         first_name:
@@ -1249,6 +1447,9 @@ components:
           anyOf:
           - $ref: '#/components/schemas/ClinicalStatusReasonEnum'
           - type: 'null'
+        evv_required:
+          type: boolean
+          title: Evv Required
         street_address_latitude:
           anyOf:
           - type: number
@@ -1271,214 +1472,35 @@ components:
       - dob
       - id
       - clinical_status
+      - evv_required
       title: ClientResponse
-    ClaimInvoicePreviewRequest:
-      properties:
-        client_id:
-          type: integer
-          title: Client Id
-        payee_provider_id:
-          type: integer
-          title: Payee Provider Id
-        claim_ids:
-          items:
-            type: integer
-          type: array
-          title: Claim Ids
-        date_due:
-          type: string
-          format: date
-          title: Date Due
-        discount:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Discount
-      type: object
-      required:
-      - client_id
-      - payee_provider_id
-      - claim_ids
-      - date_due
-      title: ClaimInvoicePreviewRequest
-    EmploymentTypeEnum:
+    JobTitleEnum:
       type: string
       enum:
-      - Contractor / 1099
-      - Hourly, full-time
-      - Hourly, part-time
-      - Salaried, full-time
-      title: EmploymentTypeEnum
-    ClaimInvoiceCreate:
-      properties:
-        client_id:
-          type: integer
-          title: Client Id
-        payee_provider_id:
-          type: integer
-          title: Payee Provider Id
-        claim_ids:
-          items:
-            type: integer
-          type: array
-          title: Claim Ids
-        date_due:
-          type: string
-          format: date
-          title: Date Due
-        discount:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Discount
-        date_generated:
-          type: string
-          format: date-time
-          title: Date Generated
-        utc_offset_date_generated:
-          type: integer
-          title: Utc Offset Date Generated
-      type: object
-      required:
-      - client_id
-      - payee_provider_id
-      - claim_ids
-      - date_due
-      - date_generated
-      - utc_offset_date_generated
-      title: ClaimInvoiceCreate
+      - Behavior Technician
+      - Registered Behavior Technician
+      - Behavior Technician Trainee
+      - Virtual Therapy Assistant
+      - Lead Virtual Therapy Assistant
+      - Certified Behavioral Technician
+      - BCBA
+      - Lead BCBA
+      - Clinical Director
+      title: JobTitleEnum
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
     InvoiceOnlinePaymentMode:
       type: string
       enum:
       - Online Payment
       title: InvoiceOnlinePaymentMode
-    ClinicalStatusReasonEnum:
-      type: string
-      enum:
-      - DISCHARGED
-      - TERMINATED
-      - RESIGNED
-      title: ClinicalStatusReasonEnum
-    ClaimInvoicePdfUrl:
-      properties:
-        document_url:
-          type: string
-          title: Document Url
-      type: object
-      required:
-      - document_url
-      title: ClaimInvoicePdfUrl
-    ClinicalStatusEnum:
-      type: string
-      enum:
-      - PRE CLINICAL
-      - CLINICAL
-      - ON HOLD
-      - OFFBOARDED
-      - LIMITED ACCESS GUARDIAN
-      title: ClinicalStatusEnum
-    InvoicePaymentStatusReasonEnum:
-      type: string
-      enum:
-      - Payment link expired
-      title: InvoicePaymentStatusReasonEnum
-    ClaimInvoiceStatusEnum:
-      type: string
-      enum:
-      - Paid
-      - Not paid
-      - Partial payment
-      - In progress
-      title: ClaimInvoiceStatusEnum
-    CheckoutPaymentResponse:
-      properties:
-        payment_status:
-          $ref: '#/components/schemas/InvoicePaymentStatus'
-        payment_id:
-          type: integer
-          title: Payment Id
-      type: object
-      required:
-      - payment_status
-      - payment_id
-      title: CheckoutPaymentResponse
-    ClaimInvoiceListResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        client:
-          $ref: '#/components/schemas/ClientListResponse'
-        payee:
-          $ref: '#/components/schemas/ProviderListResponse'
-        biller:
-          $ref: '#/components/schemas/ProviderListResponse'
-        status:
-          $ref: '#/components/schemas/ClaimInvoiceStatusEnum'
-        amount_billed:
-          type: number
-          title: Amount Billed
-        amount_due:
-          type: number
-          title: Amount Due
-        date_sent:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Date Sent
-        date_due:
-          type: string
-          format: date
-          title: Date Due
-        discount:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Discount
-        net_billed_amount:
-          type: number
-          title: Net Billed Amount
-      type: object
-      required:
-      - id
-      - client
-      - payee
-      - biller
-      - status
-      - amount_billed
-      - amount_due
-      - date_due
-      - net_billed_amount
-      title: ClaimInvoiceListResponse
-    InvoicePaymentStatus:
-      type: string
-      enum:
-      - Pending
-      - Processing
-      - Success
-      - Failed
-      title: InvoicePaymentStatus
-    InvoicePaymentsResponse:
-      properties:
-        invoice_id:
-          type: integer
-          title: Invoice Id
-        invoice_amount_due:
-          type: number
-          title: Invoice Amount Due
-        payments:
-          items:
-            $ref: '#/components/schemas/InvoicePaymentBaseResponse'
-          type: array
-          title: Payments
-      type: object
-      required:
-      - invoice_id
-      - invoice_amount_due
-      - payments
-      title: InvoicePaymentsResponse
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

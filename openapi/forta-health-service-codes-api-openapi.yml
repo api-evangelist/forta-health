@@ -12,7 +12,7 @@ paths:
       summary: Create Service Code
       operationId: create_service_code_api_v1_service_codes__post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       requestBody:
         required: true
         content:
@@ -38,7 +38,7 @@ paths:
       summary: Get Service Codes
       operationId: get_service_codes_api_v1_service_codes__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: is_timesheet_usable
         in: query
@@ -66,12 +66,44 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ServiceCodeTypeEnum:
-      type: string
-      enum:
-      - CPT
-      - HCPCS
-      title: ServiceCodeTypeEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ServiceCodeBase:
+      properties:
+        code:
+          type: string
+          title: Code
+        label:
+          type: string
+          title: Label
+        is_billable:
+          type: boolean
+          title: Is Billable
+        is_timesheet_usable:
+          type: boolean
+          title: Is Timesheet Usable
+        type:
+          $ref: '#/components/schemas/ServiceCodeTypeEnum'
+          default: CPT
+        hcpcs_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hcpcs Code
+      type: object
+      required:
+      - code
+      - label
+      - is_billable
+      - is_timesheet_usable
+      title: ServiceCodeBase
     ServiceCodeResponse:
       properties:
         code:
@@ -105,35 +137,6 @@ components:
       - is_timesheet_usable
       - id
       title: ServiceCodeResponse
-    ServiceCodeBase:
-      properties:
-        code:
-          type: string
-          title: Code
-        label:
-          type: string
-          title: Label
-        is_billable:
-          type: boolean
-          title: Is Billable
-        is_timesheet_usable:
-          type: boolean
-          title: Is Timesheet Usable
-        type:
-          $ref: '#/components/schemas/ServiceCodeTypeEnum'
-          default: CPT
-        hcpcs_code:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Hcpcs Code
-      type: object
-      required:
-      - code
-      - label
-      - is_billable
-      - is_timesheet_usable
-      title: ServiceCodeBase
     ValidationError:
       properties:
         loc:
@@ -149,22 +152,24 @@ components:
         type:
           type: string
           title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
       - loc
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+    ServiceCodeTypeEnum:
+      type: string
+      enum:
+      - CPT
+      - HCPCS
+      title: ServiceCodeTypeEnum
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

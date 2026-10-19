@@ -13,26 +13,65 @@ paths:
       description: 'Create an intake questionnaire for the (provider, client) pair.
 
 
-        Callers without an overriding role may only send a questionnaire for themselves
+        Only the ``admin`` and ``onboarding_coordinator`` roles can call this route. A
 
-        (403 when ``provider_id`` is someone else''s) — the target provider is taken from the
+        guardian can no longer send a questionnaire for themself. Both allowed roles are
 
-        request body, so this prevents a holder of ``post:intake_questionnaires:send`` from
+        overriding roles, so a caller can send a questionnaire for any (provider, client)
 
-        creating questionnaires for arbitrary (provider, client) pairs.
+        pair in the request body. The service keeps the self-only check (403 when
+
+        ``provider_id`` is someone else''s) for a caller without an overriding role, but no
+
+        caller that passes this role gate is in that group.
 
 
         400 when the provider is not a practicing guardian for the client, the provider''s
 
         onboarding questionnaire is not COMPLETED, or an intake questionnaire already exists
 
-        for the pair. 404 when the provider does not exist.'
+        for the pair. 404 when the provider does not exist. The response includes lightweight
+
+        ``provider`` and ``client`` summaries (id/name), same as list.'
       operationId: send_intake_questionnaire_api_v1_intake_questionnaires_send_post
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireSendRequest'
+              properties:
+                provider_id:
+                  type: integer
+                  exclusiveMinimum: 0.0
+                  title: Provider Id
+                client_id:
+                  type: integer
+                  exclusiveMinimum: 0.0
+                  title: Client Id
+                  description: Client the intake questionnaire is sent for; must be assigned to the provider as a practicing guardian.
+                date_sent_utc_offset:
+                  type: integer
+                  maximum: 86400.0
+                  minimum: -86400.0
+                  title: Date Sent Utc Offset
+              additionalProperties: false
+              type: object
+              required:
+              - provider_id
+              - client_id
+              - date_sent_utc_offset
+              title: Request
+              description: 'Request body for sending (creating) an intake questionnaire.
+
+
+                ``date_sent`` is stamped server-side at send time (aware UTC) rather than accepted
+
+                from the client, so it shares the same clock as the server-stamped ``date_concluded``
+
+                and the conclusion-not-before-sent ordering check is well-defined. ``date_sent_utc_offset``
+
+                is the client''s UTC offset in seconds at that moment, retained so the send time can
+
+                later be rendered in the user''s local timezone.'
         required: true
       responses:
         '201':
@@ -48,7 +87,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
   /api/v1/intake_questionnaires:
     get:
       tags:
@@ -59,7 +98,7 @@ paths:
 
         Each returned row also includes a lightweight ``provider`` and ``client`` summary
 
-        (id/name/email) for the linked provider and client.
+        (id/name) for the linked provider and client.
 
 
         Filter by ``provider_id``, ``client_id``, ``status``, and a ``date_sent`` window
@@ -73,14 +112,18 @@ paths:
         are still returned. When no filter is provided, results are limited to the past month.
 
 
-        Callers without an overriding role may only list their own questionnaires (403 when
+        Callers without an overriding role may only list questionnaires they may read (403
 
-        ``provider_id`` is someone else''s); the filter is otherwise scoped to the caller''s own
+        when ``provider_id`` is someone else''s); the filter is otherwise scoped to the
 
-        id. 400 when ``date_start`` is after ``date_end``.'
+        caller''s own id. The result also includes questionnaires for clients the caller is
+
+        assigned to as a BCBA today, even when the questionnaire is linked to a different
+
+        provider. 400 when ``date_start`` is after ``date_end``.'
       operationId: list_intake_questionnaires_api_v1_intake_questionnaires_get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: query
@@ -144,7 +187,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IntakeQuestionnaireListResponse'
+                  $ref: '#/components/schemas/IntakeQuestionnaireResponse'
                 title: Response List Intake Questionnaires Api V1 Intake Questionnaires Get
         '422':
           description: Validation Error
@@ -173,14 +216,16 @@ paths:
 
         provider is missing. Any other caller only sees the questionnaires they are authorized
 
-        to read (an active provider assignment to the client); when none are readable, a
+        to read (a BCBA assignment to the client today: home, bobbing, or substitute); when
 
-        missing provider, an absent questionnaire, and a forbidden one all return the same
+        none are readable, a missing provider, an absent questionnaire, and a forbidden one
 
-        ``403`` so existence is not observable to someone who could not read it.'
+        all return the same ``403`` so existence is not observable to someone who could not
+
+        read it.'
       operationId: get_intake_questionnaires_by_provider_api_v1_intake_questionnaires_by_provider__provider_id__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: provider_id
         in: path
@@ -226,14 +271,16 @@ paths:
       description: 'Full questionnaire with nested sections; 404 if not found.
 
 
-        Callers without an overriding role may only read questionnaires sent to them (403
+        Callers without an overriding role may only read questionnaires sent to them, or
 
-        otherwise). Sections and collections that have no rows yet (e.g. ``medical_info``,
+        questionnaires whose client they are assigned to as a BCBA today (403 otherwise).
 
-        ``referrals``) are returned as ``null``.'
+        Sections and collections that have no rows yet (e.g. ``medical_info``, ``referrals``)
+
+        are returned as ``null``.'
       operationId: get_intake_questionnaire_by_id_api_v1_intake_questionnaires__questionnaire_id__get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -271,7 +318,7 @@ paths:
         fields present in the request body are updated; omitted fields are unchanged.'
       operationId: update_intake_questionnaire_api_v1_intake_questionnaires__questionnaire_id__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -287,7 +334,31 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnairePatchRequest'
+              type: object
+              properties:
+                has_no_medications:
+                  anyOf:
+                  - type: boolean
+                  - type: 'null'
+                  title: Has No Medications
+                has_no_therapies:
+                  anyOf:
+                  - type: boolean
+                  - type: 'null'
+                  title: Has No Therapies
+                not_attending_school:
+                  anyOf:
+                  - type: boolean
+                  - type: 'null'
+                  title: Not Attending School
+              title: Request
+              description: 'Partial update for the intake questionnaire''s top-level flags.
+
+
+                Only fields explicitly present in the request body are applied (unset fields are
+
+                left unchanged); each flag is nullable, so ``null`` clears it.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -309,7 +380,7 @@ paths:
       description: Partial PATCH for general info; 403/404/400 per edit guard.
       operationId: update_intake_questionnaire_general_info_api_v1_intake_questionnaires__questionnaire_id__general_info_patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -325,7 +396,97 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireGeneralInfoPatchRequest'
+              type: object
+              properties:
+                provider_full_name:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 255
+                  - type: 'null'
+                  title: Provider Full Name
+                provider_email:
+                  anyOf:
+                  - type: string
+                    format: email
+                  - type: 'null'
+                  title: Provider Email
+                primary_language:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnairePrimaryLanguageEnum'
+                  - type: 'null'
+                relationship_to_client:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireRelationshipToClientEnum'
+                  - type: 'null'
+                client_first_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Client First Name
+                client_last_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Client Last Name
+                client_middle_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Client Middle Name
+                client_date_of_birth:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Client Date Of Birth
+                client_sex:
+                  anyOf:
+                  - $ref: '#/components/schemas/Sex'
+                  - type: 'null'
+                client_address_same_as_provider:
+                  type: boolean
+                  default: false
+                  title: Client Address Same As Provider
+                client_street_address_line_one:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Client Street Address Line One
+                client_street_address_line_two:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Client Street Address Line Two
+                client_street_address_zip:
+                  anyOf:
+                  - type: string
+                    minLength: 5
+                    maxLength: 5
+                    pattern: ^\d{5}$
+                  - type: 'null'
+                  title: Client Street Address Zip
+                client_street_address_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Client Street Address City
+                client_street_address_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: Client Street Address State
+              title: Request
+              description: Partial PATCH for general info; null clears nullable columns; NOT NULL bools reject null.
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -347,7 +508,7 @@ paths:
       description: Partial PATCH for education info; upserts row and clears not_attending_school.
       operationId: update_intake_questionnaire_education_info_api_v1_intake_questionnaires__questionnaire_id__education_info_patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -363,7 +524,76 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireEducationInfoPatchRequest'
+              type: object
+              properties:
+                education_setting:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireEducationSettingEnum'
+                  - type: 'null'
+                number_of_hours_per_week:
+                  anyOf:
+                  - type: number
+                    maximum: 40
+                    exclusiveMinimum: 0
+                  - type: 'null'
+                  title: Number Of Hours Per Week
+                school_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: School Name
+                school_phone_number:
+                  anyOf:
+                  - type: string
+                    minLength: 10
+                    maxLength: 10
+                    pattern: ^\d{10}$
+                  - type: 'null'
+                  title: School Phone Number
+                education_description:
+                  anyOf:
+                  - type: string
+                    maxLength: 800
+                  - type: 'null'
+                  title: Education Description
+                focus_area_description:
+                  anyOf:
+                  - type: string
+                    maxLength: 800
+                  - type: 'null'
+                  title: Focus Area Description
+                client_education_evaluation_status:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireEducationEvaluationStatusEnum'
+                  - type: 'null'
+                client_education_evaluation_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Client Education Evaluation Date
+                iep_or_504_in_place:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireIepOr504Enum'
+                  - type: 'null'
+                education_support:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Education Support
+                client_classroom_setting:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireClassroomSettingEnum'
+                  - type: 'null'
+                client_attitude_towards_school:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireChildAttitudeTowardsSchoolEnum'
+                  - type: 'null'
+              title: Request
+              description: Partial PATCH for education info; null clears nullable columns.
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -385,7 +615,7 @@ paths:
       description: Partial PATCH for medical info; upserts the parent row.
       operationId: update_intake_questionnaire_medical_info_api_v1_intake_questionnaires__questionnaire_id__medical_info_patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -401,7 +631,178 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoPatchRequest'
+              type: object
+              properties:
+                allergies:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Allergies
+                special_diets:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Special Diets
+                hearing_difficulty:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireMedicalHearingDifficultyEnum'
+                  - type: 'null'
+                hearing_screening_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Hearing Screening Date
+                vision_difficulty:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireMedicalVisionDifficultyEnum'
+                  - type: 'null'
+                vision_screening_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Vision Screening Date
+                trauma_history:
+                  anyOf:
+                  - type: string
+                    maxLength: 800
+                  - type: 'null'
+                  title: Trauma History
+                hospitalization_history:
+                  anyOf:
+                  - type: string
+                    maxLength: 800
+                  - type: 'null'
+                  title: Hospitalization History
+                f84_severity_level:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireMedicalAsdSeverityEnum'
+                  - type: 'null'
+                f84_diagnosis_provider_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: F84 Diagnosis Provider Name
+                f84_diagnosis_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: F84 Diagnosis City
+                f84_diagnosis_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: F84 Diagnosis State
+                f84_diagnosis_year:
+                  anyOf:
+                  - type: integer
+                    maximum: 2100
+                    minimum: 1900
+                  - type: 'null'
+                  title: F84 Diagnosis Year
+                child_delivery_type:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireMedicalChildDeliveryTypeEnum'
+                  - type: 'null'
+                child_gestational_age:
+                  anyOf:
+                  - type: integer
+                    maximum: 99
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Gestational Age
+                child_weight_at_birth_pounds:
+                  anyOf:
+                  - type: integer
+                    maximum: 999
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Weight At Birth Pounds
+                child_weight_at_birth_ounces:
+                  anyOf:
+                  - type: integer
+                    maximum: 15
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Weight At Birth Ounces
+                child_sitting_up_age_months:
+                  anyOf:
+                  - type: integer
+                    maximum: 150
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Sitting Up Age Months
+                child_crawling_age_months:
+                  anyOf:
+                  - type: integer
+                    maximum: 150
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Crawling Age Months
+                child_walking_age_years:
+                  anyOf:
+                  - type: integer
+                    maximum: 30
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Walking Age Years
+                child_walking_age_months:
+                  anyOf:
+                  - type: integer
+                    maximum: 11
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Walking Age Months
+                child_standing_age_years:
+                  anyOf:
+                  - type: integer
+                    maximum: 30
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Standing Age Years
+                child_standing_age_months:
+                  anyOf:
+                  - type: integer
+                    maximum: 11
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Standing Age Months
+                child_babbling_age_months:
+                  anyOf:
+                  - type: integer
+                    maximum: 150
+                    minimum: 0
+                  - type: 'null'
+                  title: Child Babbling Age Months
+                child_first_word:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Child First Word
+                child_second_word:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Child Second Word
+                child_first_words_age_months:
+                  anyOf:
+                  - type: integer
+                    maximum: 150
+                    minimum: 0
+                  - type: 'null'
+                  title: Child First Words Age Months
+              title: Request
+              description: Partial PATCH for medical info scalar fields; null clears nullable columns.
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -430,7 +831,7 @@ paths:
         changes are allowed (400). Duplicate ``diagnosis_name`` values return 409.'
       operationId: create_intake_questionnaire_medical_info_diagnosis_api_v1_intake_questionnaires__questionnaire_id__medical_info_diagnosis_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -446,7 +847,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoDiagnosisCreateRequest'
+              type: object
+              properties:
+                diagnosis_name:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireMedicalDiagnosisEnum'
+                  - type: 'null'
+                diagnosis_provider_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis Provider Name
+                diagnosis_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis City
+                diagnosis_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: Diagnosis State
+                diagnosis_year:
+                  anyOf:
+                  - type: integer
+                    maximum: 2100
+                    minimum: 1900
+                  - type: 'null'
+                  title: Diagnosis Year
+              title: Request
+              description: Create one medical info diagnosis row.
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -475,7 +910,7 @@ paths:
         it. Once the questionnaire is COMPLETED no further changes are allowed (400).'
       operationId: update_intake_questionnaire_medical_info_diagnosis_api_v1_intake_questionnaires__questionnaire_id__medical_info_diagnosis__diagnosis_id__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -500,7 +935,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoDiagnosisPatchRequest'
+              type: object
+              properties:
+                diagnosis_name:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireMedicalDiagnosisEnum'
+                  - type: 'null'
+                diagnosis_provider_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis Provider Name
+                diagnosis_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis City
+                diagnosis_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: Diagnosis State
+                diagnosis_year:
+                  anyOf:
+                  - type: integer
+                    maximum: 2100
+                    minimum: 1900
+                  - type: 'null'
+                  title: Diagnosis Year
+              title: Request
+              description: Partial PATCH for one medical info diagnosis row.
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -528,7 +997,7 @@ paths:
         it. Once the questionnaire is COMPLETED no deletes are allowed (400).'
       operationId: delete_intake_questionnaire_medical_info_diagnosis_api_v1_intake_questionnaires__questionnaire_id__medical_info_diagnosis__diagnosis_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -572,7 +1041,7 @@ paths:
         changes are allowed (400). Duplicate values and ``None`` conflicts return 409.'
       operationId: create_intake_questionnaire_medical_info_selection_api_v1_intake_questionnaires__questionnaire_id__medical_info_selection_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -588,7 +1057,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoSelectionCreateRequest'
+              type: object
+              properties:
+                selection_type:
+                  $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoSelectionTypeEnum'
+                value:
+                  type: string
+                  title: Value
+              required:
+              - selection_type
+              - value
+              title: Request
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -619,7 +1099,7 @@ paths:
         (400).'
       operationId: delete_intake_questionnaire_medical_info_selection_api_v1_intake_questionnaires__questionnaire_id__medical_info_selection__selection_type___selection_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -663,7 +1143,7 @@ paths:
       description: Partial PATCH for family; upserts the parent row.
       operationId: update_intake_questionnaire_family_api_v1_intake_questionnaires__questionnaire_id__family_patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -679,7 +1159,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireFamilyPatchRequest'
+              type: object
+              properties:
+                cultural_consideration:
+                  anyOf:
+                  - type: string
+                    maxLength: 800
+                  - type: 'null'
+                  title: Cultural Consideration
+              title: Request
+              description: Partial PATCH for family; upserts the parent row.
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -700,7 +1190,7 @@ paths:
       summary: Create Intake Questionnaire Family Member
       operationId: create_intake_questionnaire_family_member_api_v1_intake_questionnaires__questionnaire_id__family_member_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -716,7 +1206,95 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberCreateRequest'
+              type: object
+              properties:
+                full_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Full Name
+                member_role:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberRoleEnum'
+                  - type: 'null'
+                caregiver_type:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCaregiverTypeEnum'
+                  - type: 'null'
+                relationship_to_client:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireRelationshipToClientEnum'
+                  - type: 'null'
+                custody_type:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCustodyTypeEnum'
+                  - type: 'null'
+                marital_status:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMaritalStatusEnum'
+                  - type: 'null'
+                job_title:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Job Title
+                email:
+                  anyOf:
+                  - type: string
+                    format: email
+                  - type: 'null'
+                  title: Email
+                phone:
+                  anyOf:
+                  - type: string
+                    minLength: 10
+                    maxLength: 10
+                    pattern: ^\d{10}$
+                  - type: 'null'
+                  title: Phone
+                street_address_line_one:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Street Address Line One
+                street_address_line_two:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Street Address Line Two
+                street_address_zip:
+                  anyOf:
+                  - type: string
+                    minLength: 5
+                    maxLength: 5
+                    pattern: ^\d{5}$
+                  - type: 'null'
+                  title: Street Address Zip
+                street_address_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Street Address City
+                street_address_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: Street Address State
+              title: Request
+              description: 'Create payload for a family member.
+
+
+                A new member row is created from the provided fields; every field is optional, so
+
+                an empty/all-null body still creates a row with all columns NULL.'
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -737,7 +1315,7 @@ paths:
       summary: Update Intake Questionnaire Family Member
       operationId: update_intake_questionnaire_family_member_api_v1_intake_questionnaires__questionnaire_id__family_member__member_id__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -762,7 +1340,95 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberPatchRequest'
+              type: object
+              properties:
+                full_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Full Name
+                member_role:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberRoleEnum'
+                  - type: 'null'
+                caregiver_type:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCaregiverTypeEnum'
+                  - type: 'null'
+                relationship_to_client:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireRelationshipToClientEnum'
+                  - type: 'null'
+                custody_type:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCustodyTypeEnum'
+                  - type: 'null'
+                marital_status:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMaritalStatusEnum'
+                  - type: 'null'
+                job_title:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Job Title
+                email:
+                  anyOf:
+                  - type: string
+                    format: email
+                  - type: 'null'
+                  title: Email
+                phone:
+                  anyOf:
+                  - type: string
+                    minLength: 10
+                    maxLength: 10
+                    pattern: ^\d{10}$
+                  - type: 'null'
+                  title: Phone
+                street_address_line_one:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Street Address Line One
+                street_address_line_two:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Street Address Line Two
+                street_address_zip:
+                  anyOf:
+                  - type: string
+                    minLength: 5
+                    maxLength: 5
+                    pattern: ^\d{5}$
+                  - type: 'null'
+                  title: Street Address Zip
+                street_address_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Street Address City
+                street_address_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: Street Address State
+              title: Request
+              description: 'Partial update for an existing family member.
+
+
+                Only fields explicitly present in the body are applied (null clears the column);
+
+                omitted fields are left untouched.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -782,7 +1448,7 @@ paths:
       summary: Delete Intake Questionnaire Family Member
       operationId: delete_intake_questionnaire_family_member_api_v1_intake_questionnaires__questionnaire_id__family_member__member_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -818,7 +1484,7 @@ paths:
       summary: Create Intake Questionnaire Family Client Sibling
       operationId: create_intake_questionnaire_family_client_sibling_api_v1_intake_questionnaires__questionnaire_id__family_client_sibling_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -834,7 +1500,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireFamilyClientSiblingCreateRequest'
+              type: object
+              properties:
+                sibling_relationship:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireSiblingRelationshipEnum'
+                  - type: 'null'
+                sibling_age:
+                  anyOf:
+                  - type: integer
+                    maximum: 150
+                    minimum: 0
+                  - type: 'null'
+                  title: Sibling Age
+                sibling_diagnosis:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Sibling Diagnosis
+              title: Request
+              description: 'Create payload for a client sibling.
+
+
+                A new sibling row is created from the provided fields; every field is optional, so
+
+                an empty/all-null body still creates a row with all columns NULL.'
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -855,7 +1547,7 @@ paths:
       summary: Update Intake Questionnaire Family Client Sibling
       operationId: update_intake_questionnaire_family_client_sibling_api_v1_intake_questionnaires__questionnaire_id__family_client_sibling__sibling_id__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -880,7 +1572,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireFamilyClientSiblingPatchRequest'
+              type: object
+              properties:
+                sibling_relationship:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireSiblingRelationshipEnum'
+                  - type: 'null'
+                sibling_age:
+                  anyOf:
+                  - type: integer
+                    maximum: 150
+                    minimum: 0
+                  - type: 'null'
+                  title: Sibling Age
+                sibling_diagnosis:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Sibling Diagnosis
+              title: Request
+              description: 'Partial update for an existing client sibling.
+
+
+                Only fields explicitly present in the body are applied (null clears the column);
+
+                omitted fields are left untouched.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -900,7 +1618,7 @@ paths:
       summary: Delete Intake Questionnaire Family Client Sibling
       operationId: delete_intake_questionnaire_family_client_sibling_api_v1_intake_questionnaires__questionnaire_id__family_client_sibling__sibling_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -936,7 +1654,7 @@ paths:
       summary: Create Intake Questionnaire Family Additional Info
       operationId: create_intake_questionnaire_family_additional_info_api_v1_intake_questionnaires__questionnaire_id__family_additional_info_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -952,7 +1670,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireFamilyAdditionalInfoCreateRequest'
+              type: object
+              properties:
+                info_type:
+                  $ref: '#/components/schemas/IntakeQuestionnaireFamilyAdditionalInfoTypeEnum'
+                value:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                  title: Value
+              required:
+              - info_type
+              - value
+              title: Request
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -973,7 +1704,7 @@ paths:
       summary: Delete Intake Questionnaire Family Additional Info
       operationId: delete_intake_questionnaire_family_additional_info_api_v1_intake_questionnaires__questionnaire_id__family_additional_info__item_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1022,7 +1753,7 @@ paths:
         changes are allowed (400).'
       operationId: create_intake_questionnaire_referral_api_v1_intake_questionnaires__questionnaire_id__referral_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1038,7 +1769,47 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireReferralCreateRequest'
+              type: object
+              properties:
+                diagnosis_tool:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis Tool
+                diagnosis_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Diagnosis Date
+                provider_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Provider Name
+                diagnosis_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis City
+                diagnosis_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: Diagnosis State
+              title: Request
+              description: 'Create payload for an intake questionnaire''s referral.
+
+
+                A new referral row is created from the provided fields; every field is optional, so
+
+                an empty/all-null body still creates a row with all columns NULL.'
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -1072,7 +1843,7 @@ paths:
         it. Once the questionnaire is COMPLETED no further changes are allowed (400).'
       operationId: update_intake_questionnaire_referral_api_v1_intake_questionnaires__questionnaire_id__referral__referral_id__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1097,7 +1868,47 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireReferralPatchRequest'
+              type: object
+              properties:
+                diagnosis_tool:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis Tool
+                diagnosis_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Diagnosis Date
+                provider_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Provider Name
+                diagnosis_city:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Diagnosis City
+                diagnosis_state:
+                  anyOf:
+                  - type: string
+                    minLength: 2
+                    maxLength: 2
+                  - type: 'null'
+                  title: Diagnosis State
+              title: Request
+              description: 'Partial update for an existing intake questionnaire referral.
+
+
+                Only fields explicitly present in the body are applied (null clears the column);
+
+                omitted fields are left untouched.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -1125,7 +1936,7 @@ paths:
         it. Once the questionnaire is COMPLETED no deletes are allowed (400).'
       operationId: delete_intake_questionnaire_referral_api_v1_intake_questionnaires__questionnaire_id__referral__referral_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1174,7 +1985,7 @@ paths:
         changes are allowed (400).'
       operationId: create_intake_questionnaire_medication_api_v1_intake_questionnaires__questionnaire_id__medication_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1190,7 +2001,46 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireMedicationCreateRequest'
+              type: object
+              properties:
+                medication_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Medication Name
+                dosage:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Dosage
+                start_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Start Date
+                physician_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Physician Name
+                reason:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Reason
+              title: Request
+              description: 'Create payload for an intake questionnaire''s medication.
+
+
+                A new medication row is created from the provided fields; every field is optional, so
+
+                an empty/all-null body still creates a row with all columns NULL.'
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -1224,7 +2074,7 @@ paths:
         to it. Once the questionnaire is COMPLETED no further changes are allowed (400).'
       operationId: update_intake_questionnaire_medication_api_v1_intake_questionnaires__questionnaire_id__medication__medication_id__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1249,7 +2099,46 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireMedicationPatchRequest'
+              type: object
+              properties:
+                medication_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Medication Name
+                dosage:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Dosage
+                start_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Start Date
+                physician_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Physician Name
+                reason:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Reason
+              title: Request
+              description: 'Partial update for an existing intake questionnaire medication.
+
+
+                Only fields explicitly present in the body are applied (null clears the column);
+
+                omitted fields are left untouched.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -1277,7 +2166,7 @@ paths:
         to it. Once the questionnaire is COMPLETED no deletes are allowed (400).'
       operationId: delete_intake_questionnaire_medication_api_v1_intake_questionnaires__questionnaire_id__medication__medication_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1328,7 +2217,7 @@ paths:
         changes are allowed (400).'
       operationId: create_intake_questionnaire_therapy_api_v1_intake_questionnaires__questionnaire_id__therapy_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1344,7 +2233,78 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireTherapyCreateRequest'
+              type: object
+              properties:
+                provider_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Provider Name
+                service_type:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Service Type
+                phone_number:
+                  anyOf:
+                  - type: string
+                    minLength: 10
+                    maxLength: 10
+                    pattern: ^\d{10}$
+                  - type: 'null'
+                  title: Phone Number
+                email:
+                  anyOf:
+                  - type: string
+                    format: email
+                  - type: 'null'
+                  title: Email
+                start_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Start Date
+                end_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: End Date
+                hours:
+                  anyOf:
+                  - type: integer
+                    minimum: 0
+                  - type: 'null'
+                  title: Hours
+                frequency:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Frequency
+                progress:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Progress
+                do_not_share_info_with_provider:
+                  type: boolean
+                  default: false
+                  title: Do Not Share Info With Provider
+              title: Request
+              description: 'Create payload for an intake questionnaire''s therapy.
+
+
+                A new therapy row is created from the provided fields; every field is optional, so an
+
+                empty/all-null body still creates a row with all columns NULL (and
+
+                ``do_not_share_info_with_provider`` defaulting to ``False``).'
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -1380,7 +2340,7 @@ paths:
         Once the questionnaire is COMPLETED no further changes are allowed (400).'
       operationId: update_intake_questionnaire_therapy_api_v1_intake_questionnaires__questionnaire_id__therapy__therapy_id__patch
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1405,7 +2365,76 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireTherapyPatchRequest'
+              type: object
+              properties:
+                provider_name:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Provider Name
+                service_type:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Service Type
+                phone_number:
+                  anyOf:
+                  - type: string
+                    minLength: 10
+                    maxLength: 10
+                    pattern: ^\d{10}$
+                  - type: 'null'
+                  title: Phone Number
+                email:
+                  anyOf:
+                  - type: string
+                    format: email
+                  - type: 'null'
+                  title: Email
+                start_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: Start Date
+                end_date:
+                  anyOf:
+                  - type: string
+                    format: date
+                  - type: 'null'
+                  title: End Date
+                hours:
+                  anyOf:
+                  - type: integer
+                    minimum: 0
+                  - type: 'null'
+                  title: Hours
+                frequency:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Frequency
+                progress:
+                  anyOf:
+                  - type: string
+                    maxLength: 255
+                  - type: 'null'
+                  title: Progress
+                do_not_share_info_with_provider:
+                  type: boolean
+                  default: false
+                  title: Do Not Share Info With Provider
+              title: Request
+              description: 'Partial update for an existing intake questionnaire therapy.
+
+
+                Only fields explicitly present in the body are applied (null clears a nullable
+
+                column); omitted fields are left untouched.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -1433,7 +2462,7 @@ paths:
         Once the questionnaire is COMPLETED no deletes are allowed (400).'
       operationId: delete_intake_questionnaire_therapy_api_v1_intake_questionnaires__questionnaire_id__therapy__therapy_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1484,7 +2513,7 @@ paths:
         are allowed (400).'
       operationId: delete_all_intake_questionnaire_medications_api_v1_intake_questionnaires__questionnaire_id__medication_all_delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1530,7 +2559,7 @@ paths:
         are allowed (400).'
       operationId: delete_all_intake_questionnaire_therapies_api_v1_intake_questionnaires__questionnaire_id__therapy_all_delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1576,7 +2605,7 @@ paths:
         changes are allowed (400).'
       operationId: upsert_intake_questionnaire_child_info_api_v1_intake_questionnaires__questionnaire_id__child_info_put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1592,7 +2621,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireChildInfoUpsertRequest'
+              type: object
+              properties:
+                child_behavior_issues:
+                  anyOf:
+                  - type: string
+                    maxLength: 800
+                  - type: 'null'
+                  title: Child Behavior Issues
+              title: Request
+              description: 'Upsert payload for an intake questionnaire''s 1:1 child info row.
+
+
+                The only field is ``child_behavior_issues`` (optional; blank strings collapse to
+
+                null). The row is created if it does not exist yet, or updated otherwise. A field that
+
+                is omitted is left untouched on update.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -1628,7 +2674,7 @@ paths:
         changes are allowed (400).'
       operationId: create_intake_questionnaire_child_info_background_api_v1_intake_questionnaires__questionnaire_id__child_info_background_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1644,7 +2690,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireChildInfoBackgroundCreateRequest'
+              type: object
+              properties:
+                background_description:
+                  anyOf:
+                  - type: string
+                    maxLength: 2000
+                  - type: 'null'
+                  title: Background Description
+                background_type:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoBackgroundTypeEnum'
+                  - type: 'null'
+              title: Request
+              description: 'Create payload for an intake questionnaire''s child info background.
+
+
+                A new background row is created from the fields present in the body; both fields are
+
+                optional and blank strings collapse to null, so an empty/all-null body still creates a
+
+                row with all columns NULL. ``background_type`` must be one of the allowed enum values.
+
+                The parent child info row is created on demand if it does not exist yet.'
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -1673,7 +2742,7 @@ paths:
         it. Once the questionnaire is COMPLETED no deletes are allowed (400).'
       operationId: delete_intake_questionnaire_child_info_background_api_v1_intake_questionnaires__questionnaire_id__child_info_background__background_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1724,7 +2793,7 @@ paths:
         changes are allowed (400).'
       operationId: create_intake_questionnaire_child_info_schedule_api_v1_intake_questionnaires__questionnaire_id__child_info_schedule_post
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1740,7 +2809,49 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireChildInfoScheduleCreateRequest'
+              type: object
+              properties:
+                day_of_week:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoScheduleDayOfWeekEnum'
+                  - type: 'null'
+                schedule_activity_type:
+                  anyOf:
+                  - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoScheduleActivityTypeEnum'
+                  - type: 'null'
+                schedule_start_date:
+                  anyOf:
+                  - type: string
+                    format: date-time
+                  - type: 'null'
+                  title: Schedule Start Date
+                schedule_end_date:
+                  anyOf:
+                  - type: string
+                    format: date-time
+                  - type: 'null'
+                  title: Schedule End Date
+                utc_offset:
+                  anyOf:
+                  - type: integer
+                  - type: 'null'
+                  title: Utc Offset
+              title: Request
+              description: 'Create payload for an intake questionnaire''s child info schedule.
+
+
+                A new schedule row is created from the fields present in the body; every field is
+
+                optional and blank strings collapse to null, so an empty/all-null body still creates a
+
+                row with all columns NULL. ``schedule_start_date`` / ``schedule_end_date`` must be
+
+                timezone-aware datetimes, and ``schedule_end_date`` may not precede
+
+                ``schedule_start_date``. The parent child info row is created on demand if it does not
+
+                exist yet.'
+              additionalProperties: false
       responses:
         '201':
           description: Successful Response
@@ -1769,7 +2880,7 @@ paths:
         it. Once the questionnaire is COMPLETED no deletes are allowed (400).'
       operationId: delete_intake_questionnaire_child_info_schedule_api_v1_intake_questionnaires__questionnaire_id__child_info_schedule__schedule_id__delete
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1806,7 +2917,7 @@ paths:
       description: Validate a completed intake questionnaire and mark it submitted.
       operationId: submit_intake_questionnaire_api_v1_intake_questionnaires__questionnaire_id__submit_put
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
       parameters:
       - name: questionnaire_id
         in: path
@@ -1822,7 +2933,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntakeQuestionnaireSubmitRequest'
+              type: object
+              properties:
+                date_concluded_utc_offset:
+                  type: integer
+                  maximum: 86400
+                  minimum: -86400
+                  title: Date Concluded Utc Offset
+              required:
+              - date_concluded_utc_offset
+              title: Payload
+              description: 'Request body for submitting (completing) an intake questionnaire.
+
+
+                The conclusion timestamp is stamped server-side at submit time (aware UTC) rather
+
+                than accepted from the client. ``date_concluded_utc_offset`` is the client''s UTC
+
+                offset in seconds at that moment, retained so the server-stamped conclusion time can
+
+                later be rendered in the user''s local timezone.'
+              additionalProperties: false
       responses:
         '200':
           description: Successful Response
@@ -1838,74 +2969,41 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    IntakeQuestionnaireFamilyCaregiverTypeEnum:
+    IntakeQuestionnaireFamilyCustodyTypeEnum:
       type: string
       enum:
-      - Primary caregiver
-      - Secondary caregiver
-      title: IntakeQuestionnaireFamilyCaregiverTypeEnum
-    IntakeQuestionnaireMedicalChildDeliveryTypeEnum:
-      type: string
-      enum:
-      - Spontaneous
-      - C-Section
-      - Induced Vaginal
-      - Unknown
-      title: IntakeQuestionnaireMedicalChildDeliveryTypeEnum
-    IntakeQuestionnaireChildInfoBackgroundCreateRequest:
-      properties:
-        background_description:
-          anyOf:
-          - type: string
-            maxLength: 2000
-          - type: 'null'
-          title: Background Description
-        background_type:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoBackgroundTypeEnum'
-          - type: 'null'
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireChildInfoBackgroundCreateRequest
-      description: 'Create payload for an intake questionnaire''s child info background.
-
-
-        A new background row is created from the fields present in the body; both fields are
-
-        optional and blank strings collapse to null, so an empty/all-null body still creates a
-
-        row with all columns NULL. ``background_type`` must be one of the allowed enum values.
-
-        The parent child info row is created on demand if it does not exist yet.'
-    IntakeQuestionnaireChildInfoBackgroundResponse:
+      - Joint custody
+      - Full custody
+      - No custody
+      title: IntakeQuestionnaireFamilyCustodyTypeEnum
+    IntakeQuestionnaireChildInfoResponse:
       properties:
         id:
           type: integer
           title: Id
-        background_description:
+        child_behavior_issues:
           anyOf:
           - type: string
           - type: 'null'
-          title: Background Description
-        background_type:
+          title: Child Behavior Issues
+        backgrounds:
           anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoBackgroundTypeEnum'
+          - items:
+              $ref: '#/components/schemas/IntakeQuestionnaireChildInfoBackgroundResponse'
+            type: array
           - type: 'null'
+          title: Backgrounds
+        schedule:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/IntakeQuestionnaireChildInfoScheduleResponse'
+            type: array
+          - type: 'null'
+          title: Schedule
       type: object
       required:
       - id
-      title: IntakeQuestionnaireChildInfoBackgroundResponse
-    IntakeQuestionnaireChildInfoScheduleDayOfWeekEnum:
-      type: string
-      enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-      title: IntakeQuestionnaireChildInfoScheduleDayOfWeekEnum
+      title: IntakeQuestionnaireChildInfoResponse
     IntakeQuestionnaireFamilyMemberResponse:
       properties:
         id:
@@ -1985,6 +3083,142 @@ components:
       required:
       - id
       title: IntakeQuestionnaireFamilyMemberResponse
+    IntakeQuestionnaireMedicationResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        medication_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medication Name
+        dosage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dosage
+        start_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Start Date
+        physician_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Physician Name
+        reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason
+      type: object
+      required:
+      - id
+      title: IntakeQuestionnaireMedicationResponse
+    IntakeQuestionnaireFamilyMaritalStatusEnum:
+      type: string
+      enum:
+      - Divorced
+      - Married
+      - Single
+      - Separated
+      - Widowed
+      - Domestic Partner / Civil Union
+      title: IntakeQuestionnaireFamilyMaritalStatusEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    IntakeQuestionnaireEducationEvaluationStatusEnum:
+      type: string
+      enum:
+      - EVALUATED
+      - NOT_EVALUATED
+      - SCHEDULED_EVALUATION
+      title: IntakeQuestionnaireEducationEvaluationStatusEnum
+    IntakeQuestionnaireFamilyMemberRoleEnum:
+      type: string
+      enum:
+      - Parent and a caregiver
+      - Parent not a caregiver
+      - Caregiver
+      title: IntakeQuestionnaireFamilyMemberRoleEnum
+    IntakeQuestionnaireFamilyClientSiblingResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        sibling_relationship:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sibling Relationship
+        sibling_age:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sibling Age
+        sibling_diagnosis:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sibling Diagnosis
+      type: object
+      required:
+      - id
+      title: IntakeQuestionnaireFamilyClientSiblingResponse
+    IntakeQuestionnaireSiblingRelationshipEnum:
+      type: string
+      enum:
+      - Brother
+      - Sister
+      - Twins
+      - Half-brother
+      - Half-sister
+      - Step-siblings
+      - Adoptive-siblings
+      title: IntakeQuestionnaireSiblingRelationshipEnum
+    IntakeQuestionnaireMedicalInfoSelectionResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        selection_type:
+          $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoSelectionTypeEnum'
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - id
+      - selection_type
+      - value
+      title: IntakeQuestionnaireMedicalInfoSelectionResponse
     IntakeQuestionnaireMedicalInfoSelectionTypeEnum:
       type: string
       enum:
@@ -1992,34 +3226,6 @@ components:
       - PREGNANCY_ISSUE
       - REGRESSION
       title: IntakeQuestionnaireMedicalInfoSelectionTypeEnum
-    IntakeQuestionnaireFamilyClientSiblingPatchRequest:
-      properties:
-        sibling_relationship:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireSiblingRelationshipEnum'
-          - type: 'null'
-        sibling_age:
-          anyOf:
-          - type: integer
-            maximum: 150.0
-            minimum: 0.0
-          - type: 'null'
-          title: Sibling Age
-        sibling_diagnosis:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Sibling Diagnosis
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireFamilyClientSiblingPatchRequest
-      description: 'Partial update for an existing client sibling.
-
-
-        Only fields explicitly present in the body are applied (null clears the column);
-
-        omitted fields are left untouched.'
     IntakeQuestionnaireMedicalHearingDifficultyEnum:
       type: string
       enum:
@@ -2033,77 +3239,374 @@ components:
       - Other hearing issues
       - No hearing issues
       title: IntakeQuestionnaireMedicalHearingDifficultyEnum
-    IntakeQuestionnaireFamilyPatchRequest:
-      properties:
-        cultural_consideration:
-          anyOf:
-          - type: string
-            maxLength: 5000
-          - type: 'null'
-          title: Cultural Consideration
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireFamilyPatchRequest
-      description: Partial PATCH for family; upserts the parent row.
-    IntakeQuestionnaireChildAttitudeTowardsSchoolEnum:
+    IntakeQuestionnaireChildInfoScheduleDayOfWeekEnum:
       type: string
       enum:
-      - Very Positive (Enthusiastic, Excited to Attend)
-      - Positive (Generally Enjoys School)
-      - Somewhat Positive
-      - Neutral (No Strong Feelings)
-      - Mixed (Varies Day-to-Day)
-      - Reluctant (Needs Encouragement)
-      - Somewhat Negative
-      - Negative (Avoidant/Dislikes School)
-      - Highly Negative (Refusal, Distress, Tantrums)
-      - Anxious (Separation Anxiety, Worry)
-      title: IntakeQuestionnaireChildAttitudeTowardsSchoolEnum
-    IntakeQuestionnaireReferralResponse:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+      title: IntakeQuestionnaireChildInfoScheduleDayOfWeekEnum
+    IntakeQuestionnaireChildInfoUpsertResponse:
       properties:
         id:
           type: integer
           title: Id
-        diagnosis_tool:
+        child_behavior_issues:
           anyOf:
           - type: string
           - type: 'null'
-          title: Diagnosis Tool
-        diagnosis_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Diagnosis Date
+          title: Child Behavior Issues
+      type: object
+      required:
+      - id
+      title: IntakeQuestionnaireChildInfoUpsertResponse
+    IntakeQuestionnaireFamilyAdditionalInfoTypeEnum:
+      type: string
+      enum:
+      - MATERNAL_MEDICAL_HISTORY
+      - PATERNAL_MEDICAL_HISTORY
+      - COMMUNITY_SUPPORT
+      title: IntakeQuestionnaireFamilyAdditionalInfoTypeEnum
+    IntakeQuestionnaireMedicalDiagnosisEnum:
+      type: string
+      enum:
+      - Adjustment Disorder (F43.2)
+      - Anxiety (F41.9)
+      - Asperger’s syndrome (F84.5)
+      - Attention-deficit hyperactivity disorder (F90.0, F90.1, F90.2, F90.8, F90.9)
+      - Cerebral Palsy (G80.9)
+      - 'Cerebral Visual Impairment: (H47.61)'
+      - Coffin-Siris Syndrome (Q87.1)
+      - 'Congenital Heart Failure: (Q24.9)'
+      - Depression (F33.0, F33.2)
+      - Developmental disorder of speech and language, unspecified (F80.9)
+      - Disruptive mood dysregulation disorder (F34.81)
+      - Downs Syndrome (Q90.9)
+      - Emotional Disturbance Disorder (F98.9)
+      - 'Epilepsy: (G40.0)'
+      - Generalized Anxiety Disorder (F41.1)
+      - Global Speech Delay (F80)
+      - Mild Intellectual Developmental Disorder (F70)
+      - Mixed Receptive-Expressive Language Disorder (F80.2)
+      - Obsessive Compulsive Disorder (F42)
+      - Oppositional Defiance Disorder (F91.3)
+      - Oral Aversion (F50.82)
+      - Other childhood disintegrative disorder (F84.3)
+      - Other pervasive developmental disorders (F84.8)
+      - Pediatric Feeding Disorder (R63.32)
+      - Pervasive developmental disorder, unspecified (F84.9)
+      - Post-Traumatic Stress Disorder (F43.12)
+      - Prader-Willi Syndrome (Q87.11)
+      - Rett’s syndrome (F84.2)
+      - Sensory Processing Disorder (F88)
+      title: IntakeQuestionnaireMedicalDiagnosisEnum
+    IntakeQuestionnaireTherapyResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
         provider_name:
           anyOf:
           - type: string
           - type: 'null'
           title: Provider Name
-        diagnosis_city:
+        service_type:
           anyOf:
           - type: string
           - type: 'null'
-          title: Diagnosis City
-        diagnosis_state:
+          title: Service Type
+        phone_number:
           anyOf:
           - type: string
           - type: 'null'
-          title: Diagnosis State
+          title: Phone Number
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        start_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Start Date
+        end_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: End Date
+        hours:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Hours
+        frequency:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Frequency
+        progress:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Progress
+        do_not_share_info_with_provider:
+          type: boolean
+          title: Do Not Share Info With Provider
+          default: false
       type: object
       required:
       - id
-      title: IntakeQuestionnaireReferralResponse
-    IntakeQuestionnairePrimaryLanguageEnum:
+      title: IntakeQuestionnaireTherapyResponse
+    IntakeQuestionnaireResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        provider_id:
+          type: integer
+          title: Provider Id
+        client_id:
+          type: integer
+          title: Client Id
+        status:
+          $ref: '#/components/schemas/IntakeQuestionnaireStatusEnum'
+        date_sent:
+          type: string
+          format: date-time
+          title: Date Sent
+        date_sent_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Sent Utc Offset
+        date_concluded:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Concluded
+        date_concluded_utc_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Date Concluded Utc Offset
+        has_no_medications:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has No Medications
+        has_no_therapies:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has No Therapies
+        not_attending_school:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Not Attending School
+        date_row_created:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Created
+        date_row_updated:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date Row Updated
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/QuestionnaireProviderSummary'
+          - type: 'null'
+        client:
+          anyOf:
+          - $ref: '#/components/schemas/QuestionnaireClientSummary'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - provider_id
+      - client_id
+      - status
+      - date_sent
+      title: IntakeQuestionnaireResponse
+      description: 'Basic intake questionnaire columns (send, list, get-by-provider, patch, submit).
+
+
+        ``provider`` / ``client`` are populated on **list** and **send**. Other endpoints that
+
+        reuse this schema serialize those fields as JSON ``null`` (keys stay present via
+
+        ``response_model``). Frontends should treat ``null`` as "not loaded on this endpoint,"
+
+        not as missing identity — there is no separate list-only response type.'
+    IntakeQuestionnaireEducationSettingEnum:
       type: string
       enum:
-      - English
-      - Spanish
-      - French
-      - Portuguese
-      - Japanese
-      - Mandarin
-      title: IntakeQuestionnairePrimaryLanguageEnum
+      - In-person public/private
+      - Homeschool
+      - Remote
+      title: IntakeQuestionnaireEducationSettingEnum
+    IntakeQuestionnaireChildInfoBackgroundResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        background_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Background Description
+        background_type:
+          anyOf:
+          - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoBackgroundTypeEnum'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      title: IntakeQuestionnaireChildInfoBackgroundResponse
+    IntakeQuestionnaireMedicalAsdSeverityEnum:
+      type: string
+      enum:
+      - Level-1
+      - Level-2
+      - Level-3
+      - Unknown
+      title: IntakeQuestionnaireMedicalAsdSeverityEnum
+    IntakeQuestionnaireRelationshipToClientEnum:
+      type: string
+      enum:
+      - Parent (Mother / Father)
+      - Stepparent
+      - Grandparent
+      - Aunt / Uncle
+      - Older sibling
+      - Cousin
+      - Legal guardian (court-appointed)
+      - Adoptive parent
+      - Foster parent
+      - Kinship caregiver (relative/friend)
+      title: IntakeQuestionnaireRelationshipToClientEnum
+    QuestionnaireProviderSummary:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+      type: object
+      required:
+      - id
+      title: QuestionnaireProviderSummary
+      description: 'Lightweight provider identity on questionnaire list/send responses.
+
+
+        Populated on list and send; other endpoints that reuse the parent response schema
+
+        return this field as JSON ``null``.'
+    IntakeQuestionnaireClassroomSettingEnum:
+      type: string
+      enum:
+      - Speech-Language
+      - Occupational Therapy
+      - Physical Therapy
+      - Social Skill Groups
+      - Applied Behavior Analysis
+      - 1:1 aide
+      - Additional time
+      - General education classroom
+      - Special education classroom
+      - Integrated general education services
+      - Other
+      title: IntakeQuestionnaireClassroomSettingEnum
+    IntakeQuestionnaireEducationInfoResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        education_setting:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Education Setting
+        number_of_hours_per_week:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Number Of Hours Per Week
+        school_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: School Name
+        school_phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: School Phone Number
+        education_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Education Description
+        focus_area_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Focus Area Description
+        client_education_evaluation_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Education Evaluation Status
+        client_education_evaluation_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Client Education Evaluation Date
+        iep_or_504_in_place:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Iep Or 504 In Place
+        education_support:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Education Support
+        client_classroom_setting:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Classroom Setting
+        client_attitude_towards_school:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Attitude Towards School
+      type: object
+      required:
+      - id
+      title: IntakeQuestionnaireEducationInfoResponse
     IntakeQuestionnaireMedicalInfoDiagnosisResponse:
       properties:
         id:
@@ -2138,82 +3641,6 @@ components:
       required:
       - id
       title: IntakeQuestionnaireMedicalInfoDiagnosisResponse
-    IntakeQuestionnaireMedicationPatchRequest:
-      properties:
-        medication_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Medication Name
-        dosage:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Dosage
-        start_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Start Date
-        physician_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Physician Name
-        reason:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Reason
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireMedicationPatchRequest
-      description: 'Partial update for an existing intake questionnaire medication.
-
-
-        Only fields explicitly present in the body are applied (null clears the column);
-
-        omitted fields are left untouched.'
-    IntakeQuestionnaireSendRequest:
-      properties:
-        provider_id:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Provider Id
-        client_id:
-          type: integer
-          exclusiveMinimum: 0.0
-          title: Client Id
-          description: Client the intake questionnaire is sent for; must be assigned to the provider as a practicing guardian.
-        date_sent_utc_offset:
-          type: integer
-          maximum: 86400.0
-          minimum: -86400.0
-          title: Date Sent Utc Offset
-      additionalProperties: false
-      type: object
-      required:
-      - provider_id
-      - client_id
-      - date_sent_utc_offset
-      title: IntakeQuestionnaireSendRequest
-      description: 'Request body for sending (creating) an intake questionnaire.
-
-
-        ``date_sent`` is stamped server-side at send time (aware UTC) rather than accepted
-
-        from the client, so it shares the same clock as the server-stamped ``date_concluded``
-
-        and the conclusion-not-before-sent ordering check is well-defined. ``date_sent_utc_offset``
-
-        is the client''s UTC offset in seconds at that moment, retained so the send time can
-
-        later be rendered in the user''s local timezone.'
     IntakeQuestionnaireGeneralInfoResponse:
       properties:
         id:
@@ -2298,560 +3725,26 @@ components:
       required:
       - id
       title: IntakeQuestionnaireGeneralInfoResponse
-    IntakeQuestionnaireFamilyResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        cultural_consideration:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Cultural Consideration
-        family_members:
-          items:
-            $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberResponse'
-          type: array
-          title: Family Members
-        client_siblings:
-          items:
-            $ref: '#/components/schemas/IntakeQuestionnaireFamilyClientSiblingResponse'
-          type: array
-          title: Client Siblings
-        maternal_medical_history:
-          items:
-            $ref: '#/components/schemas/IntakeQuestionnaireFamilyTaggedItemResponse'
-          type: array
-          title: Maternal Medical History
-        paternal_medical_history:
-          items:
-            $ref: '#/components/schemas/IntakeQuestionnaireFamilyTaggedItemResponse'
-          type: array
-          title: Paternal Medical History
-        community_support:
-          items:
-            $ref: '#/components/schemas/IntakeQuestionnaireFamilyTaggedItemResponse'
-          type: array
-          title: Community Support
-      type: object
-      required:
-      - id
-      title: IntakeQuestionnaireFamilyResponse
-    IntakeQuestionnaireFamilyClientSiblingResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        sibling_relationship:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sibling Relationship
-        sibling_age:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Sibling Age
-        sibling_diagnosis:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sibling Diagnosis
-      type: object
-      required:
-      - id
-      title: IntakeQuestionnaireFamilyClientSiblingResponse
-    IntakeQuestionnaireChildInfoScheduleCreateRequest:
-      properties:
-        day_of_week:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoScheduleDayOfWeekEnum'
-          - type: 'null'
-        schedule_activity_type:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoScheduleActivityTypeEnum'
-          - type: 'null'
-        schedule_start_date:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Schedule Start Date
-        schedule_end_date:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Schedule End Date
-        utc_offset:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Utc Offset
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireChildInfoScheduleCreateRequest
-      description: 'Create payload for an intake questionnaire''s child info schedule.
-
-
-        A new schedule row is created from the fields present in the body; every field is
-
-        optional and blank strings collapse to null, so an empty/all-null body still creates a
-
-        row with all columns NULL. ``schedule_start_date`` / ``schedule_end_date`` must be
-
-        timezone-aware datetimes, and ``schedule_end_date`` may not precede
-
-        ``schedule_start_date``. The parent child info row is created on demand if it does not
-
-        exist yet.'
-    IntakeQuestionnaireStatusEnum:
+    IntakeQuestionnaireChildAttitudeTowardsSchoolEnum:
       type: string
       enum:
-      - STARTED
-      - IN_PROGRESS
-      - COMPLETED
-      title: IntakeQuestionnaireStatusEnum
-      description: 'Lifecycle for the row we send to a provider.
-
-
-        STARTED: initial state when the questionnaire is first created/sent.
-
-        IN_PROGRESS: provider has begun the flow (first allowed forward step from STARTED).
-
-        COMPLETED: terminal state; ``date_concluded`` is set on first transition here.'
-    IntakeQuestionnaireFamilyMaritalStatusEnum:
+      - Very Positive (Enthusiastic, Excited to Attend)
+      - Positive (Generally Enjoys School)
+      - Somewhat Positive
+      - Neutral (No Strong Feelings)
+      - Mixed (Varies Day-to-Day)
+      - Reluctant (Needs Encouragement)
+      - Somewhat Negative
+      - Negative (Avoidant/Dislikes School)
+      - Highly Negative (Refusal, Distress, Tantrums)
+      - Anxious (Separation Anxiety, Worry)
+      title: IntakeQuestionnaireChildAttitudeTowardsSchoolEnum
+    IntakeQuestionnaireFamilyCaregiverTypeEnum:
       type: string
       enum:
-      - Divorced
-      - Married
-      - Single
-      - Separated
-      - Widowed
-      - Domestic Partner / Civil Union
-      title: IntakeQuestionnaireFamilyMaritalStatusEnum
-    IntakeQuestionnaireTherapyPatchRequest:
-      properties:
-        provider_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Provider Name
-        service_type:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Service Type
-        phone_number:
-          anyOf:
-          - type: string
-            maxLength: 10
-            minLength: 10
-            pattern: ^\d{10}$
-          - type: 'null'
-          title: Phone Number
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        start_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Start Date
-        end_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: End Date
-        hours:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Hours
-        frequency:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Frequency
-        progress:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Progress
-        do_not_share_info_with_provider:
-          type: boolean
-          title: Do Not Share Info With Provider
-          default: false
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireTherapyPatchRequest
-      description: 'Partial update for an existing intake questionnaire therapy.
-
-
-        Only fields explicitly present in the body are applied (null clears a nullable
-
-        column); omitted fields are left untouched.'
-    IntakeQuestionnaireMedicalInfoSelectionCreateRequest:
-      properties:
-        selection_type:
-          $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoSelectionTypeEnum'
-        value:
-          type: string
-          title: Value
-      additionalProperties: false
-      type: object
-      required:
-      - selection_type
-      - value
-      title: IntakeQuestionnaireMedicalInfoSelectionCreateRequest
-    IntakeQuestionnaireDetailResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        provider_id:
-          type: integer
-          title: Provider Id
-        client_id:
-          type: integer
-          title: Client Id
-        status:
-          $ref: '#/components/schemas/IntakeQuestionnaireStatusEnum'
-        date_sent:
-          type: string
-          format: date-time
-          title: Date Sent
-        date_sent_utc_offset:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Date Sent Utc Offset
-        date_concluded:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Concluded
-        date_concluded_utc_offset:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Date Concluded Utc Offset
-        has_no_medications:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has No Medications
-        has_no_therapies:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has No Therapies
-        not_attending_school:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Not Attending School
-        date_row_created:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Row Created
-        date_row_updated:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Row Updated
-        general_info:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireGeneralInfoResponse'
-          - type: 'null'
-        medical_info:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoResponse'
-          - type: 'null'
-        referrals:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/IntakeQuestionnaireReferralResponse'
-            type: array
-          - type: 'null'
-          title: Referrals
-        medications:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/IntakeQuestionnaireMedicationResponse'
-            type: array
-          - type: 'null'
-          title: Medications
-        therapies:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/IntakeQuestionnaireTherapyResponse'
-            type: array
-          - type: 'null'
-          title: Therapies
-        education_info:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireEducationInfoResponse'
-          - type: 'null'
-        family:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyResponse'
-          - type: 'null'
-        child_info:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoResponse'
-          - type: 'null'
-      type: object
-      required:
-      - id
-      - provider_id
-      - client_id
-      - status
-      - date_sent
-      title: IntakeQuestionnaireDetailResponse
-      description: 'Full questionnaire with nested sections. Each section/collection is ``None`` when
-
-        no corresponding row exists yet (rather than an empty object or list).'
-    QuestionnaireProviderSummary:
-      properties:
-        id:
-          type: integer
-          title: Id
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-      type: object
-      required:
-      - id
-      title: QuestionnaireProviderSummary
-      description: Lightweight provider identity shown alongside a listed questionnaire.
-    IntakeQuestionnaireGeneralInfoPatchRequest:
-      properties:
-        provider_full_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-            minLength: 2
-          - type: 'null'
-          title: Provider Full Name
-        provider_email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Provider Email
-        primary_language:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnairePrimaryLanguageEnum'
-          - type: 'null'
-        relationship_to_client:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireRelationshipToClientEnum'
-          - type: 'null'
-        client_first_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Client First Name
-        client_last_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Client Last Name
-        client_middle_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Client Middle Name
-        client_date_of_birth:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Client Date Of Birth
-        client_sex:
-          anyOf:
-          - $ref: '#/components/schemas/Sex'
-          - type: 'null'
-        client_address_same_as_provider:
-          type: boolean
-          title: Client Address Same As Provider
-          default: false
-        client_street_address_line_one:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Client Street Address Line One
-        client_street_address_line_two:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Client Street Address Line Two
-        client_street_address_zip:
-          anyOf:
-          - type: string
-            maxLength: 5
-            minLength: 5
-            pattern: ^\d{5}$
-          - type: 'null'
-          title: Client Street Address Zip
-        client_street_address_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Client Street Address City
-        client_street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: Client Street Address State
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireGeneralInfoPatchRequest
-      description: Partial PATCH for general info; null clears nullable columns; NOT NULL bools reject null.
-    Sex:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Sex
-    IntakeQuestionnairePatchRequest:
-      properties:
-        has_no_medications:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has No Medications
-        has_no_therapies:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has No Therapies
-        not_attending_school:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Not Attending School
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnairePatchRequest
-      description: 'Partial update for the intake questionnaire''s top-level flags.
-
-
-        Only fields explicitly present in the request body are applied (unset fields are
-
-        left unchanged); each flag is nullable, so ``null`` clears it.'
-    IntakeQuestionnaireFamilyCustodyTypeEnum:
-      type: string
-      enum:
-      - Joint custody
-      - Full custody
-      - No custody
-      title: IntakeQuestionnaireFamilyCustodyTypeEnum
-    IntakeQuestionnaireIepOr504Enum:
-      type: string
-      enum:
-      - N/A
-      - IEP
-      - '504'
-      title: IntakeQuestionnaireIepOr504Enum
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    IntakeQuestionnaireMedicalInfoSelectionResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        selection_type:
-          $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoSelectionTypeEnum'
-        value:
-          type: string
-          title: Value
-      type: object
-      required:
-      - id
-      - selection_type
-      - value
-      title: IntakeQuestionnaireMedicalInfoSelectionResponse
-    IntakeQuestionnaireChildInfoUpsertResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        child_behavior_issues:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Child Behavior Issues
-      type: object
-      required:
-      - id
-      title: IntakeQuestionnaireChildInfoUpsertResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - Primary caregiver
+      - Secondary caregiver
+      title: IntakeQuestionnaireFamilyCaregiverTypeEnum
     IntakeQuestionnaireChildInfoScheduleResponse:
       properties:
         id:
@@ -2886,104 +3779,108 @@ components:
       required:
       - id
       title: IntakeQuestionnaireChildInfoScheduleResponse
-    IntakeQuestionnaireChildInfoResponse:
+    IntakeQuestionnaireReferralResponse:
       properties:
         id:
           type: integer
           title: Id
-        child_behavior_issues:
+        diagnosis_tool:
           anyOf:
           - type: string
           - type: 'null'
-          title: Child Behavior Issues
-        backgrounds:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/IntakeQuestionnaireChildInfoBackgroundResponse'
-            type: array
-          - type: 'null'
-          title: Backgrounds
-        schedule:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/IntakeQuestionnaireChildInfoScheduleResponse'
-            type: array
-          - type: 'null'
-          title: Schedule
-      type: object
-      required:
-      - id
-      title: IntakeQuestionnaireChildInfoResponse
-    IntakeQuestionnaireEducationInfoPatchRequest:
-      properties:
-        education_setting:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireEducationSettingEnum'
-          - type: 'null'
-        number_of_hours_per_week:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Number Of Hours Per Week
-        school_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: School Name
-        school_phone_number:
-          anyOf:
-          - type: string
-            maxLength: 10
-            minLength: 10
-            pattern: ^\d{10}$
-          - type: 'null'
-          title: School Phone Number
-        education_description:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Education Description
-        focus_area_description:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Focus Area Description
-        client_education_evaluation_status:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireEducationEvaluationStatusEnum'
-          - type: 'null'
-        client_education_evaluation_date:
+          title: Diagnosis Tool
+        diagnosis_date:
           anyOf:
           - type: string
             format: date
           - type: 'null'
-          title: Client Education Evaluation Date
-        iep_or_504_in_place:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireIepOr504Enum'
-          - type: 'null'
-        education_support:
+          title: Diagnosis Date
+        provider_name:
           anyOf:
           - type: string
-            maxLength: 255
           - type: 'null'
-          title: Education Support
-        client_classroom_setting:
+          title: Provider Name
+        diagnosis_city:
           anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireClassroomSettingEnum'
+          - type: string
           - type: 'null'
-        client_attitude_towards_school:
+          title: Diagnosis City
+        diagnosis_state:
           anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireChildAttitudeTowardsSchoolEnum'
+          - type: string
           - type: 'null'
-      additionalProperties: false
+          title: Diagnosis State
       type: object
-      title: IntakeQuestionnaireEducationInfoPatchRequest
-      description: Partial PATCH for education info; null clears nullable columns.
+      required:
+      - id
+      title: IntakeQuestionnaireReferralResponse
+    IntakeQuestionnaireStatusEnum:
+      type: string
+      enum:
+      - STARTED
+      - IN_PROGRESS
+      - COMPLETED
+      title: IntakeQuestionnaireStatusEnum
+      description: 'Lifecycle for the row we send to a provider.
+
+
+        STARTED: initial state when the questionnaire is first created/sent.
+
+        IN_PROGRESS: provider has begun the flow (first allowed forward step from STARTED).
+
+        COMPLETED: terminal state; ``date_concluded`` is set on first transition here.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    IntakeQuestionnairePrimaryLanguageEnum:
+      type: string
+      enum:
+      - English
+      - Spanish
+      - French
+      - Portuguese
+      - Japanese
+      - Mandarin
+      title: IntakeQuestionnairePrimaryLanguageEnum
+    QuestionnaireClientSummary:
+      properties:
+        id:
+          type: integer
+          title: Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+      type: object
+      required:
+      - id
+      title: QuestionnaireClientSummary
+      description: 'Lightweight client identity on questionnaire list/send responses.
+
+
+        Populated on list and send; other endpoints that reuse the parent response schema
+
+        return this field as JSON ``null``.'
+    IntakeQuestionnaireMedicalChildDeliveryTypeEnum:
+      type: string
+      enum:
+      - Spontaneous
+      - C-Section
+      - Induced Vaginal
+      - Unknown
+      title: IntakeQuestionnaireMedicalChildDeliveryTypeEnum
     IntakeQuestionnaireMedicalInfoResponse:
       properties:
         id:
@@ -3150,340 +4047,45 @@ components:
       required:
       - id
       title: IntakeQuestionnaireMedicalInfoResponse
-    IntakeQuestionnaireFamilyMemberPatchRequest:
-      properties:
-        full_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Full Name
-        member_role:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberRoleEnum'
-          - type: 'null'
-        caregiver_type:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCaregiverTypeEnum'
-          - type: 'null'
-        relationship_to_client:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireRelationshipToClientEnum'
-          - type: 'null'
-        custody_type:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCustodyTypeEnum'
-          - type: 'null'
-        marital_status:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMaritalStatusEnum'
-          - type: 'null'
-        job_title:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Job Title
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-            maxLength: 10
-            minLength: 10
-            pattern: ^\d{10}$
-          - type: 'null'
-          title: Phone
-        street_address_line_one:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-            maxLength: 5
-            minLength: 5
-            pattern: ^\d{5}$
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: Street Address State
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireFamilyMemberPatchRequest
-      description: 'Partial update for an existing family member.
-
-
-        Only fields explicitly present in the body are applied (null clears the column);
-
-        omitted fields are left untouched.'
-    IntakeQuestionnaireMedicationCreateRequest:
-      properties:
-        medication_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Medication Name
-        dosage:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Dosage
-        start_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Start Date
-        physician_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Physician Name
-        reason:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Reason
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireMedicationCreateRequest
-      description: 'Create payload for an intake questionnaire''s medication.
-
-
-        A new medication row is created from the provided fields; every field is optional, so
-
-        an empty/all-null body still creates a row with all columns NULL.'
-    IntakeQuestionnaireClassroomSettingEnum:
-      type: string
-      enum:
-      - Speech-Language
-      - Occupational Therapy
-      - Physical Therapy
-      - Social Skill Groups
-      - Applied Behavior Analysis
-      - 1:1 aide
-      - Additional time
-      - General education classroom
-      - Special education classroom
-      - Integrated general education services
-      - Other
-      title: IntakeQuestionnaireClassroomSettingEnum
-    IntakeQuestionnaireReferralCreateRequest:
-      properties:
-        diagnosis_tool:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis Tool
-        diagnosis_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Diagnosis Date
-        provider_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Provider Name
-        diagnosis_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis City
-        diagnosis_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: Diagnosis State
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireReferralCreateRequest
-      description: 'Create payload for an intake questionnaire''s referral.
-
-
-        A new referral row is created from the provided fields; every field is optional, so
-
-        an empty/all-null body still creates a row with all columns NULL.'
-    IntakeQuestionnaireMedicalAsdSeverityEnum:
-      type: string
-      enum:
-      - Level-1
-      - Level-2
-      - Level-3
-      - Unknown
-      title: IntakeQuestionnaireMedicalAsdSeverityEnum
-    QuestionnaireClientSummary:
+    IntakeQuestionnaireFamilyResponse:
       properties:
         id:
           type: integer
           title: Id
-        first_name:
+        cultural_consideration:
           anyOf:
           - type: string
           - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
+          title: Cultural Consideration
+        family_members:
+          items:
+            $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberResponse'
+          type: array
+          title: Family Members
+        client_siblings:
+          items:
+            $ref: '#/components/schemas/IntakeQuestionnaireFamilyClientSiblingResponse'
+          type: array
+          title: Client Siblings
+        maternal_medical_history:
+          items:
+            $ref: '#/components/schemas/IntakeQuestionnaireFamilyTaggedItemResponse'
+          type: array
+          title: Maternal Medical History
+        paternal_medical_history:
+          items:
+            $ref: '#/components/schemas/IntakeQuestionnaireFamilyTaggedItemResponse'
+          type: array
+          title: Paternal Medical History
+        community_support:
+          items:
+            $ref: '#/components/schemas/IntakeQuestionnaireFamilyTaggedItemResponse'
+          type: array
+          title: Community Support
       type: object
       required:
       - id
-      title: QuestionnaireClientSummary
-      description: Lightweight client identity shown alongside a listed questionnaire.
-    IntakeQuestionnaireFamilyAdditionalInfoCreateRequest:
-      properties:
-        info_type:
-          $ref: '#/components/schemas/IntakeQuestionnaireFamilyAdditionalInfoTypeEnum'
-        value:
-          type: string
-          maxLength: 500
-          minLength: 1
-          title: Value
-      additionalProperties: false
-      type: object
-      required:
-      - info_type
-      - value
-      title: IntakeQuestionnaireFamilyAdditionalInfoCreateRequest
-    IntakeQuestionnaireResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        provider_id:
-          type: integer
-          title: Provider Id
-        client_id:
-          type: integer
-          title: Client Id
-        status:
-          $ref: '#/components/schemas/IntakeQuestionnaireStatusEnum'
-        date_sent:
-          type: string
-          format: date-time
-          title: Date Sent
-        date_sent_utc_offset:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Date Sent Utc Offset
-        date_concluded:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Concluded
-        date_concluded_utc_offset:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Date Concluded Utc Offset
-        has_no_medications:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has No Medications
-        has_no_therapies:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has No Therapies
-        not_attending_school:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Not Attending School
-        date_row_created:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Row Created
-        date_row_updated:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Date Row Updated
-      type: object
-      required:
-      - id
-      - provider_id
-      - client_id
-      - status
-      - date_sent
-      title: IntakeQuestionnaireResponse
-    IntakeQuestionnaireEducationSettingEnum:
-      type: string
-      enum:
-      - In-person public/private
-      - Homeschool
-      - Remote
-      title: IntakeQuestionnaireEducationSettingEnum
-    IntakeQuestionnaireSubmitRequest:
-      properties:
-        date_concluded_utc_offset:
-          type: integer
-          maximum: 86400.0
-          minimum: -86400.0
-          title: Date Concluded Utc Offset
-      additionalProperties: false
-      type: object
-      required:
-      - date_concluded_utc_offset
-      title: IntakeQuestionnaireSubmitRequest
-      description: 'Request body for submitting (completing) an intake questionnaire.
-
-
-        The conclusion timestamp is stamped server-side at submit time (aware UTC) rather
-
-        than accepted from the client. ``date_concluded_utc_offset`` is the client''s UTC
-
-        offset in seconds at that moment, retained so the server-stamped conclusion time can
-
-        later be rendered in the user''s local timezone.'
+      title: IntakeQuestionnaireFamilyResponse
     IntakeQuestionnaireFamilyTaggedItemResponse:
       properties:
         id:
@@ -3498,249 +4100,24 @@ components:
       required:
       - id
       title: IntakeQuestionnaireFamilyTaggedItemResponse
-    IntakeQuestionnaireMedicalDiagnosisEnum:
+    IntakeQuestionnaireChildInfoBackgroundTypeEnum:
       type: string
       enum:
-      - Adjustment Disorder (F43.2)
-      - Anxiety (F41.9)
-      - Asperger’s syndrome (F84.5)
-      - Attention-deficit hyperactivity disorder (F90.0, F90.1, F90.2, F90.8, F90.9)
-      - Cerebral Palsy (G80.9)
-      - 'Cerebral Visual Impairment: (H47.61)'
-      - Coffin-Siris Syndrome (Q87.1)
-      - 'Congenital Heart Failure: (Q24.9)'
-      - Depression (F33.0, F33.2)
-      - Developmental disorder of speech and language, unspecified (F80.9)
-      - Disruptive mood dysregulation disorder (F34.81)
-      - Downs Syndrome (Q90.9)
-      - Emotional Disturbance Disorder (F98.9)
-      - 'Epilepsy: (G40.0)'
-      - Generalized Anxiety Disorder (F41.1)
-      - Global Speech Delay (F80)
-      - Mixed Receptive-Expressive Language Disorder (F80.2)
-      - Obsessive Compulsive Disorder (F42)
-      - Oppositional Defiance Disorder (F91.3)
-      - Oral Aversion (F50.82)
-      - Other childhood disintegrative disorder (F84.3)
-      - Other pervasive developmental disorders (F84.8)
-      - Pediatric Feeding Disorder (R63.32)
-      - Pervasive developmental disorder, unspecified (F84.9)
-      - Post-Traumatic Stress Disorder (F43.12)
-      - Prader-Willi Syndrome (Q87.11)
-      - Rett’s syndrome (F84.2)
-      - Sensory Processing Disorder (F88)
-      title: IntakeQuestionnaireMedicalDiagnosisEnum
-    IntakeQuestionnaireReferralPatchRequest:
-      properties:
-        diagnosis_tool:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis Tool
-        diagnosis_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Diagnosis Date
-        provider_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Provider Name
-        diagnosis_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis City
-        diagnosis_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: Diagnosis State
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireReferralPatchRequest
-      description: 'Partial update for an existing intake questionnaire referral.
-
-
-        Only fields explicitly present in the body are applied (null clears the column);
-
-        omitted fields are left untouched.'
-    IntakeQuestionnaireChildInfoUpsertRequest:
-      properties:
-        child_behavior_issues:
-          anyOf:
-          - type: string
-            maxLength: 2000
-          - type: 'null'
-          title: Child Behavior Issues
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireChildInfoUpsertRequest
-      description: 'Upsert payload for an intake questionnaire''s 1:1 child info row.
-
-
-        The only field is ``child_behavior_issues`` (optional; blank strings collapse to
-
-        null). The row is created if it does not exist yet, or updated otherwise. A field that
-
-        is omitted is left untouched on update.'
-    IntakeQuestionnaireMedicalInfoDiagnosisPatchRequest:
-      properties:
-        diagnosis_name:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalDiagnosisEnum'
-          - type: 'null'
-        diagnosis_provider_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis Provider Name
-        diagnosis_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis City
-        diagnosis_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: Diagnosis State
-        diagnosis_year:
-          anyOf:
-          - type: integer
-            maximum: 2100.0
-            minimum: 1900.0
-          - type: 'null'
-          title: Diagnosis Year
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireMedicalInfoDiagnosisPatchRequest
-      description: Partial PATCH for one medical info diagnosis row.
-    IntakeQuestionnaireEducationInfoResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        education_setting:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Education Setting
-        number_of_hours_per_week:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Number Of Hours Per Week
-        school_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: School Name
-        school_phone_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: School Phone Number
-        education_description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Education Description
-        focus_area_description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Focus Area Description
-        client_education_evaluation_status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Education Evaluation Status
-        client_education_evaluation_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Client Education Evaluation Date
-        iep_or_504_in_place:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Iep Or 504 In Place
-        education_support:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Education Support
-        client_classroom_setting:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Classroom Setting
-        client_attitude_towards_school:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Attitude Towards School
-      type: object
-      required:
-      - id
-      title: IntakeQuestionnaireEducationInfoResponse
-    IntakeQuestionnaireChildInfoScheduleActivityTypeEnum:
+      - COMMUNICATION_STYLE
+      - GOALS_FOR_THERAPY
+      - STRENGTH
+      - WEAKNESS
+      - INTEREST
+      - DISLIKES
+      - BEHAVIOR_ISSUE
+      title: IntakeQuestionnaireChildInfoBackgroundTypeEnum
+    IntakeQuestionnaireIepOr504Enum:
       type: string
       enum:
-      - FORTA_THERAPY
-      - SCHOOL
-      - OTHER_THERAPY
-      - OTHER_ACTIVITY
-      title: IntakeQuestionnaireChildInfoScheduleActivityTypeEnum
-    IntakeQuestionnaireMedicalInfoDiagnosisCreateRequest:
-      properties:
-        diagnosis_name:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalDiagnosisEnum'
-          - type: 'null'
-        diagnosis_provider_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis Provider Name
-        diagnosis_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Diagnosis City
-        diagnosis_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: Diagnosis State
-        diagnosis_year:
-          anyOf:
-          - type: integer
-            maximum: 2100.0
-            minimum: 1900.0
-          - type: 'null'
-          title: Diagnosis Year
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireMedicalInfoDiagnosisCreateRequest
-      description: Create one medical info diagnosis row.
+      - N/A
+      - IEP
+      - '504'
+      title: IntakeQuestionnaireIepOr504Enum
     IntakeQuestionnaireMedicalVisionDifficultyEnum:
       type: string
       enum:
@@ -3755,465 +4132,15 @@ components:
       - Other vision issues
       - No vision issues
       title: IntakeQuestionnaireMedicalVisionDifficultyEnum
-    IntakeQuestionnaireFamilyAdditionalInfoTypeEnum:
+    IntakeQuestionnaireChildInfoScheduleActivityTypeEnum:
       type: string
       enum:
-      - MATERNAL_MEDICAL_HISTORY
-      - PATERNAL_MEDICAL_HISTORY
-      - COMMUNITY_SUPPORT
-      title: IntakeQuestionnaireFamilyAdditionalInfoTypeEnum
-    IntakeQuestionnaireSiblingRelationshipEnum:
-      type: string
-      enum:
-      - Brother
-      - Sister
-      - Half-brother
-      - Half-sister
-      - None
-      title: IntakeQuestionnaireSiblingRelationshipEnum
-    IntakeQuestionnaireChildInfoBackgroundTypeEnum:
-      type: string
-      enum:
-      - COMMUNICATION_STYLE
-      - GOALS_FOR_THERAPY
-      - STRENGTH
-      - WEAKNESS
-      - INTEREST
-      - DISLIKES
-      - BEHAVIOR_ISSUE
-      title: IntakeQuestionnaireChildInfoBackgroundTypeEnum
-    IntakeQuestionnaireFamilyMemberCreateRequest:
-      properties:
-        full_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Full Name
-        member_role:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMemberRoleEnum'
-          - type: 'null'
-        caregiver_type:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCaregiverTypeEnum'
-          - type: 'null'
-        relationship_to_client:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireRelationshipToClientEnum'
-          - type: 'null'
-        custody_type:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyCustodyTypeEnum'
-          - type: 'null'
-        marital_status:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyMaritalStatusEnum'
-          - type: 'null'
-        job_title:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Job Title
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-            maxLength: 10
-            minLength: 10
-            pattern: ^\d{10}$
-          - type: 'null'
-          title: Phone
-        street_address_line_one:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Street Address Line One
-        street_address_line_two:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Street Address Line Two
-        street_address_zip:
-          anyOf:
-          - type: string
-            maxLength: 5
-            minLength: 5
-            pattern: ^\d{5}$
-          - type: 'null'
-          title: Street Address Zip
-        street_address_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Street Address City
-        street_address_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: Street Address State
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireFamilyMemberCreateRequest
-      description: 'Create payload for a family member.
-
-
-        A new member row is created from the provided fields; every field is optional, so
-
-        an empty/all-null body still creates a row with all columns NULL.'
-    IntakeQuestionnaireTherapyCreateRequest:
-      properties:
-        provider_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Provider Name
-        service_type:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Service Type
-        phone_number:
-          anyOf:
-          - type: string
-            maxLength: 10
-            minLength: 10
-            pattern: ^\d{10}$
-          - type: 'null'
-          title: Phone Number
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        start_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Start Date
-        end_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: End Date
-        hours:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Hours
-        frequency:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Frequency
-        progress:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Progress
-        do_not_share_info_with_provider:
-          type: boolean
-          title: Do Not Share Info With Provider
-          default: false
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireTherapyCreateRequest
-      description: 'Create payload for an intake questionnaire''s therapy.
-
-
-        A new therapy row is created from the provided fields; every field is optional, so an
-
-        empty/all-null body still creates a row with all columns NULL (and
-
-        ``do_not_share_info_with_provider`` defaulting to ``False``).'
-    IntakeQuestionnaireMedicalInfoPatchRequest:
-      properties:
-        allergies:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Allergies
-        special_diets:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Special Diets
-        hearing_difficulty:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalHearingDifficultyEnum'
-          - type: 'null'
-        hearing_screening_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Hearing Screening Date
-        vision_difficulty:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalVisionDifficultyEnum'
-          - type: 'null'
-        vision_screening_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Vision Screening Date
-        trauma_history:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Trauma History
-        hospitalization_history:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Hospitalization History
-        f84_severity_level:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalAsdSeverityEnum'
-          - type: 'null'
-        f84_diagnosis_provider_name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: F84 Diagnosis Provider Name
-        f84_diagnosis_city:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: F84 Diagnosis City
-        f84_diagnosis_state:
-          anyOf:
-          - type: string
-            maxLength: 2
-            minLength: 2
-          - type: 'null'
-          title: F84 Diagnosis State
-        f84_diagnosis_year:
-          anyOf:
-          - type: integer
-            maximum: 2100.0
-            minimum: 1900.0
-          - type: 'null'
-          title: F84 Diagnosis Year
-        child_delivery_type:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalChildDeliveryTypeEnum'
-          - type: 'null'
-        child_gestational_age:
-          anyOf:
-          - type: integer
-            maximum: 99.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Gestational Age
-        child_weight_at_birth_pounds:
-          anyOf:
-          - type: integer
-            maximum: 999.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Weight At Birth Pounds
-        child_weight_at_birth_ounces:
-          anyOf:
-          - type: integer
-            maximum: 15.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Weight At Birth Ounces
-        child_sitting_up_age_months:
-          anyOf:
-          - type: integer
-            maximum: 150.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Sitting Up Age Months
-        child_crawling_age_months:
-          anyOf:
-          - type: integer
-            maximum: 150.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Crawling Age Months
-        child_walking_age_years:
-          anyOf:
-          - type: integer
-            maximum: 30.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Walking Age Years
-        child_walking_age_months:
-          anyOf:
-          - type: integer
-            maximum: 11.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Walking Age Months
-        child_standing_age_years:
-          anyOf:
-          - type: integer
-            maximum: 30.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Standing Age Years
-        child_standing_age_months:
-          anyOf:
-          - type: integer
-            maximum: 11.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Standing Age Months
-        child_babbling_age_months:
-          anyOf:
-          - type: integer
-            maximum: 150.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child Babbling Age Months
-        child_first_word:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Child First Word
-        child_second_word:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Child Second Word
-        child_first_words_age_months:
-          anyOf:
-          - type: integer
-            maximum: 150.0
-            minimum: 0.0
-          - type: 'null'
-          title: Child First Words Age Months
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireMedicalInfoPatchRequest
-      description: Partial PATCH for medical info scalar fields; null clears nullable columns.
-    IntakeQuestionnaireEducationEvaluationStatusEnum:
-      type: string
-      enum:
-      - EVALUATED
-      - NOT_EVALUATED
-      - SCHEDULED_EVALUATION
-      title: IntakeQuestionnaireEducationEvaluationStatusEnum
-    IntakeQuestionnaireFamilyClientSiblingCreateRequest:
-      properties:
-        sibling_relationship:
-          anyOf:
-          - $ref: '#/components/schemas/IntakeQuestionnaireSiblingRelationshipEnum'
-          - type: 'null'
-        sibling_age:
-          anyOf:
-          - type: integer
-            maximum: 150.0
-            minimum: 0.0
-          - type: 'null'
-          title: Sibling Age
-        sibling_diagnosis:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Sibling Diagnosis
-      additionalProperties: false
-      type: object
-      title: IntakeQuestionnaireFamilyClientSiblingCreateRequest
-      description: 'Create payload for a client sibling.
-
-
-        A new sibling row is created from the provided fields; every field is optional, so
-
-        an empty/all-null body still creates a row with all columns NULL.'
-    IntakeQuestionnaireTherapyResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        provider_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Name
-        service_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Service Type
-        phone_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone Number
-        email:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Email
-        start_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Start Date
-        end_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: End Date
-        hours:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Hours
-        frequency:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Frequency
-        progress:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Progress
-        do_not_share_info_with_provider:
-          type: boolean
-          title: Do Not Share Info With Provider
-          default: false
-      type: object
-      required:
-      - id
-      title: IntakeQuestionnaireTherapyResponse
-    IntakeQuestionnaireListResponse:
+      - FORTA_THERAPY
+      - SCHOOL
+      - OTHER_THERAPY
+      - OTHER_ACTIVITY
+      title: IntakeQuestionnaireChildInfoScheduleActivityTypeEnum
+    IntakeQuestionnaireDetailResponse:
       properties:
         id:
           type: integer
@@ -4281,6 +4208,47 @@ components:
           anyOf:
           - $ref: '#/components/schemas/QuestionnaireClientSummary'
           - type: 'null'
+        general_info:
+          anyOf:
+          - $ref: '#/components/schemas/IntakeQuestionnaireGeneralInfoResponse'
+          - type: 'null'
+        medical_info:
+          anyOf:
+          - $ref: '#/components/schemas/IntakeQuestionnaireMedicalInfoResponse'
+          - type: 'null'
+        referrals:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/IntakeQuestionnaireReferralResponse'
+            type: array
+          - type: 'null'
+          title: Referrals
+        medications:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/IntakeQuestionnaireMedicationResponse'
+            type: array
+          - type: 'null'
+          title: Medications
+        therapies:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/IntakeQuestionnaireTherapyResponse'
+            type: array
+          - type: 'null'
+          title: Therapies
+        education_info:
+          anyOf:
+          - $ref: '#/components/schemas/IntakeQuestionnaireEducationInfoResponse'
+          - type: 'null'
+        family:
+          anyOf:
+          - $ref: '#/components/schemas/IntakeQuestionnaireFamilyResponse'
+          - type: 'null'
+        child_info:
+          anyOf:
+          - $ref: '#/components/schemas/IntakeQuestionnaireChildInfoResponse'
+          - type: 'null'
       type: object
       required:
       - id
@@ -4288,65 +4256,19 @@ components:
       - client_id
       - status
       - date_sent
-      title: IntakeQuestionnaireListResponse
-      description: List row that also carries the linked provider's and client's basic identity.
-    IntakeQuestionnaireRelationshipToClientEnum:
+      title: IntakeQuestionnaireDetailResponse
+      description: 'Full questionnaire with nested sections. Each section/collection is ``None`` when
+
+        no corresponding row exists yet (rather than an empty object or list).'
+    Sex:
       type: string
       enum:
-      - Parent (Mother / Father)
-      - Stepparent
-      - Grandparent
-      - Aunt / Uncle
-      - Older sibling
-      - Cousin
-      - Legal guardian (court-appointed)
-      - Adoptive parent
-      - Foster parent
-      - Kinship caregiver (relative/friend)
-      title: IntakeQuestionnaireRelationshipToClientEnum
-    IntakeQuestionnaireMedicationResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        medication_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Medication Name
-        dosage:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Dosage
-        start_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Start Date
-        physician_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Physician Name
-        reason:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reason
-      type: object
-      required:
-      - id
-      title: IntakeQuestionnaireMedicationResponse
-    IntakeQuestionnaireFamilyMemberRoleEnum:
-      type: string
-      enum:
-      - Parent and a caregiver
-      - Parent not a caregiver
-      - Caregiver
-      title: IntakeQuestionnaireFamilyMemberRoleEnum
+      - female
+      - male
+      - other
+      - unknown
+      title: Sex
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer

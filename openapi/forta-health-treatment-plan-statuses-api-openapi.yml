@@ -25,7 +25,7 @@ paths:
                 type: array
                 title: Response Get Treatment Plan Status Api V1 Treatment Plan Statuses  Get
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
     post:
       tags:
       - treatment_plan_statuses
@@ -51,47 +51,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
-      - HTTPBearer: []
+      - _ForbiddenOnMissingCredentials: []
 components:
   schemas:
-    TreatmentPlanStatusBase:
-      properties:
-        label:
-          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
-      type: object
-      required:
-      - label
-      title: TreatmentPlanStatusBase
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    TreatmentPlanStatusLabelEnum:
-      type: string
-      enum:
-      - STARTED
-      - COMPLETED
-      - EDITING
-      - READ_ONLY
-      title: TreatmentPlanStatusLabelEnum
-      description: Enum for treatment plan status labels.
     HTTPValidationError:
       properties:
         detail:
@@ -113,7 +75,50 @@ components:
       - label
       - id
       title: TreatmentPlanStatusResponse
+    TreatmentPlanStatusBase:
+      properties:
+        label:
+          $ref: '#/components/schemas/TreatmentPlanStatusLabelEnum'
+      type: object
+      required:
+      - label
+      title: TreatmentPlanStatusBase
+    TreatmentPlanStatusLabelEnum:
+      type: string
+      enum:
+      - STARTED
+      - COMPLETED
+      - EDITING
+      - READ_ONLY
+      title: TreatmentPlanStatusLabelEnum
+      description: Enum for treatment plan status labels.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
-    HTTPBearer:
+    _ForbiddenOnMissingCredentials:
       type: http
       scheme: bearer
